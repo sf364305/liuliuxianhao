@@ -197,6 +197,17 @@
      var vm = new Vue({ 
         beforeCreate(){
             
+        },
+        created(){
+            var that = this;
+            this.Http.get(this.Api.getToken(),null,function(result){
+                // console.log(result);
+                that.Http.setToken(result.data.token);
+                // debugger;
+                that.Http.get(that.Api.getQiniuToken(),null,function(_result){
+                    console.log(_result);
+                });
+            });
         }
     })
      export default {
