@@ -4,6 +4,9 @@ import Vue from 'vue'
 import App from './App'
 // 引入router路由
 import Router from 'vue-router'
+//  引入http
+import Http from './http/Http'
+
 // 引入项目的四个模块组件
 import './assets/css/reset.css'
 import './assets/css/style.css'
