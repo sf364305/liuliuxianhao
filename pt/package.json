@@ -12,6 +12,7 @@
     "test": "npm run e2e"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "caniuse-lite": "^1.0.30000696",
     "fast-deep-equal": "^1.0.0",
     "json-schema-traverse": "^0.3.1",

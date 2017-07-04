@@ -8,9 +8,9 @@
         </div>
         <div class="announcement">
             <ul class="announ">
-                <li>公告1：本网站出售，出租多平台直播账号</li>
-                <li>公告2：出售流程为>我要卖>上传图片>填写账号信息>提交审核</li>
-                <li>公告3：欢迎联系在线客服了解最新信息</li>
+                <li v-for="notice in notices" v-bind:key="notice.id">
+                    <span :key="notice.id">{{notice.title}}</span>l
+                </li>
             </ul>
         </div>
         <section class="new-content">
@@ -205,9 +205,19 @@
                 that.Http.setToken(result.data.token);
                 // debugger;
                 that.Http.get(that.Api.getQiniuToken(),null,function(_result){
-                    console.log(_result);
+                    // console.log(_result);
                 });
             });
+
+            //获取公告
+            this.Http.get(this.Api.getNotices(),null,function(result){
+                // debugger;
+                // that.$set('notices',result.data.notices);
+                // that.notices = (result.data.notices);
+                that.$set(that.notices,result.data.notices,true) ;
+                // that.msg = '77777';
+                // that.$set('msg','sdfsf');
+            })
         }
     })
      export default {
@@ -219,7 +229,8 @@
                 }, {
                     url: b
                 }],
-                msg: '6666'
+                msg: '6666',
+                notices:[]
             }
         },
         components: {
