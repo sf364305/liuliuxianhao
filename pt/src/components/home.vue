@@ -215,7 +215,7 @@
                 // that.$set('notices',result.data.notices);
                 // that.notices = (result.data.notices);
                 that.$set(that.notices,result.data.notices,true) ;
-                // that.msg = '77777';
+                that.msg = '77777';
                 // that.$set('msg','sdfsf');
             })
         }
