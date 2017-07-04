@@ -1,7 +1,6 @@
 import Vue from 'vue'
-import VueResource from 'vue-resource'
+import axios from 'axios'
 
-Vue.use(VueResource);
 
 // const base = 'http://localhost:8080/front';
 const base = 'http://c.chovans.cn/front';
@@ -13,7 +12,10 @@ Vue.prototype.Api = {
     },
     getQiniuToken(){
         return base + '/utils/getUploadToken';
-    } 
+    } ,
+    getNotices(){
+        return base+'/common/getNotices';
+    }
 };
 
 //Http基本类，统一处理
@@ -40,7 +42,7 @@ Vue.prototype.Http = {
         }
         console.log("参数："+JSON.stringify(params));
 
-        Vue.http.post(api, params,{emulateJSON: true}).then((response) => {
+        axios.post(api, params,{emulateJSON: true}).then((response) => {
             // 响应成功回调
             callback(response.data);
         }, (response) => {
