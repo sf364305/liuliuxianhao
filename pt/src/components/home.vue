@@ -130,9 +130,10 @@
      import b from '../assets/images/banner2.png'
      var vm = new Vue({
         beforeCreate(){
-            
+
         },
         created(){
+            alert(6)
             var that = this;
             this.Http.get(this.Api.getToken(),null,function(result){
                 alert(55)
