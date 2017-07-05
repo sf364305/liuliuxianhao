@@ -5,6 +5,7 @@ import axios from 'axios'
 // const base = 'http://localhost:8080/front';
 const base = 'http://c.chovans.cn/front';
 
+Vue.prototype.Setting = null;
 //API,接口列表
 Vue.prototype.Api = {
     getToken() {
@@ -16,8 +17,17 @@ Vue.prototype.Api = {
     getNotices() {
         return base + '/common/getNotices';
     },
-    getCategroy(){
+    getCategroy() {
         return base + '/home/getCategory';
+    },
+    getConfig() {
+        return base + '/home/getConfig';
+    },
+    getBanners() {
+        return base + '/home/getBanners';
+    },
+    addGoods() {
+        return base + '/sale/addGoods';
     }
 };
 
@@ -48,7 +58,7 @@ Vue.prototype.Http = {
         axios.post(api, params, {
             emulateJSON: true,
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json;charse=UTF-8'
             }
         }).then((response) => {
             // 响应成功回调

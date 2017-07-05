@@ -1,35 +1,54 @@
 <template>
     <div class="swiper-container banner-index">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="str in listImg"><img :src="str.url" alt=""></div>
+            <div class="swiper-slide" v-for="banner in banners" :key=banner.id>
+                <img :src="$store.state.Setting.qiniuUrl + banner.qiniuKey" alt="">
+            </div>
         </div>
         <div class="swiper-pagination swiper-pagination-white"></div>
     </div>
 </template>
 <script>
-    import Swiper from 'swiper';
-    import 'swiper/dist/css/swiper.min.css';
-    export default {
-        props: ['listImg'],
-        mounted() {
-            console.log('mounted', this)
-            var swiper = new Swiper('.swiper-container', {
-                pagination: '.swiper-pagination',
-                paginationClickable: true,
-                loop: true,
-                speed: 600,
-                autoplay: 2000,
-                onTouchEnd: function() {
-                    swiper.startAutoplay()
-                }
-            });
+import Swiper from 'swiper';
+import 'swiper/dist/css/swiper.min.css';
+export default {
+    name: 'banner',
+    data() {
+        return {
+            banners: []
         }
+    },
+    created() {
+        this.getBanner();
+    },
+    methods: {
+        getBanner() {
+            var that = this;
+            this.Http.get(this.Api.getBanners(), null, function (result) {
+                setTimeout(function () {
+                    that.banners = result.data.banners;
+                }, 1000);
+            })
+        }
+    },
+    mounted() {
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            loop: true,
+            speed: 600,
+            autoplay: 2000,
+            onTouchEnd: function () {
+                swiper.startAutoplay()
+            }
+        });
     }
+}
 </script>
 <style>
-    .banner-index img {
-        display: block;
-        width: 100%;
-        height: auto;
-    }
+.banner-index img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
 </style>
