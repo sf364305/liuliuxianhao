@@ -2,14 +2,15 @@
     <div class="home">
         <header class="index-logo" id="index-logo">
             <router-link to="/commodity" class="search-index" replace></router-link>
+            {{msg}}
         </header>
         <div>
             <app-banner :listImg="listImg"></app-banner>
         </div>
         <div class="announcement">
-            <ul class="announ">
+            <ul class="announ" id="announ">
                 <li v-for="notice in notices" v-bind:key="notice.id">
-                    <span :key="notice.id">{{notice.title}}</span>l
+                    <span :="notice.id">{{notice.title}}</span>
                 </li>
             </ul>
         </div>
