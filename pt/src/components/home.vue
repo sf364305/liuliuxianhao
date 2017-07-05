@@ -4,11 +4,11 @@
             <router-link to="/commodity" class="search-index" replace></router-link>
         </header>
         <div>
-            <app-banner :listImg="listImg"></app-banner>
+            <app-banner></app-banner>
         </div>
         <div class="announcement">
             <ul class="announ" id="announ">
-                <li v-for="notice in notices" v-bind:key="notice.id">
+                <li v-for="notice in $store.state.Notices" v-bind:key="notice.id">
                     <span :="notice.id">{{notice.title}}</span>
                 </li>
             </ul>
@@ -27,9 +27,9 @@
             </ul>
         </section>
         <ul class="project clearfix">
-            <li v-for="c in categroy" v-bind:key="c.id">
+            <li v-for="c in $store.state.Categroy" v-bind:key="c.id">
                 <router-link to="/commodity" class="index-ying" replace>
-                    <img :src="c.img" alt="">{{c.name}}</router-link>
+                    <img :src="$store.state.Setting.qiniuUrl + c.img" alt="">{{c.name}}</router-link>
             </li>
         </ul>
         <div class="index-news">
@@ -216,17 +216,17 @@ export default {
     name: 'home',
     data() {
         return {
-            listImg: [{
-                url: a
-            }, {
-                url: b
-            }],
             notices: [],
-            categroy:[]
+            categroy: [],
         }
+    },
+    beforeCreate() {
+
     },
     created() {
         this.getToken();
+        this.getConfig();
+
         this.getNotices();
         this.getCategroy();
     },
@@ -242,16 +242,50 @@ export default {
         getNotices() {
             //获取公告
             var that = this;
-            this.Http.get(this.Api.getNotices(), {
-                t: "t"
-            }, function (result) {
-                that.notices = (result.data.notices);
+            this.Http.get(this.Api.getNotices(), null, function (result) {
+                that.$store.commit('setNotices',result.data.notices);
             })
         },
-        getCategroy(){
+        getCategroy() {
             var that = this;
-            this.Http.get(this.Api.getCategroy(),null, function (result) {
-                that.categroy = result.data.categories;
+            this.Http.get(this.Api.getCategroy(), null, function (result) {
+                that.$store.commit('setCategroy',result.data.categories);
+            })
+        },
+        getConfig() {
+            var that = this;
+            this.Http.get(this.Api.getConfig(), null, function (result) {
+                that.$store.commit('setSetting', result.data.setting);
+            })
+        },
+        addGoods() {
+            var goodsInfo = {
+                type: 1,
+                categoryId: "402880e75cfcace3015cfcb25e050000",
+                images: "logo,logo1",
+                title: "测试陌陌",
+                detail: "detail",
+                accountId: "k",
+                grade: 55,
+                sex: 1,
+                client: 3,
+                system: 3,
+                bind: 3,
+                authorization: 1,
+                identification: 1,
+                price: 5,
+                hourCost: "1",
+                dayCost: "2",
+                weekCost: "3",
+                monthCost: "4",
+                deposit: "",
+                account: "chovans",
+                password: "chovans",
+                phone: "1875971871",
+                qq: "404943850@qq.com",
+            };
+            this.Http.get(this.Api.addGoods(), goodsInfo, function (result) {
+                console.log(result);
             })
         }
     },
