@@ -2,14 +2,15 @@
     <div class="home">
         <header class="index-logo" id="index-logo">
             <router-link to="/commodity" class="search-index" replace></router-link>
+            {{msg}}
         </header>
         <div>
            <app-banner :listImg="listImg"></app-banner>
         </div>
         <div class="announcement">
-            <ul class="announ">
+            <ul class="announ" id="announ">
                 <li v-for="notice in notices" v-bind:key="notice.id">
-                    <span :key="notice.id">{{notice.title}}</span>l
+                    <span :="notice.id">{{notice.title}}</span>
                 </li>
             </ul>
         </div>
@@ -107,73 +108,6 @@
         background: url("../assets/images/advert.png") 20px center no-repeat;
         background-size: 4% auto;
     }
-    .announcement-alert {
-        position: fixed;
-        display: none;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.8);
-        z-index: 100;
-    }
-    .announ-alert {
-        overflow-x: hidden;
-        width: 92%;
-        height: 20rem;
-        padding-top: 8rem;
-        margin: 0 auto;
-        color: #fff;
-    }
-    .announ-close {
-        position: absolute;
-        top: auto;
-        left: 0;
-        right: 0;
-        bottom: 5rem;
-        margin: auto;
-        width: 2rem;
-        height: 2rem;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        border-radius: 50%;
-        border: 1px solid #dcdcdc;
-        color: #fff;
-        line-height: 2rem;
-        text-align: center;
-    }
-    .announ-alert li {
-        margin: 0.5rem 0;
-        
-    }
-    .announ li {
-        overflow: hidden;
-        height: 3rem;
-        padding-left: 2%;
-        background-color: #fff;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        line-height: 3rem;
-    }
-    .new-content {
-        padding: 0.63rem;
-        background: #e9e9e9;
-    }
-    .new-content ul li {
-        float: left;
-        width: 33%;
-        height: 3rem;
-        border-right: 1px solid #999;
-        line-height: 3rem;
-    }
-    .new-content ul li:last-child {
-        border-right: none;
-    }
-    .new-content ul li a {
-        display: block;
-        padding-left: 45%;
-        font-size: 1.08rem;
-    }
     .index-sell-buy {
         background: url("../assets/images/sell_buy.png") 15% 0 no-repeat;
         background-size: 31% auto;
@@ -194,13 +128,14 @@
      import Banner from '../templates/Banner.vue'
      import a from '../assets/images/banner1.png'
      import b from '../assets/images/banner2.png'
-     var vm = new Vue({ 
+     var vm = new Vue({
         beforeCreate(){
             
         },
         created(){
             var that = this;
             this.Http.get(this.Api.getToken(),null,function(result){
+                alert(55)
                 // console.log(result);
                 that.Http.setToken(result.data.token);
                 // debugger;
@@ -211,10 +146,11 @@
 
             //获取公告
             this.Http.get(this.Api.getNotices(),null,function(result){
+                console.log(999);
                 // debugger;
                 // that.$set('notices',result.data.notices);
-                // that.notices = (result.data.notices);
-                that.$set(that.notices,result.data.notices,true) ;
+                that.notices = (result.data.notices);
+                //that.$set(that.notices,result.data.notices,true) ;
                 that.msg = '77777';
                 // that.$set('msg','sdfsf');
             })
@@ -229,8 +165,8 @@
                 }, {
                     url: b
                 }],
-                msg: '6666',
-                notices:[]
+                msg: '',
+                notices: ''
             }
         },
         components: {

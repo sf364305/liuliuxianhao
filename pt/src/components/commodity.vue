@@ -22,15 +22,47 @@
                 <form action="" method="post">
                     <div class="clearfix">
                         <label for="">关键词：</label>
-                        <input type="text" value="" name="" class="key-word" placeholder="请输入想查找的关键信息">
+                        <input type="text" value="" name="" class="key-word" placeholder="请输入想查找的关键信息" style="border: none;width: 75%;text-align: left;">
+                    </div>
+                    <div class="plat-comm clearfix">
+                        <span>平台：</span>
+                        <label>
+                            <input type="radio" checked="checked" name="plat" value="1"/>
+                            <i class="choice-sho choiced-show"  @click="changeSex"></i>
+                            <em class="choice-text">陌陌</em>
+                        </label>
+                        <label>
+                            <input type="radio" name="plat" value="2"/>
+                            <i class="choice-sho"  @click="changeSex"></i>
+                            <em class="choice-text">映客</em>
+                        </label>
+                        <label>
+                            <input type="radio" name="plat" value="1"/>
+                            <i class="choice-sho"  @click="changeSex"></i>
+                            <em class="choice-text">花椒</em>
+                        </label>
+                        <label style="margin-left:25%;">
+                            <input type="radio" name="plat" value="2"/>
+                            <i class="choice-sho"  @click="changeSex"></i>
+                            <em class="choice-text">快手</em>
+                        </label>
+                        <label>
+                            <input type="radio" name="plat" value="2"/>
+                            <i class="choice-sho"  @click="changeSex"></i>
+                            <em class="choice-text">其他</em>
+                        </label>
                     </div>
                     <div class="clearfix">
                         <label for="">价格范围：</label>
-                        <input type="text" value="" name="" class="key-word" placeholder="0 - 20000000">
+                        <input type="text" value="" name="" class="key-price" placeholder="0">
+                        <i>-</i>
+                        <input type="text" value="" name="" class="key-price2" placeholder="200000">
                     </div>
                     <div class="clearfix">
                         <label for="">等级：</label>
-                        <input type="text" value="" name="" class="key-word" placeholder="0 - 999">
+                        <input type="text" value="" name="" class="key-leve" placeholder="0">
+                        <i>-</i>
+                        <input type="text" value="" name="" class="key-leve2" placeholder="999">
                     </div>
                     <div class="sex-com clearfix">
                         <span>性别：</span>

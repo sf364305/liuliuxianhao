@@ -28,6 +28,9 @@ import certification_else from './components/certification_else'
 import popularity from './components/popularity'
 import popular_buy from './components/popular_buy'
 import wait_send from './components/wait_send'
+import all_order from './components/all_order'
+import all_order_seller from './components/all_order_seller'
+import my_code from './components/my_code'
 // 使用router
 Vue.use(Router)
 // 定义路由
@@ -79,6 +82,15 @@ var routes = [{
 }, {
   path: '/wait_send',
   component: wait_send  
+}, {
+  path: '/all_order',
+  component: all_order  
+}, {
+  path: '/all_order_seller',
+  component: all_order_seller  
+}, {
+  path: '/my_code',
+  component: my_code  
 }]
 // 实例化路由
 var vueRouter = new Router({

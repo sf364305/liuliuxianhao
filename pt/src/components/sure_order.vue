@@ -72,10 +72,5 @@
     </div>
 </template>
 <script>
-    import Vue from 'vue'
-    var vm = new Vue({ 
-        beforeCreate(){
-            
-        }
-    })
+    
 </script>

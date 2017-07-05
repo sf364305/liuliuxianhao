@@ -196,6 +196,24 @@
                     </div>
                 </li>
             </ul>
+            <ul class="account-infor">
+                <li>
+                    <label><i>*</i>直播账号</label>
+                    <input type="text"   name="" value="" placeholder="请输入直播账号"/>
+                </li>
+                <li>
+                    <label><i>*</i>账号密码</label>
+                    <input type="text"   name="" value="" placeholder="请输入账号密码"/>
+                </li>
+                <li>
+                    <label><i>*</i>联系手机</label>
+                    <input type="text"   name="" value="" placeholder="请输入手机号码"/>
+                </li>
+                <li>
+                    <label><i>*</i>QQ号码</label>
+                    <input type="text"   name="" value="" placeholder="请输入QQ号码"/>
+                </li>
+            </ul>
             <div class="add-com">
                 <h3>商品描述：</h3>
                 <textarea id="detail" name="detail" maxlength="200" placeholder="输入商品的补充说明" rows="3"></textarea>

@@ -13,7 +13,7 @@
         </div>
         <ul class="person-dif-con">
             <li class="person-buyer-con person-con-show clearfix">
-                <router-link to="/unpaid" class="person-unpaid" replace>未支付</router-link>
+                <router-link to="/unpaid" class="person-unpaid" replace>未支付<i>0</i></router-link>
                 <router-link to="/wait_send" class="person-send" replace>待发货</router-link>
                 <router-link to="/wait_sure" class="person-sure" replace>待确认</router-link>
                 <router-link to="/arbitration" class="person-arbitration" replace>仲裁中</router-link>
@@ -26,7 +26,7 @@
                 <router-link to="/arbitration" class="person-review" replace>审核中</router-link>
                 <router-link to="/arbitration" class="person-seccess" replace>交易成功</router-link>
                 <router-link to="/arbitration" class="person-defeat" replace>交易失败</router-link>
-                <router-link to="/all_order" class="person-all" replace>全部订单</router-link>
+                <router-link to="/all_order_seller" class="person-all" replace>全部订单</router-link>
             </li>
         </ul>
         <div class="person-income-con clearfix">
