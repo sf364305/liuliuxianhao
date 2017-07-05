@@ -73,38 +73,16 @@
                             <em>映客</em>
                         </li>
                         <li>
-                            <span>客户端</span>
+                            <span>账户类型</span>
                             <em>
-                                电脑端
+                                手机账号
                             </em>
                         </li>
                         <li>
-                            <span>操作系统</span>
+                            <span>账号等级</span>
                             <em>
-                                IOS
+                                42级
                             </em>
-                        </li>
-                        <li>
-                            <span>账号绑定</span>
-                            <em>
-                                手机
-                            </em>
-                        </li>
-                        <li>
-                            <span>第三方授权</span>
-                            <em>
-                                无援权
-                            </em>
-                        </li>
-                        <li>
-                            <span>身份认证</span>
-                            <em>
-                                未认证
-                            </em>
-                        </li>
-                        <li>
-                            <span>帐号等级</span>
-                            <em>60级</em>
                         </li>
                         <li>
                             <span>性别</span>
@@ -115,8 +93,18 @@
                         <li>
                             <span>绑定情况</span>
                             <em>
-                                手机
+                                未绑定
                             </em>
+                        </li>
+                        <li>
+                            <span>认证情况</span>
+                            <em>
+                                未认证
+                            </em>
+                        </li>
+                        <li>
+                            <span>价格详情</span>
+                            <em>时租50/时；月租500/月；周租50/周；天租500/天；</em>
                         </li>
                         <li>
                             <span>描述</span>

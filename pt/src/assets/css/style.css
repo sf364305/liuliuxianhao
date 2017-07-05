@@ -2032,3 +2032,124 @@ select {
     background: #fff url("../images/right.png") center center no-repeat;
     background-size: 23% auto; 
 }
+/*我的推广样式*/
+.promotion-pic li {
+    position: relative;
+    float: left;
+    width: 33.3%;
+    margin-bottom: 2rem;
+}
+.promotion-pic {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 2rem;
+}
+.promotion-pic li img {
+    display: block;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin: 0 auto;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 1px solid #44c9ef;
+}
+.promotion-pic li p {
+    margin: 1rem 0 0.5rem;
+    color: #333;
+    text-align: center;
+    font-size: 1.25rem;
+}
+.promotion-pic li span {
+    display: block;
+    color: #666;
+    font-size: 0.83rem;
+    text-align: center;
+}
+.promotion-pic li i {
+    position: absolute;
+    left: 13%;
+    top: 0;
+}
+/*我的收益样式*/
+.income-pic li {
+    position: relative;
+    overflow: hidden;
+    width: 92%;
+    margin: 1.5rem auto 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #dcdcdc;
+}
+.income-pic li img {
+    float: left;
+    width: 4rem;
+    height: 4rem;
+}
+.income-pic li p {
+    float: left;
+    width: 70%;
+    margin: 0.5rem 0 0.2rem 5%;
+    color: #333;
+    font-size: 1.17rem;
+}
+.income-pic li span {
+    float: left;
+    width: 70%;
+    margin-left: 5%;
+    color: #666;
+    font-size: 1rem;
+}
+.income-pic li i {
+    position: absolute;
+    right: 8%;
+    top: 1rem;
+    color: red;
+    font-size: 1.33rem;
+}
+/*交易成功样式*/
+.buy-success-pic {
+    width: 100%;
+    height: 18.75rem;
+    background: #fff url("../images/success_3.png") center center no-repeat;
+    background-size: 100% auto;
+}
+.buy-success-pic dt {
+    padding-top: 6rem;
+}
+.buy-success-pic dt img {
+    display: block;
+    width: 16.67%;
+    height: auto;
+    margin: 0 auto 2rem;
+}
+.buy-success-pic dd {
+    color: #fff;
+    font-size: 1.5rem;
+    text-align: center;
+}
+.success-con {
+    width: 81.87%;
+    margin: 3rem auto;
+    color: #4d4d4d;
+    font-size: 1.17rem;
+    line-height: 3rem;
+    text-align: center;
+}
+.buy-defeat .buy-defeat-pic {
+    background: #fff url("../images/success_4.png") center center no-repeat;
+    background-size: 100% auto;
+}
+.success-link {
+    display: block;
+    width: 72.4%;
+    height: 3.5rem;
+    margin: 0 auto;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #3177eb;
+    color: #fff;
+    line-height: 3.5rem;
+    text-align: center;
+    font-size: 1.58rem;
+}

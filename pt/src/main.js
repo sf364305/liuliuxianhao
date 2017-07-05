@@ -31,6 +31,10 @@ import wait_send from './components/wait_send'
 import all_order from './components/all_order'
 import all_order_seller from './components/all_order_seller'
 import my_code from './components/my_code'
+import my_promotion from './components/my_promotion'
+import income_con from './components/income_con'
+import buy_success from './components/buy_success'
+import buy_defeat from './components/buy_defeat'
 // 使用router
 Vue.use(Router)
 // 定义路由
@@ -91,6 +95,18 @@ var routes = [{
 }, {
   path: '/my_code',
   component: my_code  
+}, {
+  path: '/my_promotion',
+  component: my_promotion  
+}, {
+  path: '/income_con',
+  component: income_con  
+}, {
+  path: '/buy_success',
+  component: buy_success  
+}, {
+  path: '/buy_defeat',
+  component: buy_defeat  
 }]
 // 实例化路由
 var vueRouter = new Router({
