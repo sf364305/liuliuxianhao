@@ -7,22 +7,25 @@ const base = 'http://c.chovans.cn/front';
 
 //API,接口列表
 Vue.prototype.Api = {
-    getToken(){
+    getToken() {
         return base + '/utils/getToken';
     },
-    getQiniuToken(){
+    getQiniuToken() {
         return base + '/utils/getUploadToken';
-    } ,
-    getNotices(){
-        return base+'/common/getNotices';
+    },
+    getNotices() {
+        return base + '/common/getNotices';
+    },
+    getCategroy(){
+        return base + '/home/getCategory';
     }
 };
 
 //Http基本类，统一处理
 Vue.prototype.Http = {
-    token:null,
-    setToken(_token){
-        console.log("设置token："+_token);
+    token: null,
+    setToken(_token) {
+        console.log("设置token：" + _token);
         this.token = _token;
     },
     get: function (api, params, callback) {
@@ -33,16 +36,21 @@ Vue.prototype.Http = {
         }
 
         //添加请求token
-        if(params === null){
+        if (params === null) {
             params = {};
         }
         // debugger;
-        if(api !== Vue.prototype.Api.getToken()){
+        if (api !== Vue.prototype.Api.getToken()) {
             params.token = this.token;
         }
-        console.log("参数："+JSON.stringify(params));
+        console.log("参数：" + JSON.stringify(params));
 
-        axios.post(api, params,{emulateJSON: true}).then((response) => {
+        axios.post(api, params, {
+            emulateJSON: true,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
             // 响应成功回调
             callback(response.data);
         }, (response) => {
