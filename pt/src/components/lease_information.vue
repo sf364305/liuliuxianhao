@@ -15,35 +15,30 @@
                     <input  id="platFileBtn" name="file" type="file" multiple />
                 </div>
             </div>
-            <upload :uploadurl="uploadimgs" :pickfile ="pickfiles" :multiple="true">
-                <div slot="upload">
-                  <div :id="pickfiles" class="btn">点击添加门店logo/照片<img :src="uploadimgs" class="uploadimg"></div>
-                </div>
-              </upload>
             <div class="sell-second">填写详细信息</div>
             <ul class="sell-information clearfix">
                 <li class="clearfix">
                     <span><i>*</i>商品标题：</span>
-                    <input id="name" name="name" type="text" value="" placeholder="请输入商品的标题"/>
+                    <input id="name" name="name" type="text" value="" placeholder="请输入商品的标题" v-model="goodsInfo.title"/>
                 </li>
                 <li class="clearfix">
                     <span>&nbsp;账号ID：</span>
-                    <input id="account" name="account" type="number" value="" placeholder="没有填无"/>
+                    <input id="account" name="account" type="number" value="" placeholder="没有填无" v-model="goodsInfo.accountId"/>
                 </li>
                 <li class="clearfix">
                     <span><i>*</i>角色等级：</span>
-                    <input id="grade" type="number" name="grade" value="" placeholder="请输入角色等级"/>
+                    <input id="grade" type="number" name="grade" value="" placeholder="请输入角色等级" v-model="goodsInfo.grade"/>
                 </li>
                 <li class="sell-sex clearfix">
                     <span><i>*</i>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</span>
                     <div id="sex" name="sex" class="re_sele">
                         <label>
-                            <input type="radio" checked="checked" name="sex" value="1" v-model="sexs"/>
+                            <input type="radio" checked="checked" name="sex" value="1" v-model="goodsInfo.sex"/>
                             <i class="choice-sho choiced-show" @click="changeMach"></i>
                             <em class="choice-text">男</em>
                         </label>
                         <label>
-                            <input type="radio" name="sex" value="2" v-model="sexs"/>
+                            <input type="radio" name="sex" value="2" v-model="goodsInfo.sex"/>
                             <i class="choice-sho" @click="changeMach"></i>
                             <em class="choice-text">女</em>
                         </label>
@@ -53,17 +48,17 @@
                     <span><i>*</i>操作系统：</span>
                     <div id="system" name="system" class="re_sele">
                         <label>
-                            <input type="radio" checked="checked"  name="system" value="3" v-model="systems"/>
+                            <input type="radio" checked="checked"  name="system" value="3" v-model="goodsInfo.system"/>
                             <i class="choice-sho choiced-show" @click="changeMach"></i>
                             <em class="choice-text">通用</em>
                         </label>
                         <label>
-                            <input type="radio"  name="system" value="1" v-model="systems"/>
+                            <input type="radio"  name="system" value="1" v-model="goodsInfo.system"/>
                             <i class="choice-sho" @click="changeMach"></i>
                             <em class="choice-text">安卓</em>
                         </label>
                         <label>
-                            <input type="radio" name="system" value="2" v-model="systems"/>
+                            <input type="radio" name="system" value="2" v-model="goodsInfo.system"/>
                             <i class="choice-sho" @click="changeMach"></i>
                             <em class="choice-text">IOS</em>
                         </label>
@@ -73,17 +68,17 @@
                     <span><i>*</i>客户端：</span>
                     <div id="client" name="client" class="re_sele">
                         <label>
-                            <input type="radio" checked="checked"  name="client" value="3" v-model="clients"/>
+                            <input type="radio" checked="checked"  name="client" value="3" v-model="goodsInfo.client"/>
                             <i class="choice-sho choiced-show" @click="changeMach"></i>
                             <em class="choice-text">通用</em>
                         </label>
                         <label>
-                            <input type="radio"  name="client" value="1" v-model="clients"/>
+                            <input type="radio"  name="client" value="1" v-model="goodsInfo.client"/>
                             <i class="choice-sho" @click="changeMach"></i>
                             <em class="choice-text">手机端</em>
                         </label>
                         <label>
-                            <input type="radio" name="client" value="2" v-model="clients"/>
+                            <input type="radio" name="client" value="2" v-model="goodsInfo.client"/>
                             <i class="choice-sho" @click="changeMach"></i>
                             <em class="choice-text">PC端</em>
                         </label>
@@ -93,17 +88,17 @@
                     <span><i>*</i>账号绑定：</span>
                     <div id="binding" name="binding" class="re_sele">
                         <label>
-                            <input type="radio" checked="checked"  name="binding" value="3" v-model="bindings"/>
+                            <input type="radio" checked="checked"  name="binding" value="3" v-model="goodsInfo.bind"/>
                             <i class="choice-sho choiced-show" @click="changeMach"></i>
                             <em class="choice-text">无</em>
                         </label>
                         <label>
-                            <input type="radio" name="binding" value="1" v-model="bindings"/>
+                            <input type="radio" name="binding" value="1" v-model="goodsInfo.bind"/>
                             <i class="choice-sho" @click="changeMach"></i>
                             <em class="choice-text">手机</em>
                         </label>
                         <label>
-                            <input type="radio" name="binding" value="2" v-model="bindings"/>
+                            <input type="radio" name="binding" value="2" v-model="goodsInfo.bind"/>
                             <i class="choice-sho" @click="changeMach"></i>
                             <em class="choice-text">邮箱</em>
                         </label>
@@ -113,22 +108,22 @@
                     <span><i>*</i>第三方授权：</span>
                     <div id="authorization" name="authorization" class="re_sele">
                         <label style="width: 24%; margin-right: 0;">
-                            <input type="radio" checked="checked"  name="authorization" value="4" v-model="authorizations"/>
+                            <input type="radio" checked="checked"  name="authorization" value="4" v-model="goodsInfo.authorization"/>
                             <i class="choice-sho choiced-show" @click="changeMach"></i>
                             <em class="choice-text">无</em>
                         </label>
                         <label style="width: 24%; margin-right: 0;">
-                            <input type="radio"  name="authorization" value="1" v-model="authorizations"/>
+                            <input type="radio"  name="authorization" value="1" v-model="goodsInfo.authorization"/>
                             <i class="choice-sho" @click="changeMach"></i>
                             <em class="choice-text">QQ</em>
                         </label style="width: 24%; margin-right: 0;">
                         <label style="width: 24%; margin-right: 0;">
-                            <input type="radio" name="authorization" value="2" v-model="authorizations"/>
+                            <input type="radio" name="authorization" value="2" v-model="goodsInfo.authorization"/>
                             <i class="choice-sho" @click="changeMach"></i>
                             <em class="choice-text">微信</em>
                         </label>
                         <label style="width: 24%; margin-right: 0;">
-                            <input type="radio" name="authorization" value="3" v-model="authorizations"/>
+                            <input type="radio" name="authorization" value="3" v-model="goodsInfo.authorization"/>
                             <i class="choice-sho" @click="changeMach"></i>
                             <em class="choice-text">微博</em>
                         </label>
@@ -138,14 +133,34 @@
                     <span><i>*</i>身份认证：</span>
                     <div id="identification" name="identification" class="re_sele">
                         <label>
-                            <input type="radio" checked="checked"  name="identification" value="1" v-model="identifications"/>
+                            <input type="radio" checked="checked"  name="identification" value="1" v-model="goodsInfo.identification"/>
                             <i class="choice-sho choiced-show" @click="changeMach"></i>
                             <em class="choice-text">未认证</em>
                         </label>
                         <label>
-                            <input type="radio" name="identification" value="2" v-model="identifications"/>
+                            <input type="radio" name="identification" value="2" v-model="goodsInfo.identification"/>
                             <i class="choice-sho" @click="changeMach"></i>
                             <em class="choice-text">已认证</em>
+                        </label>
+                    </div>
+                </li>
+                <li class="sell-sex clearfix">
+                    <span><i>*</i>押金方式：</span>
+                    <div id="deposit" name="deposit" class="re_sele">
+                        <label>
+                            <input type="radio" checked="checked"  name="deposit" value="1" v-model="goodsInfo.deposit"/>
+                            <i class="choice-sho choiced-show" @click="changeMach"></i>
+                            <em class="choice-text">押一付一</em>
+                        </label>
+                        <label>
+                            <input type="radio" name="deposit" value="2" v-model="goodsInfo.deposit"/>
+                            <i class="choice-sho" @click="changeMach"></i>
+                            <em class="choice-text">押二付一</em>
+                        </label>
+                        <label>
+                            <input type="radio" name="deposit" value="3" v-model="goodsInfo.deposit"/>
+                            <i class="choice-sho" @click="changeMach"></i>
+                            <em class="choice-text">押三付一</em>
                         </label>
                     </div>
                 </li>
@@ -156,31 +171,31 @@
                     </div>
                     <div class="lease-check">
                         <label>
-                            <input type="checkbox" name="check" class="lease-dis" value="1" v-model="leaseshBool"/>
+                            <input type="checkbox" name="check" class="lease-dis" value="1" v-model="goodsInfo.leaseshBool"/>
                             <i class="choice-sho" @click="changeMach2"></i>
                             <em class="choice-text" style="width: 12%;">时租</em>
-                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="leasesh"/>
+                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goodsInfo.hourCost"/>
                             <span>元/时</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="check" class="lease-dis" value="2" v-model="leasesdBool"/>
+                            <input type="checkbox" name="check" class="lease-dis" value="2" v-model="goodsInfo.leasesdBool"/>
                             <i class="choice-sho" @click="changeMach2"></i>
                             <em class="choice-text" style="width: 12%;">日租</em>
-                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="leasesd"/>
+                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goodsInfo.dayCost"/>
                             <span>元/天</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="check" class="lease-dis" value="3" v-model="leaseswBool"/>
+                            <input type="checkbox" name="check" class="lease-dis" value="3" v-model="goodsInfo.leaseswBool"/>
                             <i class="choice-sho" @click="changeMach2"></i>
                             <em class="choice-text" style="width: 12%;">周租</em>
-                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="leasesw"/>
+                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goodsInfo.weekCost"/>
                             <span>元/周</span>
                         </label>
                         <label>
-                            <input type="checkbox" name="check" class="lease-dis" value="4" v-model="leasesmBool"/>
+                            <input type="checkbox" name="check" class="lease-dis" value="4" v-model="goodsInfo.leasesmBool"/>
                             <i class="choice-sho" @click="changeMach2"></i>
                             <em class="choice-text" style="width: 12%;">月租</em>
-                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="leasesm"/>
+                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goodsInfo.monthCost"/>
                             <span>元/月</span>
                         </label>
                     </div>
@@ -189,17 +204,17 @@
                     <span><i>*</i>押金方式：</span>
                     <div id="deposit" name="deposit" class="re_sele">
                         <label>
-                            <input type="radio" checked="checked"  name="deposit" value="1" v-model="deposits"/>
+                            <input type="radio" checked="checked"  name="deposit" value="1" v-model="goodsInfo.deposit"/>
                             <i class="choice-sho choiced-show" @click="changeMach"></i>
                             <em class="choice-text">押一付一</em>
                         </label>
                         <label>
-                            <input type="radio" name="deposit" value="2" v-model="deposits"/>
+                            <input type="radio" name="deposit" value="2" v-model="goodsInfo.deposit"/>
                             <i class="choice-sho" @click="changeMach"></i>
                             <em class="choice-text">押二付一</em>
                         </label>
                         <label>
-                            <input type="radio" name="deposit" value="3" v-model="deposits"/>
+                            <input type="radio" name="deposit" value="3" v-model="goodsInfo.deposit"/>
                             <i class="choice-sho" @click="changeMach"></i>
                             <em class="choice-text">押三付一</em>
                         </label>
@@ -222,30 +237,30 @@
                 </li>
                 <li class="clearfix">
                     <span><i>*</i>商品价格：</span>
-                    <input id="price" type="number" name="price" value="" placeholder=">=5元" v-model="prices"/>
+                    <input id="price" type="number" name="price" value="" placeholder=">=5元" v-model="goodsInfo.price"/>
                 </li>
             </ul>
             <ul class="account-infor">
                 <li>
                     <label><i>*</i>直播账号</label>
-                    <input type="text"   name="" :value=accounts placeholder="请输入直播账号" v-model="accounts" class="accounts"/>
+                    <input type="text"   name="" value="" placeholder="请输入直播账号" v-model="goodsInfo.account" class="accounts"/>
                 </li>
                 <li>
                     <label><i>*</i>账号密码</label>
-                    <input type="text"   name="" :value=passwords placeholder="请输入账号密码" v-model="passwords" class="passwords"/>
+                    <input type="text"   name="" value="" placeholder="请输入账号密码" v-model="goodsInfo.password" class="passwords"/>
                 </li>
                 <li>
                     <label><i>*</i>联系手机</label>
-                    <input type="text"   name="" :value=telephones maxlength="11" placeholder="请输入手机号码" v-model="telephones" class="telephones"/>
+                    <input type="text"   name="" value="" maxlength="11" placeholder="请输入手机号码" v-model="goodsInfo.telephone" class="telephones"/>
                 </li>
                 <li>
                     <label><i>*</i>QQ号码</label>
-                    <input type="text"   name="" :value=qq placeholder="请输入QQ号码" v-model="qq" class="qq"/>
+                    <input type="text"   name="" value="" placeholder="请输入QQ号码" v-model="goodsInfo.qq" class="qq"/>
                 </li>
             </ul>
             <div class="add-com">
                 <h3>商品描述：</h3>
-                <textarea id="detail" name="detail" maxlength="200" placeholder="输入商品的补充说明" rows="3" v-model="details"></textarea>
+                <textarea id="detail" name="detail" maxlength="200" placeholder="输入商品的补充说明" rows="3" v-model="goodsInfo.detail"></textarea>
             </div>
             <div class="fill-foot">
                 <em>(所有交易平台将收取10%的手续费)</em>
@@ -253,55 +268,43 @@
             <div class="sell-next">
                 <input type="button" class="diyStart"  @click="addGoods" value="提交" />
             </div>
-            <input type="hidden" name="" :value=sexs class="sexValue">
-            <input type="hidden" name="" :value=systems class="systemValue">
-            <input type="hidden" name="" :value=clients class="clientValue">
-            <input type="hidden" name="" :value=bindings class="bindingValue">
-            <input type="hidden" name="" :value=authorizations class="authorizationValue">
-            <input type="hidden" name="" :value=identifications class="identificationValue">
-            <input type="hidden" name="" :value=prices class="priceValue">
-            <input type="hidden" name="" :value=leasesh class="leasesh">
-            <input type="hidden" name="" :value=leasesd class="leasesd">
-            <input type="hidden" name="" :value=leasesw class="leasesw">
-            <input type="hidden" name="" :value=leasesm class="leasesm">
-            <input type="hidden" name="" :value=leaseshBool class="leaseshBool">
-            <input type="hidden" name="" :value=leasesdBool class="leasesdBool">
-            <input type="hidden" name="" :value=leaseswBool class="leaseswBool">
-            <input type="hidden" name="" :value=leasesmBool class="leasesmBool">
-            <input type="hidden" name="" :value=deposits class="depositValue">
-            <input type="hidden" name="" :value=details class="detailValue">
         </form>
     </div>
 </template>
 <script>
-    import upload from '../templates/upload.vue'
      export default {
         name: 'sell-infomation',
         data() {
             return {
-                uploadimgs:'',
-                pickfiles:'',
-                sexs:'',
-                systems:'',
-                clients:'',
-                bindings:'',
-                authorizations:'',
-                identifications:'',
-                leasesh:'',
-                leasesd:'',
-                leasesw:'',
-                leasesm:'',
-                leaseshBool:'',
-                leasesdBool:'',
-                leaseswBool:'',
-                leasesmBool:'',
-                deposits:'',
-                accounts:'',
-                passwords:'',
-                telephones:'',
-                qq:'',
-                details:'',
-                prices: ''
+                goodsInfo: {
+                    type: 1,
+                    categoryId: "402880e75cfcace3015cfcb25e050000",
+                    images: "logo,logo1",
+                    title: '',
+                    detail: '',
+                    accountId: '',
+                    grade: '',
+                    sex: '',
+                    client: '',
+                    system: '',
+                    bind: '',
+                    authorization: '',
+                    identification: '',
+                    price: '',
+                    leaseshBool:'',
+                    leasedBool:'',
+                    leaseswBool:'',
+                    leasesmBool:'',
+                    hourCost: '',
+                    dayCost: '',
+                    weekCost: '',
+                    monthCost: '',
+                    deposit: '',
+                    account: '',
+                    password: '',
+                    phone: '',
+                    qq: ''
+                }
             }
         },
         beforeCreate() {
@@ -326,83 +329,11 @@
                 this.$router.go(-1);
             },
             addGoods() {
-                var tit = $("#name").val(),
-                    accountId = $("#account").val(),
-                    grade = $("#grade").val(),
-                    sex = $(".sexValue").val(),
-                    client = $(".clientValue").val(),
-                    system = $(".systemValue").val(),
-                    bind = $(".bindingValue").val(),
-                    authorization = $(".authorizationValue").val(),
-                    identification = $(".identificationValue").val(),
-                    leasesh = $(".leasesh").val(),
-                    leasesd = $(".leasesd").val(),
-                    leasesw = $(".leasesw").val(),
-                    leasesm = $(".leasesm").val(),
-                    leaseshBool = $(".leaseshBool").val(),
-                    leasesdBool = $(".leasesdBool").val(),
-                    leaseswBool = $(".leaseswBool").val(),
-                    leasesmBool = $(".leasesmBool").val(),
-                    deposit = $(".depositValue").val(),
-                    account = $(".accounts").val(),
-                    password = $(".passwords").val(),
-                    phone = $(".telephones").val(),
-                    detail = $("#detail").val(),
-                    price = $(".priceValue").val(),
-                    qq = $(".qq").val();
-                    if(sex=="") {
-                        sex = 1;
-                    }
-                    if(client=="") {
-                        client = 3;
-                    }
-                    if(system=="") {
-                        system = 3;
-                    }
-                    if(bind=="") {
-                        bind = 3;
-                    }
-                    if(authorization=="") {
-                        authorization = 3;
-                    }
-                    if(identification=="") {
-                        identification = 1;
-                    }
-                    if(deposit=="") {
-                        deposit = 1;
-                    }
-                var goodsInfo = {
-                    type: 1,
-                    categoryId: "402880e75cfcace3015cfcb25e050000",
-                    images: "logo,logo1",
-                    title: tit,
-                    detail: detail,
-                    accountId: accountId,
-                    grade: grade,
-                    sex: sex,
-                    client: client,
-                    system: system,
-                    bind: bind,
-                    authorization: authorization,
-                    identification: identification,
-                    price: price,
-                    hourCost: leasesh+'-'+leaseshBool,
-                    dayCost: leasesd+'-'+leasesdBool,
-                    weekCost: leasesw+'-'+leaseswBool,
-                    monthCost: leasesm+'-'+leasesmBool,
-                    deposit: deposit,
-                    account: account,
-                    password: password,
-                    phone: phone,
-                    qq: qq,
-                };
-                this.Http.get(this.Api.addGoods(), goodsInfo, function (result) {
+                var that = this
+                this.Http.get(this.Api.addGoods(), that.goodsInfo, function (result) {
                     console.log(result);
                 })
             }
-        },
-            components: {
-              upload,
-            },
+        }
     }
 </script>

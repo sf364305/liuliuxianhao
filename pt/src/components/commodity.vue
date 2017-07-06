@@ -13,10 +13,14 @@
         <ul class="alert-com">
             <li class="alert-com-diff">
                 <h2>>全部</h2>
-                <div>
-                    <span>买卖</span>
-                    <span>租赁</span>
-                </div>
+                <label class="alert-all-dif">
+                    <input v-model="condition.sellbuy" type="radio" value="1" name="sellbuy" class="key-word" checked="checked">
+                    <span style="width:87%;">买卖</span>
+                </label>
+                <label class="alert-all-dif">
+                    <span style="width:87%;">租赁</span>
+                     <input v-model="condition.sellbuy" type="radio" value="2" name="sellbuy" class="key-word" placeholder="">
+                </label>
             </li>
             <li class="alert-com-inf alert-com-show">
                 <form action="" method="post">
@@ -108,13 +112,17 @@
                 <h2>>默认排序
                     <em>（按时间倒序）</em>
                 </h2>
-                <div>
-                    <span>价格↓
-                        <em>（按价格从高到低）</em>
-                    </span>
-                    <span>价格↑
-                        <em>（按价格从低到高）</em>
-                    </span>
+                <div class="price-sort">
+                    <label class="alert-all-dif">
+                        价格↓
+                        <input v-model="condition.priceSort" type="radio" value="1" name="price" class="key-word" checked="checked">
+                        <span>（按价格从高到低）</span>
+                    </label>
+                    <label class="alert-all-dif">
+                        价格↑
+                        <span>（按价格从低到高）</span>
+                         <input v-model="condition.priceSort" type="radio" value="2" name="price" class="key-word" placeholder="">
+                    </label>
                 </div>
             </li>
         </ul>
@@ -136,8 +144,10 @@ export default {
             goods: [],
             condition: {
                 type: "",
+                sellbuy:"",
                 keyword: "",
                 categroId: "",
+                priceSort:"",
                 minPrice: "",
                 maxPrice: "",
                 minLevel: "",

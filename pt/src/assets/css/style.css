@@ -613,14 +613,26 @@
     line-height: 3rem;
     font-size: 1.08rem;
 }
-.alert-com-diff div span, .alert-com-time div span {
+.alert-all-dif input {
     display: block;
-    /*width: 100%;*/
+    width: 100%;
+
+}
+.alert-all-dif span, .alert-com-time div span {
+    display: inline-block;
+    width: 60%;
     height: 3rem;
     padding-left: 13%;
-    border-top: 1px solid #e5e5e5;
+    border: none;
     color: #333;
     line-height: 3rem;
+    outline: none;
+}
+.alert-all-dif span {
+    border-top: 1px solid #e5e5e5;
+}
+.alert-all-dif input {
+    display: none;
 }
 .alert-com-inf div {
     padding-left: 10%;
@@ -648,6 +660,12 @@
     height: 3rem;
     margin: 0 5%;
     line-height: 3rem;
+}
+.price-sort label {
+    display: block;
+    height: 3rem;
+    padding-left: 13%;
+    border-top: 1px solid #e5e5e5;
 }
 .plat-comm input {
     display: none;
