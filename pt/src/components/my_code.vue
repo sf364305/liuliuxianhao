@@ -1,26 +1,27 @@
 <template>
     <div class="my-code">
-        <header class="commodity-head">
-            分享二维码
-            <span class="return-back" @click="ruturnBack"></span>
-        </header>
+        <app-header :header="myCode"></app-header>
         <div class="code-list">
             <img src="" alt="">
         </div>
     </div>
 </template>
 <script>
-     export default {
-        name: 'my-code',
-        data() {
-            return {
-            
-            }
-        },
-        methods: {
-            ruturnBack: function() {
-                this.$router.go(-1);
-            }
+import Header from '../templates/Header.vue'
+export default {
+    name: 'my-code',
+    data() {
+        return {
+            myCode:'我的二维码'
         }
+    },
+    methods: {
+        returnBack: function () {
+            // this.$router.go(-1);
+        }
+    },
+    components:{
+        "app-header":Header
     }
+}
 </script>

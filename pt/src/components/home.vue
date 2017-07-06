@@ -58,41 +58,15 @@ export default {
         }
     },
     created() {
-        this.getToken();
-        this.getConfig();
+        // this.getToken();
+        // this.getConfig();
 
-        this.getNotices();
-        this.getCategroy();
+        // this.getNotices();
+        // this.getCategroy();
         this.getHomeGoodsList();
     },
     methods: {
-        getToken() {
-            this.Http.setToken(this.GetQueryString('token'));
-        },
-        GetQueryString(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-            var r = window.location.search.substr(1).match(reg);
-            if (r != null) return unescape(r[2]); return null;
-        },
-        getNotices() {
-            //获取公告
-            var that = this;
-            this.Http.get(this.Api.getNotices(), null, function (result) {
-                that.$store.commit('setNotices', result.data.notices);
-            })
-        },
-        getCategroy() {
-            var that = this;
-            this.Http.get(this.Api.getCategroy(), null, function (result) {
-                that.$store.commit('setCategroy', result.data.categories);
-            })
-        },
-        getConfig() {
-            var that = this;
-            this.Http.get(this.Api.getConfig(), null, function (result) {
-                that.$store.commit('setSetting', result.data.setting);
-            })
-        },
+        
         getHomeGoodsList() {
             var that = this;
             this.Http.get(this.Api.getHomeGoodsList(), {

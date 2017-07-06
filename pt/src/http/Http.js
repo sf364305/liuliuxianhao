@@ -29,11 +29,14 @@ Vue.prototype.Api = {
     addGoods() {
         return base + '/sale/addGoods';
     },
-    getGoodsList(){
+    getGoodsList() {
         return base + '/common/getGoodsList';
     },
-    getHomeGoodsList(){
+    getHomeGoodsList() {
         return base + '/home/getHomeGoodsList';
+    },
+    getUserInfo() {
+        return base + '/user/getUserInfo';
     }
 };
 
@@ -75,3 +78,16 @@ Vue.prototype.Http = {
         });
     }
 };
+
+// http request 拦截器
+axios.interceptors.request.use(
+    config => {
+        if (!Vue.prototype.Http.token) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
+            // debugger;
+             Vue.$route.push('/');
+        }
+        return config;
+    },
+    err => {
+        return Promise.reject(err);
+    });

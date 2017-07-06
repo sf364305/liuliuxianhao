@@ -47,20 +47,30 @@ Vue.use(VueScroller)
 const store = new Vuex.Store({
   state: {
     Setting: {},
-    Categroy:[],
-    Banner:[],
-    Notices:[],
-    UserId:""
+    Categroy: [],
+    Banner: [],
+    Notices: [],
+    UserId: "",
+    FromView:"/person"
   },
   mutations: {
     setSetting(state, setting) {
       state.Setting = setting;
     },
-    setCategroy(state,categroy){
+    setCategroy(state, categroy) {
       state.Categroy = categroy;
     },
-    setNotices(state,notices){
+    setNotices(state, notices) {
       state.Notices = notices;
+    },
+    setBanner(state, banners) {
+      state.Banner = banners;
+    },
+    setUserInfo(state, user) {
+      state.UserId = user.id;
+    },
+    setFrom(state, from) {
+      state.FromView = from;
     }
   },
   getters: {
@@ -73,7 +83,7 @@ const store = new Vuex.Store({
 // 定义路由
 var routes = [{
   path: '/',
-  component: home
+  component: loading
 }, {
   path: '/home',
   component: home
@@ -127,28 +137,48 @@ var routes = [{
   component: all_order_seller
 }, {
   path: '/my_code',
-  component: my_code  
+  component: my_code
 }, {
   path: '/my_promotion',
-  component: my_promotion  
+  component: my_promotion
 }, {
   path: '/income_con',
-  component: income_con  
+  component: income_con
 }, {
   path: '/buy_success',
-  component: buy_success  
+  component: buy_success
 }, {
   path: '/buy_defeat',
-  component: buy_defeat  
-}]
+  component: buy_defeat
+}];
+
 // 实例化路由
 var vueRouter = new Router({
   routes
 })
+
+vueRouter.beforeEach((to, from, next) => {
+  console.log(from.path);
+  if (to.path != "/") {  // 判断该路由是否需要登录权限
+    if (Vue.prototype.Http.token) {  // 通过vuex state获取当前的token是否存在
+      vm.$store.commit('setFrom', from.path);
+      next();
+    }else {
+      next({
+        path: '/',
+        query: { redirect: from.fullPath }  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+      })
+    }
+  }else {
+    next();
+  }
+})
+
+
 // 创建和挂载根实例
-new Vue({
+var vm = new Vue({
   el: '#app',
-  store:store,
+  store: store,
   router: vueRouter,
   template: '<App></App>',
   components: { App }
