@@ -49,6 +49,6 @@ export default {
 .banner-index img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 20rem;
 }
 </style>

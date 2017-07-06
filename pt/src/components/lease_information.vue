@@ -371,10 +371,10 @@
                 this.Http.get(this.Api.addGoods(), goodsInfo, function (result) {
                     console.log(result);
                 })
-            },
+            }
+        },
             components: {
               upload,
             },
-        }
     }
 </script>

@@ -43,14 +43,16 @@
             }
         },
         created(){
-            debugger;
-            this.qiniu();
+        var self =this;
+        setTimeout(function(){
+
+            self.qiniu();
+        },2000);
         },
         methods:{
             qiniu(){
-            debugger;
                 const self = this;
-                var getTokenUrl = self.Http.Api.getQiniuToken();
+                var getTokenUrl = self.Api.getQiniuToken();
                 const uploader = Qiniu.uploader({
                      runtimes: 'html5,flash,html4',    //上传模式,依次退化
                             browse_button: self.pickfiles,       //上传选择的点选按钮，**必需**
