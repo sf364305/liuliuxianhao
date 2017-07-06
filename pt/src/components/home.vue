@@ -1,91 +1,122 @@
 <template>
     <div class="home">
-        <header class="index-logo" id="index-logo">
-            <router-link to="/commodity" class="search-index" replace></router-link>
-        </header>
-        <div>
-            <app-banner></app-banner>
-        </div>
-        <div class="announcement">
-            <ul class="announ" id="announ">
-                <li v-for="notice in $store.state.Notices" v-bind:key="notice.id">
-                    <span :="notice.id">{{notice.title}}</span>
+        <scroller :on-infinite="infinite" ref="scroller">
+            <header class="index-logo" id="index-logo">
+                <router-link to="/commodity" class="search-index" replace></router-link>
+            </header>
+            <div>
+                <app-banner></app-banner>
+            </div>
+            <div class="announcement">
+                <ul class="announ" id="announ">
+                    <li v-for="notice in $store.state.Notices" v-bind:key="notice.id">
+                        <span :="notice.id">{{notice.title}}</span>
+                    </li>
+                </ul>
+            </div>
+            <section class="new-content">
+                <ul class="clearfix">
+                    <li>
+                        <router-link to="/my_sell" class="index-sell-buy" replace>买卖账号</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/lease" class="index-lease" replace>租赁账号</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/popularity" class="index-popularity" replace>提高人气</router-link>
+                    </li>
+                </ul>
+            </section>
+            <ul class="project clearfix">
+                <li v-for="c in $store.state.Categroy" v-bind:key="c.id">
+                    <router-link to="/commodity" class="index-ying" replace>
+                        <img :src="$store.state.Setting.qiniuUrl + c.img" alt="">{{c.name}}</router-link>
                 </li>
             </ul>
-        </div>
-        <section class="new-content">
-            <ul class="clearfix">
-                <li>
-                    <router-link to="/my_sell" class="index-sell-buy" replace>买卖账号</router-link>
-                </li>
-                <li>
-                    <router-link to="/lease" class="index-lease" replace>租赁账号</router-link>
-                </li>
-                <li>
-                    <router-link to="/popularity" class="index-popularity" replace>提高人气</router-link>
-                </li>
-            </ul>
-        </section>
-        <ul class="project clearfix">
-            <li v-for="c in $store.state.Categroy" v-bind:key="c.id">
-                <router-link to="/commodity" class="index-ying" replace>
-                    <img :src="$store.state.Setting.qiniuUrl + c.img" alt="">{{c.name}}</router-link>
-            </li>
-        </ul>
-        <div class="index-news">
-            <h2>最新寄售信息</h2>
-            <ul class="com-list">
-                <li>
-                    <router-link to="/detail" class="game-name" replace>
-                        <span class="name-title clearfix">
-                            <img src="../assets/images/little2.png" alt="">
-                            <em>【55级男神】求围观</em>
-                        </span>
-                        <span class="sever">
-                            <em class="com-game">绑定情况：</em>
-                            <i class="game-sever">手机绑定</i>
-                        </span>
-                        <span class="price">￥2000</span>
-                        <div class="sell-credit clearfix">
-                            <em>卖家信用：</em>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <div class="sell-inf clearfix">
-                            <em>最近成交：</em>
-                            <span>暂无</span>
-                        </div>
-                    </router-link>
-                    <div class="sell-status1"></div>
-                </li>
-                <li>
-                    <router-link to="/detail" class="game-lease" replace>
-                        <span class="name-title clearfix">
-                            <img src="../assets/images/little1.png" alt="">
-                            <em>【55级男神】求围观</em>
-                        </span>
-                        <span class="sever">
-                            <em class="com-game">绑定情况：</em>
-                            <i class="game-sever">手机绑定</i>
-                        </span>
-                        <span class="price">￥2000</span>
-                        <div class="lease-credit clearfix">
-                            <em>租赁等级：</em>
-                            <span>22级</span>
-                        </div>
-                        <div class="lease-inf clearfix">
-                            <em>租赁天数：</em>
-                            <span>33</span>
-                        </div>
-                    </router-link>
-                    <div class="sell-status"></div>
-                </li>
-            </ul>
-        </div>
+    
+            <div class="index-news">
+                <h2>最新寄售信息</h2>
+                <app-goods :goods="goods"></app-goods>
+            </div>
+        </scroller>
     </div>
 </template>
+<script>
+import Vue from 'vue'
+//引入组件和图片
+import Banner from '../templates/Banner.vue'
+import Goods from '../templates/Goods.vue'
+import a from '../assets/images/banner1.png'
+import b from '../assets/images/banner2.png'
+export default {
+    name: 'home',
+    data() {
+        return {
+            page: 0,
+            size: 10,
+            goods: []
+        }
+    },
+    created() {
+        this.getToken();
+        this.getConfig();
+
+        this.getNotices();
+        this.getCategroy();
+        this.getHomeGoodsList();
+    },
+    methods: {
+        getToken() {
+            this.Http.setToken(this.GetQueryString('token'));
+        },
+        GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        },
+        getNotices() {
+            //获取公告
+            var that = this;
+            this.Http.get(this.Api.getNotices(), null, function (result) {
+                that.$store.commit('setNotices', result.data.notices);
+            })
+        },
+        getCategroy() {
+            var that = this;
+            this.Http.get(this.Api.getCategroy(), null, function (result) {
+                that.$store.commit('setCategroy', result.data.categories);
+            })
+        },
+        getConfig() {
+            var that = this;
+            this.Http.get(this.Api.getConfig(), null, function (result) {
+                that.$store.commit('setSetting', result.data.setting);
+            })
+        },
+        getHomeGoodsList() {
+            var that = this;
+            this.Http.get(this.Api.getHomeGoodsList(), {
+                page: that.page,
+                size: that.size
+            }, function (result) {
+                that.goods = result.data.goods;
+            })
+        },
+        refresh(done) {
+                done();
+        },
+        infinite(done) {
+            var self = this;
+            done();
+        }
+    },
+    components: {
+        'app-banner': Banner,
+        'app-goods': Goods
+    }
+}
+</script>
+
 <style>
 .index-logo {
     position: relative;
@@ -205,92 +236,3 @@
     background-size: 31% auto;
 }
 </style>
-
-<script>
-import Vue from 'vue'
-//引入组件和图片
-import Banner from '../templates/Banner.vue'
-import a from '../assets/images/banner1.png'
-import b from '../assets/images/banner2.png'
-export default {
-    name: 'home',
-    data() {
-        return {
-            notices: [],
-            categroy: [],
-        }
-    },
-    beforeCreate() {
-
-    },
-    created() {
-        this.getToken();
-        this.getConfig();
-
-        this.getNotices();
-        this.getCategroy();
-    },
-    methods: {
-        getToken() {
-            this.Http.setToken(this.GetQueryString('token'));
-        },
-        GetQueryString(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-            var r = window.location.search.substr(1).match(reg);
-            if (r != null) return unescape(r[2]); return null;
-        },
-        getNotices() {
-            //获取公告
-            var that = this;
-            this.Http.get(this.Api.getNotices(), null, function (result) {
-                that.$store.commit('setNotices',result.data.notices);
-            })
-        },
-        getCategroy() {
-            var that = this;
-            this.Http.get(this.Api.getCategroy(), null, function (result) {
-                that.$store.commit('setCategroy',result.data.categories);
-            })
-        },
-        getConfig() {
-            var that = this;
-            this.Http.get(this.Api.getConfig(), null, function (result) {
-                that.$store.commit('setSetting', result.data.setting);
-            })
-        },
-        addGoods() {
-            var goodsInfo = {
-                type: 1,
-                categoryId: "402880e75cfcace3015cfcb25e050000",
-                images: "logo,logo1",
-                title: "测试陌陌",
-                detail: "detail",
-                accountId: "k",
-                grade: 55,
-                sex: 1,
-                client: 3,
-                system: 3,
-                bind: 3,
-                authorization: 1,
-                identification: 1,
-                price: 5,
-                hourCost: "1",
-                dayCost: "2",
-                weekCost: "3",
-                monthCost: "4",
-                deposit: "",
-                account: "chovans",
-                password: "chovans",
-                phone: "1875971871",
-                qq: "404943850@qq.com",
-            };
-            this.Http.get(this.Api.addGoods(), goodsInfo, function (result) {
-                console.log(result);
-            })
-        }
-    },
-    components: {
-        'app-banner': Banner
-    }
-}
-</script>

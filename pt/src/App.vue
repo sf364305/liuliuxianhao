@@ -4,7 +4,7 @@
         <!-- 路由中的几个组件在这里被渲染，默认被渲染的为第一个组件，也就是home组件  -->
         <router-view></router-view>
       </div>
-      <div class="nav-bottom">
+      <div class="nav-bottom" v-if="$store.state.UserId != ''">
           <!-- 引入公用的尾部 footer组件 -->
             <v-footer></v-footer>
       </div>

@@ -7,6 +7,8 @@ import App from './App'
 import Router from 'vue-router'
 //  引入http
 import Http from './http/Http'
+// 刷新 加载更多 https://github.com/wangdahoo/vue-scroller
+import VueScroller from 'vue-scroller'
 
 // 引入项目的四个模块组件
 import './assets/css/reset.css'
@@ -14,6 +16,7 @@ import './assets/css/style.css'
 import './assets/js/jquery-1.11.3.min.js'
 import './assets/js/common.js'
 import './assets/js/touch.min.js'
+import loading from './templates/Loading'
 import server from './components/server'
 import home from './components/home'
 import person from './components/person'
@@ -39,13 +42,15 @@ import buy_defeat from './components/buy_defeat'
 // 使用router
 Vue.use(Router)
 Vue.use(Vuex)
+Vue.use(VueScroller)
 
 const store = new Vuex.Store({
   state: {
     Setting: {},
     Categroy:[],
     Banner:[],
-    Notices:[]
+    Notices:[],
+    UserId:""
   },
   mutations: {
     setSetting(state, setting) {

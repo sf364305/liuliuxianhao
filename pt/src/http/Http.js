@@ -28,6 +28,12 @@ Vue.prototype.Api = {
     },
     addGoods() {
         return base + '/sale/addGoods';
+    },
+    getGoodsList(){
+        return base + '/common/getGoodsList';
+    },
+    getHomeGoodsList(){
+        return base + '/home/getHomeGoodsList';
     }
 };
 
@@ -35,7 +41,7 @@ Vue.prototype.Api = {
 Vue.prototype.Http = {
     token: null,
     setToken(_token) {
-        console.log("设置token：" + _token);
+        console.log('设置token：' + _token);
         this.token = _token;
     },
     get: function (api, params, callback) {

@@ -22,204 +22,190 @@
                 <form action="" method="post">
                     <div class="clearfix">
                         <label for="">关键词：</label>
-                        <input type="text" value="" name="" class="key-word" placeholder="请输入想查找的关键信息" style="border: none;width: 75%;text-align: left;">
+                        <input v-model="condition.keyword" type="text" value="" name="" class="key-word" placeholder="请输入想查找的关键信息" style="border: none;width: 75%;text-align: left;">
                     </div>
                     <div class="plat-comm clearfix">
                         <span>平台：</span>
                         <label>
-                            <input type="radio" checked="checked" name="plat" value="1"/>
-                            <i class="choice-sho choiced-show"  @click="changeSex"></i>
-                            <em class="choice-text">陌陌</em>
+                            <input type="radio" checked="checked" name="plat" value=""></input>
+                            <i class="choice-sho choiced-show" @click="changeSex"></i>
+                            <em class="choice-text">全部</em>
                         </label>
-                        <label>
-                            <input type="radio" name="plat" value="2"/>
-                            <i class="choice-sho"  @click="changeSex"></i>
-                            <em class="choice-text">映客</em>
-                        </label>
-                        <label>
-                            <input type="radio" name="plat" value="1"/>
-                            <i class="choice-sho"  @click="changeSex"></i>
-                            <em class="choice-text">花椒</em>
-                        </label>
-                        <label style="margin-left:25%;">
-                            <input type="radio" name="plat" value="2"/>
-                            <i class="choice-sho"  @click="changeSex"></i>
-                            <em class="choice-text">快手</em>
-                        </label>
-                        <label>
-                            <input type="radio" name="plat" value="2"/>
-                            <i class="choice-sho"  @click="changeSex"></i>
-                            <em class="choice-text">其他</em>
+                        <label v-for="c in $store.state.Categroy" v-bind:key="c.id">
+                            <input type="radio" v-model="condition.categroId" name="plat" :value="c.id"></input>
+                            <i class="choice-sho" @click="changeSex"></i>
+                            <em class="choice-text">{{c.name}}</em>
                         </label>
                     </div>
                     <div class="clearfix">
                         <label for="">价格范围：</label>
-                        <input type="text" value="" name="" class="key-price" placeholder="0">
+                        <input type="number" v-model="condition.minPrice" value="" name="" class="key-price" placeholder="0" >
                         <i>-</i>
-                        <input type="text" value="" name="" class="key-price2" placeholder="200000">
+                        <input type="number" v-model="condition.maxPrice" value="" name="" class="key-price2" placeholder="200000">
                     </div>
                     <div class="clearfix">
                         <label for="">等级：</label>
-                        <input type="text" value="" name="" class="key-leve" placeholder="0">
+                        <input type="number" v-model="condition.minLevel" value="" name="" class="key-leve" placeholder="0">
                         <i>-</i>
-                        <input type="text" value="" name="" class="key-leve2" placeholder="999">
+                        <input type="number" v-model="condition.maxLevel" value="" name="" class="key-leve2" placeholder="999">
                     </div>
                     <div class="sex-com clearfix">
                         <span>性别：</span>
                         <label>
-                            <input type="radio" checked="checked" name="sex" value="1"/>
-                            <i class="choice-sho choiced-show"  @click="changeSex"></i>
+                            <input v-model="condition.sex" type="radio" checked="checked" name="sex" value=""></input>
+                            <i class="choice-sho choiced-show" @click="changeSex"></i>
+                            <em class="choice-text">不限</em>
+                        </label>
+                        <label>
+                            <input v-model="condition.sex" type="radio" name="sex" value="1"></input>
+                            <i class="choice-sho" @click="changeSex"></i>
                             <em class="choice-text">男</em>
                         </label>
                         <label>
-                            <input type="radio" name="sex" value="2"/>
-                            <i class="choice-sho"  @click="changeSex"></i>
+                            <input v-model="condition.sex" type="radio" name="sex" value="2"></input>
+                            <i class="choice-sho" @click="changeSex"></i>
                             <em class="choice-text">女</em>
                         </label>
                     </div>
                     <div class="bind-com clearfix">
                         <span>绑定情况：</span>
                         <label>
-                            <input type="radio" checked="checked" name="bind" value="1"/>
-                            <i class="choice-sho choiced-show"  @click="changeSex"></i>
+                            <input v-model="condition.bind" type="radio" checked="checked" name="bind" value="1"></input>
+                            <i class="choice-sho choiced-show" @click="changeSex"></i>
                             <em class="choice-text">手机</em>
                         </label>
                         <label>
-                            <input type="radio" name="bind" value="2"/>
-                            <i class="choice-sho"  @click="changeSex"></i>
+                            <input v-model="condition.bind" type="radio" name="bind" value="2"></input>
+                            <i class="choice-sho" @click="changeSex"></i>
                             <em class="choice-text">邮箱</em>
+                        </label>
+                        <label>
+                            <input v-model="condition.bind" type="radio" name="bind" value="3"></input>
+                            <i class="choice-sho" @click="changeSex"></i>
+                            <em class="choice-text">无绑定</em>
                         </label>
                     </div>
                     <div class="certification-com clearfix">
                         <span>身份认证：</span>
                         <label>
-                            <input type="radio" checked="checked" name="bind" value="1"/>
-                            <i class="choice-sho choiced-show"  @click="changeSex"></i>
+                            <input v-model="condition.identification" type="radio" checked="checked" name="bind" value="2"></input>
+                            <i class="choice-sho choiced-show" @click="changeSex"></i>
                             <em class="choice-text">已认证</em>
                         </label>
                         <label>
-                            <input type="radio" name="bind" value="2"/>
-                            <i class="choice-sho"  @click="changeSex"></i>
+                            <input v-model="condition.identification" type="radio" name="bind" value="1"></input>
+                            <i class="choice-sho" @click="changeSex"></i>
                             <em class="choice-text">未认证</em>
                         </label>
                     </div>
                     <div class="com-sub">
-                        <input type="reset" name="" value="重置" class="com-reset"/>
-                        <input type="button" name="" value="确定" class="com-submit"/>
+                        <input type="reset" name="" value="重置" class="com-reset"></input>
+                        <input type="button" name="" value="确定" class="com-submit" @click="submit"></input>
                     </div>
                 </form>
             </li>
             <li class="alert-com-time">
-                <h2>>默认排序<em>（按时间倒序）</em></h2>
+                <h2>>默认排序
+                    <em>（按时间倒序）</em>
+                </h2>
                 <div>
-                    <span>价格↓<em>（按价格从高到低）</em></span>
-                    <span>价格↑<em>（按价格从低到高）</em></span>
+                    <span>价格↓
+                        <em>（按价格从高到低）</em>
+                    </span>
+                    <span>价格↑
+                        <em>（按价格从低到高）</em>
+                    </span>
                 </div>
             </li>
         </ul>
-        <ul class="com-list">
-            <li>     
-                <router-link to="/detail" class="game-name" replace>
-                    <span class="name-title clearfix">
-                        <img src="../assets/images/little2.png" alt="">
-                        <em>【55级男神】求围观</em>
-                    </span>
-                    <span class="sever">
-                        <em class="com-game">绑定情况：</em>
-                        <i class="game-sever">手机绑定</i>
-                    </span>
-                    <span class="price">￥2000</span>
-                    <div class="sell-credit clearfix">
-                        <em>卖家信用：</em>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <div class="sell-inf clearfix">
-                        <em>最近成交：</em>
-                        <span>暂无</span>
-                    </div>
-                </router-link>
-                <div class="sell-status"></div>
-            </li>
-            <li>     
-                <router-link to="/detail" class="game-lease" replace>
-                    <span class="name-title clearfix">
-                        <img src="../assets/images/little1.png" alt="">
-                        <em>【55级男神】求围观</em>
-                    </span>
-                    <span class="sever">
-                        <em class="com-game">绑定情况：</em>
-                        <i class="game-sever">手机绑定</i>
-                    </span>
-                    <span class="price">￥2000</span>
-                    <div class="lease-credit clearfix">
-                        <em>租赁等级：</em>
-                        <span>22级</span>
-                    </div>
-                    <div class="lease-inf clearfix">
-                        <em>租赁天数：</em>
-                        <span>33</span>
-                    </div>
-                </router-link>
-                <div class="sell-status"></div>
-            </li>
-            <li>     
-                <router-link to="/detail" class="game-lease" replace>
-                    <span class="name-title clearfix">
-                        <img src="../assets/images/little1.png" alt="">
-                        <em>【55级男神】求围观</em>
-                    </span>
-                    <span class="sever">
-                        <em class="com-game">绑定情况：</em>
-                        <i class="game-sever">手机绑定</i>
-                    </span>
-                    <span class="price">￥2000</span>
-                    <div class="lease-credit clearfix">
-                        <em>租赁等级：</em>
-                        <span>22级</span>
-                    </div>
-                    <div class="lease-inf clearfix">
-                        <em>租赁天数：</em>
-                        <span>33</span>
-                    </div>
-                </router-link>
-                <div class="sell-status"></div>
-            </li>
-        </ul>
+        <scroller :on-infinite="infinite" ref="scroller" style="margin-top:6rem;">
+            <app-goods :goods="goods"></app-goods>
+        </scroller>
     </div>
 </template>
 <style>
+
 </style>
 <script>
-     export default {
-        name: 'detail',
-        data() {
-            return {
-                
-                msg: '6666'
-            }
-        },
-        methods: {
-            change1: function() {
-                $(".alert-com, .alert-com-outer").css("display", "block");
-                $(".alert-com-diff").css("display", "block").siblings().css("display", "none");
-            },
-            change2: function() {
-                $(".alert-com, .alert-com-outer").css("display", "block");
-                $(".alert-com-inf").css("display", "block").siblings().css("display", "none");
-            },
-            change3: function() {
-                $(".alert-com, .alert-com-outer").css("display", "block");
-                $(".alert-com-time").css("display", "block").siblings().css("display", "none");
-            },
-            closeA: function() {
-                $(".alert-com, .alert-com-outer").css("display", "none");
-            },
-            changeSex: function(e) {   
-                $(e.target).addClass('choiced-show').parent().siblings().find('i').removeClass('choiced-show');
+
+import Goods from '../templates/Goods.vue'
+export default {
+    name: 'detail',
+    data() {
+        return {
+            goods: [],
+            condition: {
+                type: "",
+                keyword: "",
+                categroId: "",
+                minPrice: "",
+                maxPrice: "",
+                minLevel: "",
+                maxLevel: "",
+                sex: "",
+                bind: "",
+                identification: "",
+                page: 0,
+                size: 20
             }
         }
+    },
+    created() {
+        this.submit();
+    },
+    methods: {
+        change1: function () {
+            $(".alert-com, .alert-com-outer").css("display", "block");
+            $(".alert-com-diff").css("display", "block").siblings().css("display", "none");
+        },
+        change2: function () {
+            $(".alert-com, .alert-com-outer").css("display", "block");
+            $(".alert-com-inf").css("display", "block").siblings().css("display", "none");
+        },
+        change3: function () {
+            $(".alert-com, .alert-com-outer").css("display", "block");
+            $(".alert-com-time").css("display", "block").siblings().css("display", "none");
+        },
+        closeA: function () {
+            $(".alert-com, .alert-com-outer").css("display", "none");
+        },
+        changeSex: function (e) {
+            $(e.target).addClass('choiced-show').parent().siblings().find('i').removeClass('choiced-show');
+        },
+        submit() {
+            //获取列表
+            var that = this;
+            setTimeout(function () {
+                that.condition.page = 0;
+                that.$refs.scroller.triggerPullToRefresh();
+                that.goods = [];
+                that.Http.get(that.Api.getGoodsList(), that.condition, function (result) {
+                    that.goods = result.data.goods;
+                    that.$refs.scroller.finishPullToRefresh();
+                })
+                that.closeA();
+            }, 300);
+        },
+        refresh(done) {
+            done();
+        },
+        infinite(done) {
+            var that = this;
+            that.condition.page += 1;
+            this.Http.get(this.Api.getGoodsList(), this.condition, function (result) {
+                if (result.data.goods.length > 0) {
+                    for (var i = 0; i < result.data.goods.length; i++) {
+                        that.goods.push(result.data.goods[i]);
+                    }
+                    done();
+                } else {
+                    that.$refs.scroller.finishInfinite(true);
+                }
+            })
+        }
+    },
+    components: {
+        'app-goods': Goods
     }
+}
 </script>

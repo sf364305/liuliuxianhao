@@ -45,7 +45,7 @@
          name: 'perosn',
          data() {
              return{
-
+                user:{}
              }
          },
          methods: {
