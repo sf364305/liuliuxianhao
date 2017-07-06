@@ -220,6 +220,10 @@
                         </label> -->
                     </div>
                 </li>
+                <li class="clearfix">
+                    <span><i>*</i>商品价格：</span>
+                    <input id="price" type="number" name="price" value="" placeholder=">=5元" v-model="prices"/>
+                </li>
             </ul>
             <ul class="account-infor">
                 <li>
@@ -255,6 +259,7 @@
             <input type="hidden" name="" :value=bindings class="bindingValue">
             <input type="hidden" name="" :value=authorizations class="authorizationValue">
             <input type="hidden" name="" :value=identifications class="identificationValue">
+            <input type="hidden" name="" :value=prices class="priceValue">
             <input type="hidden" name="" :value=leasesh class="leasesh">
             <input type="hidden" name="" :value=leasesd class="leasesd">
             <input type="hidden" name="" :value=leasesw class="leasesw">
@@ -274,8 +279,8 @@
         name: 'sell-infomation',
         data() {
             return {
-            uploadimgs:'',
-            pickfiles:'',
+                uploadimgs:'',
+                pickfiles:'',
                 sexs:'',
                 systems:'',
                 clients:'',
@@ -295,7 +300,8 @@
                 passwords:'',
                 telephones:'',
                 qq:'',
-                details:''
+                details:'',
+                prices: ''
             }
         },
         beforeCreate() {
@@ -342,7 +348,29 @@
                     password = $(".passwords").val(),
                     phone = $(".telephones").val(),
                     detail = $("#detail").val(),
+                    price = $(".priceValue").val(),
                     qq = $(".qq").val();
+                    if(sex=="") {
+                        sex = 1;
+                    }
+                    if(client=="") {
+                        client = 3;
+                    }
+                    if(system=="") {
+                        system = 3;
+                    }
+                    if(bind=="") {
+                        bind = 3;
+                    }
+                    if(authorization=="") {
+                        authorization = 3;
+                    }
+                    if(identification=="") {
+                        identification = 1;
+                    }
+                    if(deposit=="") {
+                        deposit = 1;
+                    }
                 var goodsInfo = {
                     type: 1,
                     categoryId: "402880e75cfcace3015cfcb25e050000",
@@ -357,7 +385,7 @@
                     bind: bind,
                     authorization: authorization,
                     identification: identification,
-                    price: 5,
+                    price: price,
                     hourCost: leasesh+'-'+leaseshBool,
                     dayCost: leasesd+'-'+leasesdBool,
                     weekCost: leasesw+'-'+leaseswBool,
