@@ -226,7 +226,6 @@ export default {
     created() {
         this.getToken();
         this.getConfig();
-
         this.getNotices();
         this.getCategroy();
     },

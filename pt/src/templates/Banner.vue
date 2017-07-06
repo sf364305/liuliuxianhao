@@ -1,7 +1,7 @@
 <template>
     <div class="swiper-container banner-index">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="banner in banners" :key=banner.id>
+            <div class="swiper-slide" v-for="banner in banners" :key=banner.id style="overflow: hidden;height:20rem;">
                 <img :src="$store.state.Setting.qiniuUrl + banner.qiniuKey" alt="">
             </div>
         </div>
@@ -27,7 +27,7 @@ export default {
             this.Http.get(this.Api.getBanners(), null, function (result) {
                 setTimeout(function () {
                     that.banners = result.data.banners;
-                }, 1000);
+                }, 100);
             })
         }
     },

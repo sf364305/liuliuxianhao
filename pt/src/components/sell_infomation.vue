@@ -185,12 +185,49 @@
             
             }
         },
+        beforeCreate() {
+
+        },
+        created() {
+            
+        },
         methods: {
             changeMach: function(e) {
                 $(e.target).addClass('choiced-show').parent().siblings().find('i').removeClass('choiced-show');
             },
             ruturnBack: function() {
                 this.$router.go(-1);
+            },
+            addGoods() {
+                var goodsInfo = {
+                    type: 1,
+                    categoryId: "402880e75cfcace3015cfcb25e050000",
+                    images: "logo,logo1",
+                    title: "测试陌陌",
+                    detail: "detail",
+                    accountId: "k",
+                    grade: 55,
+                    sex: 1,
+                    client: 3,
+                    system: 3,
+                    bind: 3,
+                    authorization: 1,
+                    identification: 1,
+                    price: 5,
+                    hourCost: "1",
+                    dayCost: "2",
+                    weekCost: "3",
+                    monthCost: "4",
+                    deposit: "",
+                    account: "chovans",
+                    password: "chovans",
+                    phone: "1875971871",
+                    qq: "404943850@qq.com",
+                };
+                this.Http.get(this.Api.addGoods(), goodsInfo, function (result) {
+                    alert(666)
+                    console.log(result + "0");
+                })
             }
         }
     }
