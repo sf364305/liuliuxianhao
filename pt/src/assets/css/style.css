@@ -1105,7 +1105,7 @@ select {
     border: none;
     line-height: 3rem;
 }
-#category label, #sex label, #payway label, #system label, #client label, #binding label, #identification label, #authorization label {
+#category label, #sex label, #payway label, #system label, #client label, #binding label, #identification label, #authorization label, #deposit label {
     float: left;
     width: 30%;
     height: 3rem;
@@ -1114,7 +1114,7 @@ select {
 .categroy span {
     color: #006FF9;
 }
-#category input, #sex input, #payway input, #system input, #client input, #binding input, #authorization input, #identification input {
+#category input, #sex input, #payway input, #system input, #client input, #binding input, #authorization input, #identification input, #deposit label input {
     display: none;
     width: 20%;
 }
@@ -1133,7 +1133,7 @@ select {
     box-sizing: border-box;
 }*/
 .sell-information .choiced-show {
-    background: url("../images/chioce_2.png") center center no-repeat;
+    background: url("../images/chioce_2.png") 0 center no-repeat;
     background-size: 75% auto;
 }
 #sex .choice-text, .#payway .choice-text, #system .choice-text, #client .choice-text, #binding .choice-text, #authorization .choice-text, #identification .choice-text {
@@ -1601,7 +1601,7 @@ select {
 .lease-check label {
     display: block;
     overflow: hidden;
-    padding-left: 20%;
+    padding-left: 24%;
 }
 .lease-diff-head {
     padding-left: 3%;
