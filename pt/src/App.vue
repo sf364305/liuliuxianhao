@@ -2,12 +2,11 @@
   <div id="app">
       <div class="contianer">
         <!-- 路由中的几个组件在这里被渲染，默认被渲染的为第一个组件，也就是home组件  -->
-        <router-view></router-view>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
       </div>
-      <div class="nav-bottom">
-          <!-- 引入公用的尾部 footer组件 -->
-            <v-footer></v-footer>
-      </div>
+      
   </div>
 </template>
 <style>
@@ -44,13 +43,3 @@
   opacity: 0;
 }
 </style>
-<script>
-//引入header组件
-import footer from './components/footer.vue'
-//输出header组件
-export default{
-  components: {
-    'v-footer': footer
-  }
-}
-</script>

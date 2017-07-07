@@ -1,54 +1,46 @@
 <template>
     <div class="income-con">
-        <header class="commodity-head">
-            我的收益
-            <span class="return-back" @click="ruturnBack"></span>
-        </header>
+        <app-header :header="title"></app-header>
         <ul class="income-pic clearfix">
-            <li>
-                <img src="../assets/images/papulity.png" alt=""/>
-                <p>你就是唯一</p>
-                <span>生成时间：2017-7-5</span>
-                <i>￥150</i>
-            </li>
-            <li>
-                <img src="../assets/images/papulity.png" alt=""/>
-                <p>你就是唯一</p>
-                <span>生成时间：2017-7-5</span>
-                <i>￥150</i>
-            </li>
-            <li>
-                <img src="../assets/images/papulity.png" alt=""/>
-                <p>你就是唯一</p>
-                <span>生成时间：2017-7-5</span>
-                <i>￥150</i>
-            </li>
-            <li>
-                <img src="../assets/images/papulity.png" alt=""/>
-                <p>你就是唯一</p>
-                <span>生成时间：2017-7-5</span>
-                <i>￥150</i>
-            </li><li>
-                <img src="../assets/images/papulity.png" alt=""/>
-                <p>你就是唯一</p>
-                <span>生成时间：2017-7-5</span>
-                <i>￥150</i>
+            <li v-for="c in commission" :key="c.id">
+                <img :src="c.fromUser.avatar" alt="" />
+                <p>{{c.fromUser.name}}</p>
+                <span>生成时间：{{c.createOn}}</span>
+                <i>￥{{c.price}}</i>
             </li>
         </ul>
     </div>
 </template>
 <script>
-     export default {
-        name: 'income-con',
-        data() {
-            return {
-            
-            }
-        },
-        methods: {
-            ruturnBack: function() {
-                this.$router.go(-1);
-            }
+import Header from '../templates/Header.vue'
+export default {
+    name: 'income-con',
+    data() {
+        return {
+            title:"收益详情",
+            page:0,
+            size:20,
+            commission:[]
         }
+    },
+    created(){
+        this.getCommission();
+    },
+    methods: {
+        getCommission(){
+            var self = this;
+            this.Http.get(this.Api.getCommission(),{
+                page:self.page,
+                size:self.size
+            },function(result){
+                for(var i = 0;i<result.data.commissions.lenght;i++){
+                    commission.push(result.data.commissions[i]);
+                }
+            })
+        }
+    },
+    components: {
+        "app-header": Header
     }
+}
 </script>

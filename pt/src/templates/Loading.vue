@@ -46,7 +46,7 @@ export default {
     getUserInfo() {
       var that = this;
       this.Http.get(this.Api.getUserInfo(), null, function (result) {
-        that.$store.commit('setUserInfo', result.data.user);
+        that.$store.commit('setUser', result.data.user);
         that.checkGo();
       })
     },

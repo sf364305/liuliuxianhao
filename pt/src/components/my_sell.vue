@@ -49,6 +49,10 @@
                 <router-link to="/sell_infomation" class="sell-in-next">下一步</router-link>
             </div>
         </form>
+        <div class="nav-bottom">
+            <!-- 引入公用的尾部 footer组件 -->
+            <app-footer></app-footer>
+        </div>
     </div>
 </template>
 <style>
@@ -60,6 +64,7 @@
     
 </style>
 <script>
+import Footer from '../templates/Footer.vue'
     export default {
       data () {
         return {
@@ -77,6 +82,9 @@
           changePlat: function(e) {
             $(e.target).addClass('plat-show').parent().parent().siblings().find('span').removeClass('plat-show');
           }
+      },
+      components:{
+          'app-footer': Footer
       }
     }
 </script>

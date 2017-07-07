@@ -37,6 +37,18 @@ Vue.prototype.Api = {
     },
     getUserInfo() {
         return base + '/user/getUserInfo';
+    },
+    getQrCode(){
+        return base + '/user/getQrCode';
+    },
+    getReferred(){
+        return base + '/user/getReferred';
+    },
+    getCommission(){
+        return base + '/user/getCommission';
+    },
+    getBuyInfoByStatus(){
+        return base + '/user/getBuyInfoByStatus';
     }
 };
 
@@ -71,6 +83,7 @@ Vue.prototype.Http = {
             }
         }).then((response) => {
             // 响应成功回调
+            console.log(api,response.data);
             callback(response.data);
         }, (response) => {
             // 响应错误回调
@@ -80,14 +93,14 @@ Vue.prototype.Http = {
 };
 
 // http request 拦截器
-axios.interceptors.request.use(
-    config => {
-        if (!Vue.prototype.Http.token) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
-            // debugger;
-             Vue.$route.push('/');
-        }
-        return config;
-    },
-    err => {
-        return Promise.reject(err);
-    });
+// axios.interceptors.request.use(
+//     config => {
+//         if (!Vue.prototype.Http.token) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
+//             // debugger;
+//              Vue.$route.push('/');
+//         }
+//         return config;
+//     },
+//     err => {
+//         return Promise.reject(err);
+//     });

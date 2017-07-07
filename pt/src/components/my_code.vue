@@ -1,6 +1,6 @@
 <template>
     <div class="my-code">
-        <app-header :header="myCode"></app-header>
+        <app-header :header="title"></app-header>
         <div class="code-list">
             <img src="" alt="">
         </div>
@@ -12,7 +12,7 @@ export default {
     name: 'my-code',
     data() {
         return {
-            myCode:'我的二维码'
+            myCotitlede:'我的二维码'
         }
     },
     methods: {

@@ -183,6 +183,26 @@
     background-size: 70% auto;
 }
 /*导航样式*/
+.index-home {
+    background: url("../images/index_1.png") center 15% no-repeat;
+    background-size: 25% auto;
+}
+
+.index-person {
+    background: url("../images/person_1.png") center 15% no-repeat;
+    background-size: 19% auto;
+}
+
+.index-sell {
+    background: url("../images/sell_1.png") center 15% no-repeat;
+    background-size: 18% auto;
+}
+
+.index-server {
+    background: url("../images/server_1.png") center 15% no-repeat;
+    background-size: 25% auto;
+}
+
 .index-person-active {
     color: #00baff;
     background: url("../images/person_active.png") center 15% no-repeat;
@@ -198,10 +218,13 @@
     background: url("../images/sell_active.png") center 15% no-repeat;
     background-size: 18% auto;
 }
-.index-home {
-    background: url("../images/index_1.png") center 15% no-repeat;
+.index-home-active {
+    color: #00baff;
+    background: url("../images/index_active.png") center 15% no-repeat;
     background-size: 25% auto;
 }
+
+
 /*个人中心样式*/
 .person-infor {
     position: relative;
@@ -246,7 +269,7 @@
 .my-mon {
     display: block;
     position: absolute;
-    bottom: -1rem;
+    bottom: -1.4rem;
     right: 0;
     left: 0;
     width: 6.2rem;
@@ -255,7 +278,7 @@
     color: #fff;
     background: url("../images/mon_back.png") center 0 no-repeat;
     background-size: 100% auto;
-    line-height: 2.8rem;
+    line-height: 2.3rem;
     text-align: center;
 }
 .person-dif {

@@ -39,6 +39,7 @@ import my_promotion from './components/my_promotion'
 import income_con from './components/income_con'
 import buy_success from './components/buy_success'
 import buy_defeat from './components/buy_defeat'
+import order_list from './components/order_list'
 // 使用router
 Vue.use(Router)
 Vue.use(Vuex)
@@ -50,7 +51,7 @@ const store = new Vuex.Store({
     Categroy: [],
     Banner: [],
     Notices: [],
-    UserId: "",
+    User: {},
     FromView:"/person"
   },
   mutations: {
@@ -66,8 +67,8 @@ const store = new Vuex.Store({
     setBanner(state, banners) {
       state.Banner = banners;
     },
-    setUserInfo(state, user) {
-      state.UserId = user.id;
+    setUser(state, user) {
+      state.User = user;
     },
     setFrom(state, from) {
       state.FromView = from;
@@ -100,7 +101,7 @@ var routes = [{
   path: '/commodity',
   component: commodity
 }, {
-  path: '/detail',
+  path: '/detail/:id',
   component: detail
 }, {
   path: '/sure_order',
@@ -150,6 +151,9 @@ var routes = [{
 }, {
   path: '/buy_defeat',
   component: buy_defeat
+}, {
+  path: '/orders/:status',
+  component: order_list
 }];
 
 // 实例化路由

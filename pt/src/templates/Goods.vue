@@ -1,9 +1,9 @@
 <template>
     <ul class="com-list">
-        <li v-for="g in goods" :key="g.id">
-            <router-link to="/detail" class="game-name" replace>
+        <li v-for="(g,index) in goods" :key="g.name">
+            <a class="game-name" replace @click="toDetail(index)">
                 <span class="name-title clearfix">
-                    <img :srt="$store.state.Setting.qiniuUrl + g.id" alt="">
+                    <img :srt="$store.state.Setting.qiniuUrl" alt="">
                     <em>{{g.name}}</em>
                 </span>
                 <span class="sever" v-if="g.type==0">
@@ -16,7 +16,7 @@
                 <span class="price" v-if="g.type==0">￥{{g.price}}</span>
                 <div class="sell-credit clearfix" v-if="g.type==0">
                     <em>卖家信用：</em>
-                    <span v-for="n in g.merchant.creditLevel"></span>
+                    <span v-for="n in g.merchant.creditLevel" :key="n.id"></span>
                 </div>
                 <div class="sell-inf clearfix" v-if="g.type==0">
                     <em>最近成交：</em>
@@ -27,7 +27,7 @@
                         暂无
                     </span>
                 </div>
-            </router-link>
+            </a>
             <div class="sell-status1" v-if="g.type==0"></div>
     
             <span class="sever" v-if="g.type==1">
@@ -54,6 +54,17 @@
 <script>
 export default {
     name: 'goods',
-    props: ['goods']
+    data() {
+        return {
+            // goods: []
+        }
+    },
+    props: ['goods'],
+    methods:{
+        toDetail(idx){
+            var goodsId = this.goods[idx].id;
+            this.$router.push("/detail/"+goodsId);
+        }
+    }
 }
 </script>

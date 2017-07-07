@@ -225,9 +225,11 @@
         name: 'detail',
         data() {
             return {
-                
                 msg: '6666'
             }
+        },
+        created(){
+                console.log(this.$route.params.id);
         },
         methods: {
             moveT: function(bool, deNum) {

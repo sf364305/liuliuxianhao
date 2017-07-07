@@ -10,7 +10,7 @@
             <div class="announcement">
                 <ul class="announ" id="announ">
                     <li v-for="notice in $store.state.Notices" v-bind:key="notice.id">
-                        <span :="notice.id">{{notice.title}}</span>
+                        <span>{{notice.title}}</span>
                     </li>
                 </ul>
             </div>
@@ -39,6 +39,10 @@
                 <app-goods :goods="goods"></app-goods>
             </div>
         </scroller>
+        <div class="nav-bottom">
+            <!-- 引入公用的尾部 footer组件 -->
+            <app-footer></app-footer>
+        </div>
     </div>
 </template>
 <script>
@@ -46,6 +50,7 @@ import Vue from 'vue'
 //引入组件和图片
 import Banner from '../templates/Banner.vue'
 import Goods from '../templates/Goods.vue'
+import Footer from '../templates/Footer.vue'
 import a from '../assets/images/banner1.png'
 import b from '../assets/images/banner2.png'
 export default {
@@ -66,7 +71,7 @@ export default {
         this.getHomeGoodsList();
     },
     methods: {
-        
+
         getHomeGoodsList() {
             var that = this;
             this.Http.get(this.Api.getHomeGoodsList(), {
@@ -77,7 +82,7 @@ export default {
             })
         },
         refresh(done) {
-                done();
+            done();
         },
         infinite(done) {
             var self = this;
@@ -86,7 +91,8 @@ export default {
     },
     components: {
         'app-banner': Banner,
-        'app-goods': Goods
+        'app-goods': Goods,
+        'app-footer': Footer
     }
 }
 </script>
