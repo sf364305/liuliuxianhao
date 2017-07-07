@@ -46,7 +46,7 @@
                 </label>
             </div>
             <div class="sell-next-in">
-                <router-link to="/sell_infomation" class="sell-in-next">下一步</router-link>
+                <router-link to="/lease_information" class="sell-in-next">下一步</router-link>
             </div>
         </form>
         <div class="nav-bottom">
