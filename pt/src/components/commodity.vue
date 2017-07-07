@@ -134,7 +134,7 @@
                 </div>
             </li>
         </ul>
-        <scroller :on-infinite="infinite" ref="scroller" style="margin-top:6rem;">
+        <scroller :on-infinite="infinite" ref="scroller" style="margin-top:7rem;">
             <app-goods :goods="goods"></app-goods>
         </scroller>
     </div>

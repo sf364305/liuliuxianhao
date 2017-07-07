@@ -28,6 +28,9 @@
                     <router-link to="/arbitration" class="person-arbitration" replace>仲裁中
                         <i v-if="userInfo.arbitrationCount > 0">{{userInfo.arbitrationCount}}</i>
                     </router-link>
+                    <router-link to="/arbitration" class="person-collect" replace>收藏
+                        <i v-if="userInfo.arbitrationCount > 0">{{userInfo.arbitrationCount}}</i>
+                    </router-link>
                     <router-link to="/all_order" class="person-all" replace>全部订单</router-link>
                 </li>
                 <li class="person-seller-con clearfix">

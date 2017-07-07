@@ -27,29 +27,27 @@
                         暂无
                     </span>
                 </div>
+                <span class="sever" v-if="g.type==1">
+                    <em class="com-game">绑定情况：</em>
+                    <i class="game-sever" v-if="g.goodsLeaseInfo != null && g.goodsLeaseInfo.bind == 1">手机绑定</i>
+                    <i class="game-sever" v-if="g.goodsLeaseInfo != null && g.goodsLeaseInfo.bind == 2">邮箱绑定</i>
+                    <i class="game-sever" v-if="g.goodsLeaseInfo != null && g.goodsLeaseInfo.bind == 3">无绑定</i>
+                    <i class="game-sever" v-if="g.goodsLeaseInfo == null">未知</i>
+                </span>
+                <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.hourCost">￥{{g.goodsLeaseInfo.hourCost}}/时</span>
+                <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.dayCost">￥{{g.goodsLeaseInfo.dayCost}}/日</span>
+                <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.weedCos">￥{{g.goodsLeaseInfo.weedCos}}/周</span>
+                <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.monthCost">￥{{g.goodsLeaseInfo.monthCost}}/月</span>
+                <div class="lease-credit clearfix" v-if="g.type==1">
+                    <em>租赁等级：</em>
+                    <span>{{g.goodsLeaseInfo.grade}}级</span>
+                </div>
+                <div class="lease-inf clearfix" v-if="g.type==1">
+                    <em>租赁时间：</em>
+                    <span>不低于1小时</span>
+                </div>
             </a>
             <div class="sell-status1" v-if="g.type==0"></div>
-    
-            <span class="sever" v-if="g.type==1">
-                <em class="com-game">绑定情况：</em>
-                <i class="game-sever" v-if="g.goodsLeaseInfo != null && g.goodsLeaseInfo.bind == 1">手机绑定</i>
-                <i class="game-sever" v-if="g.goodsLeaseInfo != null && g.goodsLeaseInfo.bind == 2">邮箱绑定</i>
-                <i class="game-sever" v-if="g.goodsLeaseInfo != null && g.goodsLeaseInfo.bind == 3">无绑定</i>
-                <i class="game-sever" v-if="g.goodsLeaseInfo == null">未知</i>
-            </span>
-            <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.hourCost">￥{{g.goodsLeaseInfo.hourCost}}/时</span>
-            <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.dayCost">￥{{g.goodsLeaseInfo.dayCost}}/日</span>
-            <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.weedCos">￥{{g.goodsLeaseInfo.weedCos}}/周</span>
-            <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.monthCost">￥{{g.goodsLeaseInfo.monthCost}}/月</span>
-            <div class="lease-credit clearfix" v-if="g.type==1">
-                <em>租赁等级：</em>
-                <span>{{g.goodsLeaseInfo.grade}}级</span>
-            </div>
-            <div class="lease-inf clearfix" v-if="g.type==1">
-                <em>租赁时间：</em>
-                <span>不低于1小时</span>
-            </div>
-            </router-link>
             <div class="sell-status" v-if="g.type==1"></div>
         </li>
     </ul>

@@ -24,24 +24,29 @@ export default {
     methods: {
         getBanner() {
             var that = this;
-            this.Http.get(this.Api.getBanners(), null, function (result) {
-                setTimeout(function () {
-                    that.banners = result.data.banners;
-                }, 100);
+            this.Http.get(this.Api.getBanners(), null, function (result) {  
+                that.banners = result.data.banners;
+                //当dom发生变化，更新后执行的回调
+                that.$nextTick(function () {
+                    this.show();
+                })       
             })
+        },
+        show() {
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                loop: true,
+                speed: 600,
+                autoplay: 2000,
+                onTouchEnd: function () {
+                    swiper.startAutoplay()
+                }
+            });
         }
     },
     mounted() {
-        var swiper = new Swiper('.swiper-container', {
-            pagination: '.swiper-pagination',
-            paginationClickable: true,
-            loop: true,
-            speed: 600,
-            autoplay: 2000,
-            onTouchEnd: function () {
-                swiper.startAutoplay()
-            }
-        });
+        console.log('mounted', this);
     }
 }
 </script>
