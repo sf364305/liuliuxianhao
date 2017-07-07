@@ -1,5 +1,7 @@
 <template>
     <div class="sure-order">
+        <app-load></app-load>
+        <app-alert></app-alert>
         <app-header :header="title"></app-header>
         <div class="tobuy-tit">商品信息</div>
         <ul class="sure-inf">
@@ -49,6 +51,12 @@
                     <span v-if="goods.goodsLeaseInfo.deposit==1">押一付一</span>
                     <span v-if="goods.goodsLeaseInfo.deposit==2">押二付一</span>
                     <span v-if="goods.goodsLeaseInfo.deposit==3">押三付一</span>
+                </em>
+            </li>
+            <li class="clearfix">
+                <span>时间：</span>
+                <em>
+                    2017-7-6 20:20  至  2017-8-16 20:20
                 </em>
             </li>
         </ul>
@@ -110,8 +118,8 @@
     </div>
 </template>
 <script>
-
-
+import Alert from '../templates/Alert.vue'
+import Load from '../templates/Load.vue'
 import Header from '../templates/Header.vue'
 export default {
     name: 'sure_order',
@@ -138,15 +146,23 @@ export default {
     },
     methods: {
         submitOrder() {
-
             var self = this;
+            if(!(/^1[34578]\d{9}$/.test(self.phone))){
+                $('.alert-comfirm2').css("display","block");
+                $('.alert-comfirm-com p').html("手机号码有误，请重填");  
+                return false; 
+            } else if(!(/^\d{6,12}$/.test(self.qq))) {
+                $('.alert-comfirm2').css("display","block");
+                $('.alert-comfirm-com p').html("qq号码有误，请重填");  
+                return false;
+            }
+            $('.load-all').css("display","block");
             var amount = 0;
             if (this.goods.type == 0) {
                 amount = this.goods.price;
             } else if (this.goods.type == 1) {
                 amount = this.lessCost[this.leaseType] * this.goodsNum + this.lessCost[this.leaseType] * this.goodsNum * this.goods.goodsLeaseInfo.deposit;
             }
-
             this.Http.get(this.Api.confirmOrder(), {
                 phone: self.phone,
                 qq: self.qq,
@@ -174,7 +190,9 @@ export default {
         }
     },
     components: {
-        'app-header': Header
+        'app-header': Header,
+        'app-alert': Alert,
+        'app-load': Load
     }
 }
 </script>

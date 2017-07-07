@@ -21,8 +21,8 @@
                         <img :src="$store.state.Setting.qiniuUrl + img.qiniuKey" alt="" />
                     </div>
                 </div>
-                <div class="pic-top" @click="moveT(false, imgNu)"></div>
-                <div class="pic-bottom" @click="moveT(true, imgNu)"></div>
+                <div class="pic-top" @click="moveT"></div>
+                <div class="pic-bottom" @click="moveT2"></div>
             </div>
         </div>
         <div class="alert-big">
@@ -193,27 +193,57 @@ export default {
         this.getGoodsInfo();
     },
     methods: {
-        moveT: function (bool, deNum) {
-            var divH = $(".detail-right-inner div").height();
-            var divL = $(".detail-right-inner div").length;
-            if (bool) {
-                deNum++;
-                if (deNum > 0) {
-                    deNum = 0;
+        moveT: function() {
+            var imgNu =  $(".detail-pic-center").attr("img-data");
+            show(false,imgNu)
+            function show (bool,deNum) {
+                var divH = $(".detail-right-inner div").height();
+                var divL = $(".detail-right-inner div").length;
+                if(bool) {
+                    deNum++;
+                    if(deNum > 0) {
+                        deNum = 0;
+                    }
+                } else {
+                    deNum--;
+                    if(deNum <= -divL+1) {
+                        deNum = -divL+1;
+                    }
                 }
-            } else {
-                deNum--;
-                if (deNum <= -divL + 1) {
-                    deNum = -divL + 1;
-                }
+                var imgS = $(".detail-right-inner div").eq(deNum).children("img").attr("src");
+                $(".detail-pic-center img").attr("src", imgS);
+                $(".detail-pic-center").attr("img-data", deNum);
+                var leg = deNum * divH;
+                $(".detail-right-inner").animate({
+                    "marginTop": leg
+                },500)
             }
-            var imgS = $(".detail-right-inner div").eq(deNum).children("img").attr("src");
-            $(".detail-pic-center img").attr("src", imgS);
-            $(".detail-pic-center").attr("img-data", deNum);
-            var leg = deNum * divH;
-            $(".detail-right-inner").animate({
-                "marginTop": leg
-            }, 500)
+        },
+        moveT2: function() {
+            var imgNu =  $(".detail-pic-center").attr("img-data");
+            show(true,imgNu)
+            function show (bool,deNum) {
+                var divH = $(".detail-right-inner div").height();
+                var divL = $(".detail-right-inner div").length;
+                if(bool) {
+                    deNum++;
+                    if(deNum > 0) {
+                        deNum = 0;
+                    }
+                } else {
+                    deNum--;
+                    if(deNum <= -divL+1) {
+                        deNum = -divL+1;
+                    }
+                }
+                var imgS = $(".detail-right-inner div").eq(deNum).children("img").attr("src");
+                $(".detail-pic-center img").attr("src", imgS);
+                $(".detail-pic-center").attr("img-data", deNum);
+                var leg = deNum * divH;
+                $(".detail-right-inner").animate({
+                    "marginTop": leg
+                },500)
+            }
         },
         detail(i) {
             this.isDetail = i;
