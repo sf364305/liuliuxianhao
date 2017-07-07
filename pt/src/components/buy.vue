@@ -1,51 +1,74 @@
 <template>
     <div class="buy">
-        <header class="commodity-head">
-            选择支付
-            <span class="return-back" @click="ruturnBack"></span>
-        </header>
+        <app-header :header="title"></app-header>
         <div class="buy-inf">商品信息</div>
         <ul class="pay-inf">
             <li class="clearfix">
                 <span>商品名称</span>
-                <em>厉害的哥</em>
+                <em>{{order.goodsName}}</em>
             </li>
             <li class="clearfix">
                 <span>手机号码</span>
-                <em>15260623877</em>
+                <em>{{order.phone}}</em>
             </li>
             <li class="clearfix">
                 <span>QQ号码</span>
-                <em>1839085395</em>
+                <em>{{order.qq}}</em>
             </li>
             <li class="clearfix">
                 <span>应付总价</span>
-                <em>12000元</em>
+                <em>{{order.amount}}元</em>
             </li>
             <li class="clearfix">
                 <span>实付总价</span>
-                <em>12000元</em>
+                <em>{{order.amount}}元</em>
             </li>
-            <input type="text"  id="amount" style="display: none" value=""/>
-            <input type="text"  id="orderid" style="display: none" value=""/>
         </ul>
         <div class="pay-time">*订单支付有效时间30分钟</div>
         <div class="buy-inf-method">支付方式</div>
-        <router-link to="/buy_defeat" class="pay-method" replace>微信支付</router-link>
+        <a @click="pay" class="pay-method" replace>微信支付</a>
     </div>
 </template>
 <script>
-     export default {
-        name: 'buy',
-        data() {
-            return {
-            
-            }
-        },
-        methods: {
-            ruturnBack: function() {
-                this.$router.go(-1);
+import Header from '../templates/Header.vue'
+export default {
+    name: 'buy',
+    data() {
+        return {
+            title: "选择支付方式",
+            order: {},
+            payInfo: {
+
             }
         }
+    },
+    created() {
+        this.order = this.$store.state.Order;
+        console.log("全局订单信息",this.order);
+    },
+    mounted(){
+
+    },
+    methods: {
+        pay() {
+            var self = this;
+            this.Http.get(this.Api.payOrder(), {
+                orderId: self.order.orderId
+            }, function (result) {
+                if (result.code === 0) {
+                    self.payInfo = JSON.parse(result.data.payJson);
+                    self.callWxPay();
+                } else {
+                    console.log(result.msg);
+                }
+            })
+        },
+        callWxPay() {
+            
+        }
+    },
+    components: {
+        'app-header': Header,
     }
+}
 </script>

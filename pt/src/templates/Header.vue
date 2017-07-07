@@ -10,8 +10,9 @@ export default {
     props: ['header'],
     methods: {
         back() {
-            console.log("返回:"+this.$store.state.FromView);
-            this.$router.push(this.$store.state.FromView);
+            var v = this.$store.state.FromView[this.$store.state.FromView.length-1];
+            this.$router.push(v);
+            console.log("跳转页面",v);
             // this.$router.back(-1);
         }
     }

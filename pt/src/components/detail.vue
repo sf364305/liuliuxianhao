@@ -1,76 +1,73 @@
 <template>
     <div class="detail">
-        <header class="commodity-head">
-            商品信息
-            <span class="return-back" @click="ruturnBack"></span>
-        </header>
+        <app-header :header="title"></app-header>
         <div class="detail-inner clearfix">
             <p class="detail-pic-left">
-                点<br/>击<br/>图<br/>片<br/>查<br/>看<br/>大<br/>图
+                点
+                <br/>击
+                <br/>图
+                <br/>片
+                <br/>查
+                <br/>看
+                <br/>大
+                <br/>图
             </p>
             <div class="detail-pic-center" img-data="0">
                 <img src="../assets/images/comm1.jpg" alt="" />
             </div>
             <div class="detail-pic-right">
                 <div class="detail-right-inner">
-                    <div><img src="../assets/images/comm1.jpg" alt="" /></div>
-                    <div><img src="../assets/images/comm2.jpg" alt="" /></div>
-                    <div><img src="../assets/images/comm1.jpg" alt="" /></div>
-                    <div><img src="../assets/images/comm2.jpg" alt="" /></div>
+                    <div v-for="img in goods.goodsImages" :key="img.id">
+                        <img :src="$store.state.Setting.qiniuUrl + img.qiniuKey" alt="" />
+                    </div>
                 </div>
                 <div class="pic-top" @click="moveT(false, imgNu)"></div>
                 <div class="pic-bottom" @click="moveT(true, imgNu)"></div>
             </div>
-        </div>           
+        </div>
         <div class="alert-big">
             <div class="big-show" id="icons">
-                <img src="../assets/images/comm1.jpg" alt="" />
-                <img src="../assets/images/comm2.jpg" alt="" />
-                <img src="../assets/images/comm1.jpg" alt="" />
-                <img src="../assets/images/comm2.jpg" alt="" />
+                <img v-for="img in goods.goodsImages" :key="img.id" :src="$store.state.Setting.qiniuUrl + img.qiniuKey" />
             </div>
             <div class="pic-left-alert"></div>
             <div class="pic-right-alert"></div>
         </div>
-        <div class="over-detail">        
+        <div class="over-detail" style="padding-bottom:5rem;">
             <div class="detail-inf clearfix">
                 <div class="detail-in-left">
-                <span class="detail-in-name">
-                    <img src="../assets/images/little1.png" alt=""/>
-                    <em>60级超级帅号</em>
-                </span>
-                    <span class="detail-in-price">￥12000</span>
+                    <span class="detail-in-name">
+                        <img :src="$store.state.Setting.qiniuUrl + goods.category.img" alt="" />
+                        <em>{{goods.name}}</em>
+                    </span>
+                    <span class="detail-in-price">￥{{goods.price}}</span>
                 </div>
                 <div class="detail-in-position">
                     <div class="sell-first1 clearfix">
                         <span>
                             <em>首次出售</em>
-                         </span>
-                         <em>商品属性：</em>
-                     </div>
+                        </span>
+                        <em>商品属性：</em>
+                    </div>
                     <div class="sell-credit clearfix">
-                         <span></span>
-                         <span></span>
-                         <span></span>
-                         <span></span>
-                         <em>卖家信用：</em>
-                     </div>
-                     <div class="sell-deal clearfix">
-                        <span>5笔（成交率：100%）</span>
+                        <span v-for="n in goods.merchant.creditLevel" :key="n.id"></span>
+                        <em>卖家信用：</em>
+                    </div>
+                    <div class="sell-deal clearfix">
+                        <span>{{goods.merchant.successNum}}笔（成交率：{{goods.merchant.successRate}}%）</span>
                         <em>最近成交：</em>
                     </div>
                 </div>
             </div>
             <div class="detail-information">
                 <div class="detail-nav clearfix">
-                    <span class="detail-show" @click="changeCom">商品信息</span>
-                    <span @click="changeCom2">交易说明</span>
+                    <span v-bind:class="{'detail-show':isDetail}" @click="detail(true)">商品信息</span>
+                    <span v-bind:class="{'detail-show':!isDetail}" @click="detail(false)">交易说明</span>
                 </div>
-                <div class="detail-else">            
-                    <ul class="detail-content">
+                <div class="detail-else">
+                    <ul class="detail-content" v-if="isDetail">
                         <li>
                             <span>所属平台</span>
-                            <em>映客</em>
+                            <em>{{goods.category.name}}</em>
                         </li>
                         <li>
                             <span>账户类型</span>
@@ -81,37 +78,54 @@
                         <li>
                             <span>账号等级</span>
                             <em>
-                                42级
+                                {{goods.grade}}级
                             </em>
                         </li>
                         <li>
                             <span>性别</span>
-                            <em>
+                            <em v-if="goods.sex == 0">
                                 男
+                            </em>
+                            <em v-if="goods.sex == 1">
+                                女
                             </em>
                         </li>
                         <li>
                             <span>绑定情况</span>
-                            <em>
+                            <em v-if="goods.bind == 1">
+                                手机绑定
+                            </em>
+                            <em v-if="goods.bind == 2">
+                                邮箱绑定
+                            </em>
+                            <em v-if="goods.bind == 3">
                                 未绑定
                             </em>
                         </li>
                         <li>
                             <span>认证情况</span>
-                            <em>
+                            <em v-if="goods.identification == 1" >
                                 未认证
+                            </em>
+                            <em v-if="goods.identification == 2">
+                                已认证
+                            </em>
+                        </li>
+                        <li v-if="goods.type == 1">
+                            <span>价格详情</span>
+                            <em>
+                                {{goods.goodsLeaseInfo.hourCost}}元/时
+                                {{goods.goodsLeaseInfo.dayCost}}元/日
+                                {{goods.goodsLeaseInfo.weekCost}}元/周
+                                {{goods.goodsLeaseInfo.monthCost}}元/月
                             </em>
                         </li>
                         <li>
-                            <span>价格详情</span>
-                            <em>时租50/时；月租500/月；周租50/周；天租500/天；</em>
-                        </li>
-                        <li>
                             <span>描述</span>
-                            <em>卖号卖号啦卖号卖号啦卖号卖号啦卖号卖号啦卖号卖号啦</em>
+                            <em>{{goods.detail}}</em>
                         </li>
                     </ul>
-                    <ul class="descripe">
+                    <ul class="descripe" v-if="!isDetail">
                         <li>
                             <h2>1.下单支付</h2>
                             <p>选择满意的账号下单并支付</p>
@@ -141,140 +155,100 @@
             </div>
             <div class="detail-love">
                 <h2>猜你喜欢</h2>
-                <ul class="com-list">
-                    <li>     
-                        <router-link to="/detail" class="game-name" replace>
-                            <span class="name-title clearfix">
-                                <img src="../assets/images/little2.png" alt="">
-                                <em>【55级男神】求围观</em>
-                            </span>
-                            <span class="sever">
-                                <em class="com-game">绑定情况：</em>
-                                <i class="game-sever">手机绑定</i>
-                            </span>
-                            <span class="price">￥2000</span>
-                            <div class="sell-credit clearfix">
-                                <em>卖家信用：</em>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                            <div class="sell-inf clearfix">
-                                <em>最近成交：</em>
-                                <span>暂无</span>
-                            </div>
-                        </router-link>
-                        <div class="sell-status1"></div>
-                    </li>
-                    <li>     
-                        <router-link to="/detail" class="game-lease" replace>
-                            <span class="name-title clearfix">
-                                <img src="../assets/images/little1.png" alt="">
-                                <em>【55级男神】求围观</em>
-                            </span>
-                            <span class="sever">
-                                <em class="com-game">绑定情况：</em>
-                                <i class="game-sever">手机绑定</i>
-                            </span>
-                            <span class="price">￥2000</span>
-                            <div class="lease-credit clearfix">
-                                <em>租赁等级：</em>
-                                <span>22级</span>
-                            </div>
-                            <div class="lease-inf clearfix">
-                                <em>租赁天数：</em>
-                                <span>33</span>
-                            </div>
-                        </router-link>
-                        <div class="sell-status"></div>
-                    </li>
-                    <li>     
-                        <router-link to="/detail" class="game-lease" replace>
-                            <span class="name-title clearfix">
-                                <img src="../assets/images/little1.png" alt="">
-                                <em>【55级男神】求围观</em>
-                            </span>
-                            <span class="sever">
-                                <em class="com-game">绑定情况：</em>
-                                <i class="game-sever">手机绑定</i>
-                            </span>
-                            <span class="price">￥2000</span>
-                            <div class="lease-credit clearfix">
-                                <em>租赁等级：</em>
-                                <span>22级</span>
-                            </div>
-                            <div class="lease-inf clearfix">
-                                <em>租赁天数：</em>
-                                <span>33</span>
-                            </div>
-                        </router-link>
-                        <div class="sell-status"></div>
-                    </li>
-                </ul>
+                <app-goods :goods="recommendGoods"></app-goods>
             </div>
         </div>
         <div class="detail-buy clearfix">
-            <span class="detail-collect" @click="changeCollect">收藏</span>
-            <router-link to="/sure_order" class="detail-btn" replace>立即购买</router-link>
+            <span v-bind:class="{'detail-collect':true,'collect-active':isCollection}" @click="setCollection()">
+                {{collection}}
+            </span>
+            <div @click="buy()" class="detail-btn" replace>立即购买</div>
         </div>
     </div>
 </template>
 <script> 
-     export default {
-        name: 'detail',
-        data() {
-            return {
-                msg: '6666'
-            }
-        },
-        created(){
-                console.log(this.$route.params.id);
-        },
-        methods: {
-            moveT: function(bool, deNum) {
-                var divH = $(".detail-right-inner div").height();
-                var divL = $(".detail-right-inner div").length;
-                if(bool) {
-                    deNum++;
-                    if(deNum > 0) {
-                        deNum = 0;
-                    }
-                } else {
-                    deNum--;
-                    if(deNum <= -divL+1) {
-                        deNum = -divL+1;
-                    }
-                }
-                var imgS = $(".detail-right-inner div").eq(deNum).children("img").attr("src");
-                $(".detail-pic-center img").attr("src", imgS);
-                $(".detail-pic-center").attr("img-data", deNum);
-                var leg = deNum * divH;
-                $(".detail-right-inner").animate({
-                    "marginTop": leg
-                },500)
+
+import Header from '../templates/Header.vue'
+import Goods from '../templates/Goods.vue'
+export default {
+    name: 'detail',
+    data() {
+        return {
+            title: "商品详情",
+            goodsId: "",
+            goods: {
+                sex:0
             },
-            changeCom: function(e) {
-                $(e.target).addClass('detail-show').siblings().removeClass('detail-show');
-                $(".detail-content").css("display", "block").siblings().css("display", "none");
-            },
-            changeCom2: function(e) {
-                $(e.target).addClass('detail-show').siblings().removeClass('detail-show');
-                $(".descripe").css("display", "block").siblings().css("display", "none");
-            },
-            changeCollect: function() {
-                var col = $(".detail-buy span").html();
-                if(col == "收藏") {
-                    $(".detail-buy span").addClass('collect-active');
-                    $(".detail-buy span").html("已收藏");
-                } else {
-                    $(".detail-buy span").removeClass('collect-active');
-                    $(".detail-buy span").html("收藏");
-                }
-            },
-            ruturnBack: function() {
-                this.$router.go(-1);
-            }
+            isCollection: false,
+            collection: "收藏",//isCollection ? "已收藏" : "收藏",
+            isDetail: true,
+            recommendGoods:[]
         }
+    },
+    created() {
+        this.goodsId = this.$route.params.id;
+        
+    },
+    activated() {
+        this.getGoodsInfo();
+    },
+    methods: {
+        moveT: function (bool, deNum) {
+            var divH = $(".detail-right-inner div").height();
+            var divL = $(".detail-right-inner div").length;
+            if (bool) {
+                deNum++;
+                if (deNum > 0) {
+                    deNum = 0;
+                }
+            } else {
+                deNum--;
+                if (deNum <= -divL + 1) {
+                    deNum = -divL + 1;
+                }
+            }
+            var imgS = $(".detail-right-inner div").eq(deNum).children("img").attr("src");
+            $(".detail-pic-center img").attr("src", imgS);
+            $(".detail-pic-center").attr("img-data", deNum);
+            var leg = deNum * divH;
+            $(".detail-right-inner").animate({
+                "marginTop": leg
+            }, 500)
+        },
+        detail(i) {
+            this.isDetail = i;
+        },
+        setCollection() {
+            var that = this;
+            this.Http.get(this.Api.collection(), {
+                goodsId: that.goodsId
+            }, function (result) {
+                that.isCollection = !that.isCollection;
+                that.collection = that.isCollection ? "已收藏" : "收藏";
+            })
+        },
+        getGoodsInfo() {
+            var that = this;
+            this.Http.get(this.Api.getGoodsInfo(), {
+                goodsId: that.goodsId
+            }, function (result) {
+                that.goods = result.data.goods;
+                that.goods.sex = that.goods.goodsSaleInfo != null ? that.goods.goodsSaleInfo.sex : that.goods.goodsLeaseInfo.sex;
+                that.goods.grade = that.goods.goodsSaleInfo != null ? that.goods.goodsSaleInfo.grade : that.goods.goodsLeaseInfo.grade;
+                that.goods.bind = that.goods.goodsSaleInfo != null ? that.goods.goodsSaleInfo.bind : that.goods.goodsLeaseInfo.bind;
+                that.goods.identification = that.goods.goodsSaleInfo != null ? that.goods.goodsSaleInfo.identification : that.goods.goodsLeaseInfo.identification;
+                that.isCollection = that.goods.isCollection;
+                that.collection = that.isCollection ? "已收藏" : "收藏";
+            })
+        },
+        buy(){
+            this.$store.commit('setGoods',this.goods);
+            this.$router.push('/sure_order');
+        }
+    },
+    components: {
+        "app-header": Header,
+        'app-goods': Goods,
     }
+}
 </script>

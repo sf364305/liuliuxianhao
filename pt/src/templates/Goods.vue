@@ -3,7 +3,7 @@
         <li v-for="(g,index) in goods" :key="g.name">
             <a class="game-name" replace @click="toDetail(index)">
                 <span class="name-title clearfix">
-                    <img :srt="$store.state.Setting.qiniuUrl" alt="">
+                    <img :src="$store.state.Setting.qiniuUrl + g.category.img" alt="">
                     <em>{{g.name}}</em>
                 </span>
                 <span class="sever" v-if="g.type==0">
@@ -37,7 +37,10 @@
                 <i class="game-sever" v-if="g.goodsLeaseInfo != null && g.goodsLeaseInfo.bind == 3">无绑定</i>
                 <i class="game-sever" v-if="g.goodsLeaseInfo == null">未知</i>
             </span>
-            <span class="price" v-if="g.type==1">￥{{g.goodsLeaseInfo.hourPirce}}/时</span>
+            <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.hourCost">￥{{g.goodsLeaseInfo.hourCost}}/时</span>
+            <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.dayCost">￥{{g.goodsLeaseInfo.dayCost}}/日</span>
+            <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.weedCos">￥{{g.goodsLeaseInfo.weedCos}}/周</span>
+            <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.monthCost">￥{{g.goodsLeaseInfo.monthCost}}/月</span>
             <div class="lease-credit clearfix" v-if="g.type==1">
                 <em>租赁等级：</em>
                 <span>{{g.goodsLeaseInfo.grade}}级</span>

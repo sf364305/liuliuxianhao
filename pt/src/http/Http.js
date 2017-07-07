@@ -8,6 +8,9 @@ const base = 'http://c.chovans.cn/front';
 Vue.prototype.Setting = null;
 //API,接口列表
 Vue.prototype.Api = {
+    getJsSign(){
+        return base + '/utils/getJsSign'
+    },
     getToken() {
         return base + '/utils/getToken';
     },
@@ -38,17 +41,29 @@ Vue.prototype.Api = {
     getUserInfo() {
         return base + '/user/getUserInfo';
     },
-    getQrCode(){
+    getQrCode() {
         return base + '/user/getQrCode';
     },
-    getReferred(){
+    getReferred() {
         return base + '/user/getReferred';
     },
-    getCommission(){
+    getCommission() {
         return base + '/user/getCommission';
     },
-    getBuyInfoByStatus(){
+    getBuyInfoByStatus() {
         return base + '/user/getBuyInfoByStatus';
+    },
+    getGoodsInfo() {
+        return base + '/common/getGoodsInfo';
+    },
+    confirmOrder() {
+        return base + '/order/confirmOrder';
+    },
+    payOrder(){
+        return base + '/order/payOrder';
+    },
+    collection(){
+        return base + '/collection/collect';
     }
 };
 
@@ -83,7 +98,7 @@ Vue.prototype.Http = {
             }
         }).then((response) => {
             // 响应成功回调
-            console.log(api,response.data);
+            console.log(api, response.data);
             callback(response.data);
         }, (response) => {
             // 响应错误回调

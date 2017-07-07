@@ -52,7 +52,9 @@ const store = new Vuex.Store({
     Banner: [],
     Notices: [],
     User: {},
-    FromView:"/person"
+    FromView: new Array(),
+    Goods: {},
+    Order: {}
   },
   mutations: {
     setSetting(state, setting) {
@@ -70,8 +72,17 @@ const store = new Vuex.Store({
     setUser(state, user) {
       state.User = user;
     },
-    setFrom(state, from) {
-      state.FromView = from;
+    pushFrom(state, from) {
+      state.FromView.push(from);
+    },
+    popFrom(state) {
+      state.FromView.pop();// = state.FromView.slice(0, state.FromView.length - 1);
+    },
+    setGoods(state, goods) {
+      state.Goods = goods;
+    },
+    setOrder(state, order) {
+      state.Order = order;
     }
   },
   getters: {
@@ -165,15 +176,20 @@ vueRouter.beforeEach((to, from, next) => {
   console.log(from.path);
   if (to.path != "/") {  // 判断该路由是否需要登录权限
     if (Vue.prototype.Http.token) {  // 通过vuex state获取当前的token是否存在
-      vm.$store.commit('setFrom', from.path);
+      var v = vm.$store.state.FromView[vm.$store.state.FromView.length - 1];
+      if (v == to.path) {
+        vm.$store.commit('popFrom');
+      } else {
+        vm.$store.commit('pushFrom', from.path);
+      }
       next();
-    }else {
+    } else {
       next({
         path: '/',
         query: { redirect: from.fullPath }  // 将跳转的路由path作为参数，登录成功后跳转到该路由
       })
     }
-  }else {
+  } else {
     next();
   }
 })

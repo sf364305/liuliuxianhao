@@ -9,6 +9,9 @@
       
   </div>
 </template>
+<script>
+</script>
+
 <style>
 /*test*/
 #app {

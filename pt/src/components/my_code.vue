@@ -12,7 +12,7 @@ export default {
     name: 'my-code',
     data() {
         return {
-            myCotitlede:'我的二维码'
+            title:'我的二维码'
         }
     },
     methods: {
