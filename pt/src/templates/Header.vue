@@ -12,7 +12,7 @@ export default {
         back() {
             console.log("返回:"+this.$store.state.FromView);
             this.$router.push(this.$store.state.FromView);
-            // this.$router.back(-1);
+            //this.$router.back(-1);
         }
     }
 }

@@ -973,6 +973,7 @@
 .detail-love {
     width: 100%;
     overflow: hidden;
+    padding-bottom: 6rem;
 }
 .detail-in-position > div {
     padding: 0;
