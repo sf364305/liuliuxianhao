@@ -2,7 +2,7 @@
     <div class="home">
         <scroller :on-infinite="infinite" ref="scroller">
             <header class="index-logo" id="index-logo">
-                <router-link to="/commodity" class="search-index" replace></router-link>
+                <router-link to="/commodity/all" class="search-index" replace></router-link>
             </header>
             <div>
                 <app-banner></app-banner>
@@ -17,10 +17,10 @@
             <section class="new-content">
                 <ul class="clearfix">
                     <li>
-                        <router-link to="/my_sell" class="index-sell-buy" replace>买卖账号</router-link>
+                        <router-link to="/commodity/0" class="index-sell-buy" replace>买卖账号</router-link>
                     </li>
                     <li>
-                        <router-link to="/lease" class="index-lease" replace>租赁账号</router-link>
+                        <router-link to="/commodity/2" class="index-lease" replace>租赁账号</router-link>
                     </li>
                     <li>
                         <router-link to="/popularity" class="index-popularity" replace>提高人气</router-link>
@@ -28,9 +28,9 @@
                 </ul>
             </section>
             <ul class="project clearfix">
-                <li v-for="c in $store.state.Categroy" v-bind:key="c.id">
-                    <router-link to="/commodity" class="index-ying" replace>
-                        <img :src="$store.state.Setting.qiniuUrl + c.img" alt="">{{c.name}}</router-link>
+                <li v-for="(c,index) in $store.state.Categroy" v-bind:key="c.id">
+                    <a class="index-ying" replace @click="linkCom(index)">
+                        <img :src="$store.state.Setting.qiniuUrl + c.img" alt="">{{c.name}}</a>
                 </li>
             </ul>
     
@@ -46,7 +46,9 @@
     </div>
 </template>
 <script>
+import Router from 'vue-router'
 import Vue from 'vue'
+Vue.use(Router)
 //引入组件和图片
 import Banner from '../templates/Banner.vue'
 import Goods from '../templates/Goods.vue'
@@ -71,7 +73,10 @@ export default {
         this.getHomeGoodsList();
     },
     methods: {
-
+        linkCom(ids) {
+            var goodsId = this.$store.state.Categroy[ids].name;
+            this.$router.push("/commodity/"+goodsId);
+        },
         getHomeGoodsList() {
             var that = this;
             this.Http.get(this.Api.getHomeGoodsList(), {
@@ -79,6 +84,7 @@ export default {
                 size: that.size
             }, function (result) {
                 that.goods = result.data.goods;
+                console.log(result.data.goods)
             })
         },
         refresh(done) {

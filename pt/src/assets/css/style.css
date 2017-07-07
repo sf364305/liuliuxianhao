@@ -578,6 +578,10 @@
     line-height: 1.92rem;
     text-align: center;
 }
+.com-choice .comtext-show {
+    background: #000;
+    color: #fff;
+}
 .alert-com {
     display: none;
     position: fixed;
@@ -639,11 +643,14 @@
     padding-left: 13%;
     line-height: 3rem;
     font-size: 1.08rem;
+    font-weight: bold;
 }
 .alert-all-dif input {
     display: block;
     width: 100%;
-
+}
+.alert-com-diff .chioced-comd {
+    font-weight: bold;
 }
 .alert-all-dif span, .alert-com-time div span {
     display: inline-block;
@@ -720,10 +727,11 @@
 .alert-com-time em {
     display: inline-block;
     height: 3rem;
-    padding-left: 10%;
-    color: #999;
+    color: #333;
     line-height: 3rem;
-    font-size: 0.83rem;
+}
+.alert-com-time .com-time-show {
+    font-weight: bold;
 }
 /*商品信息样式*/
 .detail-inner {
@@ -969,6 +977,7 @@
 .detail-love {
     width: 100%;
     overflow: hidden;
+    padding-bottom: 6rem;
 }
 .detail-in-position > div {
     padding: 0;

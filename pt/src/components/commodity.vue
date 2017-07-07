@@ -1,25 +1,28 @@
 <template>
     <div class="commodity">
-        <header class="commodity-head">
-            账号搜索
-            <span class="return-back"></span>
-        </header>
+        <app-header :header="title"></app-header>
         <ul class="com-choice clearfix">
-            <li class="com-text" @click="change1">商品类型</li>
+            <li class="com-text comtext-show" @click="change1">商品类型</li>
             <li class="com-text2" @click="change2">筛选</li>
             <li class="com-text3" @click="change3">默认排序</li>
         </ul>
         <div class="alert-com-outer" @click="closeA"></div>
         <ul class="alert-com">
             <li class="alert-com-diff">
-                <h2>>全部</h2>
                 <label class="alert-all-dif">
-                    <input v-model="condition.sellbuy" type="radio" value="1" name="sellbuy" class="key-word" checked="checked">
-                    <span style="width:87%;">买卖</span>
+                    <input v-model="condition.sellbuy" type="radio" value="" name="sellbuy" class="sell-b" checked="checked">
+                    <span style="width:87%;" v-if="condition.sellbuy == ''" class="com-sell-all chioced-comd">>全部</span>
+                    <span style="width:87%;" v-else class="com-sell-all">全部</span>
                 </label>
                 <label class="alert-all-dif">
-                    <span style="width:87%;">租赁</span>
-                     <input v-model="condition.sellbuy" type="radio" value="2" name="sellbuy" class="key-word" placeholder="">
+                    <input v-model="condition.sellbuy" type="radio" value="0" name="sellbuy" class="sell-b">
+                    <span style="width:87%;" v-if="condition.sellbuy == '0'" class="com-sell chioced-comd">>买卖</span>
+                    <span style="width:87%;" v-else class="com-sell">买卖</span>
+                </label>
+                <label class="alert-all-dif">
+                    <span style="width:87%;" v-if="condition.sellbuy == 2" class="com-lease chioced-comd">>租赁</span>
+                    <span style="width:87%;" v-else class="com-lease">租赁</span>
+                     <input v-model="condition.sellbuy" type="radio" value="2" name="sellbuy" class="sell-l" placeholder="">
                 </label>
             </li>
             <li class="alert-com-inf alert-com-show">
@@ -109,19 +112,24 @@
                 </form>
             </li>
             <li class="alert-com-time">
-                <h2>>默认排序
-                    <em>（按时间倒序）</em>
-                </h2>
                 <div class="price-sort">
                     <label class="alert-all-dif">
-                        价格↓
+                        <em v-if="condition.priceSort===''" class="com-time-show">>默认排序</em>
+                        <em v-else class="">默认排序</em>
+                        <input v-model="condition.priceSort" type="radio" value="" name="price" class="key-word" checked="checked">
+                        <span>（按时间倒序）</span>
+                    </label>
+                    <label class="alert-all-dif">
+                        <em v-if="condition.priceSort==1" class="com-time-show">>价格↓</em>
+                        <em v-else class="">价格↓</em>
                         <input v-model="condition.priceSort" type="radio" value="1" name="price" class="key-word" checked="checked">
                         <span>（按价格从高到低）</span>
                     </label>
                     <label class="alert-all-dif">
-                        价格↑
+                        <em v-if="condition.priceSort=='0'" class="com-time-show">>价格↑</em>
+                        <em v-else class="">价格↑</em>
                         <span>（按价格从低到高）</span>
-                         <input v-model="condition.priceSort" type="radio" value="2" name="price" class="key-word" placeholder="">
+                         <input v-model="condition.priceSort" type="radio" value="0" name="price" class="key-word" placeholder="">
                     </label>
                 </div>
             </li>
@@ -135,8 +143,8 @@
 
 </style>
 <script>
-
 import Goods from '../templates/Goods.vue'
+import Header from '../templates/Header.vue'
 export default {
     name: 'detail',
     data() {
@@ -157,24 +165,33 @@ export default {
                 identification: "",
                 page: 0,
                 size: 20
-            }
+            },
+            title:"账号搜索",
         }
     },
     created() {
         this.submit();
+        if(this.$route.params.id=="0" || this.$route.params.id=="2") {
+            this.condition.sellbuy = this.$route.params.id;
+        } else {
+            this.condition.categroId = this.$route.params.id;
+        }
     },
     methods: {
         change1: function () {
             $(".alert-com, .alert-com-outer").css("display", "block");
             $(".alert-com-diff").css("display", "block").siblings().css("display", "none");
+            $(".com-text").addClass('comtext-show').siblings().removeClass('comtext-show');
         },
         change2: function () {
             $(".alert-com, .alert-com-outer").css("display", "block");
             $(".alert-com-inf").css("display", "block").siblings().css("display", "none");
+            $(".com-text2").addClass('comtext-show').siblings().removeClass('comtext-show');
         },
         change3: function () {
             $(".alert-com, .alert-com-outer").css("display", "block");
             $(".alert-com-time").css("display", "block").siblings().css("display", "none");
+            $(".com-text3").addClass('comtext-show').siblings().removeClass('comtext-show');
         },
         closeA: function () {
             $(".alert-com, .alert-com-outer").css("display", "none");
@@ -215,7 +232,8 @@ export default {
         }
     },
     components: {
-        'app-goods': Goods
+        'app-goods': Goods,
+        "app-header": Header
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="../assets/images/loading.gif" style="width:100%;"></img>
+    <img src="../assets/images/loading.gif" style="width:40%;transform:translateX(76%) translateY(125%);"></img>
   </div>
 </template>
 <script>
