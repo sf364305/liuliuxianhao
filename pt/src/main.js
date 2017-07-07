@@ -183,6 +183,7 @@ vueRouter.beforeEach((to, from, next) => {
         vm.$store.commit('pushFrom', from.path);
       }
       next();
+      console.log("当前路由：",vm.$store.state.FromView);
     } else {
       next({
         path: '/',

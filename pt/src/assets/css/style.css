@@ -558,6 +558,7 @@
     line-height: 4rem;
     color: #333;
     font-size: 1.33rem;
+    z-index: 999;
 }
 .commodity-head span {
     display: block;

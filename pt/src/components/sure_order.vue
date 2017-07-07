@@ -139,8 +139,6 @@ export default {
     methods: {
         submitOrder() {
 
-             this.$refs.alert.open();
-             return;
             var self = this;
             var amount = 0;
             if (this.goods.type == 0) {
@@ -154,7 +152,7 @@ export default {
                 qq: self.qq,
                 amount: amount,
                 goodsId: self.goods.id,
-                deposit: self.goods.goodsLeaseInfo.deposit,
+                deposit: self.goods.goodsLeaseInfo == null ? "":self.goods.goodsLeaseInfo.deposit,
                 leaseType: self.leaseType,
                 goodsNum: self.goodsNum
             }, function (result) {

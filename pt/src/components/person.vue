@@ -16,39 +16,39 @@
             </div>
             <ul class="person-dif-con">
                 <li class="person-buyer-con person-con-show clearfix">
-                    <router-link to="/unpaid" class="person-unpaid" replace>未支付
+                    <a @click="orderList(1)" class="person-unpaid" replace>未支付
                         <i v-if="userInfo.waitPayCount > 0">{{userInfo.waitPayCount}}</i>
-                    </router-link>
-                    <router-link to="/wait_send" class="person-send" replace>待发货
-                        <i v-if="userInfo.waitPayCount > 0">{{userInfo.waitPayCount}}</i>
-                    </router-link>
-                    <router-link to="/wait_sure" class="person-sure" replace>待确认
+                    </a>
+                    <a @click="orderList(2)" class="person-send" replace>待发货
+                        <i v-if="userInfo.waitDeliveryCount > 0">{{userInfo.waitDeliveryCount}}</i>
+                    </a>
+                    <a @click="orderList(3)" class="person-sure" replace>待确认
                         <i v-if="userInfo.waitSureCount > 0">{{userInfo.waitSureCount}}</i>
-                    </router-link>
-                    <router-link to="/arbitration" class="person-arbitration" replace>仲裁中
+                    </a>
+                    <a @click="orderList(-1)" class="person-arbitration" replace>仲裁中
                         <i v-if="userInfo.arbitrationCount > 0">{{userInfo.arbitrationCount}}</i>
-                    </router-link>
+                    </a>
                     <router-link to="/all_order" class="person-all" replace>全部订单</router-link>
                 </li>
                 <li class="person-seller-con clearfix">
-                    <router-link to="/unpaid" class="person-sended" replace>已发货
+                    <a @click="merchantOrderList(0)" class="person-sended" replace>已发货
                         <i v-if="userInfo.deliveryCount > 0">{{userInfo.deliveryCount}}</i>
-                    </router-link>
-                    <router-link to="/wait_send" class="person-transaction" replace>交易中
+                    </a>
+                    <a @click="merchantOrderList(0)" class="person-transaction" replace>交易中
                         <i v-if="userInfo.transactionCount > 0">{{userInfo.transactionCount}}</i>
-                    </router-link>
-                    <router-link to="/wait_sure" class="person-shelves" replace>已上架
+                    </a>
+                    <a @click="merchantOrderList(0)" class="person-shelves" replace>已上架
                         <i v-if="userInfo.upShelvesCount > 0">{{userInfo.upShelvesCount}}</i>
-                    </router-link>
-                    <router-link to="/arbitration" class="person-review" replace>审核中
+                    </a>
+                    <a @click="merchantOrderList(0)" class="person-review" replace>审核中
                         <i v-if="userInfo.approveCount > 0">{{userInfo.approveCount}}</i>
-                    </router-link>
-                    <router-link to="/arbitration" class="person-seccess" replace>交易成功
+                    </a>
+                    <a @click="merchantOrderList(0)" class="person-seccess" replace>交易成功
                         <i v-if="userInfo.successCount > 0">{{userInfo.successCount}}</i>
-                    </router-link>
-                    <router-link to="/arbitration" class="person-defeat" replace>交易失败
+                    </a>
+                    <a @click="merchantOrderList(0)" class="person-defeat" replace>交易失败
                         <i v-if="userInfo.failCount > 0">{{userInfo.failCount}}</i>
-                    </router-link>
+                    </a>
                     <router-link to="/all_order_seller" class="person-all" replace>全部订单</router-link>
                 </li>
             </ul>
@@ -88,10 +88,10 @@ export default {
             }
         }
     },
-    mounted() {
-        // this.userInfo.user = this.$store.state.Uesr;
-        console.log(this.$store.state.Uesr);
-        console.log(this.userInfo.user.avatar);
+    created(){
+
+    },
+    activated() {
         this.getUserInfo();
     },
     methods: {
@@ -118,6 +118,12 @@ export default {
             setTimeout(function(){
                 done();
             },1000);
+        },
+        orderList(status){
+            this.$router.push('/orders/'+status);
+        },
+        merchantOrderList(status){
+            
         }
     },
     components: {
