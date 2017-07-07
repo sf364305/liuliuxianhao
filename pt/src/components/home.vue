@@ -17,10 +17,10 @@
             <section class="new-content">
                 <ul class="clearfix">
                     <li>
-                        <router-link to="/my_sell" class="index-sell-buy" replace>买卖账号</router-link>
+                        <router-link to="/commodity/1" class="index-sell-buy" replace>买卖账号</router-link>
                     </li>
                     <li>
-                        <router-link to="/lease" class="index-lease" replace>租赁账号</router-link>
+                        <router-link to="/commodity/2" class="index-lease" replace>租赁账号</router-link>
                     </li>
                     <li>
                         <router-link to="/popularity" class="index-popularity" replace>提高人气</router-link>
@@ -46,7 +46,9 @@
     </div>
 </template>
 <script>
+import Router from 'vue-router'
 import Vue from 'vue'
+Vue.use(Router)
 //引入组件和图片
 import Banner from '../templates/Banner.vue'
 import Goods from '../templates/Goods.vue'

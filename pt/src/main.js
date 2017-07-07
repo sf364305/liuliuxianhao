@@ -98,7 +98,7 @@ var routes = [{
   path: '/my_sell',
   component: my_sell
 }, {
-  path: '/commodity',
+  path: '/commodity/:id',
   component: commodity
 }, {
   path: '/detail/:id',
