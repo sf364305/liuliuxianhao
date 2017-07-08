@@ -20,9 +20,9 @@
                     <span style="width:87%;" v-else class="com-sell">买卖</span>
                 </label>
                 <label class="alert-all-dif" @click="submit">
-                    <span style="width:87%;" v-if="condition.type == 2" class="com-lease chioced-comd">>租赁</span>
+                    <span style="width:87%;" v-if="condition.type == 1" class="com-lease chioced-comd">>租赁</span>
                     <span style="width:87%;" v-else class="com-lease">租赁</span>
-                     <input v-model="condition.type" type="radio" value="2" name="type" class="sell-l" placeholder="">
+                     <input v-model="condition.type" type="radio" value="1" name="type" class="sell-l" placeholder="">
                 </label>
             </li>
             <li class="alert-com-inf alert-com-show">
@@ -170,7 +170,7 @@ export default {
     },
     created() {
         this.submit();
-        if(this.$route.params.id=="0" || this.$route.params.id=="2") {
+        if(this.$route.params.id=="0" || this.$route.params.id=="1") {
             this.condition.type = this.$route.params.id;
         } else {
             this.condition.categoryId = this.$route.params.id;

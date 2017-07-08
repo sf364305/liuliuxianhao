@@ -104,7 +104,7 @@
                         </li>
                         <li>
                             <span>认证情况</span>
-                            <em v-if="goods.identification == 1" >
+                            <em v-if="goods.identification == 1">
                                 未认证
                             </em>
                             <em v-if="goods.identification == 2">
@@ -114,10 +114,10 @@
                         <li v-if="goods.type == 1">
                             <span>价格详情</span>
                             <em>
-                                {{goods.goodsLeaseInfo.hourCost}}元/时
-                                {{goods.goodsLeaseInfo.dayCost}}元/日
-                                {{goods.goodsLeaseInfo.weekCost}}元/周
-                                {{goods.goodsLeaseInfo.monthCost}}元/月
+                                <span v-if="goods.goodsLeaseInfo.hourCost">{{goods.goodsLeaseInfo.hourCost}}元/时</span>
+                                <span v-if="goods.goodsLeaseInfo.dayCost">{{goods.goodsLeaseInfo.dayCost}}元/日</span>
+                                <span v-if="goods.goodsLeaseInfo.weekCost">{{goods.goodsLeaseInfo.weekCost}}元/周</span>
+                                <span v-if="goods.goodsLeaseInfo.monthCost">{{goods.goodsLeaseInfo.monthCost}}元/月</span>
                             </em>
                         </li>
                         <li>
@@ -177,37 +177,38 @@ export default {
             title: "商品详情",
             goodsId: "",
             goods: {
-                sex:0
+                sex: 0
             },
             isCollection: false,
             collection: "收藏",//isCollection ? "已收藏" : "收藏",
             isDetail: true,
-            recommendGoods:[]
+            recommendGoods: []
         }
     },
     created() {
         this.goodsId = this.$route.params.id;
-        
+        this.getGoodsInfo();
+
     },
     activated() {
         this.getGoodsInfo();
     },
     methods: {
-        moveT: function() {
-            var imgNu =  $(".detail-pic-center").attr("img-data");
-            show(false,imgNu)
-            function show (bool,deNum) {
+        moveT: function () {
+            var imgNu = $(".detail-pic-center").attr("img-data");
+            show(false, imgNu)
+            function show(bool, deNum) {
                 var divH = $(".detail-right-inner div").height();
                 var divL = $(".detail-right-inner div").length;
-                if(bool) {
+                if (bool) {
                     deNum++;
-                    if(deNum > 0) {
+                    if (deNum > 0) {
                         deNum = 0;
                     }
                 } else {
                     deNum--;
-                    if(deNum <= -divL+1) {
-                        deNum = -divL+1;
+                    if (deNum <= -divL + 1) {
+                        deNum = -divL + 1;
                     }
                 }
                 var imgS = $(".detail-right-inner div").eq(deNum).children("img").attr("src");
@@ -216,24 +217,24 @@ export default {
                 var leg = deNum * divH;
                 $(".detail-right-inner").animate({
                     "marginTop": leg
-                },500)
+                }, 500)
             }
         },
-        moveT2: function() {
-            var imgNu =  $(".detail-pic-center").attr("img-data");
-            show(true,imgNu)
-            function show (bool,deNum) {
+        moveT2: function () {
+            var imgNu = $(".detail-pic-center").attr("img-data");
+            show(true, imgNu)
+            function show(bool, deNum) {
                 var divH = $(".detail-right-inner div").height();
                 var divL = $(".detail-right-inner div").length;
-                if(bool) {
+                if (bool) {
                     deNum++;
-                    if(deNum > 0) {
+                    if (deNum > 0) {
                         deNum = 0;
                     }
                 } else {
                     deNum--;
-                    if(deNum <= -divL+1) {
-                        deNum = -divL+1;
+                    if (deNum <= -divL + 1) {
+                        deNum = -divL + 1;
                     }
                 }
                 var imgS = $(".detail-right-inner div").eq(deNum).children("img").attr("src");
@@ -242,7 +243,7 @@ export default {
                 var leg = deNum * divH;
                 $(".detail-right-inner").animate({
                     "marginTop": leg
-                },500)
+                }, 500)
             }
         },
         detail(i) {
@@ -271,8 +272,8 @@ export default {
                 that.collection = that.isCollection ? "已收藏" : "收藏";
             })
         },
-        buy(){
-            this.$store.commit('setGoods',this.goods);
+        buy() {
+            this.$store.commit('setGoods', this.goods);
             this.$router.push('/sure_order');
         }
     },

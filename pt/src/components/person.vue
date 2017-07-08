@@ -66,10 +66,10 @@
                     <em>未认证</em>
                     <span></span>
                 </router-link>
-                <a v-if="userInfo.user.userStatus == 1"  class="person-cer" replace>实名认证
+                <a v-if="userInfo.user.userStatus == 1" class="person-cer" replace>实名认证
                     <em>等待审核</em>
                 </a>
-                <a v-if="userInfo.user.userStatus == 2"  class="person-cer" replace>实名认证
+                <a v-if="userInfo.user.userStatus == 2" class="person-cer" replace>实名认证
                     <em>审核通过</em>
                 </a>
                 <router-link v-if="userInfo.user.userStatus == 3" to="/certification" class="person-cer" replace>实名认证
@@ -98,8 +98,8 @@ export default {
             }
         }
     },
-    created(){
-
+    created() {
+        this.getUserInfo();
     },
     activated() {
         this.getUserInfo();
@@ -123,17 +123,17 @@ export default {
                 self.userInfo = result.data;
             })
         },
-        refresh(done){
+        refresh(done) {
             this.getUserInfo();
-            setTimeout(function(){
+            setTimeout(function () {
                 done();
-            },1000);
+            }, 1000);
         },
-        orderList(status){
-            this.$router.push('/orders/'+status);
+        orderList(status) {
+            this.$router.push('/orders/' + status);
         },
-        merchantOrderList(status){
-            
+        merchantOrderList(status) {
+
         }
     },
     components: {

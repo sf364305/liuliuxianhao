@@ -2,9 +2,9 @@
   <div id="app">
       <div class="contianer">
         <!-- 路由中的几个组件在这里被渲染，默认被渲染的为第一个组件，也就是home组件  -->
-        <keep-alive>
+        <!--<keep-alive>-->
           <router-view></router-view>
-        </keep-alive>
+        <!--</keep-alive>-->
       </div>
       <vue-loading v-if="$store.state.Loading" type="spin" color="rgb(101, 186, 239)" :size="{ width: '20%', height: '20%' }" style="padding: 40%;transform: translateY(30%);z-index: 99999;position: absolute;left: 0;top: 0;"></vue-loading>
   </div>

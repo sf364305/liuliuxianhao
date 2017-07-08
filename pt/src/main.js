@@ -9,7 +9,7 @@ import Router from 'vue-router'
 import Http from './http/Http'
 // 刷新 加载更多 https://github.com/wangdahoo/vue-scroller
 import VueScroller from 'vue-scroller'
-import iosAlertView from 'vue-ios-alertview';
+import iosAlertView from 'vue-ios-alertview'
 
 // 引入项目的四个模块组件
 import './assets/css/reset.css'

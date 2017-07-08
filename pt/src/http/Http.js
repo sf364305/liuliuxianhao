@@ -5,7 +5,6 @@ import axios from 'axios'
 // const base = 'http://localhost:8080/front';
 const base = 'http://c.chovans.cn/front';
 
-Vue.prototype.Setting = null;
 //API,接口列表
 Vue.prototype.Api = {
     getJsSign() {
@@ -110,6 +109,14 @@ Vue.prototype.Http = {
             // 响应错误回调
             console.error('请求错误');
         });
+    },
+    upload(param,config,callback){
+        axios.post('http://up-z2.qiniu.com', param, config,callback)
+                .then(response => {
+                    console.log("上传返回",response.data);
+                    callback(response.data.key);
+                })
+
     }
 };
 

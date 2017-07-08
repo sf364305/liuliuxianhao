@@ -5,13 +5,7 @@
             <div class="sell-first">点击添加图片</div>
             <input type="hidden" id="goods-id">
             <div class="pic-dis" style="display: none;"></div>
-            <div class="release_pic clearfix">
-                <div class="realease_picbtn" data="0">
-                    <img data-id="img_0" src="../assets/images/add.png" alt="" title="">
-                    <div style="display:none;" id="none"></div>
-                    <input id="platFileBtn" name="file" type="file" multiple />
-                </div>
-            </div>
+            <app-upload ref="images"></app-upload>
             <div class="sell-second">填写详细信息</div>
             <ul class="sell-information clearfix">
                 <li class="clearfix">
@@ -208,6 +202,7 @@
 </template>
 <script>
 import Header from '../templates/Header.vue'
+import Upload from '../templates/upload.vue'
 export default {
     name: 'sell-infomation',
     data() {
@@ -216,7 +211,7 @@ export default {
             errorMsg: "",
             goodsInfo: {
                 type: 0,
-                categoryId: "402880e75cfcace3015cfcb25e050000",
+                categoryId: '',
                 images: "logo,logo1",
                 title: '',
                 detail: '',
@@ -244,12 +239,11 @@ export default {
     created() {
         this.goodsInfo.categoryId = this.$route.params.categoryId;
     },
+    activated(){
+    },
     methods: {
         changeMach: function (e) {
             $(e.target).addClass('choiced-show').parent().siblings().find('i').removeClass('choiced-show');
-        },
-        ruturnBack: function () {
-            this.$router.go(-1);
         },
         addGoods() {
             var errorMsg;
@@ -267,13 +261,16 @@ export default {
                 errorMsg = "请输入联系手机";
             } else if (!this.goodsInfo.qq) {
                 errorMsg = "请输入QQ";
+            }else if (this.$refs.images.images.length == 0) {
+                errorMsg = "请至少上传一张图片";
             }
+
             if (errorMsg) {
                 this.$iosAlert(errorMsg);
                 return;
             }
 
-            console.log("出售商品", this.goodsInfo);
+            this.goodsInfo.images = this.$refs.images.images.join(",");
             var self = this;
             this.Http.get(this.Api.addGoods(), self.goodsInfo, function (result) {
                 if(result.code == 0){
@@ -283,10 +280,12 @@ export default {
                     self.$iosAlert(result.msg);
                 }
             })
-        }
+        },
+        initQiniu(){}
     },
     components:{
-        "app-header": Header
+        "app-header": Header,
+        'app-upload': Upload,
     }
 }
 </script>

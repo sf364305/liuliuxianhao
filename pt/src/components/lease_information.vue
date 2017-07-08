@@ -1,20 +1,11 @@
 <template>
     <div class="sell-infomation">
-        <header class="commodity-head">
-            我要租
-            <span class="return-back" @click="ruturnBack"></span>
-        </header>
+        <app-header :header="title"></app-header>
         <form id="form" action="" enctype="" method="post" class="clearfix">
             <div class="sell-first">点击添加图片</div>
             <input type="hidden" id="goods-id">
             <div class="pic-dis" style="display: none;"></div>
-            <div class="release_pic clearfix">
-                <div class="realease_picbtn" data="0">
-                    <img data-id="img_0" src="../assets/images/add.png" alt="" title="">
-                    <div style="display:none;" id="none"></div>
-                    <input id="platFileBtn" name="file" type="file" multiple />
-                </div>
-            </div>
+            <app-upload ref="images"></app-upload>
             <div class="sell-second">填写详细信息</div>
             <ul class="sell-information clearfix">
                 <li class="clearfix">
@@ -240,17 +231,17 @@
                             <em class="choice-text">现金结算</em>
                         </label>
                         <!-- <label>
-                                            <input type="radio" name="payway" value="2"/>
-                                            <i class="choice-sho" @click="changeMach"></i>
-                                            <em class="choice-text">其他</em>
-                                        </label> -->
+                                                        <input type="radio" name="payway" value="2"/>
+                                                        <i class="choice-sho" @click="changeMach"></i>
+                                                        <em class="choice-text">其他</em>
+                                                    </label> -->
                     </div>
                 </li>
                 <!--<li class="clearfix">
-                            <span>
-                                <i>*</i>商品价格：</span>
-                            <input id="price" type="number" name="price" value="" placeholder=">=5元" v-model="goodsInfo.price" />
-                        </li>-->
+                                        <span>
+                                            <i>*</i>商品价格：</span>
+                                        <input id="price" type="number" name="price" value="" placeholder=">=5元" v-model="goodsInfo.price" />
+                                    </li>-->
             </ul>
             <ul class="account-infor">
                 <li>
@@ -289,6 +280,7 @@
 </template>
 <script>
 import Header from '../templates/Header.vue'
+import Upload from '../templates/upload.vue'
 export default {
     name: 'sell-infomation',
     data() {
@@ -296,7 +288,7 @@ export default {
             title: "我要出租",
             goodsInfo: {
                 type: 1,
-                categoryId: "402880e75cfcace3015cfcb25e050000",
+                categoryId: '',
                 images: "logo,logo1",
                 title: '',
                 detail: '',
@@ -324,7 +316,6 @@ export default {
         this.goodsInfo.categoryId = this.$route.params.categoryId;
     },
     methods: {
-
         changeMach: function (e) {
             $(e.target).addClass('choiced-show').parent().siblings().find('i').removeClass('choiced-show');
         },
@@ -335,10 +326,8 @@ export default {
                 $(e.target).addClass('choiced-show');
             }
         },
-        ruturnBack: function () {
-            this.$router.go(-1);
-        },
         addGoods() {
+
             var errorMsg = null;
             if (!this.goodsInfo.title) {
                 errorMsg = "请输入商品标题";
@@ -357,12 +346,15 @@ export default {
                 && this.goodsInfo.weekCost == ''
                 && this.goodsInfo.monthCost == '') {
                 errorMsg = "至少选择一种支付方式";
+            } else if (this.$refs.images.images.length == 0) {
+                errorMsg = "请至少上传一张图片";
             }
             if (errorMsg) {
                 this.$iosAlert(errorMsg);
                 return;
             }
 
+            this.goodsInfo.images = this.$refs.images.images.join(",");
             var self = this;
             this.Http.get(this.Api.addGoods(), self.goodsInfo, function (result) {
                 if (result.code == 0) {
@@ -375,7 +367,8 @@ export default {
         }
     },
     components: {
-        "app-header": Header
+        "app-header": Header,
+        'app-upload': Upload,
     }
 }
 </script>

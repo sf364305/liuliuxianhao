@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <scroller :on-infinite="infinite" ref="scroller">
+        <scroller :on-infinite="infinite" ref="scroller" style="padding-bottom:4rem;">
             <header class="index-logo" id="index-logo">
                 <router-link to="/commodity/all" class="search-index" replace></router-link>
             </header>
@@ -20,7 +20,7 @@
                         <router-link to="/commodity/0" class="index-sell-buy" replace>买卖账号</router-link>
                     </li>
                     <li>
-                        <router-link to="/commodity/2" class="index-lease" replace>租赁账号</router-link>
+                        <router-link to="/commodity/1" class="index-lease" replace>租赁账号</router-link>
                     </li>
                     <li>
                         <router-link to="/popularity" class="index-popularity" replace>提高人气</router-link>
@@ -40,7 +40,6 @@
             </div>
         </scroller>
         <div class="nav-bottom">
-            <!-- 引入公用的尾部 footer组件 -->
             <app-footer></app-footer>
         </div>
     
@@ -54,8 +53,7 @@ Vue.use(Router)
 import Banner from '../templates/Banner.vue'
 import Goods from '../templates/Goods.vue'
 import Footer from '../templates/Footer.vue'
-import a from '../assets/images/banner1.png'
-import b from '../assets/images/banner2.png'
+
 export default {
     name: 'home',
     data() {
@@ -76,7 +74,7 @@ export default {
     },
     methods: {
         linkCom(ids) {
-            var goodsId = this.$store.state.Categroy[ids].name;
+            var goodsId = this.$store.state.Categroy[ids].id;
             this.$router.push("/commodity/" + goodsId);
         },
         getHomeGoodsList() {
@@ -100,7 +98,8 @@ export default {
     components: {
         'app-banner': Banner,
         'app-goods': Goods,
-        'app-footer': Footer
+        'app-footer': Footer,
+        
     }
 }
 </script>
