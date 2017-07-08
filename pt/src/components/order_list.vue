@@ -37,6 +37,7 @@ export default {
     activated() {
         this.orders = [];
         this.page = 0;
+        console.log(this.$route.params.status);
         this.status = this.$route.params.status;
         if (this.status == 1) {
             this.title = "待支付";
@@ -78,6 +79,7 @@ export default {
             this.getBuyInfoByStatus(done);
         },
         infinite(done) {
+        console.log("加载");
             this.page += 1;
             this.getBuyInfoByStatus(done);
         },

@@ -78,8 +78,13 @@ Vue.prototype.Api = {
     },
     cancelOrder() {
         return base + '/order/exit';
+    },
+    sureOrder() {
+        return base + '/order/sure';
+    },
+    arbitrationOrder() {
+        return base + '/order/arbitration';
     }
-    
 };
 
 //Http基本类，统一处理

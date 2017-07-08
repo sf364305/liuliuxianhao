@@ -31,22 +31,22 @@
                     <router-link to="/all_order" class="person-all" replace>全部订单</router-link>
                 </li>
                 <li class="person-seller-con clearfix">
-                    <a @click="merchantOrderList(0)" class="person-sended" replace>已发货
+                    <a @click="merchantOrderList(3)" class="person-sended" replace>已发货
                         <i v-if="userInfo.deliveryCount > 0">{{userInfo.deliveryCount}}</i>
                     </a>
-                    <a @click="merchantOrderList(0)" class="person-transaction" replace>交易中
+                    <a @click="merchantOrderList(2)" class="person-transaction" replace>交易中
                         <i v-if="userInfo.transactionCount > 0">{{userInfo.transactionCount}}</i>
                     </a>
-                    <a @click="merchantOrderList(0)" class="person-shelves" replace>已上架
+                    <a @click="merchantOrderList(-1)" class="person-shelves" replace>已上架
                         <i v-if="userInfo.upShelvesCount > 0">{{userInfo.upShelvesCount}}</i>
                     </a>
                     <a @click="merchantOrderList(0)" class="person-review" replace>审核中
                         <i v-if="userInfo.approveCount > 0">{{userInfo.approveCount}}</i>
                     </a>
-                    <a @click="merchantOrderList(0)" class="person-seccess" replace>交易成功
+                    <a @click="merchantOrderList(4)" class="person-seccess" replace>交易成功
                         <i v-if="userInfo.successCount > 0">{{userInfo.successCount}}</i>
                     </a>
-                    <a @click="merchantOrderList(0)" class="person-defeat" replace>交易失败
+                    <a @click="merchantOrderList(5)" class="person-defeat" replace>交易失败
                         <i v-if="userInfo.failCount > 0">{{userInfo.failCount}}</i>
                     </a>
                     <router-link to="/all_order_seller" class="person-all" replace>全部订单</router-link>
@@ -133,7 +133,7 @@ export default {
             this.$router.push('/orders/' + status);
         },
         merchantOrderList(status) {
-
+            this.$router.push('/orders/' + status);
         }
     },
     components: {

@@ -25,26 +25,25 @@
         
         <div class="sell-status"></div>
         
-        <div class="wait-you" v-if="order.status == 1">
+        <div class="wait-you" v-if="order.status == 1 && order.arbitrationStatus !=1">
             <span class="wait-cancel" @click="deleteRe(order.id)">删除订单</span>
             <span class="wait-sure">支付订单</span>
         </div>
-        <div class="wait-you" v-if="order.status == 2">
+        <div class="wait-you" v-if="order.status == 2 && order.arbitrationStatus !=1">
             <span class="wait-cancel" @click="cancel(order.id)">取消订单</span>
             <span class="wait-sure">联系客服</span>
         </div>
-        <div class="wait-you" v-if="order.status == 3">
-            <span class="wait-cancel">申请仲裁</span>
-            <span class="wait-sure" >确认收货</span>
+        <div class="wait-you" v-if="order.status == 3 && order.arbitrationStatus !=1">
+            <span class="wait-cancel" @click="arbitrationStatus(order.id)">申请仲裁</span>
+            <span class="wait-sure" @click="sure(order.id)">确认收货</span>
         </div>
         
-        <div class="wait-you" v-if="order.status == 4">
+        <div class="wait-you" v-if="order.arbitrationStatus == 1">
+            <span class="wait-sure" @click="sure(order.id)" style="width:100%;">联系客服6</span>
+        </div>
+        <div class="wait-you" v-if="order.status == 4 && order.arbitrationStatus !=1">
             <!--<span class="wait-cancel">申请仲裁</span>-->
             <!--<span class="wait-sure">确认收货</span>-->
-        </div>
-        <div class="wait-you" v-if="order.status == 3">
-            <span class="wait-cancel">申请仲裁</span>
-            <span class="wait-sure">确认收货</span>
         </div>
     </div>
 </template>
@@ -79,9 +78,29 @@ export default {
             this.Http.get(this.Api.cancelOrder(), {
                 orderId:orderId
             }, function (result) {
-                //confirm("你确定删除这个订单嘛")
                 console.log(result);
                 
+            })
+        },
+        sure(orderId) {
+            var that = this;
+            //移除订单结构
+            this.$emit('remove',orderId)
+            this.Http.get(this.Api.sureOrder(), {
+                orderId:orderId
+            }, function (result) {
+                console.log(result);             
+            })
+        }
+        ,
+        arbitration(orderId) {
+            var that = this;
+            //移除订单结构
+            this.$emit('remove',orderId)
+            this.Http.get(this.Api.arbitrationOrder(), {
+                orderId:orderId
+            }, function (result) {
+                console.log(result);             
             })
         }
     }
