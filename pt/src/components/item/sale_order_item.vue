@@ -17,7 +17,7 @@
         </router-link>
         <div class="sell-status1"></div>
         <div class="wait-you" v-if="order.status == 1">
-            <span class="wait-cancel">取消订单</span>
+            <span class="wait-cancel" @click="cancel">删除订单</span>
             <span class="wait-sure">支付订单</span>
         </div>
         <div class="wait-you" v-if="order.status == 2">
@@ -42,6 +42,19 @@
 <script>
 export default {
     name: 'order',
-    prop: ['order']
+    prop: ['order'],
+    data() {
+        return {
+
+        }
+    },
+    methods: {
+        cancel() {
+            alert(666)
+            this.Http.get(this.Api.cancelOrder(), function (result) {
+                console.log(result);
+            })
+        }
+    }
 }
 </script>
