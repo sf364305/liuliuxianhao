@@ -70,11 +70,10 @@ export default {
     },
 
     checkGo() {
-      if (this.$store.state.Setting
-        && this.$store.state.Categroy
-        && this.$store.state.Notices
+      if (this.$store.state.Setting != {}
+        && this.$store.state.Categroy != []
+        && this.$store.state.Notices != []
         && this.$store.state.UserId != "") {
-        console.log("配置完成，跳转");
         this.$router.push('/home');
       }
     }

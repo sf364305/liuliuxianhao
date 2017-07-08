@@ -2,7 +2,7 @@
     <div>
         <router-link to="/detail" class="game-name" replace>
             <span class="name-title clearfix">
-                <img :src="$store.state.Setting.qiniuUrl + order.goods.images[0].qiniuKey" alt="">
+                <img :src="$store.state.Setting.qiniuUrl + order.goods.category.img" alt="">
                 <em>{{order.goods.name}}</em>
             </span>
             <span class="sever">
@@ -16,9 +16,26 @@
             </div>
         </router-link>
         <div class="sell-status1"></div>
-        <div class="wait-you">
-            <span class="wait-cancel">取消</span>
-            <span class="wait-sure">确定</span>
+        <div class="wait-you" v-if="order.status == 1">
+            <span class="wait-cancel">取消订单</span>
+            <span class="wait-sure">支付订单</span>
+        </div>
+        <div class="wait-you" v-if="order.status == 2">
+            <span class="wait-cancel">取消订单</span>
+            <span class="wait-sure">联系客服</span>
+        </div>
+        <div class="wait-you" v-if="order.status == 3">
+            <span class="wait-cancel">申请仲裁</span>
+            <span class="wait-sure">确认收货</span>
+        </div>
+        
+        <div class="wait-you" v-if="order.status == 4">
+            <!--<span class="wait-cancel">申请仲裁</span>-->
+            <!--<span class="wait-sure">确认收货</span>-->
+        </div>
+        <div class="wait-you" v-if="order.status == 3">
+            <span class="wait-cancel">申请仲裁</span>
+            <span class="wait-sure">确认收货</span>
         </div>
     </div>
 </template>

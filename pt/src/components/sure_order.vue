@@ -168,7 +168,7 @@ export default {
                 qq: self.qq,
                 amount: amount,
                 goodsId: self.goods.id,
-                deposit: self.goods.goodsLeaseInfo.deposit,
+                deposit: self.goods.goodsLeaseInfo == null ? "":self.goods.goodsLeaseInfo.deposit,
                 leaseType: self.leaseType,
                 goodsNum: self.goodsNum
             }, function (result) {

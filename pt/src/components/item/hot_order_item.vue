@@ -20,9 +20,27 @@
             </div>
         </router-link>
         <div class="sell-status"></div>
-        <div class="wait-you">
-            <span class="wait-cancel">取消</span>
-            <span class="wait-sure">确定</span>
+        
+        <div class="wait-you" v-if="order.status == 1">
+            <span class="wait-cancel">取消订单</span>
+            <span class="wait-sure">支付订单</span>
+        </div>
+        <div class="wait-you" v-if="order.status == 2">
+            <span class="wait-cancel">取消订单</span>
+            <span class="wait-sure">联系客服</span>
+        </div>
+        <div class="wait-you" v-if="order.status == 3">
+            <span class="wait-cancel">申请仲裁</span>
+            <span class="wait-sure">确认收货</span>
+        </div>
+        
+        <div class="wait-you" v-if="order.status == 4">
+            <!--<span class="wait-cancel">申请仲裁</span>-->
+            <!--<span class="wait-sure">确认收货</span>-->
+        </div>
+        <div class="wait-you" v-if="order.status == 3">
+            <span class="wait-cancel">申请仲裁</span>
+            <span class="wait-sure">确认收货</span>
         </div>
     </div>
 </template>

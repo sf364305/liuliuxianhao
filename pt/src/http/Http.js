@@ -51,7 +51,7 @@ Vue.prototype.Api = {
         return base + '/user/getCommission';
     },
     getBuyInfoByStatus() {
-        return base + '/user/getBuyInfoByStatus';
+        return base + '/order/getBuyInfoByStatus';
     },
     getGoodsInfo() {
         return base + '/common/getGoodsInfo';
