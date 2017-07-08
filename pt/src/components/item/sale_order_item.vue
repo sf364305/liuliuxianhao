@@ -17,11 +17,11 @@
         </router-link>
         <div class="sell-status1"></div>
         <div class="wait-you" v-if="order.status == 1">
-            <span class="wait-cancel" @click="cancel">删除订单</span>
+            <span class="wait-cancel" @click="deleteRe(order.id)">取消订单</span>
             <span class="wait-sure">支付订单</span>
         </div>
         <div class="wait-you" v-if="order.status == 2">
-            <span class="wait-cancel">取消订单</span>
+            <span class="wait-cancel" @click="cancel(order.id)">取消订单</span>
             <span class="wait-sure">联系客服</span>
         </div>
         <div class="wait-you" v-if="order.status == 3">
@@ -48,11 +48,29 @@ export default {
 
         }
     },
-    methods: {
-        cancel() {
-            alert(666)
-            this.Http.get(this.Api.cancelOrder(), function (result) {
+    method: {
+        deleteRe(orderId) {
+            var that = this;     
+            this.Http.get(this.Api.deleteReOrder(), {
+                orderId:orderId
+            }, function (result) {
+                //confirm("你确定删除这个订单嘛")
                 console.log(result);
+                //移除订单结构
+                this.$emit('remove',orderId)
+                 
+            })
+        },
+        cancel(orderId) {
+            var that = this;     
+            //移除订单结构
+            this.$emit('remove',orderId)
+            this.Http.get(this.Api.cancelOrder(), {
+                orderId:orderId
+            }, function (result) {
+                //confirm("你确定删除这个订单嘛")
+                console.log(result);
+                
             })
         }
     }
