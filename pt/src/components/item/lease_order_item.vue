@@ -26,16 +26,16 @@
         <div class="sell-status"></div>
         
         <div class="wait-you" v-if="order.status == 1">
-            <span class="wait-cancel" @click="cancel">删除订单</span>
+            <span class="wait-cancel" @click="deleteRe(order.id)">删除订单</span>
             <span class="wait-sure">支付订单</span>
         </div>
         <div class="wait-you" v-if="order.status == 2">
-            <span class="wait-cancel">取消订单</span>
+            <span class="wait-cancel" @click="cancel(order.id)">取消订单</span>
             <span class="wait-sure">联系客服</span>
         </div>
         <div class="wait-you" v-if="order.status == 3">
             <span class="wait-cancel">申请仲裁</span>
-            <span class="wait-sure">确认收货</span>
+            <span class="wait-sure" >确认收货</span>
         </div>
         
         <div class="wait-you" v-if="order.status == 4">
@@ -60,16 +60,28 @@ export default {
         
     },
     props: ['order'],
-    data() {
-        return {
-
-        }
-    },
     methods: {
-        cancel() {
-            var that = this;
-            this.Http.get(this.Api.cancelOrder(), {orderId:this.orderId}, function (result) {
+        deleteRe(orderId) {
+            var that = this; 
+            //移除订单结构    
+            this.$emit('remove',orderId)
+            this.Http.get(this.Api.deleteReOrder(), {
+                orderId:orderId
+            }, function (result) {
+                //confirm("你确定删除这个订单嘛")
+                console.log(result);               
+            })
+        },
+        cancel(orderId) {
+            var that = this;     
+            //移除订单结构
+            this.$emit('remove',orderId)
+            this.Http.get(this.Api.cancelOrder(), {
+                orderId:orderId
+            }, function (result) {
+                //confirm("你确定删除这个订单嘛")
                 console.log(result);
+                
             })
         }
     }

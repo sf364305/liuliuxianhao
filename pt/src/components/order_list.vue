@@ -8,9 +8,9 @@
                         <sale-order-item :order="o"></sale-order-item>
                     </div>
                     <div v-if="o.type==1">
-                        <lease-order-item :order="o"></lease-order-item>
+                        <lease-order-item  v-on:remove="removeItems" :order="o"></lease-order-item>
                     </div>
-                    <div v-if="o.type==2">
+                    <div v-if="o.type==2" >
                         <hot-order-item :order="o"></hot-order-item>
                     </div>
                 </li>
@@ -73,12 +73,20 @@ export default {
             })
         },
         refresh(done) {
+            console.log("刷新");
             this.page = 0;
             this.getBuyInfoByStatus(done);
         },
         infinite(done) {
             this.page += 1;
             this.getBuyInfoByStatus(done);
+        },
+        removeItems(orderId){
+            for(var i = 0 ;i <this.orders.length;i++){
+                if(this.orders[i].id == orderId){
+                    this.orders.splice(i,1);
+                }
+            }
         }
     },
     components: {
