@@ -1,9 +1,6 @@
 <template>
     <div class="popularity">
-        <header class="commodity-head">
-            人气专题
-            <span class="return-back" @click="ruturnBack"></span>
-        </header>
+        <app-header :header="title"></app-header>
         <div class="popularity-img">
             <img src="../assets/images/popula.png" alt="">
         </div>
@@ -91,15 +88,13 @@
                             <input type="text" placeholder="" name="" value="" readOnly="true" class="papular-s"/>
                             <ul>
                                 <li>500</li>
-                                <li>1000</li>
                                 <li>1500</li>
-                                <li>2000</li>
                                 <li>2500</li>
-                                <li>3000</li>
                                 <li>3500</li>
-                                <li>4000</li>
                                 <li>4500</li>
-                                <li>5000</li>
+                                <li>5500</li>
+                                <li>6500</li>
+                                <li>7500</li>
                             </ul>
                         </div>
                         <div class="alert-method-papular">
@@ -117,17 +112,16 @@
     </div>
 </template>
 <script>
+    import '../assets/js/touch.min.js'
+    import Header from '../templates/Header.vue'
      export default {
         name: 'popularity',
         data() {
             return {
-                
+                title:"人气专题"          
             }
         },
         methods: {
-            ruturnBack: function() {
-                this.$router.go(-1);
-            },
             addLess: function() {
                 var inp = $(".papular-nub").val();
                 inp--;
@@ -180,7 +174,7 @@
                     "bottom" : "0"
                 }, 500);
                 $(".alert-method-papular").css("display", "block").siblings().css("display", "none");
-            }   
+            },
         },
         mounted() {
             var currYear = (new Date()).getFullYear();  
@@ -205,6 +199,9 @@
             var optTime = $.extend(opt['time'], opt['default']);
             $("#appDateTime").mobiscroll(optDateTime).datetime(optDateTime);
             $("#appTime").mobiscroll(optTime).time(optTime);
+        },
+        components: {
+            "app-header": Header
         }
     }
 </script>
