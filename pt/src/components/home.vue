@@ -43,7 +43,7 @@
             <!-- 引入公用的尾部 footer组件 -->
             <app-footer></app-footer>
         </div>
-        
+    
     </div>
 </template>
 <script>
@@ -72,11 +72,12 @@ export default {
         // this.getNotices();
         // this.getCategroy();
         this.getHomeGoodsList();
+        
     },
     methods: {
         linkCom(ids) {
             var goodsId = this.$store.state.Categroy[ids].name;
-            this.$router.push("/commodity/"+goodsId);
+            this.$router.push("/commodity/" + goodsId);
         },
         getHomeGoodsList() {
             var that = this;

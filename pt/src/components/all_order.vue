@@ -46,7 +46,7 @@ export default {
             }
         }
     },
-    created() {
+    activated() {
         this.getUserInfo();
     },
     methods: {

@@ -9,6 +9,7 @@ import Router from 'vue-router'
 import Http from './http/Http'
 // 刷新 加载更多 https://github.com/wangdahoo/vue-scroller
 import VueScroller from 'vue-scroller'
+import iosAlertView from 'vue-ios-alertview';
 
 // 引入项目的四个模块组件
 import './assets/css/reset.css'
@@ -54,6 +55,7 @@ import order_detail from './components/order_detail'
 Vue.use(Router)
 Vue.use(Vuex)
 Vue.use(VueScroller)
+Vue.use(iosAlertView);
 
 const store = new Vuex.Store({
   state: {
@@ -88,6 +90,11 @@ const store = new Vuex.Store({
     },
     popFrom(state) {
       state.FromView.pop();// = state.FromView.slice(0, state.FromView.length - 1);
+    },
+    clearFrom(state){
+      while(state.FromView.length > 1){
+        state.FromView.pop();
+      }
     },
     setGoods(state, goods) {
       state.Goods = goods;
@@ -135,10 +142,10 @@ var routes = [{
   path: '/buy',
   component: buy
 }, {
-  path: '/sell_infomation',
+  path: '/sell_infomation/:categoryId',
   component: sell_infomation
 }, {
-  path: '/lease_information',
+  path: '/lease_information/:categoryId',
   component: lease_information
 }, {
   path: '/certification',

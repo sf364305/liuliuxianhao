@@ -146,12 +146,10 @@ export default {
         submitOrder() {
             var self = this;
             if(!(/^1[34578]\d{9}$/.test(self.phone))){
-                $('.alert-comfirm2').css("display","block");
-                $('.alert-comfirm-com p').html("手机号码有误，请重填");  
+                this.$iosAlert("手机号码有误，请重填");
                 return false; 
             } else if(!(/^\d{6,12}$/.test(self.qq))) {
-                $('.alert-comfirm2').css("display","block");
-                $('.alert-comfirm-com p').html("qq号码有误，请重填");  
+                this.$iosAlert("qq号码有误，请重填");
                 return false;
             }
             var amount = 0;
