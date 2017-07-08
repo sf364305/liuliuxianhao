@@ -69,6 +69,9 @@ Vue.prototype.Api = {
     },
     getCode(){
         return base + '/user/getCode';
+    },
+    cancelOrder() {
+        return base + '/order/exit';
     }
 };
 
