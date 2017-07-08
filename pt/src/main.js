@@ -14,6 +14,14 @@ import VueScroller from 'vue-scroller'
 import './assets/css/reset.css'
 import './assets/css/style.css'
 import './assets/js/jquery-1.11.3.min.js'
+import './assets/js/mobiscroll_002.js'
+import './assets/js/mobiscroll_004.js'
+import './assets/css/mobiscroll_002.css'
+import './assets/css/mobiscroll.css'
+import './assets/js/mobiscroll.js'
+import './assets/js/mobiscroll_003.js'
+import './assets/js/mobiscroll_005.js'
+import './assets/css/mobiscroll_003.css'
 import './assets/js/common.js'
 import './assets/js/touch.min.js'
 import loading from './templates/Loading'
@@ -40,6 +48,7 @@ import income_con from './components/income_con'
 import buy_success from './components/buy_success'
 import buy_defeat from './components/buy_defeat'
 import order_list from './components/order_list'
+import order_detail from './components/order_detail'
 // 使用router
 Vue.use(Router)
 Vue.use(Vuex)
@@ -165,6 +174,9 @@ var routes = [{
 }, {
   path: '/orders/:status',
   component: order_list
+}, {
+  path: '/order_detail',
+  component: order_detail
 }];
 
 // 实例化路由
