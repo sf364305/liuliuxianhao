@@ -1,12 +1,9 @@
 <template>
     <div class="wait-send">
-        <header class="commodity-head">
-            待发货
-            <span class="return-back" @click="ruturnBack"></span>
-        </header>
+        <app-header :header="title"></app-header>
         <ul class="com-list">
             <li>     
-                <router-link to="/detail" class="game-name" replace>
+                <router-link to="/order_detail" class="game-name" replace>
                     <span class="name-title clearfix">
                         <img src="../assets/images/little2.png" alt="">
                         <em>【55级男神】求围观</em>
@@ -28,7 +25,7 @@
                 </div>
             </li>
             <li>     
-                <router-link to="/detail" class="game-lease" replace>
+                <router-link to="/order_detail" class="game-lease" replace>
                     <span class="name-title clearfix">
                         <img src="../assets/images/little1.png" alt="">
                         <em>【55级男神】求围观</em>
@@ -54,7 +51,7 @@
                 </div>
             </li>
             <li>     
-                <router-link to="/detail" class="game-lease" replace>
+                <router-link to="/order_detail" class="game-lease" replace>
                     <span class="name-title clearfix">
                         <img src="../assets/images/little1.png" alt="">
                         <em>【55级男神】求围观</em>
@@ -83,17 +80,20 @@
     </div>
 </template>
 <script>
+import Header from '../templates/Header.vue'
     export default {
         name: 'popularity-buy',
         data() {
             return {
-                
+                title: '待发货'
             }
         },
         methods: {
-            ruturnBack: function() {
-                this.$router.go(-1);
-            }   
+             
+        }
+        ,
+        components: {
+            "app-header": Header
         }
     }
 </script>

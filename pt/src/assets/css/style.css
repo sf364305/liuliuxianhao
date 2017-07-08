@@ -1118,7 +1118,7 @@
     background-color: #fff;
 }
 .sure-inf li, .sure-stock li, .sure-price li, .sell-information li, .person-inf li, .person-bind li, .update-inf li {
-    padding-left: 3%;
+    padding-left: 6%;
     border-top: 1px solid #dcdcdc;
                 
 }
@@ -2232,4 +2232,40 @@ select {
     line-height: 3.5rem;
     text-align: center;
     font-size: 1.58rem;
+}
+/*订单详情样式*/
+.order-contact li {
+    padding-left: 6%;
+}
+.order-contact li em, .order-contact li span {
+    float: left;
+    height: 2.5rem;
+    line-height: 2.5rem;
+}
+.order-contact li em {
+    width: 60%;
+    margin-left: 5%;
+}
+.order-contact li span {
+    width: 20%;
+}
+.order-button {
+    margin-top: 2rem;
+    padding: 0 5%;
+}
+.order-button span {
+    width: 40%;
+    height: 2.8rem;
+    line-height: 2.8rem;
+    text-align: center;
+}
+.order-button-delete {
+    float: left;
+    background: #eee;
+    color: #666;
+}
+.order-button-sure {
+    float: right;
+    background: #29bdf8;
+    color: #fff;
 }

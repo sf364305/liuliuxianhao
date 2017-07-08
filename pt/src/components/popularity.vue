@@ -37,11 +37,11 @@
             </div>
             <div>
                 <label for="">开始时间：</label>
-                <input type="text" placeholder="" name="" readOnly="true" value="2017年7月19号 11:30" class="papular-start"/>
+                <input value="2017-07-11 15:42:00" class="papular-start" readonly="readonly" name="appDateTime" id="appDateTime" type="text">
             </div>
             <div>
                 <label for="">结束时间：</label>
-                <input type="text" placeholder="" name="" readOnly="true" value="2017年7月19号 11:30" class="papular-over"/>
+                <input type="text" placeholder="" name="" readOnly="true" value="2017-07-11 15:42:00" class="papular-over"/>
             </div>
             <div>
                 <label for="">刷人气平台ID：</label>
@@ -50,7 +50,7 @@
             <div class="add-com-papular">
                 <textarea id="detail" name="detail" maxlength="200" placeholder="输入备注信息" rows="4"></textarea>
             </div>
-            <div class="popularity-sub">
+            <div class="popularity-sub" style="border:none;">
                 <router-link to="/popular_buy" replace class="popularity-submit">立即下单</router-link>
             </div>
             <div class="alert-outer-papular" style="padding-left:0;">
@@ -181,6 +181,30 @@
                 }, 500);
                 $(".alert-method-papular").css("display", "block").siblings().css("display", "none");
             }   
+        },
+        mounted() {
+            var currYear = (new Date()).getFullYear();  
+            var opt={};
+            opt.date = {preset : 'date'};
+            opt.datetime = {preset : 'datetime'};
+            opt.time = {preset : 'time'};
+            opt.default = {
+                theme: 'android-ics light', //皮肤样式
+                display: 'modal', //显示方式 
+                mode: 'scroller', //日期选择模式
+                dateFormat: 'yyyy-mm-dd',
+                lang: 'zh',
+                showNow: true,
+                nowText: "今天",
+                startYear: currYear - 10, //开始年份
+                endYear: currYear + 10 //结束年份
+            };
+
+            $("#appDate").mobiscroll($.extend(opt['date'], opt['default']));
+            var optDateTime = $.extend(opt['datetime'], opt['default']);
+            var optTime = $.extend(opt['time'], opt['default']);
+            $("#appDateTime").mobiscroll(optDateTime).datetime(optDateTime);
+            $("#appTime").mobiscroll(optTime).time(optTime);
         }
     }
 </script>
