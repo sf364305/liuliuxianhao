@@ -43,6 +43,7 @@
             <!-- 引入公用的尾部 footer组件 -->
             <app-footer></app-footer>
         </div>
+        
     </div>
 </template>
 <script>

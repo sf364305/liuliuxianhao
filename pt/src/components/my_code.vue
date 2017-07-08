@@ -2,7 +2,7 @@
     <div class="my-code">
         <app-header :header="title"></app-header>
         <div class="code-list">
-            <img src="" alt="">
+            <img :src="path" alt="" style="width: 100%;">
         </div>
     </div>
 </template>
@@ -12,13 +12,15 @@ export default {
     name: 'my-code',
     data() {
         return {
-            title:'我的二维码'
+            title:'我的二维码',
+            path:""
         }
     },
+    created(){
+        this.path = "http://c.chovans.cn/front/getCode/" + this.Http.token+"/";
+        console.log(this.path);
+    },
     methods: {
-        returnBack: function () {
-            // this.$router.go(-1);
-        }
     },
     components:{
         "app-header":Header

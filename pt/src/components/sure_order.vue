@@ -1,6 +1,5 @@
 <template>
     <div class="sure-order">
-        <app-load></app-load>
         <app-alert></app-alert>
         <app-header :header="title"></app-header>
         <div class="tobuy-tit">商品信息</div>
@@ -119,7 +118,6 @@
 </template>
 <script>
 import Alert from '../templates/Alert.vue'
-import Load from '../templates/Load.vue'
 import Header from '../templates/Header.vue'
 export default {
     name: 'sure_order',
@@ -156,13 +154,14 @@ export default {
                 $('.alert-comfirm-com p').html("qq号码有误，请重填");  
                 return false;
             }
-            $('.load-all').css("display","block");
             var amount = 0;
             if (this.goods.type == 0) {
                 amount = this.goods.price;
             } else if (this.goods.type == 1) {
                 amount = this.lessCost[this.leaseType] * this.goodsNum + this.lessCost[this.leaseType] * this.goodsNum * this.goods.goodsLeaseInfo.deposit;
             }
+
+            self.$store.commit('setLoading', true);
             this.Http.get(this.Api.confirmOrder(), {
                 phone: self.phone,
                 qq: self.qq,
@@ -172,6 +171,7 @@ export default {
                 leaseType: self.leaseType,
                 goodsNum: self.goodsNum
             }, function (result) {
+                self.$store.commit('setLoading', false);
                 if (result.code === 0) {
                     var order = {
                         goodsName: result.data.goodsName,
@@ -192,7 +192,6 @@ export default {
     components: {
         'app-header': Header,
         'app-alert': Alert,
-        'app-load': Load
     }
 }
 </script>

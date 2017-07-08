@@ -2,30 +2,26 @@
     <div class="all-order">
         <app-header :header="title"></app-header>
         <div class="all-order-list">
-            <router-link to="/unpaid" class="person-sended-all" replace>已发货
-                <i>0</i>
+            <a @click="merchantOrderList(3)" class="person-sended-all" replace>已发货
+                <i>{{user.deliveryCount}}</i>
                 <span></span>
-            </router-link>
-            <router-link to="/wait_send" class="person-transaction-all" replace>交易中
-                <i>0</i>
+            </a>
+            <a @click="merchantOrderList(2)" class="person-transaction-all" replace>交易中
+                <i>{{user.transactionCount}}</i>
                 <span></span>
-            </router-link>
-            <router-link to="/wait_sure" class="person-shelves-all" replace>已上架
-                <i>0</i>
+            </a>
+            <a @click="merchantOrderList(-1)" class="person-shelves-all" replace>仲裁中
+                <i>{{user.merchantArbitrationCount}}</i>
                 <span></span>
-            </router-link>
-            <router-link to="/arbitration" class="person-review-all" replace>审核中
-                <i>0</i>
+            </a>
+            <a @click="merchantOrderList(4)" class="person-seccess-all" replace>交易成功
+                <i>{{user.successCount}}</i>
                 <span></span>
-            </router-link>
-            <router-link to="/arbitration" class="person-seccess-all" replace>交易成功
-                <i>0</i>
+            </a>
+            <a @click="merchantOrderList(5)" class="person-defeat-all" replace>交易失败
+                <i>{{user.failCount}}</i>
                 <span></span>
-            </router-link>
-            <router-link to="/arbitration" class="person-defeat-all" replace>交易失败
-                <i>0</i>
-                <span></span>
-            </router-link>
+            </a>
         </div>
     </div>
 </template>
@@ -35,10 +31,33 @@ export default {
     name: 'sell-infomation',
     data() {
         return {
-            title: '全部订单'
+            title: '全部订单',
+            user: {
+                deliveryCount: "加载中",
+                transactionCount: "加载中",
+                successCount: "加载中",
+                failCount: "加载中",
+                upShelvesCount: "加载中",
+                downShelvesCount: "加载中",
+                approveCount: "加载中",
+                merchantArbitrationCount: "加载中",
+            }
         }
     },
+    activated() {
+        this.getUserInfo();
+    },
     methods: {
+        getUserInfo() {
+            var self = this;
+            this.Http.get(this.Api.getUserInfo(), null, function (result) {
+                self.user = result.data;
+            })
+            console.log(self.user);
+        },
+        merchantOrderList(status) {
+            this.$router.push('/orders_merchant/' + status);
+        }
     },
     components: {
         "app-header": Header

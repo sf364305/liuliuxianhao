@@ -40,6 +40,7 @@ import income_con from './components/income_con'
 import buy_success from './components/buy_success'
 import buy_defeat from './components/buy_defeat'
 import order_list from './components/order_list'
+import order_list_merchant from './components/order_list_merchant'
 // 使用router
 Vue.use(Router)
 Vue.use(Vuex)
@@ -54,7 +55,8 @@ const store = new Vuex.Store({
     User: {},
     FromView: new Array(),
     Goods: {},
-    Order: {}
+    Order: {},
+    Loading:false
   },
   mutations: {
     setSetting(state, setting) {
@@ -83,6 +85,9 @@ const store = new Vuex.Store({
     },
     setOrder(state, order) {
       state.Order = order;
+    },
+    setLoading(state, loading) {
+      state.Loading = loading;
     }
   },
   getters: {
@@ -165,6 +170,9 @@ var routes = [{
 }, {
   path: '/orders/:status',
   component: order_list
+}, {
+  path: '/orders_merchant/:status',
+  component: order_list_merchant
 }];
 
 // 实例化路由

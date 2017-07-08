@@ -8,7 +8,7 @@ const base = 'http://c.chovans.cn/front';
 Vue.prototype.Setting = null;
 //API,接口列表
 Vue.prototype.Api = {
-    getJsSign(){
+    getJsSign() {
         return base + '/utils/getJsSign'
     },
     getToken() {
@@ -53,17 +53,23 @@ Vue.prototype.Api = {
     getBuyInfoByStatus() {
         return base + '/order/getBuyInfoByStatus';
     },
+    getMerchantInfoByStatus() {
+        return base + '/order/getMerchantInfoByStatus';
+    },
     getGoodsInfo() {
         return base + '/common/getGoodsInfo';
     },
     confirmOrder() {
         return base + '/order/confirmOrder';
     },
-    payOrder(){
+    payOrder() {
         return base + '/order/payOrder';
     },
-    collection(){
+    collection() {
         return base + '/collection/collect';
+    },
+    getCode(){
+        return base + '/user/getCode';
     }
 };
 

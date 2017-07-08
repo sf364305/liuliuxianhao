@@ -9,20 +9,20 @@
         <div class="alert-com-outer" @click="closeA"></div>
         <ul class="alert-com">
             <li class="alert-com-diff">
-                <label class="alert-all-dif">
-                    <input v-model="condition.sellbuy" type="radio" value="" name="sellbuy" class="sell-b" checked="checked">
-                    <span style="width:87%;" v-if="condition.sellbuy == ''" class="com-sell-all chioced-comd">>全部</span>
+                <label class="alert-all-dif" @click="submit">
+                    <input v-model="condition.type" type="radio" value="" name="type" class="sell-b" checked="checked">
+                    <span style="width:87%;" v-if="condition.type == ''" class="com-sell-all chioced-comd">>全部</span>
                     <span style="width:87%;" v-else class="com-sell-all">全部</span>
                 </label>
-                <label class="alert-all-dif">
-                    <input v-model="condition.sellbuy" type="radio" value="0" name="sellbuy" class="sell-b">
-                    <span style="width:87%;" v-if="condition.sellbuy == '0'" class="com-sell chioced-comd">>买卖</span>
+                <label class="alert-all-dif" @click="submit">
+                    <input v-model="condition.type" type="radio" value="0" name="type" class="sell-b">
+                    <span style="width:87%;" v-if="condition.type == '0'" class="com-sell chioced-comd">>买卖</span>
                     <span style="width:87%;" v-else class="com-sell">买卖</span>
                 </label>
-                <label class="alert-all-dif">
-                    <span style="width:87%;" v-if="condition.sellbuy == 2" class="com-lease chioced-comd">>租赁</span>
+                <label class="alert-all-dif" @click="submit">
+                    <span style="width:87%;" v-if="condition.type == 2" class="com-lease chioced-comd">>租赁</span>
                     <span style="width:87%;" v-else class="com-lease">租赁</span>
-                     <input v-model="condition.sellbuy" type="radio" value="2" name="sellbuy" class="sell-l" placeholder="">
+                     <input v-model="condition.type" type="radio" value="2" name="type" class="sell-l" placeholder="">
                 </label>
             </li>
             <li class="alert-com-inf alert-com-show">
@@ -39,7 +39,7 @@
                             <em class="choice-text">全部</em>
                         </label>
                         <label v-for="c in $store.state.Categroy" v-bind:key="c.id">
-                            <input type="radio" v-model="condition.categroId" name="plat" :value="c.id"></input>
+                            <input type="radio" v-model="condition.categoryId" name="plat" :value="c.id"></input>
                             <i class="choice-sho" @click="changeSex"></i>
                             <em class="choice-text">{{c.name}}</em>
                         </label>
@@ -113,23 +113,23 @@
             </li>
             <li class="alert-com-time">
                 <div class="price-sort">
-                    <label class="alert-all-dif">
-                        <em v-if="condition.priceSort===''" class="com-time-show">>默认排序</em>
+                    <label class="alert-all-dif" @click="submit">
+                        <em v-if="condition.sort===''" class="com-time-show">>默认排序</em>
                         <em v-else class="">默认排序</em>
-                        <input v-model="condition.priceSort" type="radio" value="" name="price" class="key-word" checked="checked">
+                        <input v-model="condition.sort" type="radio" value="" name="price" class="key-word" checked="checked">
                         <span>（按时间倒序）</span>
                     </label>
-                    <label class="alert-all-dif">
-                        <em v-if="condition.priceSort==1" class="com-time-show">>价格↓</em>
+                    <label class="alert-all-dif" @click="submit">
+                        <em v-if="condition.sort==1" class="com-time-show">>价格↓</em>
                         <em v-else class="">价格↓</em>
-                        <input v-model="condition.priceSort" type="radio" value="1" name="price" class="key-word" checked="checked">
+                        <input v-model="condition.sort" type="radio" value="1" name="price" class="key-word" checked="checked">
                         <span>（按价格从高到低）</span>
                     </label>
-                    <label class="alert-all-dif">
-                        <em v-if="condition.priceSort=='0'" class="com-time-show">>价格↑</em>
+                    <label class="alert-all-dif" @click="submit">
+                        <em v-if="condition.sort=='0'" class="com-time-show">>价格↑</em>
                         <em v-else class="">价格↑</em>
                         <span>（按价格从低到高）</span>
-                         <input v-model="condition.priceSort" type="radio" value="0" name="price" class="key-word" placeholder="">
+                         <input v-model="condition.sort" type="radio" value="0" name="price" class="key-word" placeholder="">
                     </label>
                 </div>
             </li>
@@ -152,10 +152,9 @@ export default {
             goods: [],
             condition: {
                 type: "",
-                sellbuy:"",
                 keyword: "",
-                categroId: "",
-                priceSort:"",
+                categoryId: "",
+                sort:"",
                 minPrice: "",
                 maxPrice: "",
                 minLevel: "",
@@ -172,9 +171,9 @@ export default {
     created() {
         this.submit();
         if(this.$route.params.id=="0" || this.$route.params.id=="2") {
-            this.condition.sellbuy = this.$route.params.id;
+            this.condition.type = this.$route.params.id;
         } else {
-            this.condition.categroId = this.$route.params.id;
+            this.condition.categoryId = this.$route.params.id;
         }
     },
     methods: {
