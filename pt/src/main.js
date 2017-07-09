@@ -10,7 +10,6 @@ import Http from './http/Http'
 // 刷新 加载更多 https://github.com/wangdahoo/vue-scroller
 import VueScroller from 'vue-scroller'
 import iosAlertView from 'vue-ios-alertview'
-import picker from 'vue-3d-picker';
 
 // 引入项目的四个模块组件
 import './assets/css/reset.css'
@@ -57,7 +56,6 @@ Vue.use(Router)
 Vue.use(Vuex)
 Vue.use(VueScroller)
 Vue.use(iosAlertView);
-Vue.component(picker.name, picker);
 
 const store = new Vuex.Store({
   state: {
