@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link to="/detail" class="game-lease" replace>
+        <a @click="toDetail(order.id)" class="game-lease" replace>
             <span class="name-title clearfix">
                 <img :src="$store.state.Setting.qiniuUrl + order.goods.category.img" alt="">
                 <em>{{order.goods.name}}</em>
@@ -21,7 +21,7 @@
                 <em>结束时间：</em>
                 <span>{{order.endTime}}</span>
             </div>
-        </router-link>
+        </a>
         
         <div class="sell-status"></div>
         
@@ -61,6 +61,9 @@ export default {
     },
     props: ['order'],
     methods: {
+        toDetail(orderId){
+            this.$router.push("/order_detail/"+orderId);
+        },
         deleteRe(orderId) {
             var that = this; 
             //移除订单结构    

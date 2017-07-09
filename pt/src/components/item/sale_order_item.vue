@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link to="/detail" class="game-name" replace>
+        <a @click="toDetail(order.id)" class="game-name" replace>
             <span class="name-title clearfix">
                 <img :src="$store.state.Setting.qiniuUrl + order.goods.category.img" alt="">
                 <em>{{order.goods.name}}</em>
@@ -14,7 +14,7 @@
                 <em>生成时间：</em>
                 <span>{{order.createOn}}</span>
             </div>
-        </router-link>
+        </a>
         <div class="sell-status1"></div>
         <div class="wait-you" v-if="order.status == 1">
             <span class="wait-cancel" @click="deleteRe(order.id)">取消订单</span>
@@ -49,6 +49,9 @@ export default {
         }
     },
     method: {
+        toDetail(orderId){
+            this.$router.push("/order_detail/"+orderId);
+        },
         deleteRe(orderId) {
             var that = this;     
             this.Http.get(this.Api.deleteReOrder(), {
