@@ -251,11 +251,12 @@ export default {
         },
         setCollection() {
             var that = this;
+            that.isCollection = !that.isCollection;
+            that.collection = that.isCollection ? "已收藏" : "收藏";
             this.Http.get(this.Api.collection(), {
                 goodsId: that.goodsId
             }, function (result) {
-                that.isCollection = !that.isCollection;
-                that.collection = that.isCollection ? "已收藏" : "收藏";
+
             })
         },
         getGoodsInfo() {
@@ -270,6 +271,7 @@ export default {
                 that.goods.identification = that.goods.goodsSaleInfo != null ? that.goods.goodsSaleInfo.identification : that.goods.goodsLeaseInfo.identification;
                 that.isCollection = that.goods.isCollection;
                 that.collection = that.isCollection ? "已收藏" : "收藏";
+                that.recommendGoods = result.data.recomendGoodses;
             })
         },
         buy() {

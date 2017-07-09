@@ -54,8 +54,8 @@
             </li>
             <li class="clearfix">
                 <span>时间：</span>
-                <em>
-                    2017-7-6 20:20  至  2017-8-16 20:20
+                <em id="appDateTime" >
+                    {{startTime}}  至  {{endTime}}
                 </em>
             </li>
         </ul>
@@ -119,17 +119,20 @@
 <script>
 import Alert from '../templates/Alert.vue'
 import Header from '../templates/Header.vue'
+import '../assets/js/touch.min.js'
 export default {
     name: 'sure_order',
     data() {
         return {
             title: "确认订单",
             goods: {},
-            goodsNum: 1,
+            goodsNum: "",
             leaseType: 0,
             lessCost: [0, 0, 0, 0],
             phone: "",
-            qq: ""
+            qq: "",
+            startTime:"请选择开始时间",
+            endTime:""
         }
     },
     created() {
@@ -181,11 +184,41 @@ export default {
                     self.$store.commit('setOrder', order);
                     self.$router.push("/buy");
                 } else {
-                    console.log(result.msg);
+                    this.$iosAlert(result.msg);
                 }
             })
 
         }
+    },
+    mounted() {
+        var self = this;
+        var currYear = (new Date()).getFullYear();
+        var opt = {};
+        opt.date = { preset: 'date' };
+        opt.datetime = { preset: 'datetime' };
+        opt.time = { preset: 'time' };
+        opt.default = {
+            theme: 'android-ics light', //皮肤样式
+            display: 'modal', //显示方式 
+            mode: 'scroller', //日期选择模式
+            dateFormat: 'yyyy-mm-dd',
+            timeFormat: 'HH:mm:ss',
+            lang: 'zh',
+            showNow: true,
+            nowText: "今天",
+            startYear: currYear - 10, //开始年份
+            endYear: currYear + 10,//结束年份
+            onSelect: function (valueText, inst) {
+                self.startTime = valueText;
+                self.cal();
+            }
+        };
+
+        $("#appDate").mobiscroll($.extend(opt['date'], opt['default']));
+        var optDateTime = $.extend(opt['datetime'], opt['default']);
+        var optTime = $.extend(opt['time'], opt['default']);
+        $("#appDateTime").mobiscroll(optDateTime).datetime(optDateTime);
+        $("#appTime").mobiscroll(optTime).time(optTime);
     },
     components: {
         'app-header': Header,

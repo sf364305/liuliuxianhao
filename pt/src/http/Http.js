@@ -90,6 +90,9 @@ Vue.prototype.Api = {
     },
     popularityGoods(){
         return base + '/goods/popularityGoods';
+    },
+    confirmPopularOrder(){
+        return base + '/order/confirmPopularOrder';
     }
 };
 

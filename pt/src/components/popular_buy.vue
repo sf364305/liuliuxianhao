@@ -1,35 +1,35 @@
 <template>
     <div class="popularity-buy">
-        <header class="commodity-head">
-            支付信息
-            <span class="return-back" @click="ruturnBack"></span>
-        </header>
+        <app-header :header="title"></app-header>
         <div class="pay-popular">
             <h2>刷人气</h2>
             <ul>
                 <li style="color: red;font-size: 1.33rem;">
                     <span>订单号：</span>
-                    <em style="color: red">￥200</em>
+                    <em style="color: red">{{$store.state.Order.orderNo}}</em>
                 </li>
                 <li>
                     <span>人气：</span>
-                    <em>￥200</em>
+                    <em>{{$store.state.Order.quantity}}</em>
                 </li>
                 <li>
                     <span>类型：</span>
-                    <em>￥200</em>
+                    <em v-if="popularType==0">按小时</em>
+                    <em v-if="popularType==1">按天</em>
+                    <em v-if="popularType==2">按周</em>
+                    <em v-if="popularType==3">按月</em>
                 </li>
                 <li>
                     <span>数量：</span>
-                    <em>￥200</em>
+                    <em>{{$store.state.Order.count}}</em>
                 </li>
                 <li>
                     <span>开始时间：</span>
-                    <em>￥200</em>
+                    <em>{{$store.state.Order.startTime}}</em>
                 </li>
                 <li>
                     <span>结束时间：</span>
-                    <em>￥200</em>
+                    <em>{{$store.state.Order.endTime}}</em>
                 </li>
                 <li>
                     <span>平台：</span>
@@ -37,11 +37,11 @@
                 </li>
                 <li>
                     <span>平台ID：</span>
-                    <em>￥200</em>
+                    <em>{{$store.state.Order.targetId}}</em>
                 </li>
-                <li>
+                <li v-if="$store.state.Order.comment">
                     <span>备注：</span>
-                    <em>￥200</em>
+                    <em>{{$store.state.Order.comment}}</em>
                 </li>
             </ul>
         </div>
@@ -51,17 +51,21 @@
     </div>
 </template>
 <script>
-    export default {
-        name: 'popularity-buy',
-        data() {
-            return {
-                
-            }
-        },
-        methods: {
-            ruturnBack: function() {
-                this.$router.go(-1);
-            }   
+import Header from '../templates/Header.vue'
+export default {
+    name: 'popularity-buy',
+    data() {
+        return {
+            title:"确认人气订单"
         }
+    },
+    methods: {
+        callWxPay(){
+            
+        }
+    },
+    components: {
+        'app-header': Header
     }
+}
 </script>

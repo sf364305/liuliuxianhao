@@ -1059,14 +1059,14 @@
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
+.detail-else{
+    padding-top: 1rem;
+}
 .detail-content li em {
     display: block;
     width: 80%;
     color: #333;
     float: left;
-}
-.descripe {
-    display: none;
 }
 .descripe p {
     margin-top: 0.5rem;
@@ -1776,8 +1776,9 @@ select {
 }
 
 .popular-form .right{
-        width: 22rem;
+            width: 20rem;
     float: left;
+    margin-left: 7%;
 }
 
 .popular-form .popular-type{

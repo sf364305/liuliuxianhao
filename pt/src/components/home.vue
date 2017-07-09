@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <scroller :on-infinite="infinite" ref="scroller" style="padding-bottom:4rem;">
+        <scroller :on-refresh="refresh" :on-infinite="infinite" ref="scroller" style="margin-bottom:4rem;">
             <header class="index-logo" id="index-logo">
                 <router-link to="/commodity/all" class="search-index" replace></router-link>
             </header>
@@ -77,22 +77,30 @@ export default {
             var goodsId = this.$store.state.Categroy[ids].id;
             this.$router.push("/commodity/" + goodsId);
         },
-        getHomeGoodsList() {
+        getHomeGoodsList(done) {
             var that = this;
             this.Http.get(this.Api.getHomeGoodsList(), {
                 page: that.page,
                 size: that.size
             }, function (result) {
-                that.goods = result.data.goods;
-                console.log(result.data.goods)
+                if(done)done();
+                if(result.data.goods.length > 0){
+                    for(var i=0;i<result.data.goods.length;i++){
+                        that.goods.push(result.data.goods[i]);
+                    }
+                    that.$refs.scroller.finishInfinite(false);
+                }else{
+                    that.$refs.scroller.finishInfinite(true);
+                }
             })
         },
         refresh(done) {
-            done();
+            this.page = 0;
+            this.getHomeGoodsList(done);
         },
         infinite(done) {
-            var self = this;
-            done();
+            this.page+=1;
+            this.getHomeGoodsList(done);
         }
     },
     components: {

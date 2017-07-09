@@ -14,7 +14,7 @@
                 <div class="right">
                     <label v-for="g in goods" :key="g.id" @click="changePlat(g.id)">
                         <!--<input type="radio" checked="checked" name="sell" value="1"/>-->
-                        <img :src="$store.state.Setting.qiniuUrl + g.img" class="" v-bind:class="{'show':(goodsId == g.id)}">
+                        <img :src="$store.state.Setting.qiniuUrl + g.goodsImages[0].qiniuKey" class="" v-bind:class="{'show':(goodsId == g.id)}">
                         </img>
                     </label>
                 </div>
@@ -27,7 +27,7 @@
             <div>
                 <label for="">选择类型：</label>
                 <!--<div @click="changeType(0)" v-bind:class="{'popular-type-select':popularType == 0}" class="popular-type" style="margin-left:10%;"> 时 </div>-->
-                <div @click="changeType(1)" v-bind:class="{'popular-type-select':popularType == 1}" class="popular-type"> 天 </div>
+                <div @click="changeType(1)" v-bind:class="{'popular-type-select':popularType == 1}" class="popular-type" style="margin-left:10%;"> 天 </div>
                 <div @click="changeType(2)" v-bind:class="{'popular-type-select':popularType == 2}" class="popular-type"> 周 </div>
                 <div @click="changeType(3)" v-bind:class="{'popular-type-select':popularType == 3}" class="popular-type"> 月 </div>
             </div>
@@ -44,29 +44,21 @@
             </div>
             <div>
                 <label for="">开始时间：</label>
-                <input class="papular-start" v-on:change="dateChange()" readonly="readonly" name="appDateTime" id="appDateTime" type="text" placeholder="请选择开始时间">
+                <input class="papular-start" v-model="startTime" readonly="readonly" name="appDateTime" id="appDateTime" type="text" placeholder="请选择开始时间">
             </div>
             <div>
                 <label for="">结束时间：</label>
-                <input type="text" placeholder="" name="" readOnly="true" class="papular-over" />
+                <input type="text" placeholder="结束时间" v-model="endTime" name="" readOnly="true" class="papular-over" />
             </div>
             <div>
                 <label for="">刷人气平台ID：</label>
-                <input type="text" placeholder="请输入平台ID" name="" value="" class="papular-id" />
+                <input type="text" v-model="targetId" placeholder="请输入平台ID" name="" value="" class="papular-id" />
             </div>
             <div class="add-com-papular">
-                <textarea id="detail" name="detail" maxlength="200" placeholder="输入备注信息" rows="4"></textarea>
+                <textarea id="detail" v-model="comment" name="detail" maxlength="200" placeholder="输入备注信息" rows="4"></textarea>
             </div>
             <div class="popularity-sub" style="border:none;">
-                <router-link to="/popular_buy" replace class="popularity-submit">立即下单</router-link>
-            </div>
-            <div class="alert-outer-papular" style="padding-left:0;">
-                <div class="alert-plat-papular">
-                    <div class="papular-plat-head clearfix">
-                        <span class="papular-plat-cancel" @click="closePopu">取消</span>
-                        <span class="papular-plat-sure" @click="surePopu">确定</span>
-                    </div>
-                </div>
+                <a @click="addOrder"  replace class="popularity-submit">立即下单</a>
             </div>
         </form>
     </div>
@@ -86,7 +78,9 @@ export default {
             quantity: 1000,
             price: 0,
             startTime: "",
-            endTime: ""
+            endTime: "",
+            targetId: "",
+            comment: ""
         }
     },
     created() {
@@ -129,8 +123,61 @@ export default {
 
             this.price = per * this.count * this.quantity;
             if (this.startTime) {
-                console.log("开始时间", this.startTime);
+                this.dateChange();
             }
+        },
+        dateChange() {
+            var start = new Date(this.startTime);
+            var unit = 'd ';
+
+            if (this.popularType == 0) {
+                unit = 'h ';
+            } else if (this.popularType == 1) {
+                unit = 'd ';
+            } else if (this.popularType == 2) {
+                unit = 'w ';
+            } else if (this.popularType == 3) {
+                unit = 'm ';
+            }
+            var newDate = this.dateAdd(unit, this.count, start);
+            var formatDate = newDate.getFullYear()
+                + "-" + (newDate.getMonth() + 1 < 10 ? "0" : "") + (newDate.getMonth() + 1)
+                + "-" + (newDate.getDate() < 10 ? "0" : "") + (newDate.getDate())
+                + " " + (newDate.getHours() < 10 ? "0" : "") + (newDate.getHours())
+                + ":" + (newDate.getMinutes() < 10 ? "0" : "") + (newDate.getMinutes())
+                + ":00";
+            this.endTime = formatDate;
+        },
+        addOrder() {
+            var self = this;
+            var param = {
+                goodsId:this.goodsId,
+                popularType: this.popularType,
+                targetId: this.targetId,
+                quantity: this.quantity,
+                comment: this.comment,
+                count: this.count,
+                startTime:this.startTime
+            }
+
+            this.Http.get(this.Api.confirmPopularOrder(), param , function (result) {
+                if (result.code === 0) {
+                    self.$store.commit('setOrder', result.data.order);
+                    self.$router.push("/popular_buy");
+                } else {
+                    self.$iosAlert(result.msg);
+                }
+            })
+
+        },
+        addLess: function () {
+            this.count -= 1
+            if (this.count < 0) {
+                this.count = 0;
+            }
+        },
+        addNum: function () {
+            this.count += 1;
         },
         dateAdd(interval, number, date) {
             switch (interval) {
@@ -181,83 +228,9 @@ export default {
                 }
             }
         },
-        dateChange() {
-            debugger;
-            console.log("chang");
-            if (!$("#appDateTime").val())
-                return;
-            this.startTime = $("#appDateTime").val();
-            var start = new Date(this.startTime);
-            var unit = 'd';
-
-            if (popularType == 0){
-                unity ='h';
-            }else if(popularType == 1){
-                unity ='d';
-            }else if(popularType == 2){
-                unity ='w';
-            }else if(popularType == 3){
-                unity ='m';
-            }
-
-            var newDate = this.DateAdd(unit, count, start);
-            console.log(newDate);
-        },
-        addLess: function () {
-            var inp = $(".papular-nub").val();
-            inp--;
-            if (inp < 0) {
-                inp = 0;
-            }
-            this.count = inp;
-        },
-        addNum: function () {
-            var inp = $(".papular-nub").val();
-            inp++;
-            this.count = inp;
-        },
-        closePopu: function () {
-            $(".alert-outer-papular").css("display", "none");
-            $(".alert-plat-papular").animate({
-                "bottom": "-22rem"
-            }, 500)
-        },
-        changePupa: function () {
-            $(".alert-outer-papular").css("display", "block");
-            $(".alert-plat-papular").animate({
-                "bottom": "0"
-            }, 500);
-            $(".papular-plat-choice").css("display", "block").siblings().css("display", "none");
-        },
-        changePlat1: function (e) {
-            $(e.target).addClass('plat-show').parent().parent().siblings().find('span').removeClass('plat-show');
-            var textA = $(e.target).parent().siblings('em').html();
-            $(".alert-plat-papular").attr("data-text", textA);
-        },
-        surePopu: function () {
-            var textB = $(".alert-plat-papular").attr("data-text");
-            $(".papular-plat").val(textB);
-            $(".alert-outer-papular").css("display", "none");
-            $(".alert-plat-papular").animate({
-                "bottom": "-22rem"
-            }, 500)
-        },
-        changepPer: function () {
-            $(".alert-outer-papular").css("display", "block");
-            $(".alert-plat-papular").animate({
-                "bottom": "0"
-            }, 500);
-            $(".alert-number-papular").css("display", "block").siblings().css("display", "none");
-        },
-        changepD: function () {
-            $(".alert-outer-papular").css("display", "block");
-            $(".alert-plat-papular").animate({
-                "bottom": "0"
-            }, 500);
-            $(".alert-method-papular").css("display", "block").siblings().css("display", "none");
-        },
     },
     mounted() {
+        var self = this;
         var currYear = (new Date()).getFullYear();
         var opt = {};
         opt.date = { preset: 'date' };
@@ -268,11 +241,16 @@ export default {
             display: 'modal', //显示方式 
             mode: 'scroller', //日期选择模式
             dateFormat: 'yyyy-mm-dd',
+            timeFormat: 'HH:mm:ss',
             lang: 'zh',
             showNow: true,
             nowText: "今天",
             startYear: currYear - 10, //开始年份
-            endYear: currYear + 10 //结束年份
+            endYear: currYear + 10,//结束年份
+            onSelect: function (valueText, inst) {
+                self.startTime = valueText;
+                self.cal();
+            }
         };
 
         $("#appDate").mobiscroll($.extend(opt['date'], opt['default']));
