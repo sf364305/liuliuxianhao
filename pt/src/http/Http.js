@@ -3,7 +3,9 @@ import axios from 'axios'
 
 
 // const base = 'http://localhost:8080/front';
+
 const base = 'http://c.chovans.cn/front';
+//const base = 'http://192.168.0.105:8081/front';
 
 //const base = 'http://c.chovans.cn/front';
 // const base = 'http://192.168.0.111:8081/front';
@@ -88,11 +90,23 @@ Vue.prototype.Api = {
     arbitrationOrder() {
         return base + '/order/arbitration';
     },
+    verified() {
+        return base + '/user/certification';
+    },
     popularityGoods(){
         return base + '/goods/popularityGoods';
     },
     confirmPopularOrder(){
         return base + '/order/confirmPopularOrder';
+    },
+    getUpGoods(){
+        return base + '/goods/upGoods';
+    },
+    getDownGoods(){
+       return base + '/goods/downGoods';  
+    },
+    getComidityGoods() {
+        return base + '/goods/goodsStatus';
     }
 };
 

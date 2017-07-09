@@ -13,12 +13,12 @@
                 <br/>图
             </p>
             <div class="detail-pic-center" img-data="0">
-                <img src="../assets/images/comm1.jpg" alt="" />
+                <img :src="$store.state.Setting.qiniuUrl + goods.goodsImages[0].qiniuKey" alt="" @click="clickBig"/>
             </div>
             <div class="detail-pic-right">
                 <div class="detail-right-inner">
-                    <div v-for="img in goods.goodsImages" :key="img.id">
-                        <img :src="$store.state.Setting.qiniuUrl + img.qiniuKey" alt="" />
+                    <div v-for="imgs in goods.goodsImages" :key="imgs.id">
+                        <img :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" alt="" />
                     </div>
                 </div>
                 <div class="pic-top" @click="moveT"></div>
@@ -27,10 +27,10 @@
         </div>
         <div class="alert-big">
             <div class="big-show" id="icons">
-                <img v-for="img in goods.goodsImages" :key="img.id" :src="$store.state.Setting.qiniuUrl + img.qiniuKey" />
+                <img v-for="imgs in goods.goodsImages" :key="imgs.id" :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" @click="closeAlert"/>
             </div>
-            <div class="pic-left-alert"></div>
-            <div class="pic-right-alert"></div>
+            <div class="pic-left-alert" @click="moveLeft"></div>
+            <div class="pic-right-alert" @click="moveRight"></div>
         </div>
         <div class="over-detail" style="padding-bottom:5rem;">
             <div class="detail-inf clearfix">
@@ -86,7 +86,7 @@
                             <em v-if="goods.sex == 0">
                                 男
                             </em>
-                            <em v-if="goods.sex == 1">
+                            <em v-if="goods.sex == 2">
                                 女
                             </em>
                         </li>
@@ -177,7 +177,14 @@ export default {
             title: "商品详情",
             goodsId: "",
             goods: {
-                sex: 0
+                sex: 0,
+                goodsImages:[{'qiniuKey':'FtRpCvGwPzY3Rf8fIn7z0HWwNj8K'}],
+                category:{
+                    img:"o_1bkjko2oe126vtvc1s5m1q501gom9.png"
+                },
+                merchant: {
+                    creditLevel:""
+                }
             },
             isCollection: false,
             collection: "收藏",//isCollection ? "已收藏" : "收藏",
@@ -191,36 +198,11 @@ export default {
 
     },
     activated() {
+    this.goodsId = this.$route.params.id;
         this.getGoodsInfo();
     },
     methods: {
         moveT: function () {
-            var imgNu = $(".detail-pic-center").attr("img-data");
-            show(false, imgNu)
-            function show(bool, deNum) {
-                var divH = $(".detail-right-inner div").height();
-                var divL = $(".detail-right-inner div").length;
-                if (bool) {
-                    deNum++;
-                    if (deNum > 0) {
-                        deNum = 0;
-                    }
-                } else {
-                    deNum--;
-                    if (deNum <= -divL + 1) {
-                        deNum = -divL + 1;
-                    }
-                }
-                var imgS = $(".detail-right-inner div").eq(deNum).children("img").attr("src");
-                $(".detail-pic-center img").attr("src", imgS);
-                $(".detail-pic-center").attr("img-data", deNum);
-                var leg = deNum * divH;
-                $(".detail-right-inner").animate({
-                    "marginTop": leg
-                }, 500)
-            }
-        },
-        moveT2: function () {
             var imgNu = $(".detail-pic-center").attr("img-data");
             show(true, imgNu)
             function show(bool, deNum) {
@@ -237,7 +219,7 @@ export default {
                         deNum = -divL + 1;
                     }
                 }
-                var imgS = $(".detail-right-inner div").eq(deNum).children("img").attr("src");
+                var imgS = $(".detail-right-inner div").eq(Math.abs(deNum)).children("img").attr("src");
                 $(".detail-pic-center img").attr("src", imgS);
                 $(".detail-pic-center").attr("img-data", deNum);
                 var leg = deNum * divH;
@@ -245,6 +227,96 @@ export default {
                     "marginTop": leg
                 }, 500)
             }
+        },
+        moveT2: function () {
+            var imgNu = $(".detail-pic-center").attr("img-data");
+            show(false, imgNu)
+            function show(bool, deNum) {
+                var divH = $(".detail-right-inner div").height();
+                var divL = $(".detail-right-inner div").length;
+                if (bool) {
+                    deNum++;
+                    if (deNum > 0) {
+                        deNum = 0;
+                    }
+                } else {
+                    deNum--;
+                    if (deNum <= -divL + 1) {
+                        deNum = -divL + 1;
+                    }
+                }
+                console.log(deNum);
+                var imgS = $(".detail-right-inner div").eq(Math.abs(deNum)).children("img").attr("src");
+                console.log(imgS)
+                $(".detail-pic-center img").attr("src", imgS);
+                $(".detail-pic-center").attr("img-data", deNum);
+                var leg = deNum * divH;
+                $(".detail-right-inner").animate({
+                    "marginTop": leg
+                }, 500)
+            }
+        },
+        moveLeft() {
+            var divL = $(".detail-right-inner div").length;
+            var imgD =  $(".alert-big").attr("img-data");
+            moveA(imgD, true);
+            function moveA(index, bool) {
+                if(bool) {
+                    index++;
+                    if(index > 0) {
+                        index = 0;
+                    }
+                } else {
+                    index--;
+                    if(index < -divL+1) {
+                        index = -divL+1;
+                    }
+                }
+                $(".alert-big").attr("img-data", index);
+                console.log(Math.abs(index));
+                $(".big-show img").eq(Math.abs(index)).fadeIn(400).siblings().fadeOut(400);
+                $(".big-show-pointer span").eq(Math.abs(index)).addClass("show-pointer").siblings().removeClass("show-pointer");
+            }
+        },
+        moveRight() {
+            var divL = $(".detail-right-inner div").length;
+            var imgD =  $(".alert-big").attr("img-data");
+            
+            moveA(imgD, false);
+            function moveA(index, bool) {
+                if(bool) {
+                    index++;
+                    if(index > 0) {
+                        index = 0;
+                    }
+                } else {
+                    index--;
+                    if(index < -divL+1) {
+                        index = -divL+1;
+                    }
+                }
+                $(".alert-big").attr("img-data", index);
+                console.log(Math.abs(index));
+                $(".big-show img").eq(Math.abs(index)).fadeIn(400).siblings().fadeOut(400);
+                $(".big-show-pointer span").eq(Math.abs(index)).addClass("show-pointer").siblings().removeClass("show-pointer");
+            }
+        },
+        clickBig() {
+            var divL = $(".detail-right-inner div").length;
+            $(".alert-big").css("display", "block");
+            if(divL == 1) {
+                $(".pic-left-alert").css("display", "none");
+                $(".pic-right-alert").css("display", "none");
+                $(".big-show-pointer").css("display", "none");
+            }
+            $(".big-show-pointer span").eq(0).addClass("show-pointer");
+            var index = $(".detail-pic-center").attr("img-data");
+            console.log(index);
+            $(".big-show img").eq(Math.abs(index)).css("display", "block").siblings().css("display", "none");
+            $(".alert-big").attr("img-data", index);
+        },
+        closeAlert() {
+            $(".alert-big").css("display", "none");
         },
         detail(i) {
             this.isDetail = i;
@@ -264,6 +336,8 @@ export default {
             this.Http.get(this.Api.getGoodsInfo(), {
                 goodsId: that.goodsId
             }, function (result) {
+                console.log(result);
+                
                 that.goods = result.data.goods;
                 that.goods.sex = that.goods.goodsSaleInfo != null ? that.goods.goodsSaleInfo.sex : that.goods.goodsLeaseInfo.sex;
                 that.goods.grade = that.goods.goodsSaleInfo != null ? that.goods.goodsSaleInfo.grade : that.goods.goodsLeaseInfo.grade;

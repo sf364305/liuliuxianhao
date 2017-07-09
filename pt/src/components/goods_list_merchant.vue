@@ -2,80 +2,71 @@
     <div class="wait-send">
         <app-header :header="title"></app-header>
         <scroller :on-infinite="infinite" ref="scroller" style="margin-top:4rem;">
-            <ul class="com-list">
-                <li v-for="o in orders" :key="o.id">
-                    <div v-if="o.type==0">
-                        <sale-order-item :order="o"></sale-order-item>
-                    </div>
-                    <div v-if="o.type==1">
-                        <lease-order-item :order="o"></lease-order-item>
-                    </div>
-                </li>
-            </ul>
+            <app-goods :goods="goodses"></app-goods>
         </scroller>
     </div>
 </template>
 <script>
 import Header from '../templates/Header.vue'
+import Goods from '../templates/Goods.vue'
 import SaleOrderItemSeller from './item/sale_order_item_seller.vue'
 import LeaseOrderItemSeller from './item/lease_order_item_seller.vue'
 export default {
     name: 'order_list',
     data() {
         return {
-            title: "订单列表",
+            title: "商品列表",
             page: 0,
             size: 5,
-            orders: [],
+            goodses: [],
             status: 0,
         }
     },
     activated() {
-        this.orders = [];
+        this.goodses = [];
         this.page = 0;
         this.status = this.$route.params.status;
-        if (this.status == 2) {
-            this.title = "交易中";
-        } else if (this.status == 3) {
-            this.title = "已发货";
-        } else if (this.status == 4) {
-            this.title = "交易成功";
-        } else if (this.status == 5) {
-            this.title = "交易失败";
+        if (this.status == 1) {
+            this.title = "已上架";
+        } else if (this.status == 0) {
+            this.title = "已下架";
+        } else if (this.status == 2) {
+            this.title = "审核中";
         }
-        this.getMerchantInfoByStatus();
+        this.getGoodsByStatus();
     },
     methods: {
-        getMerchantInfoByStatus(done) {
+        getGoodsByStatus(done) {
             var that = this;
-            this.Http.get(this.Api.getMerchantInfoByStatus(), {
+            this.Http.get(this.Api.getComidityGoods(), {
                 status:that.status,
                 page: that.page,
                 size: that.size
             }, function (result) {
                 if (done) done();
-                if (result.data.orders.length > 0) {
-                    for (var i = 0; i < result.data.orders.length; i++) {
-                        that.orders.push(result.data.orders[i]);
+                if (result.data.goodses.length > 0) {
+                    for (var i = 0; i < result.data.goodses.length; i++) {
+                        that.goodses.push(result.data.goodses[i]);
                     }
                     that.$refs.scroller.finishInfinite(false);
                 } else {
                     that.$refs.scroller.finishInfinite(true);
                 }
-                console.log("订单数量："+that.orders.length);
+                console.log("订单数量："+that.goodses.length);
             })
         },
         refresh(done) {
             this.page = 0;
-            this.getMerchantInfoByStatus(done);
+            this.getGoodsByStatus(done);
         },
         infinite(done) {
             this.page += 1;
-            this.getMerchantInfoByStatus(done);
+            this.getGoodsByStatus(done);
         }
     },
     components: {
         "app-header": Header,
+        "app-goods": Goods,
         "sale-order-item": SaleOrderItemSeller,
         "lease-order-item": LeaseOrderItemSeller
     }

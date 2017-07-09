@@ -37,10 +37,13 @@
                     <a @click="merchantOrderList(2)" class="person-transaction" replace>交易中
                         <i v-if="userInfo.transactionCount > 0">{{userInfo.transactionCount}}</i>
                     </a>
-                    <a @click="merchantOrderList(-1)" class="person-shelves" replace>已上架
+                    <a @click="goodsList(1)" class="person-shelves" replace>已上架
                         <i v-if="userInfo.upShelvesCount > 0">{{userInfo.upShelvesCount}}</i>
                     </a>
-                    <a @click="merchantOrderList(0)" class="person-review" replace>审核中
+                    <a @click="goodsList(0)" class="person-shelf" replace>已下架
+                        <i v-if="userInfo.downShelvesCount > 0">{{userInfo.downShelvesCount}}</i>
+                    </a>
+                    <a @click="goodsList(2)" class="person-review" replace>审核中
                         <i v-if="userInfo.approveCount > 0">{{userInfo.approveCount}}</i>
                     </a>
                     <a @click="merchantOrderList(4)" class="person-seccess" replace>交易成功
@@ -121,6 +124,7 @@ export default {
             var self = this;
             this.Http.get(this.Api.getUserInfo(), null, function (result) {
                 self.userInfo = result.data;
+                console.log(self.userInfo,"----")
             })
         },
         refresh(done) {
@@ -133,7 +137,10 @@ export default {
             this.$router.push('/orders/' + status);
         },
         merchantOrderList(status) {
-            this.$router.push('/orders/' + status);
+            this.$router.push('/orders_merchant/' + status);
+        },
+        goodsList(status){
+            this.$router.push('/goods_list_merchant/'+status);
         }
     },
     components: {

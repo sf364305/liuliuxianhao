@@ -14,6 +14,18 @@
                 <i>{{user.merchantArbitrationCount}}</i>
                 <span></span>
             </a>
+            <a @click="goodsList(1)" class="person-shelves-all" replace>已上架
+                <i>{{user.upShelvesCount}}</i>
+                <span></span>
+            </a>
+            <a @click="goodsList(0)" class="person-shelves-all" replace>已下架
+                <i>{{user.downShelvesCount}}</i>
+                <span></span>
+            </a>
+            <a @click="goodsList(2)" class="person-shelves-all" replace>审核中
+                <i>{{user.approveCount}}</i>
+                <span></span>
+            </a>
             <a @click="merchantOrderList(4)" class="person-seccess-all" replace>交易成功
                 <i>{{user.successCount}}</i>
                 <span></span>
@@ -57,6 +69,9 @@ export default {
         },
         merchantOrderList(status) {
             this.$router.push('/orders_merchant/' + status);
+        },
+        goodsList(status){
+            this.$router.push('/goods_list_merchant/'+status);
         }
     },
     components: {
