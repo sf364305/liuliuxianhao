@@ -1760,10 +1760,42 @@ select {
 }
 .popular-form label {
     float: left;
-    height: 3rem;
+    /*height: 3rem;*/
     line-height: 3rem;
 }
-.papular-plat, .papular-pla, .papular-dif, .papular-price {
+
+.popular-form img{
+    height: 4rem;
+    width: 4rem;
+    margin: 1rem;
+    opacity: 0.2;
+}
+
+.popular-form img.show{
+    opacity: 1;
+}
+
+.popular-form .right{
+        width: 22rem;
+    float: left;
+}
+
+.popular-form .popular-type{
+    color:black;
+    border:1px solid #ccc;
+    padding: 0.3rem 1.5rem;
+    margin-left: 1rem;
+    float:left;
+    margin-top: 0.5rem;
+    border-radius: 0.2rem;
+}
+.popular-form .popular-type-select{
+    color:white;
+    background: #0d75d5;
+    border:1px solid #0d75d5;
+}
+
+.papular-plat,.papular-pla, .papular-dif, .papular-price {
     float: left;
     border: none;
     outline: none;
@@ -1772,6 +1804,9 @@ select {
     color: #0d75d5;
     padding-left: 10%;
     line-height: 3rem;
+}
+.papular-pla{
+    width: 50%;
 }
 .papular-price {
     color: red;
