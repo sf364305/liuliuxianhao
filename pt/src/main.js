@@ -50,6 +50,7 @@ import buy_success from './components/buy_success'
 import buy_defeat from './components/buy_defeat'
 import order_list from './components/order_list'
 import order_list_merchant from './components/order_list_merchant'
+import goods_list_merchant from './components/goods_list_merchant'
 import order_detail from './components/order_detail'
 // 使用router
 Vue.use(Router)
@@ -189,6 +190,9 @@ var routes = [{
 }, {
   path: '/orders_merchant/:status',
   component: order_list_merchant
+},{
+  path: '/goods_list_merchant/:status',
+  component: goods_list_merchant
 }, {
   path: '/order_detail/:id',
   component: order_detail

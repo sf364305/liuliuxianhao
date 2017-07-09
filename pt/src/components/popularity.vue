@@ -44,7 +44,7 @@
             </div>
             <div>
                 <label for="">开始时间：</label>
-                <input class="papular-start" v-on:change="dateChange()" readonly="readonly" name="appDateTime" id="appDateTime" type="text" placeholder="请选择开始时间">
+                <input class="papular-start" v-on:change="dateChange()" readonly="readonly" name="appDateTime" id="appDateTime" type="text" vaule="" v-model="times" placeholder="请选择开始时间">
             </div>
             <div>
                 <label for="">结束时间：</label>

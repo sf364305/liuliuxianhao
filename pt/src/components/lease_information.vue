@@ -359,6 +359,8 @@ export default {
             this.Http.get(this.Api.addGoods(), self.goodsInfo, function (result) {
                 if (result.code == 0) {
                     self.$store.commit("clearFrom");
+                    console.log(result);
+
                     self.$router.push("/person");
                 } else {
                     self.$iosAlert(result.msg);
