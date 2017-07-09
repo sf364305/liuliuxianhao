@@ -3,10 +3,10 @@ import axios from 'axios'
 
 
 // const base = 'http://localhost:8080/front';
-const base = 'http://c.chovans.cn/front';
+// const base = 'http://c.chovans.cn/front';
 
 //const base = 'http://c.chovans.cn/front';
-// const base = 'http://192.168.0.111:8081/front';
+const base = 'http://192.168.0.111:8081/front';
 
 //API,接口列表
 Vue.prototype.Api = {
@@ -81,8 +81,13 @@ Vue.prototype.Api = {
     },
     getOrderGoodsDetail(){
         return base + '/order/getOrderGoodsDetail';
+    },
+    sureOrder() {
+        return base + '/order/sure';
+    },
+    arbitrationOrder() {
+        return base + '/order/arbitration';
     }
-    
 };
 
 //Http基本类，统一处理

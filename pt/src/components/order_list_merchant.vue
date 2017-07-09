@@ -48,6 +48,8 @@ export default {
             this.title = "交易失败";
         } else if(this.status == -1){
             this.title = "仲裁中";
+        } else if(this.status == 0){
+            this.title = "审核中";
         }
         this.getMerchantInfoByStatus();
     },
