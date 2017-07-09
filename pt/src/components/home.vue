@@ -96,6 +96,7 @@ export default {
         },
         refresh(done) {
             this.page = 0;
+            this.goods=[];
             this.getHomeGoodsList(done);
         },
         infinite(done) {

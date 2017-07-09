@@ -41,7 +41,7 @@ export default {
     prop: ['order'],
     data() {
         return {
-
+            order:''
         }
     },
     method: {

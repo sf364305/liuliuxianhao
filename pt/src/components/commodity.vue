@@ -168,7 +168,8 @@ export default {
             title:"账号搜索",
         }
     },
-    created() {
+    activated() {
+        this.condition.page = 0;
         this.submit();
         if(this.$route.params.id=="0" || this.$route.params.id=="1") {
             this.condition.type = this.$route.params.id;

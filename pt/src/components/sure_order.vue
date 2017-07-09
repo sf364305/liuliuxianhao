@@ -125,7 +125,7 @@ export default {
     data() {
         return {
             title: "确认订单",
-            goods: {},
+            goods: {name:'',category:{name:''}},
             goodsNum: "",
             leaseType: 0,
             lessCost: [0, 0, 0, 0],
@@ -135,7 +135,7 @@ export default {
             endTime:""
         }
     },
-    created() {
+    activated() {
         this.goods = this.$store.state.Goods;
         console.log("订单商品：", this.goods);
         if (this.goods.type == 1) {
