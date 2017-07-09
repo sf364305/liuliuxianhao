@@ -10,9 +10,6 @@
                     <div v-if="o.type==1">
                         <lease-order-item :order="o"></lease-order-item>
                     </div>
-                    <div v-if="o.type==2">
-                        <hot-order-item :order="o"></hot-order-item>
-                    </div>
                 </li>
             </ul>
         </scroller>
@@ -20,9 +17,8 @@
 </template>
 <script>
 import Header from '../templates/Header.vue'
-import SaleOrderItem from './item/sale_order_item.vue'
-import LeaseOrderItem from './item/lease_order_item.vue'
-import HotOrderItem from './item/hot_order_item.vue'
+import SaleOrderItemSeller from './item/sale_order_item_seller.vue'
+import LeaseOrderItemSeller from './item/lease_order_item_seller.vue'
 export default {
     name: 'order_list',
     data() {
@@ -47,9 +43,11 @@ export default {
         } else if (this.status == 5) {
             this.title = "交易失败";
         } else if(this.status == -1){
-            this.title = "仲裁中";
+            this.title = "已上架";
         } else if(this.status == 0){
             this.title = "审核中";
+        }else if(this.status == 6){
+            this.title = "已下架";
         }
         this.getMerchantInfoByStatus();
     },
@@ -84,9 +82,8 @@ export default {
     },
     components: {
         "app-header": Header,
-        "sale-order-item": SaleOrderItem,
-        "lease-order-item": LeaseOrderItem,
-        "hot-order-item": HotOrderItem
+        "sale-order-item": SaleOrderItemSeller,
+        "lease-order-item": LeaseOrderItemSeller
     }
 }
 </script>

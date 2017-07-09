@@ -8,19 +8,19 @@
             </div>
             <div>
                 <label for="">真实姓名：</label>
-                <input type="text" placeholder="请输入您的真实姓名" v-model="name" value="" />
+                <input type="text" placeholder="请输入您的真实姓名" v-model="realName" value="" />
             </div>
             <div>
                 <label for="">手机号码：</label>
                 <input type="text" placeholder="请输入您的手机号码" v-model="phone" value="" />
             </div>
-            <div class="certification-tele">
+            <!--<div class="certification-tele">
                 <input type="text" placeholder="请输入验证码" v-model="code" value="" class="certification-num" />
                 <span class="get-num" @click="getNum" data-num="1">获取验证码</span>
                 <em class="time-num" v-if="a < 60">{{a}}s</em>
-            </div>
+            </div>-->
             <div class="certification-sub">
-                <input type="submit" placeholder="" name="" value="提交" class="certification-submit" />
+                <input type="button" placeholder="" name="" @click="submitCer" value="提交" class="certification-submit" />
             </div>
         </form>
     </div>
@@ -33,7 +33,7 @@ export default {
         return {
             title:"实名认证",
             a:60,
-            name:"",
+            realName:"",
             phone:"",
             cardId:"",
             code:""
@@ -45,12 +45,10 @@ export default {
             if(self.phone.length != 11){
                 console.log("手机号错误");
                 return;
-            }
-
-            
+            }         
             var num = $(e.target).attr("data-num");
             console.log(num);
-            $(e.target).attr("data-num", 2);
+            $(e.target).attr("data-num", 2);   
             if (num == 1) {
                 self.a = 60;
                 $(e.target).addClass('get-num-active');
@@ -68,6 +66,23 @@ export default {
                 return;
             }
 
+        },
+        submitCer() {
+            var that = this;
+            this.Http.get(this.Api.verified(), {
+                userId:that.userId,
+                realName:that.realName,
+                cardId:that.cardId,
+                phone:that.phone
+            }, function (result) {
+                console.log(result);
+                if (result.code == 0) {
+                    that.$store.commit("clearFrom");
+                    that.$router.push("/person");
+                } else {
+                    that.$iosAlert(result.msg);
+                }
+            })
         }
     },
     components: {

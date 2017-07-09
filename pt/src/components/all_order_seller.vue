@@ -10,8 +10,12 @@
                 <i>{{user.transactionCount}}</i>
                 <span></span>
             </a>
-            <a @click="merchantOrderList(-1)" class="person-shelves-all" replace>仲裁中
+            <a @click="merchantOrderList(-1)" class="person-shelves-all" replace>上架中
                 <i>{{user.merchantArbitrationCount}}</i>
+                <span></span>
+            </a>
+            <a @click="merchantOrderList(-1)" class="person-shelves-all" replace>审核中
+                <i>{{user.approveCount}}</i>
                 <span></span>
             </a>
             <a @click="merchantOrderList(4)" class="person-seccess-all" replace>交易成功

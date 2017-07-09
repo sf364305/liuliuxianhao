@@ -40,6 +40,9 @@
                     <a @click="merchantOrderList(-1)" class="person-shelves" replace>已上架
                         <i v-if="userInfo.upShelvesCount > 0">{{userInfo.upShelvesCount}}</i>
                     </a>
+                    <a @click="merchantOrderList(6)" class="person-shelf" replace>已下架
+                        <i v-if="userInfo.upShelvesCount > 0">{{userInfo.upShelvesCount}}</i>
+                    </a>
                     <a @click="merchantOrderList(0)" class="person-review" replace>审核中
                         <i v-if="userInfo.approveCount > 0">{{userInfo.approveCount}}</i>
                     </a>
@@ -133,7 +136,7 @@ export default {
             this.$router.push('/orders/' + status);
         },
         merchantOrderList(status) {
-            this.$router.push('/orders/' + status);
+            this.$router.push('/orders_merchant/' + status);
         }
     },
     components: {

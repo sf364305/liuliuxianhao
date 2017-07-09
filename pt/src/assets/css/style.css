@@ -391,6 +391,10 @@
     background: url("../images/shelves.png") center 15% no-repeat;
     background-size: 25% auto;
 }
+.person-shelf {
+    background: url("../images/shelf.png") center 15% no-repeat;
+    background-size: 25% auto;
+}
 .person-review {
     background: url("../images/arbitration.png") center 15% no-repeat;
     background-size: 33% auto;
@@ -548,6 +552,7 @@
     line-height: 3.2rem;
     font-size: 1.75rem;
     text-align: center;
+    -webkit-appearance: none;
 }
 .certification-tele .get-num-active {
     background: #aaa;
