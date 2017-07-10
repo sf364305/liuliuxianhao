@@ -28,6 +28,9 @@
                     <a @click="orderList(-1)" class="person-arbitration" replace>仲裁中
                         <i v-if="userInfo.arbitrationCount > 0">{{userInfo.arbitrationCount}}</i>
                     </a>
+                    <a @click="orderList(6)" class="person-collect" replace>收藏
+                        <i v-if="userInfo.collectionCount > 0">{{userInfo.arbitrationCount}}</i>
+                    </a>
                     <router-link to="/all_order" class="person-all" replace>全部订单</router-link>
                 </li>
                 <li class="person-seller-con clearfix">

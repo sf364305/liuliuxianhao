@@ -26,6 +26,10 @@
                 <i>{{user.arbitrationCount}}</i>
                 <span></span>
             </a>
+            <a @click="orderList(6)" class="person-arbitration-all" replace>收藏
+                <i>{{user.collectionCount}}</i>
+                <span></span>
+            </a>
         </div>
     </div>
 </template>
