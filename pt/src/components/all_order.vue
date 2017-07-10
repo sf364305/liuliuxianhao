@@ -26,7 +26,7 @@
                 <i>{{user.arbitrationCount}}</i>
                 <span></span>
             </a>
-            <a @click="orderList(6)" class="person-arbitration-all" replace>收藏
+            <a @click="orderListCollect(6)" class="person-arbitration-all" replace>收藏
                 <i>{{user.collectionCount}}</i>
                 <span></span>
             </a>
@@ -62,6 +62,9 @@ export default {
         },
         orderList(status) {
             this.$router.push('/orders/' + status);
+        },
+        orderListCollect(status) {
+            this.$router.push('/goods_item_collect/'+status);
         }
     }, components: {
         "app-header": Header

@@ -111,6 +111,9 @@ Vue.prototype.Api = {
     },
     calDate() {
         return base + '/utils/calDate';
+    },
+    getCollection() {
+        return base + '/collection/getMyCollection';
     }
 };
 
