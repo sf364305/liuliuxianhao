@@ -10,6 +10,9 @@ const base = 'http://d9s0anp.hk1.mofasuidao.cn/front';
 
 //API,接口列表
 Vue.prototype.Api = {
+    getConfig() {
+        return base + '/home/getConfig'
+    },
     getJsSign() {
         return base + '/utils/getJsSign'
     },
@@ -70,7 +73,7 @@ Vue.prototype.Api = {
     collection() {
         return base + '/collection/collect';
     },
-    getCode(){
+    getCode() {
         return base + '/user/getCode';
     },
     deleteReOrder() {
@@ -79,7 +82,7 @@ Vue.prototype.Api = {
     cancelOrder() {
         return base + '/order/exit';
     },
-    getOrderGoodsDetail(){
+    getOrderGoodsDetail() {
         return base + '/order/getOrderGoodsDetail';
     },
     sureOrder() {
@@ -91,22 +94,22 @@ Vue.prototype.Api = {
     verified() {
         return base + '/user/certification';
     },
-    popularityGoods(){
+    popularityGoods() {
         return base + '/goods/popularityGoods';
     },
-    confirmPopularOrder(){
+    confirmPopularOrder() {
         return base + '/order/confirmPopularOrder';
     },
-    getUpGoods(){
+    getUpGoods() {
         return base + '/goods/upGoods';
     },
-    getDownGoods(){
-       return base + '/goods/downGoods';  
+    getDownGoods() {
+        return base + '/goods/downGoods';
     },
     getComidityGoods() {
         return base + '/goods/goodsStatus';
     },
-    calDate(){
+    calDate() {
         return base + '/utils/calDate';
     }
 };
@@ -149,12 +152,12 @@ Vue.prototype.Http = {
             console.error('请求错误');
         });
     },
-    upload(param,config,callback){
-        axios.post('http://up-z2.qiniu.com', param, config,callback)
-                .then(response => {
-                    console.log("上传返回",response.data);
-                    callback(response.data.key);
-                })
+    upload(param, config, callback) {
+        axios.post('http://up-z2.qiniu.com', param, config, callback)
+            .then(response => {
+                console.log("上传返回", response.data);
+                callback(response.data.key);
+            })
 
     }
 };
