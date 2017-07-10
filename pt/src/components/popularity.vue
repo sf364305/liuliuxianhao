@@ -11,14 +11,7 @@
         <form action="" method="" class="popular-form">
             <div>
                 <label for="">选择平台：</label>
-                <div class="right">
-                    <label v-for="g in goods" :key="g.id" @click="changePlat(g.id)">
-                        <!--<input type="radio" checked="checked" name="sell" value="1"/>-->
-                        <img :src="$store.state.Setting.qiniuUrl + g.goodsImages[0].qiniuKey" class="" v-bind:class="{'show':(goodsId == g.id)}">
-                        </img>
-                    </label>
-                </div>
-    
+                <input type="text" placeholder="" name="" readOnly="true" value="点击选择 ∨" @click="changePupa" class="papular-plat"/>    
             </div>
             <div>
                 <label for="">选择人气：</label>
@@ -60,6 +53,24 @@
             <div class="popularity-sub" style="border:none;">
                 <a @click="addOrder"  replace class="popularity-submit">立即下单</a>
             </div>
+            <div class="alert-outer-papular" style="padding-left:0;">
+                <div class="alert-plat-papular">
+                    <div class="papular-plat-head clearfix">
+                        <span class="papular-plat-cancel" @click="closePopu">取消</span>
+                        <span class="papular-plat-sure" @click="surePopu">确定</span>
+                    </div>
+                    <div>  
+                        <div class="papular-plat-choice clearfix">
+                            <label v-for="g in goods" :key="g.id" @click="changePlat(g.id)">
+                                <!--<input type="radio" checked="checked" name="sell" value="1"/>-->
+                                <img :src="$store.state.Setting.qiniuUrl + g.goodsImages[0].qiniuKey" class="choice-sho-platform choiced-ying-platform" v-bind:class="{'show':(goodsId == g.id)}">
+                                </img>
+                                <em class="choice-text-platform">{{g.name}}</em>
+                            </label>
+                        </div>                      
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 </template>
@@ -80,7 +91,8 @@ export default {
             startTime: "",
             endTime: "",
             targetId: "",
-            comment: ""
+            comment: "",
+            id:''
         }
     },
     created() {
@@ -92,7 +104,41 @@ export default {
             this.Http.get(this.Api.popularityGoods(), null, function (result) {
                 self.goods = [];
                 self.goods = result.data.goodses;
+                self.goodsId = self.goods[0].id;
+                $(".alert-plat-papular").attr("data-id", self.goodsId);
             })
+        },
+        changePupa: function() {
+            //var daId = $(".alert-plat-papular").attr("data-id");
+            $(".alert-outer-papular").css("display", "block");
+            $(".alert-plat-papular").animate({
+                "bottom" : "0"
+            }, 500);
+            $(".papular-plat-choice").css("display", "block").siblings().css("display", "none");
+        },
+        closePopu: function() {
+            var dataId = $(".alert-plat-papular").attr("data-id");
+            this.goodsId = dataId;
+            $(".alert-outer-papular").css("display", "none");
+            $(".alert-plat-papular").animate({
+                "bottom" : "-22rem"
+            }, 500)
+        },
+        surePopu: function() {
+            $(".alert-plat-papular").attr("data-id",this.goodsId);
+            for(var i=0; i<$(".papular-plat-choice label").length;i++) {
+                var bool = $(".papular-plat-choice label").eq(i).find("img").hasClass("show");
+                console.log(bool)
+                if(bool == true) {
+                    console.log(bool)
+                    var textB = $(".papular-plat-choice label").eq(i).find("img").siblings("em").html();
+                }
+            }
+            $(".papular-plat").val(textB);
+            $(".alert-outer-papular").css("display", "none");
+            $(".alert-plat-papular").animate({
+                "bottom" : "-22rem"
+            }, 500)
         },
         changePlat(id) {
             this.goodsId = id;
@@ -162,6 +208,7 @@ export default {
 
             this.Http.get(this.Api.confirmPopularOrder(), param , function (result) {
                 if (result.code === 0) {
+                    console.log(result)
                     self.$store.commit('setOrder', result.data.order);
                     self.$router.push("/popular_buy");
                 } else {

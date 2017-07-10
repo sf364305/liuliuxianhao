@@ -8,10 +8,7 @@
                         <sale-order-item :order="o"></sale-order-item>
                     </div>
                     <div v-if="o.type==1">
-                        <lease-order-item  v-on:remove="removeItems" :order="o"></lease-order-item>
-                    </div>
-                    <div v-if="o.type==2" >
-                        <hot-order-item :order="o"></hot-order-item>
+                        <lease-order-item :order="o"></lease-order-item>
                     </div>
                 </li>
             </ul>
@@ -20,9 +17,8 @@
 </template>
 <script>
 import Header from '../templates/Header.vue'
-import SaleOrderItem from './item/sale_order_item.vue'
-import LeaseOrderItem from './item/lease_order_item.vue'
-import HotOrderItem from './item/hot_order_item.vue'
+import SaleOrderItemSeller from './item/sale_order_item_seller.vue'
+import LeaseOrderItemSeller from './item/lease_order_item_seller.vue'
 export default {
     name: 'order_list',
     data() {
@@ -37,30 +33,22 @@ export default {
     activated() {
         this.orders = [];
         this.page = 0;
-        console.log(this.$route.params.status);
         this.status = this.$route.params.status;
-        if (this.status == 1) {
-            this.title = "待支付";
-        } else if (this.status == 2) {
-            this.title = "待发货";
+        if (this.status == 2) {
+            this.title = "交易中";
         } else if (this.status == 3) {
-            this.title = "待确认";
+            this.title = "已发货";
         } else if (this.status == 4) {
             this.title = "交易成功";
         } else if (this.status == 5) {
-            this.title = "退款";
-        } else if(this.status == -1){
-            this.title = "仲裁中";
+            this.title = "交易失败";
         }
-         else if(this.status == 6){
-            this.title = "收藏";
-        }
-        this.getBuyInfoByStatus();
+        this.getMerchantInfoByStatus();
     },
     methods: {
-        getBuyInfoByStatus(done) {
+        getMerchantInfoByStatus(done) {
             var that = this;
-            this.Http.get(this.Api.getBuyInfoByStatus(), {
+            this.Http.get(this.Api.getMerchantInfoByStatus(), {
                 status:that.status,
                 page: that.page,
                 size: that.size
@@ -74,31 +62,22 @@ export default {
                 } else {
                     that.$refs.scroller.finishInfinite(true);
                 }
+                console.log("订单数量："+that.orders.length);
             })
         },
         refresh(done) {
-            console.log("刷新");
             this.page = 0;
-            this.getBuyInfoByStatus(done);
+            this.getMerchantInfoByStatus(done);
         },
         infinite(done) {
-        console.log("加载");
             this.page += 1;
-            this.getBuyInfoByStatus(done);
-        },
-        removeItems(orderId){
-            for(var i = 0 ;i <this.orders.length;i++){
-                if(this.orders[i].id == orderId){
-                    this.orders.splice(i,1);
-                }
-            }
+            this.getMerchantInfoByStatus(done);
         }
     },
     components: {
         "app-header": Header,
-        "sale-order-item": SaleOrderItem,
-        "lease-order-item": LeaseOrderItem,
-        "hot-order-item": HotOrderItem
+        "sale-order-item": SaleOrderItemSeller,
+        "lease-order-item": LeaseOrderItemSeller
     }
 }
 </script>

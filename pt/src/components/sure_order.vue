@@ -79,8 +79,9 @@
             <li class="clearfix">
                 <span>购买数：</span>
                 <!-- <input type="number" value="1" class="sure-num"/> -->
-                <em v-if="goodsNum != ''">{{goodsNum}}</em>
-                <em v-if="goodsNum == ''">请输入数量</em>
+                <em v-if="goodsNum != '' && goods.type == 1">{{goodsNum}}</em>
+                <em v-if="goodsNum == '' && goods.type == 1"></em>
+                <em v-if="goods.type == 0">1</em>
             </li>
             <li class="clearfix">
                 <span>原价格：</span>
@@ -108,10 +109,10 @@
             <div class="tobuy-prompt">*请确认您的信息准确无误，确保您的交易安全！</div>
             <div class="protocol">
                 <span class="pro-check"></span>
-                <a href="">《六六交易平台服务协议》</a>
+                <a href="###">《六六交易平台服务协议》</a>
             </div>
             <div class="wallet-submit">
-                <a @click="submitOrder" class="detail-pay">确认购买</a>
+                <span @click="submitOrder" class="detail-pay">确认购买</span>
             </div>
         </div>
     </div>
@@ -172,6 +173,7 @@ export default {
                 leaseType: self.leaseType,
                 goodsNum: self.goodsNum
             }, function (result) {
+                console.log(result)
                 self.$store.commit('setLoading', false);
                 if (result.code === 0) {
                     var order = {

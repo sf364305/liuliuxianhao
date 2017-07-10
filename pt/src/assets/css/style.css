@@ -162,7 +162,6 @@
     position: absolute;
     right: 15%;
     top: 3.5rem;
-    width: 21.33%;
     text-overflow: ellipsis;
     color: red;
     white-space: nowrap;
@@ -369,6 +368,10 @@
 }
 .person-arbitration {
     background: url("../images/arbitration.png") center 15% no-repeat;
+    background-size: 33% auto;
+}
+.person-collect {
+    background: url("../images/my_collect.png") center 15% no-repeat;
     background-size: 33% auto;
 }
 .person-all {
@@ -713,6 +716,9 @@
 }
 .plat-comm input {
     display: none;
+}
+.plat-comm label:nth-child(5){
+    margin-left: 25%;
 }
 .alert-com-inf .sex-com input, .alert-com-inf .bind-com input, .alert-com-inf .certification-com input {
     display: none;
@@ -1245,7 +1251,7 @@ select {
     border-bottom: 1px solid #d7d7d7;
 }
 .tobuy-prompt {
-    padding: 0.4rem 0 0 2%;
+    padding: 0.4rem 0 0 6%;
     color: #FF0101;
     background: #fff;
     font-size: 0.89rem;
@@ -1262,7 +1268,7 @@ select {
 .sure-contact div label {
     float: left;
     width: 18%;
-    padding-left: 2%;
+    padding-left: 5%;
     height: 3rem;
     line-height: 3rem;
 }
@@ -1271,7 +1277,7 @@ select {
 }
 .sure-contact div input {
     float: left;
-    width: 72%;
+    width: 70%;
     height: 3rem;
     padding-left: 6%;
     border: none;
@@ -1280,7 +1286,7 @@ select {
     line-height: 3rem;
 }
 .protocol {
-    width: 94%;
+    width: 87%;
     margin: 0.5rem auto 0;
 }
 .protocol span {
@@ -1304,7 +1310,7 @@ select {
 .wallet-submit {
     margin: 2rem 0 0;
 }
-.wallet-submit a {
+.wallet-submit .detail-pay {
     display: block;
     width: 100%;
     height: 3rem;
@@ -1344,17 +1350,20 @@ select {
     background: #eee;
 }
 .pay-method {
-    display: block;
-    width: 80%;
+        display: block;
+    width: 90%;
     height: 3.5rem;
-    padding-left: 20%;
-    margin: 0 auto;
-    color: #222;
-    /*background: #fff url("../images/weixin.png") 4% center no-repeat;*/
-    /*background-size: 7% auto;*/
+    /*border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;*/
+    margin: 5rem auto;
+    color: #fff;
+    background: #015ebd url(/static/img/weixin.d7a8c82.png) 28% center no-repeat;
+    background-size: 7% auto;
     line-height: 3.5rem;
     box-shadow: 0px 0px 0px 1px #dcdcdc;
-    font-size: 1.33rem;
+    font-size: 1.5rem;
+    text-align: center;
 }
 /*我要卖出售样式*/
 .sell-diff {
@@ -1508,7 +1517,7 @@ select {
     z-index: 444;
 }
 .add-com h3 {
-    padding-left: 3%;
+    padding-left: 6%;
     height: 3rem;
     border-top: 1px solid #dcdcdc;
     line-height: 3rem;
@@ -1633,7 +1642,7 @@ select {
 }
 .add-com textarea {
     display: block;
-    width: 90%;
+    width: 83%;
     margin: 0 auto;
     padding: 2%;
     border: 1px solid #d7d7d7;
@@ -1722,7 +1731,7 @@ select {
 }
 .account-infor li {
     overflow: hidden;
-    padding-left: 3%;
+    padding-left: 6%;
     border-bottom: 1px solid #dcdcdc;
 }
 .account-infor label {
@@ -1960,26 +1969,30 @@ select {
 .pay-popular h2 {
     height: 3rem;
     padding-left: 5%;
-    margin-bottom: 2rem;
     border-bottom: 1px solid #dcdcdc;
     line-height: 3rem;
     font-weight: bold;
     font-size: 1.08rem;
+    text-align: center;
 }
 .pay-popular ul li {
     overflow: hidden;
     padding-left: 5%;
-    margin-bottom: 1rem;
+    border-bottom: 1px solid #dcdcdc;;
 }
 .pay-popular ul li span, .pay-popular ul li em {
     float: left;
+    height: 3rem;
+    line-height: 3rem;
 }
 .pay-popular ul li span {
+    width: 20%;
     margin-right: 2%;
+    font-weight: bold;
 }
 .pay-popular ul li em {
-    color: #999;
-    width: 80%;
+    color: #333;
+    width: 70%;
     word-break: break-all;
 }
 .popular-paid-outer {

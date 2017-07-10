@@ -4,9 +4,13 @@
         <div class="pay-popular">
             <h2>刷人气</h2>
             <ul>
-                <li style="color: red;font-size: 1.33rem;">
+                <li>
+                    <span>价格：</span>
+                    <em>￥200</em>
+                </li>
+                <li>
                     <span>订单号：</span>
-                    <em style="color: red">{{$store.state.Order.orderNo}}</em>
+                    <em>{{$store.state.Order.orderNo}}</em>
                 </li>
                 <li>
                     <span>人气：</span>
@@ -14,10 +18,10 @@
                 </li>
                 <li>
                     <span>类型：</span>
-                    <em v-if="popularType==0">按小时</em>
-                    <em v-if="popularType==1">按天</em>
-                    <em v-if="popularType==2">按周</em>
-                    <em v-if="popularType==3">按月</em>
+                    <em v-if="$store.state.Order.popularType==0">按小时</em>
+                    <em v-if="$store.state.Order.popularType==1">按天</em>
+                    <em v-if="$store.state.Order.popularType==2">按周</em>
+                    <em v-if="$store.state.Order.popularType==3">按月</em>
                 </li>
                 <li>
                     <span>数量：</span>
@@ -33,7 +37,7 @@
                 </li>
                 <li>
                     <span>平台：</span>
-                    <em>￥200</em>
+                    <em>{{$store.state.Order.goods.name}}</em>
                 </li>
                 <li>
                     <span>平台ID：</span>

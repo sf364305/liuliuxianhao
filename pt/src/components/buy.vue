@@ -25,7 +25,6 @@
             </li>
         </ul>
         <div class="pay-time">*订单支付有效时间30分钟</div>
-        <div class="buy-inf-method">支付方式</div>
         <a @click="pay" class="pay-method" replace>微信支付</a>
     </div>
 </template>
