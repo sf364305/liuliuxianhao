@@ -7,7 +7,7 @@
             </span>
             <span class="sever">
                 <em class="com-game">所属卖家：</em>
-                <i class="game-sever">{{order.goods.merchant.name}}}</i>
+                <i class="game-sever">{{order.goods.merchant.name}}</i>
             </span>
             <span class="price">￥{{order.amount}}</span>
             <div class="sell-inf clearfix">
@@ -38,13 +38,12 @@
 <script>
 export default {
     name: 'order',
-    prop: ['order'],
+    props: ['order'],
     data() {
         return {
-            order:''
         }
     },
-    method: {
+    methods: {
         toDetail(orderId){
             this.$router.push("/order_detail/"+orderId);
         },
@@ -53,7 +52,6 @@ export default {
             this.Http.get(this.Api.deleteReOrder(), {
                 orderId:orderId
             }, function (result) {
-                //confirm("你确定删除这个订单嘛")
                 console.log(result);
                 //移除订单结构
                 this.$emit('remove',orderId)
@@ -67,9 +65,7 @@ export default {
             this.Http.get(this.Api.cancelOrder(), {
                 orderId:orderId
             }, function (result) {
-                //confirm("你确定删除这个订单嘛")
                 console.log(result);
-                
             })
         },
         sure(orderId) {

@@ -2,6 +2,7 @@
     <div class="sure-order">
         <app-alert></app-alert>
         <app-header :header="title"></app-header>
+    
         <div class="tobuy-tit">商品信息</div>
         <ul class="sure-inf">
             <li class="clearfix">
@@ -31,17 +32,18 @@
         </ul>
     
         <ul class="sure-stock" v-if="goods.type == 1">
+    
             <li class="clearfix">
                 <span>类型：</span>
                 <em>
-                    <select v-model="leaseType">
-                        <option value="0">时租</option>
-                        <option value="1">日租</option>
-                        <option value="2">周租</option>
-                        <option value="3">月租</option>
+                    <select v-model="leaseType" @change="cal()">
+                        <option v-if="goods.goodsLeaseInfo.hourCost" value="0">时租</option>
+                        <option v-if="goods.goodsLeaseInfo.dayCost" value="1">日租</option>
+                        <option v-if="goods.goodsLeaseInfo.weekCost" value="2">周租</option>
+                        <option v-if="goods.goodsLeaseInfo.monthCost" value="3">月租</option>
                     </select>
     
-                    <input type="number" v-model="goodsNum" class="num" placeholder="请输入数量" />
+                    <input type="number" v-model="goodsNum" class="num" placeholder="请输入数量" @input="cal()" />
                 </em>
             </li>
             <li class="clearfix">
@@ -54,10 +56,13 @@
             </li>
             <li class="clearfix">
                 <span>时间：</span>
-                <em id="appDateTime" >
-                    {{startTime}}  至  {{endTime}}
+                <em style="height: 6.5rem;">
+                    <input readonly="readonly" v-model="startTime" id="appDateTime" type="text" placeholder="请选择开始时间"> 
+                    <br/>
+                    <input readonly="readonly" v-model="endTime" type="text" placeholder="请选择开始时间"> 
                 </em>
             </li>
+    
         </ul>
     
         <div class="tobuy-inf">交易信息</div>
@@ -117,22 +122,22 @@
     </div>
 </template>
 <script>
+import '../assets/js/touch.min.js'
 import Alert from '../templates/Alert.vue'
 import Header from '../templates/Header.vue'
-import '../assets/js/touch.min.js'
 export default {
     name: 'sure_order',
     data() {
         return {
             title: "确认订单",
-            goods: {name:'',category:{name:''}},
+            goods: { name: '', category: { name: '' } },
             goodsNum: "",
             leaseType: 0,
             lessCost: [0, 0, 0, 0],
             phone: "",
             qq: "",
-            startTime:"请选择开始时间",
-            endTime:""
+            startTime: "",
+            endTime: ""
         }
     },
     activated() {
@@ -145,16 +150,46 @@ export default {
             this.lessCost[3] = this.goods.goodsLeaseInfo.monthCost;
         }
     },
+    mounted() {
+        var self = this;
+        setTimeout(function () {
+            self.initDatePicker();
+        }, 1000);
+
+    },
     methods: {
+        cal() {
+            if (!this.goodsNum || !this.startTime) {
+                return;
+            }
+            var per = 1;
+            if (this.leaseType == 0) {
+                per = this.lessCost[0];
+            } else if (this.leaseType == 1) {
+                per = this.lessCost[1];
+            } else if (this.leaseType == 2) {
+                per = this.lessCost[2];
+            } else if (this.leaseType == 3) {
+                per = this.lessCost[3];
+            }
+
+            if (this.startTime) {
+                this.dateChange();
+            }
+        },
         submitOrder() {
             var self = this;
-            if(!(/^1[34578]\d{9}$/.test(self.phone))){
+            if (!(/^1[34578]\d{9}$/.test(self.phone))) {
                 this.$iosAlert("手机号码有误，请重填");
-                return false; 
-            } else if(!(/^\d{6,12}$/.test(self.qq))) {
+                return false;
+            } else if (!(/^\d{6,12}$/.test(self.qq))) {
                 this.$iosAlert("qq号码有误，请重填");
                 return false;
+            }else if(self.goods.type == 1 && !self.startTime){
+                this.$iosAlert("请选择开始时间");
+                return false;
             }
+
             var amount = 0;
             if (this.goods.type == 0) {
                 amount = this.goods.price;
@@ -168,9 +203,10 @@ export default {
                 qq: self.qq,
                 amount: amount,
                 goodsId: self.goods.id,
-                deposit: self.goods.goodsLeaseInfo == null ? "":self.goods.goodsLeaseInfo.deposit,
+                deposit: self.goods.goodsLeaseInfo == null ? "" : self.goods.goodsLeaseInfo.deposit,
                 leaseType: self.leaseType,
-                goodsNum: self.goodsNum
+                goodsNum: self.goodsNum,
+                startTime:self.startTime
             }, function (result) {
                 self.$store.commit('setLoading', false);
                 if (result.code === 0) {
@@ -187,38 +223,46 @@ export default {
                     this.$iosAlert(result.msg);
                 }
             })
+        },
+        initDatePicker() {
+            var self = this;
+            var currYear = (new Date()).getFullYear();
+            var opt = {};
+            opt.date = { preset: 'date' };
+            opt.datetime = { preset: 'datetime' };
+            opt.time = { preset: 'time' };
+            opt.default = {
+                theme: 'android-ics light', //皮肤样式
+                display: 'modal', //显示方式 
+                mode: 'scroller', //日期选择模式
+                dateFormat: 'yyyy-mm-dd',
+                timeFormat: 'HH:mm:ss',
+                lang: 'zh',
+                showNow: true,
+                nowText: "今天",
+                startYear: currYear - 10, //开始年份
+                endYear: currYear + 10,//结束年份
+                onSelect: function (valueText, inst) {
+                    self.startTime = valueText;
+                    self.cal();
+                }
+            };
 
+            console.log("初始化时间控件");
+            var optDateTime = $.extend(opt['datetime'], opt['default']);
+            var optTime = $.extend(opt['time'], opt['default']);
+            $("#appDateTime").mobiscroll(optDateTime).datetime(optDateTime);
+        },
+        dateChange() {
+            var self = this;
+            this.Http.get(this.Api.calDate(), {
+                startTime:self.startTime,
+                num:self.goodsNum,
+                type:self.leaseType
+            }, function (result) {
+                self.endTime = result.data.endTime;
+            })
         }
-    },
-    mounted() {
-        var self = this;
-        var currYear = (new Date()).getFullYear();
-        var opt = {};
-        opt.date = { preset: 'date' };
-        opt.datetime = { preset: 'datetime' };
-        opt.time = { preset: 'time' };
-        opt.default = {
-            theme: 'android-ics light', //皮肤样式
-            display: 'modal', //显示方式 
-            mode: 'scroller', //日期选择模式
-            dateFormat: 'yyyy-mm-dd',
-            timeFormat: 'HH:mm:ss',
-            lang: 'zh',
-            showNow: true,
-            nowText: "今天",
-            startYear: currYear - 10, //开始年份
-            endYear: currYear + 10,//结束年份
-            onSelect: function (valueText, inst) {
-                self.startTime = valueText;
-                self.cal();
-            }
-        };
-
-        $("#appDate").mobiscroll($.extend(opt['date'], opt['default']));
-        var optDateTime = $.extend(opt['datetime'], opt['default']);
-        var optTime = $.extend(opt['time'], opt['default']);
-        $("#appDateTime").mobiscroll(optDateTime).datetime(optDateTime);
-        $("#appTime").mobiscroll(optTime).time(optTime);
     },
     components: {
         'app-header': Header,

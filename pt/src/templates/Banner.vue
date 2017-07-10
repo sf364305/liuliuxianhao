@@ -2,7 +2,12 @@
     <div class="swiper-container banner-index">
         <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="banner in banners" :key=banner.id style="overflow: hidden;height:20rem;">
-                <img :src="$store.state.Setting.qiniuUrl + banner.qiniuKey" alt="">
+                <a :href="banner.url" v-if="banner.url.startsWith('http:')">
+                    <img :src="$store.state.Setting.qiniuUrl + banner.qiniuKey" alt="">
+                </a>
+                <a href="javascript:void(0);" v-if="!banner.url.startsWith('http:')">
+                    <img :src="$store.state.Setting.qiniuUrl + banner.qiniuKey" alt="">
+                </a>
             </div>
         </div>
         <div class="swiper-pagination swiper-pagination-white"></div>
@@ -24,12 +29,12 @@ export default {
     methods: {
         getBanner() {
             var that = this;
-            this.Http.get(this.Api.getBanners(), null, function (result) {  
+            this.Http.get(this.Api.getBanners(), null, function (result) {
                 that.banners = result.data.banners;
                 //当dom发生变化，更新后执行的回调
                 that.$nextTick(function () {
                     this.show();
-                })       
+                })
             })
         },
         show() {

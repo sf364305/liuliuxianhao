@@ -5,13 +5,13 @@
             <ul class="com-list">
                 <li v-for="o in orders" :key="o.id">
                     <div v-if="o.type==0">
-                        <sale-order-item :order="o"></sale-order-item>
+                        <sale-order-item  v-on:remove="removeItems" :order="o"></sale-order-item>
                     </div>
                     <div v-if="o.type==1">
                         <lease-order-item  v-on:remove="removeItems" :order="o"></lease-order-item>
                     </div>
                     <div v-if="o.type==2" >
-                        <hot-order-item :order="o"></hot-order-item>
+                        <hot-order-item  v-on:remove="removeItems" :order="o"></hot-order-item>
                     </div>
                 </li>
             </ul>
@@ -37,7 +37,6 @@ export default {
     activated() {
         this.orders = [];
         this.page = 0;
-        console.log(this.$route.params.status);
         this.status = this.$route.params.status;
         if (this.status == 1) {
             this.title = "待支付";

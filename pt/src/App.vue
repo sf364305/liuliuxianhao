@@ -2,7 +2,7 @@
   <div id="app">
       <div class="contianer">
         <!-- 路由中的几个组件在这里被渲染，默认被渲染的为第一个组件，也就是home组件  -->
-        <keep-alive>
+        <keep-alive exclude="detail">
           <router-view></router-view>
         </keep-alive>
       </div>

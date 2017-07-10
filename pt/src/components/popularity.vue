@@ -127,26 +127,14 @@ export default {
             }
         },
         dateChange() {
-            var start = new Date(this.startTime);
-            var unit = 'd ';
-
-            if (this.popularType == 0) {
-                unit = 'h ';
-            } else if (this.popularType == 1) {
-                unit = 'd ';
-            } else if (this.popularType == 2) {
-                unit = 'w ';
-            } else if (this.popularType == 3) {
-                unit = 'm ';
-            }
-            var newDate = this.dateAdd(unit, this.count, start);
-            var formatDate = newDate.getFullYear()
-                + "-" + (newDate.getMonth() + 1 < 10 ? "0" : "") + (newDate.getMonth() + 1)
-                + "-" + (newDate.getDate() < 10 ? "0" : "") + (newDate.getDate())
-                + " " + (newDate.getHours() < 10 ? "0" : "") + (newDate.getHours())
-                + ":" + (newDate.getMinutes() < 10 ? "0" : "") + (newDate.getMinutes())
-                + ":00";
-            this.endTime = formatDate;
+            var self = this;
+            this.Http.get(this.Api.calDate(), {
+                startTime:self.startTime,
+                num:self.goodsNum,
+                type:self.leaseType
+            }, function (result) {
+                self.endTime = result.data.endTime;
+            })
         },
         addOrder() {
             var self = this;
@@ -178,56 +166,7 @@ export default {
         },
         addNum: function () {
             this.count += 1;
-        },
-        dateAdd(interval, number, date) {
-            switch (interval) {
-                case "y ": {
-                    date.setFullYear(date.getFullYear() + number);
-                    return date;
-                    break;
-                }
-                case "q ": {
-                    date.setMonth(date.getMonth() + number * 3);
-                    return date;
-                    break;
-                }
-                case "m ": {
-                    date.setMonth(date.getMonth() + number);
-                    return date;
-                    break;
-                }
-                case "w ": {
-                    date.setDate(date.getDate() + number * 7);
-                    return date;
-                    break;
-                }
-                case "d ": {
-                    date.setDate(date.getDate() + number);
-                    return date;
-                    break;
-                }
-                case "h ": {
-                    date.setHours(date.getHours() + number);
-                    return date;
-                    break;
-                }
-                case "m ": {
-                    date.setMinutes(date.getMinutes() + number);
-                    return date;
-                    break;
-                }
-                case "s ": {
-                    date.setSeconds(date.getSeconds() + number);
-                    return date;
-                    break;
-                }
-                default: {
-                    date.setDate(date.getDate() + number);
-                    return date;
-                    break;
-                }
-            }
-        },
+        }
     },
     mounted() {
         var self = this;
@@ -253,11 +192,11 @@ export default {
             }
         };
 
-        $("#appDate").mobiscroll($.extend(opt['date'], opt['default']));
+        // $("#appDate").mobiscroll($.extend(opt['date'], opt['default']));
         var optDateTime = $.extend(opt['datetime'], opt['default']);
         var optTime = $.extend(opt['time'], opt['default']);
         $("#appDateTime").mobiscroll(optDateTime).datetime(optDateTime);
-        $("#appTime").mobiscroll(optTime).time(optTime);
+        // $("#appTime").mobiscroll(optTime).time(optTime);
     },
     components: {
         "app-header": Header

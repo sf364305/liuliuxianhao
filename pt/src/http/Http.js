@@ -2,9 +2,9 @@ import Vue from 'vue'
 import axios from 'axios'
 
 
-// const base = 'http://localhost:8080/front';
+const base = 'http://localhost:8080/front';
 
-const base = 'http://c.chovans.cn/front';
+// const base = 'http://c.chovans.cn/front';
 //const base = 'http://192.168.0.105:8081/front';
 
 //const base = 'http://c.chovans.cn/front';
@@ -107,6 +107,9 @@ Vue.prototype.Api = {
     },
     getComidityGoods() {
         return base + '/goods/goodsStatus';
+    },
+    calDate(){
+        return base + '/utils/calDate';
     }
 };
 

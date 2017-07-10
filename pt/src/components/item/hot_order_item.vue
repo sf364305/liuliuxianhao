@@ -2,12 +2,12 @@
     <div>
         <a @click="toDetail(order.id)" class="game-lease" replace>
             <span class="name-title clearfix">
-                <img :src="$store.state.Setting.qiniuUrl + order.goods.images[0].qiniuKey" alt="">
+                <img :src="$store.state.Setting.qiniuUrl + order.goods.category.img" alt="">
                 <em>{{order.goods.name}}</em>
             </span>
             <span class="sever">
                 <em class="com-game">平台：</em>
-                <i class="game-sever">{{order.goods.categroy.name}}</i>
+                <i class="game-sever">{{order.goods.category.name}}</i>
             </span>
             <span class="price">￥{{order.amount}}</span>
             <div class="lease-credit clearfix">
@@ -19,7 +19,7 @@
                 <span>{{order.startTime}}至{{order.endTime}}</span>
             </div>
         </a>
-        <div class="sell-status"></div>
+        <div class="sell-hot"></div>
         
         <div class="wait-you" v-if="order.status == 1">
             <span class="wait-cancel" @click="deleteRe(order.id)">取消订单</span>
@@ -43,7 +43,7 @@
 <script>
 export default {
     name: 'order',
-    prop: ['order'],
+    props: ['order'],
     data() {
         return {
 

@@ -186,6 +186,10 @@
     background: url(../images/sell_status.png) center 0 no-repeat;
     background-size: 70% auto;
 }
+.sell-hot {
+    background: url(../images/hot.png) center 0 no-repeat;
+    background-size: 70% auto;
+}
 /*导航样式*/
 .index-home {
     background: url("../images/index_1.png") center 15% no-repeat;

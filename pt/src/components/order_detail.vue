@@ -12,8 +12,8 @@
                 <em>{{order.goods.name}}</em>
             </li>
             <li class="clearfix">
-                <span>单价</span>
-                <em>{{order.goods.price}}</em>
+                <span>价格</span>
+                <em>{{order.amount}}</em>
             </li>
             <li class="clearfix">
                 <span>生成时间</span>
@@ -39,20 +39,36 @@
         <ul class="order-contact">
             <li class="clearfix">
                 <span>所属平台</span>
-                <em>{{order.goods.category.name}}</em>
+                <em>{{order.goods.name}}</em>
             </li>
-            <li class="clearfix">
+            <li class="clearfix" v-if="order.type == 2">
+                <span>购买人气</span>
+                <em>{{order.quantity}}</em>
+            </li>
+            <li class="clearfix" v-if="order.type == 2">
+                <span>主播ID</span>
+                <em>{{order.targetId}}</em>
+            </li>
+            <li class="clearfix" v-if="order.type == 2">
+                <span>开始时间</span>
+                <em>{{order.startTime}}</em>
+            </li>
+            <li class="clearfix" v-if="order.type == 2">
+                <span>结束时间</span>
+                <em>{{order.endTime}}</em>
+            </li>
+            <li class="clearfix" v-if="order.goods.goodsSaleInfo || order.goods.goodsLeaseInfo">
                 <span>授权情况</span>
                 <em v-if="order.goods.goodsSaleInfo ==null ? order.goods.goodsLeaseInfo.bind : order.goods.goodsSaleInfo.bind == 4">未授权</em>
                 <em v-if="order.goods.goodsSaleInfo ==null ? order.goods.goodsLeaseInfo.bind : order.goods.goodsSaleInfo.bind == 1">QQ</em>
                 <em v-if="order.goods.goodsSaleInfo ==null ? order.goods.goodsLeaseInfo.bind :  order.goods.goodsSaleInfo.bind == 2">微信</em>
                 <em v-if="order.goods.goodsSaleInfo ==null ? order.goods.goodsLeaseInfo.bind :  order.goods.goodsSaleInfo.bind == 3">微博</em>
             </li>
-            <li class="clearfix">
+            <li class="clearfix" v-if="order.goods.grade">
                 <span>账号等级</span>
                 <em>{{order.goods.grade}}级</em>
             </li>
-            <li class="clearfix">
+            <li class="clearfix" v-if="order.goods.accountID">
                 <span>ID</span>
                 <em>{{order.goods.accountID}}</em>
             </li>
@@ -78,9 +94,13 @@
                 <em v-if="order.goods.goodsLeaseInfo.bind == 2">邮箱绑定</em>
                 <em v-if="order.goods.goodsLeaseInfo.bind == 3">未绑定</em>
             </li>
+            <li class="clearfix" v-if="order.goods.goodsPopularInfo">
+                <span>人气</span>
+            </li>
             <li class="clearfix">
                 <span>描述</span>
-                <em>{{order.goods.remark}}</em>
+                <em v-if="order.goods.remark">{{order.goods.remark}}</em>
+                <em v-if="!order.goods.remark">暂无描述</em>
             </li>
         </ul>
         <div class="order-button clearfix" v-if="order.status == 1">
@@ -104,16 +124,21 @@ export default {
         return {
             title: "订单详情",
             order: {
-                id: "",
-                orderNo: ""
+                id: '',
+                orderNo: '',
+                goods:{
+                    'name':''
+                }
             }
         }
     },
     created() {
+        this.ordr = {};
         this.order.id = this.$route.params.id;
         this.getOrderDetail();
     },
     activated() {
+        this.ordr = {};
         this.order.id = this.$route.params.id;
         this.getOrderDetail();
     },

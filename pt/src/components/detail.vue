@@ -178,13 +178,14 @@ export default {
             goodsId: "",
             goods: {
                 sex: 0,
-                goodsImages:[{'qiniuKey':'FtRpCvGwPzY3Rf8fIn7z0HWwNj8K'}],
+                goodsImages:[{'qiniuKey':'logo_index.png'}],
                 category:{
-                    img:"o_1bkjko2oe126vtvc1s5m1q501gom9.png"
+                    img:"logo_index.png"
                 },
                 merchant: {
                     creditLevel:""
-                }
+                },
+                name:"加载中"
             },
             isCollection: false,
             collection: "收藏",//isCollection ? "已收藏" : "收藏",

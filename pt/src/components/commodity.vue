@@ -169,10 +169,12 @@ export default {
         }
     },
     activated() {
+        this.goods = [];
         this.condition.page = 0;
         this.submit();
         if(this.$route.params.id=="0" || this.$route.params.id=="1") {
             this.condition.type = this.$route.params.id;
+            this.condition.categoryId = "";
         } else {
             this.condition.categoryId = this.$route.params.id;
         }
@@ -204,7 +206,6 @@ export default {
             var that = this;
             setTimeout(function () {
                 that.condition.page = 0;
-                that.$refs.scroller.triggerPullToRefresh();
                 that.goods = [];
                 that.Http.get(that.Api.getGoodsList(), that.condition, function (result) {
                     that.goods = result.data.goods;
