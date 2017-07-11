@@ -191,6 +191,11 @@ Vue.prototype.callWxPay = function (payInfo) {
     });
 }
 
+Vue.prototype.callServer = function(){
+    console.log("联系客服");
+    Vue.prototype.$iosAlert("联系客服");
+}
+
 // http request 拦截器
 // axios.interceptors.request.use(
 //     config => {

@@ -1,7 +1,9 @@
 <template>
     <div class="buy-success">
         <dl class="buy-success-pic">
-            <dt><img src="../assets/images/success_1.png" alt=""></dt>
+            <dt>
+                <img src="../assets/images/success_1.png" alt="">
+            </dt>
             <dd>购买成功</dd>
         </dl>
         <p class="success-con">
@@ -13,17 +15,21 @@
     </div>
 </template>
 <script>
-     export default {
-        name: 'buy-success',
-        data() {
-            return {
-            
-            }
-        },
-        methods: {
-            back(){
+export default {
+    name: 'buy-success',
+    data() {
+        return {
 
-            }
+        }
+    },
+    created(){
+        that.$store.commit("clearFrom");
+    },
+    methods: {
+        back() {
+
+            that.$router.push("/person");
         }
     }
+}
 </script>

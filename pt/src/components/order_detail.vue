@@ -108,10 +108,10 @@
         </div>
         <div class="order-button clearfix" v-if="order.status == 2">
             <span class="order-button-delete" @click="cancel(order.id)">删除</span>
-            <span class="order-button-sure">联系客服</span>
+            <span class="order-button-sure" @click="server()">联系客服</span>
         </div>
         <div class="order-button clearfix" v-if="order.status == 3">
-            <span class="order-button-sure">联系客服</span>
+            <span class="order-button-sure" @click="server()">联系客服</span>
         </div>
     </div>
 </template>
@@ -132,6 +132,7 @@ export default {
             }
         }
     },
+
     created() {
         this.ordr = {};
         this.order.id = this.$route.params.id;
@@ -143,6 +144,9 @@ export default {
         this.getOrderDetail();
     },
     methods: {
+        server(){
+            this.callServer();
+        },
         pay(orderId) {
             var self = this;
             this.Http.get(this.Api.payOrder(), {

@@ -22,10 +22,10 @@
         </div>
         <div class="wait-you" v-if="order.status == 2">
             <span class="wait-cancel" @click="cancel(order.id)">取消订单</span>
-            <span class="wait-sure">联系客服</span>
+            <span class="wait-sure" @click="server()">联系客服</span>
         </div>
         <div class="wait-you" v-if="order.status == 3">
-            <span class="wait-cancel">申请仲裁</span>
+            <span class="wait-cancel" @click="server()">申请仲裁</span>
             <span class="wait-sure" @click="sure(order.id)">确认收货</span>
         </div>
         
@@ -45,6 +45,9 @@ export default {
         }
     },
     method: {
+        server(){
+            this.callServer();
+        },
         toDetail(orderId){
             this.$router.push("/order_detail/"+orderId);
         },

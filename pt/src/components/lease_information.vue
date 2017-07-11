@@ -273,7 +273,7 @@
                 <em>(所有交易平台将收取10%的手续费)</em>
             </div>
             <div class="sell-next">
-                <input type="button" class="diyStart" @click="addGoods" value="提交" />
+                <input type="button" :disabled="disabled" class="diyStart" @click="addGoods" value="提交" />
             </div>
         </form>
     </div>
@@ -286,6 +286,7 @@ export default {
     data() {
         return {
             title: "我要出租",
+            disabled:false,
             goodsInfo: {
                 type: 1,
                 categoryId: '',
@@ -329,6 +330,7 @@ export default {
         addGoods() {
 
             var errorMsg = null;
+            debugger;
             if (!this.goodsInfo.title) {
                 errorMsg = "请输入商品标题";
             } else if (!this.goodsInfo.grade) {
@@ -356,7 +358,9 @@ export default {
 
             this.goodsInfo.images = this.$refs.images.images.join(",");
             var self = this;
+            this.disabled = true;
             this.Http.get(this.Api.addGoods(), self.goodsInfo, function (result) {
+                that.disabled = false;
                 if (result.code == 0) {
                     self.$store.commit("clearFrom");
                     console.log(result);

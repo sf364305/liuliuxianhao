@@ -87,13 +87,23 @@ export default {
                 if (done) done();
                 if (result.data.goods.length > 0) {
                     for (var i = 0; i < result.data.goods.length; i++) {
-                        that.goods.push(result.data.goods[i]);
+                        if(!that.contains(result.data.goods[i])){
+                            that.goods.push(result.data.goods[i]);
+                        }
                     }
                     that.$refs.scroller.finishInfinite(false);
                 } else {
                     that.$refs.scroller.finishInfinite(true);
                 }
             })
+        },
+        contains(g){
+            for(var i = 0;i<this.goods.length;i++){
+                if(this.goods[i].id == g.id){
+                    return true;
+                }
+            }
+            return false;
         },
         refresh(done) {
             this.page = 0;

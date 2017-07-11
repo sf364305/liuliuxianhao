@@ -68,7 +68,7 @@
                 <router-link to="/income_con" class="person-income" replace>收益详情
                     <span></span>
                 </router-link>
-                <router-link v-if="userInfo.user.userStatus == 0" to="/certification" class="person-cer" replace>实名认证
+                <router-link v-if="!userInfo.user.userStatus || userInfo.user.userStatus == 0" to="/certification" class="person-cer" replace>实名认证
                     <em>未认证</em>
                     <span></span>
                 </router-link>
