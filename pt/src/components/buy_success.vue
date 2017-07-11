@@ -8,7 +8,7 @@
             您的订单已经成功购买，请联系客服发货，您可以在待发货页面查看详情。
         </p>
         <div class="success-linking">
-            <router-link to="/wait_send" class="success-link" replace>待发货订单</router-link>
+            <a @click="back" class="success-link" replace>待发货订单</a>
         </div>
     </div>
 </template>
@@ -21,8 +21,8 @@
             }
         },
         methods: {
-            ruturnBack: function() {
-                this.$router.go(-1);
+            back(){
+
             }
         }
     }

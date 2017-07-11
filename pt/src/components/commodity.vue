@@ -165,7 +165,7 @@ export default {
                 page: 0,
                 size: 20
             },
-            title:"账号搜索",
+            title:"商品列表",
         }
     },
     activated() {
@@ -175,7 +175,7 @@ export default {
         if(this.$route.params.id=="0" || this.$route.params.id=="1") {
             this.condition.type = this.$route.params.id;
             this.condition.categoryId = "";
-        } else {
+        } else if(this.$route.params.id.length > 8){
             this.condition.categoryId = this.$route.params.id;
         }
     },
@@ -204,7 +204,7 @@ export default {
         submit() {
             //获取列表
             var that = this;
-            setTimeout(function () {
+            // setTimeout(function () {
                 that.condition.page = 0;
                 that.goods = [];
                 that.Http.get(that.Api.getGoodsList(), that.condition, function (result) {
@@ -212,24 +212,26 @@ export default {
                     that.$refs.scroller.finishPullToRefresh();
                 })
                 that.closeA();
-            }, 300);
+            // }, 300);
         },
         refresh(done) {
+            this.condition.page = 0;
             done();
         },
         infinite(done) {
             var that = this;
-            that.condition.page += 1;
             this.Http.get(this.Api.getGoodsList(), this.condition, function (result) {
                 if (result.data.goods.length > 0) {
                     for (var i = 0; i < result.data.goods.length; i++) {
                         that.goods.push(result.data.goods[i]);
                     }
+                    
                     done();
                 } else {
                     that.$refs.scroller.finishInfinite(true);
                 }
             })
+            that.condition.page += 1;
         }
     },
     components: {

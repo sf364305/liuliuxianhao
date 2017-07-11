@@ -27,7 +27,7 @@
         
         <div class="wait-you" v-if="order.status == 1 && order.arbitrationStatus !=1">
             <span class="wait-cancel" @click="deleteRe(order.id)">删除订单</span>
-            <span class="wait-sure">支付订单</span>
+            <span class="wait-sure" @click="pay(order.id)">支付订单</span>
         </div>
         <div class="wait-you" v-if="order.status == 2 && order.arbitrationStatus !=1">
             <span class="wait-cancel" @click="cancel(order.id)">取消订单</span>
@@ -62,6 +62,19 @@ export default {
     methods: {
         toDetail(orderId){
             this.$router.push("/order_detail/"+orderId);
+        },
+        pay(orderId) {
+            var self = this;
+            this.Http.get(this.Api.payOrder(), {
+                orderId: orderId
+            }, function (result) {
+                if (result.code === 0) {
+                    self.payInfo = JSON.parse(result.data.payJson);
+                    self.callWxPay(self.payInfo);
+                } else {
+                    self.$iosAlert(result.data.msg);
+                }
+            })
         },
         deleteRe(orderId) {
             var that = this; 

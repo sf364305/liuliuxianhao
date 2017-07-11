@@ -29,7 +29,7 @@
                         <i v-if="userInfo.arbitrationCount > 0">{{userInfo.arbitrationCount}}</i>
                     </a>
                     <a @click="orderList(6)" class="person-collect" replace>收藏
-                        <i v-if="userInfo.collectionCount > 0">{{userInfo.arbitrationCount}}</i>
+                        <i v-if="userInfo.collectionCount > 0">{{userInfo.collectionCount}}</i>
                     </a>
                     <router-link to="/all_order" class="person-all" replace>全部订单</router-link>
                 </li>
@@ -141,6 +141,9 @@ export default {
         },
         merchantOrderList(status) {
             this.$router.push('/orders_merchant/' + status);
+        },
+        collectionList(){
+            this.$route.push('/collection_list');
         },
         goodsList(status){
             this.$router.push('/goods_list_merchant/'+status);
