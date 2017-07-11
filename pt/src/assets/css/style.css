@@ -153,6 +153,7 @@
 }
 .name-title  em {
     float: left;
+    margin-left: 2%;
 }
 .index-news {
     overflow: hidden;

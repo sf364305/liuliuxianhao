@@ -49,6 +49,9 @@
             </a>
             <div class="sell-status1" v-if="g.type==0"></div>
             <div class="sell-status" v-if="g.type==1"></div>
+
+
+            
         </li>
     </ul>
 </template>
