@@ -63,8 +63,17 @@ export default {
     props: ['goods'],
     methods:{
         toDetail(idx){
-            var goodsId = this.goods[idx].id;
-            this.$router.push("/detail/"+goodsId);
+            //FIXME 临时跳转到编辑页面
+            var goods = this.goods[idx];
+            this.$store.commit('setGoods',goods);
+            if(goods.type == 0){
+                this.$router.push('/sell_infomation');
+            }else if(goods.type == 1){
+                this.$router.push('/lease_information');
+            }
+            
+            // var goodsId = this.goods[idx].id;
+            // this.$router.push("/detail/"+goodsId);
         }
     }
 }
