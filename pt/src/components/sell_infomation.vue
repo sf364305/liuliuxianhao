@@ -195,7 +195,7 @@
                 <em>(所有交易平台将收取10%的手续费)</em>
             </div>
             <div class="sell-next">
-                <input type="button" class="diyStart" @click="addGoods" value="下一步" />
+                <input type="button" :disabled="disabled" class="diyStart" @click="addGoods" value="下一步" />
             </div>
         </form>
     </div>
@@ -209,6 +209,7 @@ export default {
         return {
             title: "我要卖",
             errorMsg: "",
+            disabled:false,
             goodsInfo: {
                 type: 0,
                 categoryId: '',
@@ -272,7 +273,9 @@ export default {
 
             this.goodsInfo.images = this.$refs.images.images.join(",");
             var self = this;
+            self.disabled = true;
             this.Http.get(this.Api.addGoods(), self.goodsInfo, function (result) {
+                self.disabled = false;
                 if(result.code == 0){
                     self.$store.commit("clearFrom");
                     self.$router.push("/person");

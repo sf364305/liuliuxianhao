@@ -207,6 +207,10 @@ var vueRouter = new Router({
   routes
 })
 
+Router.prototype.goBack = function () {
+  this.isBack = true
+}
+
 vueRouter.beforeEach((to, from, next) => {
   console.log(from.path);
   if (to.path != "/") {  // 判断该路由是否需要登录权限
@@ -229,8 +233,6 @@ vueRouter.beforeEach((to, from, next) => {
     next();
   }
 })
-
-
 // 创建和挂载根实例
 var vm = new Vue({
   el: '#app',

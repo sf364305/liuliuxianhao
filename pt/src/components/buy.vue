@@ -43,9 +43,9 @@ export default {
     },
     created() {
         this.order = this.$store.state.Order;
-        console.log("全局订单信息",this.order);
+        console.log("全局订单信息", this.order);
     },
-    mounted(){
+    mounted() {
 
     },
     methods: {
@@ -56,14 +56,11 @@ export default {
             }, function (result) {
                 if (result.code === 0) {
                     self.payInfo = JSON.parse(result.data.payJson);
-                    self.callWxPay();
+                    self.callWxPay(self.payInfo);
                 } else {
                     console.log(result.msg);
                 }
             })
-        },
-        callWxPay() {
-            
         }
     },
     components: {

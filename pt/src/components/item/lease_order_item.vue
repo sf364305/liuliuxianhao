@@ -27,11 +27,11 @@
         
         <div class="wait-you" v-if="order.status == 1 && order.arbitrationStatus !=1">
             <span class="wait-cancel" @click="deleteRe(order.id)">删除订单</span>
-            <span class="wait-sure">支付订单</span>
+            <span class="wait-sure" @click="pay(order.id)">支付订单</span>
         </div>
         <div class="wait-you" v-if="order.status == 2 && order.arbitrationStatus !=1">
             <span class="wait-cancel" @click="cancel(order.id)">取消订单</span>
-            <span class="wait-sure">联系客服</span>
+            <span class="wait-sure" @click="server()">联系客服</span>
         </div>
         <div class="wait-you" v-if="order.status == 3 && order.arbitrationStatus !=1">
             <span class="wait-cancel" @click="arbitrationStatus(order.id)">申请仲裁</span>
@@ -39,7 +39,7 @@
         </div>
         
         <div class="wait-you" v-if="order.arbitrationStatus == 1">
-            <span class="wait-sure" @click="sure(order.id)" style="width:100%;">联系客服6</span>
+            <span class="wait-sure" @click="server()" style="width:100%;">联系客服</span>
         </div>
         <div class="wait-you" v-if="order.status == 4 && order.arbitrationStatus !=1">
             <!--<span class="wait-cancel">申请仲裁</span>-->
@@ -60,8 +60,24 @@ export default {
     },
     props: ['order'],
     methods: {
+        server(){
+            this.callServer();
+        },
         toDetail(orderId){
             this.$router.push("/order_detail/"+orderId);
+        },
+        pay(orderId) {
+            var self = this;
+            this.Http.get(this.Api.payOrder(), {
+                orderId: orderId
+            }, function (result) {
+                if (result.code === 0) {
+                    self.payInfo = JSON.parse(result.data.payJson);
+                    self.callWxPay(self.payInfo);
+                } else {
+                    self.$iosAlert(result.data.msg);
+                }
+            })
         },
         deleteRe(orderId) {
             var that = this; 

@@ -173,7 +173,7 @@
 .com-list .price + .price{
     display: none;
 }
-.sell-status, .sell-status1 {
+.sell-status, .sell-status1,.sell-hot {
     position: absolute;
     top: 0;
     right: -4%;

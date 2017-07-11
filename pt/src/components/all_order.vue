@@ -47,6 +47,7 @@ export default {
                 arbitrationCount: '加载中',
                 refundCount: '加载中',
                 completeCount: '加载中',
+                collectionCount:'加载中'
             }
         }
     },

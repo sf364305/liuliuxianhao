@@ -10,9 +10,6 @@ const base = 'http://d9s0anp.hk1.mofasuidao.cn/front';
 
 //API,接口列表
 Vue.prototype.Api = {
-    getConfig() {
-        return base + '/home/getConfig'
-    },
     getJsSign() {
         return base + '/utils/getJsSign'
     },
@@ -112,7 +109,7 @@ Vue.prototype.Api = {
     calDate() {
         return base + '/utils/calDate';
     },
-    getCollection() {
+    getMyCollection(){
         return base + '/collection/getMyCollection';
     }
 };
@@ -164,6 +161,40 @@ Vue.prototype.Http = {
 
     }
 };
+
+Vue.prototype.callWxPay = function (payInfo) {
+    var self = this;
+    wx.chooseWXPay({
+        timestamp: payInfo.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+        nonceStr: payInfo.nonceStr, // 支付签名随机串，不长于 32 位
+        package: payInfo.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+        signType: payInfo.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+        paySign: payInfo.paySign, // 支付签名
+        success: function (res) {
+            // 支付成功后的回调函数
+            self.$router.push("/buy_success");
+        },
+        fail: function (res) {
+            //接口调用失败时执行的回调函数。
+            self.$iosAlert(result.msg);
+        },
+        complete: function (res) {
+            //接口调用完成时执行的回调函数，无论成功或失败都会执行。
+        },
+        cancel: function (res) {
+            //用户点击取消时的回调函数，仅部分有用户取消操作的api才会用到。
+            self.$iosAlert('用户取消');
+        },
+        trigger: function (res) {
+            //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口。
+        }
+    });
+}
+
+Vue.prototype.callServer = function(){
+    console.log("联系客服");
+    Vue.prototype.$iosAlert("联系客服");
+}
 
 // http request 拦截器
 // axios.interceptors.request.use(

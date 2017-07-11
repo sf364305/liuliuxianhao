@@ -344,7 +344,7 @@ export default {
                 that.goods.grade = that.goods.goodsSaleInfo != null ? that.goods.goodsSaleInfo.grade : that.goods.goodsLeaseInfo.grade;
                 that.goods.bind = that.goods.goodsSaleInfo != null ? that.goods.goodsSaleInfo.bind : that.goods.goodsLeaseInfo.bind;
                 that.goods.identification = that.goods.goodsSaleInfo != null ? that.goods.goodsSaleInfo.identification : that.goods.goodsLeaseInfo.identification;
-                that.isCollection = that.goods.isCollection;
+                that.isCollection = result.data.isCollection;
                 that.collection = that.isCollection ? "已收藏" : "收藏";
                 that.recommendGoods = result.data.recomendGoodses;
             })

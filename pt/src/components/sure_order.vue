@@ -222,7 +222,7 @@ export default {
                     self.$store.commit('setOrder', order);
                     self.$router.push("/buy");
                 } else {
-                    this.$iosAlert(result.msg);
+                    self.$iosAlert(result.msg);
                 }
             })
         },

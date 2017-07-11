@@ -104,14 +104,14 @@
             </li>
         </ul>
         <div class="order-button clearfix" v-if="order.status == 1">
-            <span class="order-button-sure">继续支付</span>
+            <span class="order-button-sure" @click="pay(order.id)">继续支付</span>
         </div>
         <div class="order-button clearfix" v-if="order.status == 2">
-            <span class="order-button-delete">删除</span>
-            <span class="order-button-sure">联系客服</span>
+            <span class="order-button-delete" @click="cancel(order.id)">删除</span>
+            <span class="order-button-sure" @click="server()">联系客服</span>
         </div>
         <div class="order-button clearfix" v-if="order.status == 3">
-            <span class="order-button-sure">联系客服</span>
+            <span class="order-button-sure" @click="server()">联系客服</span>
         </div>
     </div>
 </template>
@@ -132,6 +132,7 @@ export default {
             }
         }
     },
+
     created() {
         this.ordr = {};
         this.order.id = this.$route.params.id;
@@ -143,6 +144,22 @@ export default {
         this.getOrderDetail();
     },
     methods: {
+        server(){
+            this.callServer();
+        },
+        pay(orderId) {
+            var self = this;
+            this.Http.get(this.Api.payOrder(), {
+                orderId: self.order.orderId
+            }, function (result) {
+                if (result.code === 0) {
+                    self.payInfo = JSON.parse(result.data.payJson);
+                    self.callWxPay(self.payInfo);
+                } else {
+                    self.$iosAlert(result.data.msg);
+                }
+            })
+        },
         getOrderDetail() {
             var self = this;
             this.Http.get(this.Api.getOrderGoodsDetail(), {
@@ -150,6 +167,16 @@ export default {
             }, function (result) {
                 self.order = result.data.order;
                 console.log(result.data.order)
+            })
+        },
+        cancel(orderId) {
+            var that = this;
+            //移除订单结构
+            this.$emit('remove', orderId)
+            this.Http.get(this.Api.cancelOrder(), {
+                orderId: orderId
+            }, function (result) {
+                console.log(result);
             })
         }
     },
