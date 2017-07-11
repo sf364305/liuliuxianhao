@@ -103,7 +103,7 @@
                 <em v-if="goods.type == 0">{{goods.price}}元</em>
     
                 <em v-if="goods.type == 1 && lessCost[leaseType] > 0">
-                    {{lessCost[leaseType] * goodsNum}}元 + {{lessCost[leaseType] * goodsNum * goods.goodsLeaseInfo.deposit}}元 = {{lessCost[leaseType] * goodsNum + lessCost[leaseType] * goodsNum * goods.goodsLeaseInfo.deposit}} 元
+                    {{lessCost[leaseType] * goodsNum}}元 + {{lessCost[leaseType] * goods.goodsLeaseInfo.deposit}}元 = {{lessCost[leaseType] * goodsNum + lessCost[leaseType] * goods.goodsLeaseInfo.deposit}} 元
                 </em>
                 <em v-if="goods.type == 1 && lessCost[leaseType] == 0">
                     卖家暂不支持此种方式

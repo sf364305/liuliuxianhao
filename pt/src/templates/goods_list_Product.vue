@@ -1,7 +1,7 @@
 <template>
     <ul class="com-list">
         <li v-for="(g,index) in goods" :key="g.name">
-            <a class="game-name" replace @click="toDetail(index)">
+            <a class="game-name" replace @click="toDetail(index)" style="padding-bottom:3rem;">
                 <span class="name-title clearfix">
                     <img :src="$store.state.Setting.qiniuUrl + g.category.img" alt="">
                     <em>{{g.name}}</em>
@@ -48,7 +48,12 @@
                 </div>
             </a>
             <div class="sell-status1" v-if="g.type==0"></div>
-            <div class="sell-status" v-if="g.type==1"></div>      
+            <div class="sell-status" v-if="g.type==1"></div>
+            <!--按钮-->
+            <div class="wait-you" v-if="order.status == 2">
+                <span class="wait-cancel" @click="cancel(order.id)">删除订单</span>
+                <span class="wait-sure" @click="server()">编缉</span>
+            </div>      
         </li>
     </ul>
 </template>
@@ -63,17 +68,8 @@ export default {
     props: ['goods'],
     methods:{
         toDetail(idx){
-            //FIXME 临时跳转到编辑页面
-            var goods = this.goods[idx];
-            this.$store.commit('setGoods',goods);
-            if(goods.type == 0){
-                this.$router.push('/sell_infomation');
-            }else if(goods.type == 1){
-                this.$router.push('/lease_information');
-            }
-            
-            // var goodsId = this.goods[idx].id;
-            // this.$router.push("/detail/"+goodsId);
+            var goodsId = this.goods[idx].id;
+            this.$router.push("/detail/"+goodsId);
         }
     }
 }
