@@ -107,7 +107,7 @@
             <span class="order-button-sure" @click="pay(order.id)">继续支付</span>
         </div>
         <div class="order-button clearfix" v-if="order.status == 2">
-            <span class="order-button-delete">删除</span>
+            <span class="order-button-delete" @click="cancel(order.id)">删除</span>
             <span class="order-button-sure">联系客服</span>
         </div>
         <div class="order-button clearfix" v-if="order.status == 3">
@@ -163,6 +163,16 @@ export default {
             }, function (result) {
                 self.order = result.data.order;
                 console.log(result.data.order)
+            })
+        },
+        cancel(orderId) {
+            var that = this;
+            //移除订单结构
+            this.$emit('remove', orderId)
+            this.Http.get(this.Api.cancelOrder(), {
+                orderId: orderId
+            }, function (result) {
+                console.log(result);
             })
         }
     },

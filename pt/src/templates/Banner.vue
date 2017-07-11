@@ -1,7 +1,7 @@
 <template>
     <div class="swiper-container banner-index">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="banner in banners" :key=banner.id style="overflow: hidden;height:12rem;">
+            <div class="swiper-slide" v-for="banner in banners" :key=banner.id>
                 <a :href="banner.url" v-if="banner.url.startsWith('http:')">
                     <img :src="$store.state.Setting.qiniuUrl + banner.qiniuKey" alt="">
                 </a>
@@ -59,6 +59,6 @@ export default {
 .banner-index img {
     display: block;
     width: 100%;
-    height: 20rem;
+    height: auto;
 }
 </style>

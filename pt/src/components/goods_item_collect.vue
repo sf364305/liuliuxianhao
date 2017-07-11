@@ -40,7 +40,7 @@ export default {
     methods: {
         getGoodsByStatus(done) {
             var that = this;
-            this.Http.get(this.Api.getCollection(), {
+            this.Http.get(this.Api.getMyCollection(), {
                 page: that.page,
                 size: that.size
             }, function (result) {

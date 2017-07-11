@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a @click="toDetail(order.id)" class="game-name" replace>
+        <a @click="toDetail(order.id)" class="game-name" replace style="padding-bottom: 3rem;">
             <span class="name-title clearfix">
                 <img :src="$store.state.Setting.qiniuUrl + order.goods.category.img" alt="">
                 <em>{{order.goods.name}}</em>
