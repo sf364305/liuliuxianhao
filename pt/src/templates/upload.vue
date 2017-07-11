@@ -16,9 +16,10 @@
 export default {
     data() {
         return {
-            images: []
+            // images: []
         }
     },
+    props:['images'],
     methods: {
         update(e) {
             let file = e.target.files[0];

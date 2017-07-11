@@ -8,7 +8,7 @@
 </template>
 <script>
 import Header from '../templates/Header.vue'
-import Goods from '../templates/Goods.vue'
+import GoodsProduct from '../templates/GoodsProduct.vue'
 import SaleOrderItemSeller from './item/sale_order_item_seller.vue'
 import LeaseOrderItemSeller from './item/lease_order_item_seller.vue'
 export default {
@@ -66,7 +66,7 @@ export default {
     },
     components: {
         "app-header": Header,
-        "app-goods": Goods,
+        "app-goods": GoodsProduct,
         "sale-order-item": SaleOrderItemSeller,
         "lease-order-item": LeaseOrderItemSeller
     }
