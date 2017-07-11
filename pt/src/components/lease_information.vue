@@ -27,13 +27,13 @@
                         <i>*</i>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</span>
                     <div id="sex" name="sex" class="re_sele">
                         <label>
-                            <input type="radio" checked="checked" name="sex" value="1" v-model="goods.sex" />
-                            <i class="choice-sho choiced-show" @click="changeMach"></i>
+                            <input type="radio" checked="checked" name="sex" value="0" v-model="goods.sex" />
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.sex == 0}" @click="changeMach"></i>
                             <em class="choice-text">男</em>
                         </label>
                         <label>
-                            <input type="radio" name="sex" value="2" v-model="goods.sex" />
-                            <i class="choice-sho" @click="changeMach"></i>
+                            <input type="radio" name="sex" value="1" v-model="goods.sex" />
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.sex == 1}" @click="changeMach"></i>
                             <em class="choice-text">女</em>
                         </label>
                     </div>
@@ -44,17 +44,17 @@
                     <div id="system" name="system" class="re_sele">
                         <label>
                             <input type="radio" checked="checked" name="system" value="3" v-model="goods.system" />
-                            <i class="choice-sho choiced-show" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.system == 3}" @click="changeMach"></i>
                             <em class="choice-text">通用</em>
                         </label>
                         <label>
                             <input type="radio" name="system" value="1" v-model="goods.system" />
-                            <i class="choice-sho" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.system == 1}" @click="changeMach"></i>
                             <em class="choice-text">安卓</em>
                         </label>
                         <label>
                             <input type="radio" name="system" value="2" v-model="goods.system" />
-                            <i class="choice-sho" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.system == 2}" @click="changeMach"></i>
                             <em class="choice-text">IOS</em>
                         </label>
                     </div>
@@ -65,17 +65,17 @@
                     <div id="client" name="client" class="re_sele">
                         <label>
                             <input type="radio" checked="checked" name="client" value="3" v-model="goods.client" />
-                            <i class="choice-sho choiced-show" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.client == 3}" @click="changeMach"></i>
                             <em class="choice-text">通用</em>
                         </label>
                         <label>
                             <input type="radio" name="client" value="1" v-model="goods.client" />
-                            <i class="choice-sho" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.client == 1}" @click="changeMach"></i>
                             <em class="choice-text">手机端</em>
                         </label>
                         <label>
                             <input type="radio" name="client" value="2" v-model="goods.client" />
-                            <i class="choice-sho" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.client == 2}" @click="changeMach"></i>
                             <em class="choice-text">PC端</em>
                         </label>
                     </div>
@@ -86,17 +86,17 @@
                     <div id="binding" name="binding" class="re_sele">
                         <label>
                             <input type="radio" checked="checked" name="binding" value="3" v-model="goods.bind" />
-                            <i class="choice-sho choiced-show" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.bind == 3}" @click="changeMach"></i>
                             <em class="choice-text">无</em>
                         </label>
                         <label>
                             <input type="radio" name="binding" value="1" v-model="goods.bind" />
-                            <i class="choice-sho" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.bind == 1}" @click="changeMach"></i>
                             <em class="choice-text">手机</em>
                         </label>
                         <label>
                             <input type="radio" name="binding" value="2" v-model="goods.bind" />
-                            <i class="choice-sho" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.bind == 2}" @click="changeMach"></i>
                             <em class="choice-text">邮箱</em>
                         </label>
                     </div>
@@ -107,22 +107,22 @@
                     <div id="authorization" name="authorization" class="re_sele">
                         <label style="width: 24%; margin-right: 0;">
                             <input type="radio" checked="checked" name="authorization" value="4" v-model="goods.authorization" />
-                            <i class="choice-sho choiced-show" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.authorization == 4}" @click="changeMach"></i>
                             <em class="choice-text">无</em>
                         </label>
                         <label style="width: 24%; margin-right: 0;">
                             <input type="radio" name="authorization" value="1" v-model="goods.authorization" />
-                            <i class="choice-sho" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.authorization == 1}" @click="changeMach"></i>
                             <em class="choice-text">QQ</em>
                         </label style="width: 24%; margin-right: 0;">
                         <label style="width: 24%; margin-right: 0;">
                             <input type="radio" name="authorization" value="2" v-model="goods.authorization" />
-                            <i class="choice-sho" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.authorization == 2}" @click="changeMach"></i>
                             <em class="choice-text">微信</em>
                         </label>
                         <label style="width: 24%; margin-right: 0;">
                             <input type="radio" name="authorization" value="3" v-model="goods.authorization" />
-                            <i class="choice-sho" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.authorization == 3}" @click="changeMach"></i>
                             <em class="choice-text">微博</em>
                         </label>
                     </div>
@@ -133,12 +133,12 @@
                     <div id="identification" name="identification" class="re_sele">
                         <label>
                             <input type="radio" checked="checked" name="identification" value="1" v-model="goods.identification" />
-                            <i class="choice-sho choiced-show" @click="changeMach"></i>
+                            <i class="choice-sho"  v-bind:class="{'choiced-show':goods.identification == 1}" @click="changeMach"></i>
                             <em class="choice-text">未认证</em>
                         </label>
                         <label>
                             <input type="radio" name="identification" value="2" v-model="goods.identification" />
-                            <i class="choice-sho" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.identification == 2}" @click="changeMach"></i>
                             <em class="choice-text">已认证</em>
                         </label>
                     </div>
@@ -149,17 +149,17 @@
                     <div id="deposit" name="deposit" class="re_sele">
                         <label>
                             <input type="radio" checked="checked" name="deposit" value="1" v-model="goods.deposit" />
-                            <i class="choice-sho choiced-show" @click="changeMach"></i>
+                            <i class="choice-sho"  v-bind:class="{'choiced-show':goods.deposit == 1}" @click="changeMach"></i>
                             <em class="choice-text">押一付一</em>
                         </label>
                         <label>
                             <input type="radio" name="deposit" value="2" v-model="goods.deposit" />
-                            <i class="choice-sho" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.deposit == 2}" @click="changeMach"></i>
                             <em class="choice-text">押二付一</em>
                         </label>
                         <label>
                             <input type="radio" name="deposit" value="3" v-model="goods.deposit" />
-                            <i class="choice-sho" @click="changeMach"></i>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.deposit == 3}" @click="changeMach"></i>
                             <em class="choice-text">押三付一</em>
                         </label>
                     </div>
@@ -202,27 +202,6 @@
                 </li>
                 <li class="sell-sex clearfix">
                     <span>
-                        <i>*</i>押金方式：</span>
-                    <div id="deposit" name="deposit" class="re_sele">
-                        <label>
-                            <input type="radio" checked="checked" name="deposit" value="1" v-model="goods.deposit" />
-                            <i class="choice-sho choiced-show" @click="changeMach"></i>
-                            <em class="choice-text">押一付一</em>
-                        </label>
-                        <label>
-                            <input type="radio" name="deposit" value="2" v-model="goods.deposit" />
-                            <i class="choice-sho" @click="changeMach"></i>
-                            <em class="choice-text">押二付一</em>
-                        </label>
-                        <label>
-                            <input type="radio" name="deposit" value="3" v-model="goods.deposit" />
-                            <i class="choice-sho" @click="changeMach"></i>
-                            <em class="choice-text">押三付一</em>
-                        </label>
-                    </div>
-                </li>
-                <li class="sell-sex clearfix">
-                    <span>
                         <i>*</i>支付方式：</span>
                     <div id="payway" name="payway" class="re_sele">
                         <label>
@@ -230,18 +209,8 @@
                             <i class="choice-sho choiced-show" @click="changeMach"></i>
                             <em class="choice-text">现金结算</em>
                         </label>
-                        <!-- <label>
-                                                        <input type="radio" name="payway" value="2"/>
-                                                        <i class="choice-sho" @click="changeMach"></i>
-                                                        <em class="choice-text">其他</em>
-                                                    </label> -->
                     </div>
                 </li>
-                <!--<li class="clearfix">
-                                        <span>
-                                            <i>*</i>商品价格：</span>
-                                        <input id="price" type="number" name="price" value="" placeholder=">=5元" v-model="goods.price" />
-                                    </li>-->
             </ul>
             <ul class="account-infor">
                 <li>
@@ -314,8 +283,21 @@ export default {
             }
         }
     },
-    created() {
-        this.goods.categoryId = this.$route.params.categoryId;
+    activated() {
+        if (this.$route.params.categoryId == 0) {
+            this.goods = this.$store.state.Goods;
+            this.goods.categoryId = this.$store.state.Goods.category.id;
+            this.goods.deposit = this.$store.state.Goods.goodsLeaseInfo.deposit;
+            this.goods.hourCost = this.$store.state.Goods.goodsLeaseInfo.hourCost;
+            this.goods.dayCost = this.$store.state.Goods.goodsLeaseInfo.dayCost;
+            this.goods.weekCost = this.$store.state.Goods.goodsLeaseInfo.weekCost;
+            this.goods.monthCost = this.$store.state.Goods.goodsLeaseInfo.monthCost;
+            for(var i = 0;i < this.goods.goodsImages.length;i++){
+                this.images.push(this.goods.goodsImages[i].qiniuKey);
+            }
+        } else {
+            this.goods.categoryId = this.$route.params.categoryId;
+        }
     },
     methods: {
         changeMach: function (e) {

@@ -27,13 +27,13 @@
                         <i>*</i>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</span>
                     <div id="sex" name="sex" class="re_sele">
                         <label>
-                            <input type="radio" checked="checked" name="sex" value="1" v-model="goods.sex" />
-                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.sex == 1}" @click="changeMach"></i>
+                            <input type="radio" checked="checked" name="sex" value="0" v-model="goods.sex" />
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.sex == 0}" @click="changeMach"></i>
                             <em class="choice-text">男</em>
                         </label>
                         <label>
-                            <input type="radio" name="sex" value="2" v-model="goods.sex" />
-                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.sex == 2}" @click="changeMach"></i>
+                            <input type="radio" name="sex" value="1" v-model="goods.sex" />
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.sex == 1}" @click="changeMach"></i>
                             <em class="choice-text">女</em>
                         </label>
                     </div>
@@ -233,7 +233,7 @@ export default {
             }
         }
     },
-    created() {
+    activated() {
         if (this.$route.params.categoryId == 0) {
             this.goods = this.$store.state.Goods;
             this.goods.categoryId = this.$store.state.Goods.category.id;
