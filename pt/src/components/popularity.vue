@@ -15,7 +15,11 @@
             </div>
             <div>
                 <label for="">选择人气：</label>
-                <input type="number" placeholder="请输入数量" v-model="quantity" v-bind:change="cal()" class="papular-pla" />
+                <!--<input type="number" v-model="quantity" v-bind:change="cal()" class="papular-pla" />-->
+                <input type="number" v-bind:change="cal()" @click="getNum" style="margin-left:10%;" class="popular-number" value="5000" readonly="true"/>
+                <input type="number" v-bind:change="cal()" @click="getNum" class="popular-number" value="15000" readonly="true"/>
+                <input type="number" v-bind:change="cal()" @click="getNum" class="popular-number" value="25000" readonly="true"/>
+                <input type="number" v-bind:change="cal()" @click="getNum" class="popular-number" value="35000" readonly="true" style="margin-left:10%;"/>
             </div>
             <div>
                 <label for="">选择类型：</label>
@@ -86,13 +90,14 @@ export default {
             goods: [],
             popularType: 0,
             count: 1,
-            quantity: 1000,
+            quantity: "",
             price: 0,
             startTime: "",
             endTime: "",
             targetId: "",
             comment: "",
-            id:''
+            id:'',
+            popularNum:''
         }
     },
     created() {
@@ -107,6 +112,11 @@ export default {
                 self.goodsId = self.goods[0].id;
                 $(".alert-plat-papular").attr("data-id", self.goodsId);
             })
+        },
+        getNum(e) {
+            var num = $(e.target).val();
+            $(e.target).addClass('popular-type-select').siblings("input").removeClass('popular-type-select');
+            this.quantity = num;
         },
         changePupa: function() {
             //var daId = $(".alert-plat-papular").attr("data-id");
@@ -207,8 +217,8 @@ export default {
         },
         addLess: function () {
             this.count -= 1
-            if (this.count < 0) {
-                this.count = 0;
+            if (this.count < 1) {
+                this.count = 1;
             }
         },
         addNum: function () {

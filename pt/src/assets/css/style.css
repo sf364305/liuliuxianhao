@@ -1799,7 +1799,7 @@ select {
 }
 
 .popular-form .right{
-            width: 20rem;
+    width: 20rem;
     float: left;
     margin-left: 7%;
 }
@@ -1812,6 +1812,15 @@ select {
     float:left;
     margin-top: 0.5rem;
     border-radius: 0.2rem;
+}
+.popular-form .popular-number {
+    width: 15%;
+    height: 1.8rem;
+    margin: 0.5rem 2% 0.5rem 0;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 1.8rem;
+    border: 1px solid #dcdcdc;
 }
 .popular-form .popular-type-select{
     color:white;
