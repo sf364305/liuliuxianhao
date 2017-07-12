@@ -29,7 +29,7 @@
             </section>
             <ul class="project clearfix">
                 <li v-for="(c,index) in $store.state.Categroy" v-bind:key="c.id">
-                    <a class="index-ying" replace @click="linkCom(index)">
+                    <a class="index-ying" replace @click="linkCom(index)" v-if="c.isShow">
                         <img :src="$store.state.Setting.qiniuUrl + c.img" alt="">{{c.name}}</a>
                 </li>
             </ul>
