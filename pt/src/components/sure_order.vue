@@ -57,9 +57,9 @@
             <li class="clearfix">
                 <span>时间：</span>
                 <em style="height: 6.5rem;">
-                    <input readonly="readonly" v-model="startTime" id="appDateTime" type="text" placeholder="请选择开始时间"> 
+                    <input readonly="readonly" v-model="startTime" id="appDateTime" type="text" placeholder="请选择开始时间" style="height: 1.5rem; padding-left:3%; -webkit-user-select: none;"> 
                     <br/>
-                    <input readonly="readonly" v-model="endTime" type="text" placeholder="请选择开始时间"> 
+                    <input readonly="readonly" v-model="endTime" type="text" placeholder="请选择开始时间" style="height: 1.5rem; padding-left:3%;-webkit-user-select: none;"> 
                 </em>
             </li>
     
@@ -123,6 +123,7 @@
     </div>
 </template>
 <script>
+import InfiniteLoading from 'vue-infinite-loading';
 import '../assets/js/touch.min.js'
 import Alert from '../templates/Alert.vue'
 import Header from '../templates/Header.vue'
@@ -198,8 +199,7 @@ export default {
             } else if (this.goods.type == 1) {
                 amount = this.lessCost[this.leaseType] * this.goodsNum + this.lessCost[this.leaseType] * this.goodsNum * this.goods.goodsLeaseInfo.deposit;
             }
-
-            self.$store.commit('setLoading', true);
+            self.$store.commit('setLoading', true);      
             this.Http.get(this.Api.confirmOrder(), {
                 phone: self.phone,
                 qq: self.qq,
@@ -211,7 +211,7 @@ export default {
                 startTime:self.startTime
             }, function (result) {
                 console.log(result)
-                self.$store.commit('setLoading', false);
+                //self.$store.commit('setLoading', false);
                 if (result.code === 0) {
                     var order = {
                         goodsName: result.data.goodsName,
@@ -221,7 +221,7 @@ export default {
                         orderId: result.data.orderId
                     }
                     self.$store.commit('setOrder', order);
-                    self.$router.push("/buy");
+                    //self.$router.push("/buy");
                 } else {
                     self.$iosAlert(result.msg);
                 }
@@ -283,6 +283,7 @@ export default {
     components: {
         'app-header': Header,
         'app-alert': Alert,
+        'InfiniteLoading':InfiniteLoading
     }
 }
 </script>

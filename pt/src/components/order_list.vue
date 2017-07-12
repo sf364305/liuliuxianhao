@@ -29,13 +29,14 @@ export default {
         return {
             title: "订单列表",
             page: 0,
-            size: 5,
+            size: 20,
             orders: [],
             status: 0,
         }
     },
     activated() {
         this.orders = [];
+        console.log("sss",this.$route.params.status);
         this.page = 0;
         this.status = this.$route.params.status;
         if (this.status == 1) {
@@ -67,7 +68,9 @@ export default {
                 if (done) done();
                 if (result.data.orders.length > 0) {
                     for (var i = 0; i < result.data.orders.length; i++) {
-                        that.orders.push(result.data.orders[i]);
+                        if(result.data.orders[i].status == that.status){
+                            that.orders.push(result.data.orders[i]);
+                        }
                     }
                     that.$refs.scroller.finishInfinite(false);
                 } else {

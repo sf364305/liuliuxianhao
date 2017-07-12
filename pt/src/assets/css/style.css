@@ -992,7 +992,7 @@
 }
 .detail-in-left .detail-in-price {
     padding-left: 9%;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     color: red;
     font-size: 2rem;
 }
@@ -1160,7 +1160,11 @@
     height: 60%;
     border-radius: 0.5rem;
     text-align: center;
-
+    outline: none;
+    -webkit-appearance: none;
+}
+.sure-stock li input {
+    -webkit-appearance: none;
 }
 .sure-inf li span, .sure-stock li span, .sure-price li span, .pay-inf li span, .sell-information li > span, .fill-content li span, .person-inf li span, .person-bind li span, .update-inf li span {
     float: left;
@@ -1185,6 +1189,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     line-height: 3.1rem;
+    -webkit-appearance: none;
 }
 .tobuy-tit, .tobuy-inf {
     height: 2.92rem;
@@ -1531,8 +1536,9 @@ select {
    position: absolute; 
 }
 .fill-foot {
-    padding-left: 3%;
+    padding-left: 4%;
     color: red;
+    margin: 0.5rem 0;
 }
 /*上传插件*/
 .webuploader-container {
@@ -1653,6 +1659,7 @@ select {
     border: 1px solid #d7d7d7;
     outline: none;
     resize: none;
+    -webkit-appearance: none;
 }
 ::-webkit-scrollbar {/*隐藏滚轮*/
     display: none;

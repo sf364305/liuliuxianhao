@@ -160,6 +160,14 @@
                     <input id="price" type="number" name="price" value="" placeholder=">=5元" v-model="goods.price"  maxlength="10"/>
                 </li>
             </ul>
+            <div class="add-com">
+                <h3>商品描述：</h3>
+                <textarea id="detail" name="detail" maxlength="200" placeholder="输入商品的补充说明" rows="3" v-model="goods.detail"></textarea>
+            </div>
+            <div class="fill-foot">
+                <em>(所有交易平台将收取10%的手续费)</em>
+            </div>
+            <div class="sell-second" style="border-top:1px solid #dcdcdc;margin-top:0.5rem;">填写账号信息</div>
             <ul class="account-infor">
                 <li>
                     <label>
@@ -182,13 +190,6 @@
                     <input type="text" name="" value="" placeholder="请输入QQ号码" v-model="goods.qq" class="qq"  maxlength="15"/>
                 </li>
             </ul>
-            <div class="add-com">
-                <h3>商品描述：</h3>
-                <textarea id="detail" name="detail" maxlength="200" placeholder="输入商品的补充说明" rows="3" v-model="goods.detail"></textarea>
-            </div>
-            <div class="fill-foot">
-                <em>(所有交易平台将收取10%的手续费)</em>
-            </div>
             <div class="sell-next">
                 <input type="button" :disabled="disabled" class="diyStart" @click="addGoods" value="下一步" />
             </div>
