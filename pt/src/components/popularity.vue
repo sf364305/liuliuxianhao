@@ -16,10 +16,10 @@
             <div>
                 <label for="">选择人气：</label>
                 <!--<input type="number" v-model="quantity" v-bind:change="cal()" class="papular-pla" />-->
-                <input type="number" v-bind:class="{'popular-type-select':quantity == 5000}"  @click="getNum(5000)" style="margin-left:10%;" class="popular-number" value="5000" readonly="true"/>
-                <input type="number" v-bind:class="{'popular-type-select':quantity == 15000}"  @click="getNum(15000)" class="popular-number" value="15000" readonly="true"/>
-                <input type="number" v-bind:class="{'popular-type-select':quantity == 25000}"  @click="getNum(25000)" class="popular-number" value="25000" readonly="true"/>
-                <input type="number" v-bind:class="{'popular-type-select':quantity == 35000}"  @click="getNum(35000)" class="popular-number" value="35000" readonly="true" style="margin-left:10%;"/>
+                <input type="number" v-bind:class="{'popular-type-select':quantity == 5000}"  @click="getNum(5000)" style="margin-left:10%;" class="popular-number" value="5000" readonly="true" unselectable="on"/>
+                <input type="number" v-bind:class="{'popular-type-select':quantity == 15000}"  @click="getNum(15000)" class="popular-number" value="15000" readonly="true" unselectable="on"/>
+                <input type="number" v-bind:class="{'popular-type-select':quantity == 25000}"  @click="getNum(25000)" class="popular-number" value="25000" readonly="true" unselectable="on"/>
+                <input type="number" v-bind:class="{'popular-type-select':quantity == 35000}"  @click="getNum(35000)" class="popular-number" value="35000" readonly="true" style="margin-left:10%;" unselectable="on"/>
             </div>
             <div>
                 <label for="">选择类型：</label>
@@ -30,7 +30,7 @@
             </div>
             <div>
                 <label for="">价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格：</label>
-                <input type="text" placeholder="" name="" readOnly="true" :value="'￥'+price" class="papular-price" />
+                <input type="text" placeholder="" name="" readOnly="true" :value="'￥'+price" class="papular-price"  unselectable="on"/>
                 <span class="papular-text">价目表</span>
             </div>
             <div>
@@ -41,11 +41,11 @@
             </div>
             <div>
                 <label for="">开始时间：</label>
-                <input class="papular-start" v-model="startTime" readonly="readonly" name="appDateTime" id="appDateTime" type="text" placeholder="请选择开始时间">
+                <input class="papular-start" v-model="startTime" readonly="readonly" name="appDateTime" id="appDateTime" type="text" placeholder="请选择开始时间" unselectable="on">
             </div>
             <div>
                 <label for="">结束时间：</label>
-                <input type="text" placeholder="结束时间" v-model="endTime" name="" readOnly="true" class="papular-over" />
+                <input type="text" placeholder="结束时间" v-model="endTime" name="" readOnly="true" class="papular-over" unselectable="on"/>
             </div>
             <div>
                 <label for="">刷人气平台ID：</label>
@@ -156,12 +156,12 @@ export default {
         changeType(type) {
             this.popularType = type;
             this.cal();
+            this.boolGet();
         },
         cal() {
             if (!this.goodsId || !this.popularType || !this.count || !this.quantity) {
                 return;
             }
-            
             var per = 1;
             
             for (var i = 0; i < this.goods.length; i++) {
@@ -179,7 +179,9 @@ export default {
             }
 
             this.price = per * this.count * this.quantity;
-            if (this.startTime) {
+        },
+        boolGet() {
+            if (this.startTime!="") {
                 this.dateChange();
             }
         },
@@ -221,9 +223,11 @@ export default {
             if (this.count < 1) {
                 this.count = 1;
             }
+            this.boolGet();
         },
         addNum: function () {
             this.count += 1;
+            this.boolGet();
         }
     },
     mounted() {
@@ -246,10 +250,11 @@ export default {
             endYear: currYear + 10,//结束年份
             onSelect: function (valueText, inst) {
                 self.startTime = valueText;
-                self.cal();
+                if (self.startTime!="") {
+                    self.dateChange();
+                }
             }
         };
-
         // $("#appDate").mobiscroll($.extend(opt['date'], opt['default']));
         var optDateTime = $.extend(opt['datetime'], opt['default']);
         var optTime = $.extend(opt['time'], opt['default']);
