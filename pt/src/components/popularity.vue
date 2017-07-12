@@ -16,10 +16,10 @@
             <div>
                 <label for="">选择人气：</label>
                 <!--<input type="number" v-model="quantity" v-bind:change="cal()" class="papular-pla" />-->
-                <input type="number" v-bind:change="cal()" @click="getNum" style="margin-left:10%;" class="popular-number" value="5000" readonly="true"/>
-                <input type="number" v-bind:change="cal()" @click="getNum" class="popular-number" value="15000" readonly="true"/>
-                <input type="number" v-bind:change="cal()" @click="getNum" class="popular-number" value="25000" readonly="true"/>
-                <input type="number" v-bind:change="cal()" @click="getNum" class="popular-number" value="35000" readonly="true" style="margin-left:10%;"/>
+                <input type="number" v-bind:class="{'popular-type-select':quantity == 5000}"  @click="getNum(5000)" style="margin-left:10%;" class="popular-number" value="5000" readonly="true"/>
+                <input type="number" v-bind:class="{'popular-type-select':quantity == 15000}"  @click="getNum(15000)" class="popular-number" value="15000" readonly="true"/>
+                <input type="number" v-bind:class="{'popular-type-select':quantity == 25000}"  @click="getNum(25000)" class="popular-number" value="25000" readonly="true"/>
+                <input type="number" v-bind:class="{'popular-type-select':quantity == 35000}"  @click="getNum(35000)" class="popular-number" value="35000" readonly="true" style="margin-left:10%;"/>
             </div>
             <div>
                 <label for="">选择类型：</label>
@@ -65,9 +65,12 @@
                     </div>
                     <div>  
                         <div class="papular-plat-choice clearfix">
-                            <label v-for="g in goods" :key="g.id" @click="changePlat(g.id)">
+                            <label v-for="g in goods" :key="g.id" >
                                 <!--<input type="radio" checked="checked" name="sell" value="1"/>-->
-                                <img :src="$store.state.Setting.qiniuUrl + g.goodsImages[0].qiniuKey" class="choice-sho-platform choiced-ying-platform" v-bind:class="{'show':(goodsId == g.id)}">
+                                <img :src="$store.state.Setting.qiniuUrl + g.goodsImages[0].qiniuKey" 
+                                class="choice-sho-platform choiced-ying-platform" 
+                                v-bind:class="{'show':(goodsId == g.id)}" 
+                                @click="changePlat(g.id)">
                                 </img>
                                 <em class="choice-text-platform">{{g.name}}</em>
                             </label>
@@ -97,7 +100,7 @@ export default {
             targetId: "",
             comment: "",
             id:'',
-            popularNum:''
+            popularNum:'',
         }
     },
     created() {
@@ -113,12 +116,10 @@ export default {
                 $(".alert-plat-papular").attr("data-id", self.goodsId);
             })
         },
-        getNum(e) {
-            var num = $(e.target).val();
-            $(e.target).addClass('popular-type-select').siblings("input").removeClass('popular-type-select');
+        getNum(num) {
             this.quantity = num;
         },
-        changePupa: function() {
+        changePupa() {
             //var daId = $(".alert-plat-papular").attr("data-id");
             $(".alert-outer-papular").css("display", "block");
             $(".alert-plat-papular").animate({
@@ -126,7 +127,7 @@ export default {
             }, 500);
             $(".papular-plat-choice").css("display", "block").siblings().css("display", "none");
         },
-        closePopu: function() {
+        closePopu() {
             var dataId = $(".alert-plat-papular").attr("data-id");
             this.goodsId = dataId;
             $(".alert-outer-papular").css("display", "none");
@@ -138,9 +139,7 @@ export default {
             $(".alert-plat-papular").attr("data-id",this.goodsId);
             for(var i=0; i<$(".papular-plat-choice label").length;i++) {
                 var bool = $(".papular-plat-choice label").eq(i).find("img").hasClass("show");
-                console.log(bool)
                 if(bool == true) {
-                    console.log(bool)
                     var textB = $(".papular-plat-choice label").eq(i).find("img").siblings("em").html();
                 }
             }
@@ -162,7 +161,9 @@ export default {
             if (!this.goodsId || !this.popularType || !this.count || !this.quantity) {
                 return;
             }
+            
             var per = 1;
+            
             for (var i = 0; i < this.goods.length; i++) {
                 if (this.goods[i].id == this.goodsId) {
                     if (this.popularType == 0) {
@@ -186,8 +187,8 @@ export default {
             var self = this;
             this.Http.get(this.Api.calDate(), {
                 startTime:self.startTime,
-                num:self.goodsNum,
-                type:self.leaseType
+                num:self.count,
+                type:self.popularType
             }, function (result) {
                 self.endTime = result.data.endTime;
             })
