@@ -74,13 +74,13 @@
             </li>
             <li class="clearfix" v-if="order.goods.goodsSaleInfo">
                 <span>性别</span>
-                <em v-if="order.goods.goodsSaleInfo.sex == 1">男</em>
-                <em v-if="order.goods.goodsSaleInfo.sex == 2">女</em>
+                <em v-if="order.goods.goodsSaleInfo.sex == 0">男</em>
+                <em v-if="order.goods.goodsSaleInfo.sex == 1">女</em>
             </li>
             <li class="clearfix" v-if="order.goods.goodsLeaseInfo">
                 <span>性别</span>
-                <em v-if="order.goods.goodsLeaseInfo.sex == 1">男</em>
-                <em v-if="order.goods.goodsLeaseInfo.sex == 2">女</em>
+                <em v-if="order.goods.goodsLeaseInfo.sex == 0">男</em>
+                <em v-if="order.goods.goodsLeaseInfo.sex == 1">女</em>
             </li>
             <li class="clearfix" v-if="order.goods.goodsSaleInfo">
                 <span>绑定情况</span>
