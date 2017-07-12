@@ -89,31 +89,43 @@ export default {
         delGoods(idx) {
             var goods = this.goods[idx];
             var self = this;
-            this.Http.get(this.Api.deleteGoods(), {
-                goodsId: goods.id
-            }, function (result) {
-                if (result.code === 0) {
-                    self.$emit('remove', goods.id);
-                    self.$iosAlert("删除成功");
-                } else {
-                    self.$iosAlert(result.data.msg);
-                }
-            })
-        },
-        downGoods(idx) {
             
+            this.$iosConfirm("确定取消?")
+                .then(function () {
+                    this.Http.get(this.Api.deleteGoods(), {
+                        goodsId: goods.id
+                    }, function (result) {
+                        if (result.code === 0) {
+                            self.$emit('remove', goods.id);
+                            self.$iosAlert("删除成功");
+                        } else {
+                            self.$iosAlert(result.data.msg);
+                        }
+                    })
+                }, function () {
+                    console.log('取消');
+                });
+        },
+        downGoods(idx) {    
             var goods = this.goods[idx];
             var self = this;
-            this.Http.get(this.Api.down(), {
-                goodsId: goods.id
-            }, function (result) {
-                if (result.code === 0) {
-                    self.$emit('remove', goods.id);
-                    self.$iosAlert("下架成功");
-                } else {
-                    self.$iosAlert(result.data.msg);
-                }
-            })
+            
+            this.$iosConfirm("确定取消?")
+                .then(function () {
+                    //移除订单结构
+                    this.Http.get(this.Api.down(), {
+                        goodsId: goods.id
+                    }, function (result) {
+                        if (result.code === 0) {
+                            self.$emit('remove', goods.id);
+                            self.$iosAlert("下架成功");
+                        } else {
+                            self.$iosAlert(result.data.msg);
+                        }
+                    })
+                }, function () {
+                    console.log('取消');
+                });
         }
     }
 }
