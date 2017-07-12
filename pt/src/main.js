@@ -24,7 +24,7 @@ import './assets/js/mobiscroll_003.js'
 import './assets/js/mobiscroll_005.js'
 import './assets/css/mobiscroll_003.css'
 import './assets/js/common.js'
-import './assets/js/touch.min.js'
+
 import loading from './templates/Loading'
 import server from './components/server'
 import home from './components/home'
