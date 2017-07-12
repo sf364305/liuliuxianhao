@@ -8,7 +8,7 @@
         <div class="realease_picbtn" data="0">
             <img data-id="img_0" src="../assets/images/add.png" alt="" title="">
             <div style="display:none;" id="none"></div>
-            <input @change="update" id="platFileBtn" name="file" type="file" multiple />
+            <input @click="wxUpdate" id="platFileBtn" name="file" type="button" />
         </div>
     </div>
 </template>
@@ -17,41 +17,83 @@ export default {
     data() {
         return {
             // images: []
+            localIds: []
         }
     },
-    props:['images'],
+    props: ['images'],
     methods: {
+        wxUpdate() {
+            var self = this;
+            wx.chooseImage({
+                count: 9, // 默认9
+                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                success: function (res) {
+                    self.localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                    self.syncUpload(self.localIds[0]);
+
+                }
+            });
+        },
+        syncUpload(localId) {
+            var self = this;
+            wx.uploadImage({
+                localId: localId,
+                isShowProgressTips: 1,
+                success: function (res) {
+                    console.log(serverId);
+                    var serverId = res.serverId; // 返回图片的服务器端ID
+                    self.notifyServer(serverId);
+                    //其他对serverId做处理的代码
+                    self.localIds.splice(0, 1);
+                    if (self.localIds.length > 0) {
+                        self.syncUpload(self.localIds);
+                    }
+                }
+            });
+        },
+        notifyServer(serverId) {
+            var self = this;
+            self.Http.get(self.Api.getQiniuImage(), {
+                mediaId: serverId
+            },
+                function (result) {
+                    self.images.push(result.data.key);
+                });
+        },
         update(e) {
-            let file = e.target.files[0];
-            let d = new Date();
-            let type = file.name.split('.');
-            let tokenParem = {
-                'putPolicy': '{"name":"$(fname)","size":"$(fsize)","w":"$(imageInfo.width)","h":"$(imageInfo.height)","hash":"$(etag)"}',
-                'key': 'orderReview/' + d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.valueOf() + '.' + type[type.length - 1],
-                'bucket': 'liuliuxianhao',//七牛的地址，这个是你自己配置的（变量）
-            };
-            let param = new FormData(); //创建form对象
-            param.append('chunk', '0');//断点传输
-            param.append('chunks', '1');
-            param.append('file', file, file.name)
-            console.log(param.get('file')); //FormData私有类对象，访问不到，可以通过get判断值是否传进去
-            let config = {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            };
+            try {
+                let file = e.target.files[0];
+                let d = new Date();
+                let type = file.name.split('.');
+                let tokenParem = {
+                    'putPolicy': '{"name":"$(fname)","size":"$(fsize)","w":"$(imageInfo.width)","h":"$(imageInfo.height)","hash":"$(etag)"}',
+                    'key': 'orderReview/' + d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.valueOf() + '.' + type[type.length - 1],
+                    'bucket': 'liuliuxianhao',//七牛的地址，这个是你自己配置的（变量）
+                };
+
+                let param = new FormData(); //创建form对象
+                param.append('chunk', '0');//断点传输
+                param.append('chunks', '1');
+                param.append('file', file, file.name)
+                let config = {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                };
+            } catch (e) {
+                alert(e);
+            }
             //先从自己的服务端拿到token
             var that = this;
-            this.Http.get(this.Api.getQiniuToken(), null,
+            that.Http.get(that.Api.getQiniuToken(), null,
                 function (result) {
                     var token = result.data.config.token;
-                    console.log("token", token);
                     param.append('token', token);
                     that.uploading(param, config, file.name);//然后将参数上传七牛
-                    return;
                 });
         },
         uploading(param, config, pathName) {
             var self = this;
-            this.Http.upload(param, config,function(key){
+            this.Http.upload(param, config, function (key) {
                 self.images.push(key);
             });
         },

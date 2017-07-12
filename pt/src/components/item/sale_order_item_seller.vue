@@ -38,13 +38,13 @@
 <script>
 export default {
     name: 'order',
-    prop: ['order'],
+    props: ['order'],
     data() {
         return {
 
         }
     },
-    method: {
+    methods: {
         server() {
             this.callServer();
         },

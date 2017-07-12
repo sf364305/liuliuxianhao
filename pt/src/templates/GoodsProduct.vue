@@ -90,7 +90,7 @@ export default {
             var goods = this.goods[idx];
             var self = this;
             
-            this.$iosConfirm("确定取消?")
+            this.$iosConfirm("确定删除?")
                 .then(function () {
                     self.Http.get(self.Api.deleteGoods(), {
                         goodsId: goods.id
@@ -110,7 +110,7 @@ export default {
             var goods = this.goods[idx];
             var self = this;
             
-            this.$iosConfirm("确定取消?")
+            this.$iosConfirm("确定下架?")
                 .then(function () {
                     //移除订单结构
                     self.Http.get(self.Api.down(), {

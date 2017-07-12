@@ -17,7 +17,7 @@ export default {
         }
     },
     created(){
-        this.path = "http://c.chovans.cn/front/getCode/" + this.Http.token+"/";
+        this.path = "http://xcn.tunnel.qydev.com/front/getCode/" + this.Http.token+"/";
         console.log(this.path);
     },
     methods: {

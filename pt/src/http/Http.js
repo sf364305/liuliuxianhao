@@ -4,8 +4,8 @@ import axios from 'axios'
 
 // const base = 'http://localhost:8080/front';
 
-//const base = 'http://d9s0anp.hk1.mofasuidao.cn/front';
-const base = 'http://192.168.0.112:8081/front';
+const base = 'http://xcn.tunnel.qydev.com/front';
+// const base = 'http://192.168.0.112:8081/front';
 //const base = 'http://c.chovans.cn/front';
 
 //API,接口列表
@@ -120,6 +120,9 @@ Vue.prototype.Api = {
     },
     checkTime() {
         return base + '/order/choose';
+    },
+    getQiniuImage(){
+        return base + '/qiniu/getImage';
     }
 };
 
@@ -167,6 +170,7 @@ Vue.prototype.Http = {
         });
     },
     upload(param, config, callback) {
+        alert("开始上传");
         axios.post('http://up-z2.qiniu.com', param, config, callback)
             .then(response => {
                 console.log("上传返回", response.data);

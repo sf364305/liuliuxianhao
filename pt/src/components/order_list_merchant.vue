@@ -25,7 +25,7 @@ export default {
         return {
             title: "订单列表",
             page: 0,
-            size: 5,
+            size: 20,
             orders: [],
             status: 0,
         }
@@ -58,6 +58,7 @@ export default {
                     for (var i = 0; i < result.data.orders.length; i++) {
                         that.orders.push(result.data.orders[i]);
                     }
+                    console.log(that.orders);
                     that.$refs.scroller.finishInfinite(false);
                 } else {
                     that.$refs.scroller.finishInfinite(true);
