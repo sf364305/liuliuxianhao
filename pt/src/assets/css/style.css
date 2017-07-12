@@ -1814,6 +1814,7 @@ select {
     border-radius: 0.2rem;
 }
 .popular-form .popular-number {
+    float: left;
     width: 15%;
     height: 1.8rem;
     margin: 0.5rem 2% 0.5rem 0;
@@ -1881,6 +1882,7 @@ select {
     color: #0d75d5;
     margin-left: 10%;
     line-height: 3rem;
+    -webkit-user-select:none
 }
 .popular-form .add-com-papular {
     border: none;

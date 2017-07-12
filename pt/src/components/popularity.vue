@@ -11,15 +11,15 @@
         <form action="" method="" class="popular-form">
             <div>
                 <label for="">选择平台：</label>
-                <input type="text" placeholder="" name="" readOnly="true" value="点击选择 ∨" @click="changePupa" class="papular-plat"/>    
+                <span type="text" placeholder="" name="" readOnly="true" value="点击选择 ∨" @click="changePupa" class="papular-plat">点击选择 ∨</span>   
             </div>
             <div>
                 <label for="">选择人气：</label>
                 <!--<input type="number" v-model="quantity" v-bind:change="cal()" class="papular-pla" />-->
-                <input type="number" v-bind:class="{'popular-type-select':quantity == 5000}"  @click="getNum(5000)" style="margin-left:10%;" class="popular-number" value="5000" readonly="true" unselectable="on"/>
-                <input type="number" v-bind:class="{'popular-type-select':quantity == 15000}"  @click="getNum(15000)" class="popular-number" value="15000" readonly="true" unselectable="on"/>
-                <input type="number" v-bind:class="{'popular-type-select':quantity == 25000}"  @click="getNum(25000)" class="popular-number" value="25000" readonly="true" unselectable="on"/>
-                <input type="number" v-bind:class="{'popular-type-select':quantity == 35000}"  @click="getNum(35000)" class="popular-number" value="35000" readonly="true" style="margin-left:10%;" unselectable="on"/>
+                <div type="number" v-bind:class="{'popular-type-select':quantity == 5000}"  @click="getNum(5000)" style="margin-left:10%;" class="popular-number" value="5000">5000</div>
+                <div type="number" v-bind:class="{'popular-type-select':quantity == 15000}"  @click="getNum(15000)" class="popular-number" value="15000">15000</div>
+                <div type="number" v-bind:class="{'popular-type-select':quantity == 25000}"  @click="getNum(25000)" class="popular-number" value="25000">25000</div>
+                <div type="number" v-bind:class="{'popular-type-select':quantity == 35000}"  @click="getNum(35000)" class="popular-number" value="35000" style="margin-left:10%;">35000</div>
             </div>
             <div>
                 <label for="">选择类型：</label>
@@ -143,7 +143,7 @@ export default {
                     var textB = $(".papular-plat-choice label").eq(i).find("img").siblings("em").html();
                 }
             }
-            $(".papular-plat").val(textB);
+            $(".papular-plat").text(textB);
             $(".alert-outer-papular").css("display", "none");
             $(".alert-plat-papular").animate({
                 "bottom" : "-22rem"
