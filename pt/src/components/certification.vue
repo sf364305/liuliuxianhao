@@ -6,7 +6,7 @@
         </div>
         <p class="certification-com2">根据相关法规，虚拟网络交易需要实名认证。实名认证不涉及金钱账户，认证信息66闲号会严格保密。</p>
         <div class="certification-go">
-            <router-link to="/certification_else" class="certification-going" replace>前往认证</router-link>
+            <a @click="go" class="certification-going" replace>前往认证</a>
         </div>
     </div>
 </template>
@@ -20,9 +20,9 @@ export default {
         }
     },
     methods: {
-        ruturnBack: function () {
-            this.$router.go(-1);
-        }
+    },
+    go(){
+        this.$router.push('/certification_else');
     },
     components: {
         "app-header": Header

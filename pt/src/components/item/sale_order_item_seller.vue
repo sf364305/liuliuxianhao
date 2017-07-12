@@ -7,7 +7,7 @@
             </span>
             <span class="sever">
                 <em class="com-game">所属卖家：</em>
-                <i class="game-sever">{{order.goods.merchant.name}}}</i>
+                <i class="game-sever">{{order.goods.merchant.name}}</i>
             </span>
             <span class="price">￥{{order.amount}}</span>
             <div class="sell-inf clearfix">

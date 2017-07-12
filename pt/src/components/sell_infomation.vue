@@ -283,6 +283,7 @@ export default {
             this.Http.get(this.Api.addGoods(), self.goods, function (result) {
                 self.disabled = false;
                 if (result.code == 0) {
+                    self.$iosAlert("提交成功，平台将在1个工作日内审核，请关注公众号接收提醒。");
                     self.$store.commit("clearFrom");
                     self.$router.push("/person");
                 } else {

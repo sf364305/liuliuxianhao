@@ -43,7 +43,7 @@
                         <option v-if="goods.goodsLeaseInfo.monthCost" value="3">月租</option>
                     </select>
     
-                    <input type="number" v-model="goodsNum" class="num" placeholder="请输入数量" @input="cal()" />
+                    <input type="number" v-model="goodsNum" class="num" placeholder="请输入数量" @input="cal()" maxlength="5" />
                 </em>
             </li>
             <li class="clearfix">

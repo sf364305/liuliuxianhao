@@ -49,7 +49,7 @@
             </div>
             <div>
                 <label for="">刷人气平台ID：</label>
-                <input type="text" v-model="targetId" placeholder="请输入平台ID" name="" value="" class="papular-id" />
+                <input type="number" v-model="targetId" placeholder="请输入平台ID"  class="papular-id" />
             </div>
             <div class="add-com-papular">
                 <textarea id="detail" v-model="comment" name="detail" maxlength="200" placeholder="输入备注信息" rows="4"></textarea>
