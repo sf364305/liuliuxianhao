@@ -109,8 +109,17 @@ Vue.prototype.Api = {
     calDate() {
         return base + '/utils/calDate';
     },
-    getMyCollection(){
+    getMyCollection() {
         return base + '/collection/getMyCollection';
+    },
+    down() {
+        return base + '/goods/down';
+    },
+    deleteGoods() {
+        return base + '/goods/deleteGoods';
+    },
+    checkTime() {
+        return base + '/order/choose';
     }
 };
 
@@ -144,11 +153,16 @@ Vue.prototype.Http = {
                 'Content-Type': 'application/json;charse=UTF-8'
             }
         }).then((response) => {
-            // 响应成功回调
+            // 响应成功回调,错误统一处理
             console.log(api, response.data);
-            callback(response.data);
+            if (response.data.code == 0) {
+                callback(response.data);
+            } else {
+                Vue.prototype.$iosAlert(response.data.msg);
+            }
         }, (response) => {
             // 响应错误回调
+            Vue.prototype.$iosAlert("网络不好哦~");
             console.error('请求错误');
         });
     },
@@ -191,7 +205,7 @@ Vue.prototype.callWxPay = function (payInfo) {
     });
 }
 
-Vue.prototype.callServer = function(){
+Vue.prototype.callServer = function () {
     console.log("联系客服");
     Vue.prototype.$iosAlert("联系客服");
 }

@@ -11,16 +11,16 @@
                 <li class="clearfix">
                     <span>
                         <i>*</i>商品标题：</span>
-                    <input id="name" name="name" type="text" value="" placeholder="请输入商品的标题" v-model="goods.name" />
+                    <input id="name" name="name" type="text" value="" placeholder="请输入商品的标题" v-model="goods.name" maxlength="50"/>
                 </li>
                 <li class="clearfix">
                     <span>&nbsp;账号ID：</span>
-                    <input id="account" name="account" type="number" value="" placeholder="没有填无" v-model="goods.accountId" />
+                    <input id="account" name="account" type="text" value="" placeholder="没有填无" v-model="goods.accountId" maxlength="30"/>
                 </li>
                 <li class="clearfix">
                     <span>
                         <i>*</i>角色等级：</span>
-                    <input id="grade" type="number" name="grade" value="" placeholder="请输入角色等级" v-model="goods.grade" />
+                    <input id="grade" type="number" name="grade" value="" placeholder="请输入角色等级" v-model="goods.grade" maxlength="9"/>
                 </li>
                 <li class="sell-sex clearfix">
                     <span>
@@ -157,29 +157,29 @@
                 <li class="clearfix">
                     <span>
                         <i>*</i>商品价格：</span>
-                    <input id="price" type="number" name="price" value="" placeholder=">=5元" v-model="goods.price" />
+                    <input id="price" type="number" name="price" value="" placeholder=">=5元" v-model="goods.price"  maxlength="10"/>
                 </li>
             </ul>
             <ul class="account-infor">
                 <li>
                     <label>
                         <i>*</i>直播账号</label>
-                    <input type="text" name="" value="" placeholder="请输入直播账号" v-model="goods.account" class="accounts" />
+                    <input type="text" name="" value="" placeholder="请输入直播账号" v-model="goods.account" class="accounts"  maxlength="30"/>
                 </li>
                 <li>
                     <label>
                         <i>*</i>账号密码</label>
-                    <input type="text" name="" value="" placeholder="请输入账号密码" v-model="goods.password" class="passwords" />
+                    <input type="text" name="" value="" placeholder="请输入账号密码" v-model="goods.password" class="passwords"  maxlength="30"/>
                 </li>
                 <li>
                     <label>
                         <i>*</i>联系手机</label>
-                    <input type="text" name="" value="" maxlength="11" placeholder="请输入手机号码" v-model="goods.phone" class="telephones" />
+                    <input type="text" name="" value="" placeholder="请输入手机号码" v-model="goods.phone" class="telephones"  maxlength="11"/>
                 </li>
                 <li>
                     <label>
                         <i>*</i>QQ号码</label>
-                    <input type="text" name="" value="" placeholder="请输入QQ号码" v-model="goods.qq" class="qq" />
+                    <input type="text" name="" value="" placeholder="请输入QQ号码" v-model="goods.qq" class="qq"  maxlength="15"/>
                 </li>
             </ul>
             <div class="add-com">

@@ -24,11 +24,11 @@
             <span class="wait-cancel" @click="cancel(order.id)">取消订单</span>
             <span class="wait-sure" @click="server()">联系客服</span>
         </div>
-        <div class="wait-you" v-if="order.status == 3">
+        <!--<div class="wait-you" v-if="order.status == 3">
             <span class="wait-cancel" @click="server()">申请仲裁</span>
             <span class="wait-sure" @click="sure(order.id)">确认收货</span>
-        </div>
-        
+        </div>-->
+    
         <div class="wait-you" v-if="order.status == 4">
             <!--<span class="wait-cancel">申请仲裁</span>-->
             <!--<span class="wait-sure">确认收货</span>-->
@@ -45,45 +45,52 @@ export default {
         }
     },
     method: {
-        server(){
+        server() {
             this.callServer();
         },
-        toDetail(orderId){
-            this.$router.push("/order_detail/"+orderId);
+        toDetail(orderId) {
+            this.$router.push("/order_detail/" + orderId);
         },
         deleteRe(orderId) {
-            var that = this;     
+            var that = this;
             this.Http.get(this.Api.deleteReOrder(), {
-                orderId:orderId
+                orderId: orderId
             }, function (result) {
                 //confirm("你确定删除这个订单嘛")
                 console.log(result);
                 //移除订单结构
-                this.$emit('remove',orderId)
-                 
+                this.$emit('remove', orderId)
+
             })
         },
         cancel(orderId) {
-            var that = this;     
+            var that = this;
             //移除订单结构
-            this.$emit('remove',orderId)
+            this.$emit('remove', orderId)
             this.Http.get(this.Api.cancelOrder(), {
-                orderId:orderId
+                orderId: orderId
             }, function (result) {
                 //confirm("你确定删除这个订单嘛")
                 console.log(result);
-                
+
             })
         },
         sure(orderId) {
             var that = this;
-            //移除订单结构
-            this.$emit('remove',orderId)
-            this.Http.get(this.Api.sureOrder(), {
-                orderId:orderId
-            }, function (result) {
-                console.log(result);             
-            })
+            this.$iosConfirm("确认收货后货款将直接打给卖家，且不允许申请仲裁")
+                .then(function () {
+                    //移除订单结构
+                    that.$emit('remove', orderId)
+                    that.Http.get(that.Api.sureOrder(), {
+                        orderId: orderId
+                    }, function (result) {
+                        console.log(result);
+                    })
+                }, function () {
+                    console.log('取消');
+                });
+
+
         }
     }
 }

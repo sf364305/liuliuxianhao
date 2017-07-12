@@ -11,16 +11,16 @@
                 <li class="clearfix">
                     <span>
                         <i>*</i>商品标题：</span>
-                    <input id="name" name="name" type="text" value="" placeholder="请输入商品的标题" v-model="goods.name" />
+                    <input id="name" name="name" type="text" value="" placeholder="请输入商品的标题" v-model="goods.name" maxlength="50"/>
                 </li>
                 <li class="clearfix">
                     <span>&nbsp;账号ID：</span>
-                    <input id="account" name="account" type="number" value="" placeholder="没有填无" v-model="goods.accountId" />
+                    <input id="account" name="account" type="text" value="" placeholder="没有填无" v-model="goods.accountId" maxlength="30"/>
                 </li>
                 <li class="clearfix">
                     <span>
                         <i>*</i>角色等级：</span>
-                    <input id="grade" type="number" name="grade" value="" placeholder="请输入角色等级" v-model="goods.grade" />
+                    <input id="grade" type="number" name="grade" value="" placeholder="请输入角色等级" v-model="goods.grade" max="9"/>
                 </li>
                 <li class="sell-sex clearfix">
                     <span>
@@ -174,28 +174,28 @@
                             <input type="checkbox" name="check" class="lease-dis" value="1" />
                             <i class="choice-sho" v-bind:class="{'choiced-show':(goods.hourCost)}"></i>
                             <em class="choice-text" style="width: 12%;">时租</em>
-                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goods.hourCost" />
+                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goods.hourCost" maxlength="9"/>
                             <span>元/时</span>
                         </label>
                         <label>
                             <input type="checkbox" name="check" class="lease-dis" value="2" />
                             <i class="choice-sho" v-bind:class="{'choiced-show':(goods.dayCost)}"></i>
                             <em class="choice-text" style="width: 12%;">日租</em>
-                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goods.dayCost" />
+                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goods.dayCost"  maxlength="9"/>
                             <span>元/天</span>
                         </label>
                         <label>
                             <input type="checkbox" name="check" class="lease-dis" value="3" />
                             <i class="choice-sho" v-bind:class="{'choiced-show':(goods.weekCost)}"></i>
                             <em class="choice-text" style="width: 12%;">周租</em>
-                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goods.weekCost" />
+                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goods.weekCost" maxlength="9" />
                             <span>元/周</span>
                         </label>
                         <label>
                             <input type="checkbox" name="check" class="lease-dis" value="4" />
                             <i class="choice-sho" v-bind:class="{'choiced-show':(goods.monthCost)}"></i>
                             <em class="choice-text" style="width: 12%;">月租</em>
-                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goods.monthCost" />
+                            <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goods.monthCost" maxlength="9" />
                             <span>元/月</span>
                         </label>
                     </div>
@@ -216,22 +216,22 @@
                 <li>
                     <label>
                         <i>*</i>直播账号</label>
-                    <input type="text" name="" value="" placeholder="请输入直播账号" v-model="goods.account" class="accounts" />
+                    <input type="text" name="" value="" placeholder="请输入直播账号" v-model="goods.account" class="accounts" maxlength="30"/>
                 </li>
                 <li>
                     <label>
                         <i>*</i>账号密码</label>
-                    <input type="text" name="" value="" placeholder="请输入账号密码" v-model="goods.password" class="passwords" />
+                    <input type="text" name="" value="" placeholder="请输入账号密码" v-model="goods.password" class="passwords" maxlength="30" />
                 </li>
                 <li>
                     <label>
                         <i>*</i>联系手机</label>
-                    <input type="text" name="" value="" maxlength="11" placeholder="请输入手机号码" v-model="goods.phone" class="telephones" />
+                    <input type="text" name="" value="" placeholder="请输入手机号码" v-model="goods.phone" class="telephones"  maxlength="1" />
                 </li>
                 <li>
                     <label>
                         <i>*</i>QQ号码</label>
-                    <input type="text" name="" value="" placeholder="请输入QQ号码" v-model="goods.qq" class="qq" />
+                    <input type="text" name="" value="" placeholder="请输入QQ号码" v-model="goods.qq" class="qq"  maxlength="15"/>
                 </li>
             </ul>
             <div class="add-com">

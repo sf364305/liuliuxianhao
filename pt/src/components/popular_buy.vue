@@ -50,7 +50,7 @@
             </ul>
         </div>
         <div class="popular-paid-outer">
-            <a herf="" title="">微信支付</a>
+            <a herf="javascript:void(0);" @click="pay()" title="">微信支付</a>
         </div>
     </div>
 </template>
@@ -64,8 +64,19 @@ export default {
         }
     },
     methods: {
-        callWxPay(){
-            
+        pay(){
+            var self = this;
+            var orderId = this.$store.state.Order.id;
+            this.Http.get(this.Api.payOrder(), {
+                orderId: orderId
+            }, function (result) {
+                if (result.code === 0) {
+                    self.payInfo = JSON.parse(result.data.payJson);
+                    self.callWxPay(self.payInfo);
+                } else {
+                    console.log(result.msg);
+                }
+            })
         }
     },
     components: {

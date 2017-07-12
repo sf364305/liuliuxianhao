@@ -50,10 +50,14 @@
             <div class="sell-status1" v-if="g.type==0"></div>
             <div class="sell-status" v-if="g.type==1"></div>
             <!--按钮-->
-            <div class="wait-you" v-if="goods.status == 2">
-                <span class="wait-cancel" @click="cancel(order.id)">删除订单</span>
-                <span class="wait-sure" @click="server()">编缉</span>
-            </div>      
+            <div class="wait-you" v-if="!g.isShelves">
+                <span class="wait-cancel" @click="delGoods(index)">删除商品</span>
+                <span class="wait-sure" @click="editGoods(index)">编缉</span>
+            </div>
+            {{goods.isShelves}}
+            <div class="wait-you" v-if="g.isShelves">
+                <span class="wait-sure" style="width:100%;" @click="downGoods(index)">下架</span>
+            </div>
         </li>
     </ul>
 </template>
@@ -66,15 +70,50 @@ export default {
         }
     },
     props: ['goods'],
-    methods:{
-        toDetail(idx){
+    created() {
+    },
+    methods: {
+        toDetail(idx) {
+            var goodsId = this.goods[idx].id;
+            this.$router.push("/detail/" + goodsId);
+        },
+        editGoods(idx) {
             var goods = this.goods[idx];
-            this.$store.commit('setGoods',goods);
-            if(goods.type == 0){
+            this.$store.commit('setGoods', goods);
+            if (goods.type == 0) {
                 this.$router.push('/sell_infomation/0');
-            }else if(goods.type == 1){
+            } else if (goods.type == 1) {
                 this.$router.push('/lease_information/0');
             }
+        },
+        delGoods(idx) {
+            var goods = this.goods[idx];
+            var self = this;
+            this.Http.get(this.Api.deleteGoods(), {
+                goodsId: goods.id
+            }, function (result) {
+                if (result.code === 0) {
+                    self.$emit('remove', goods.id);
+                    self.$iosAlert("删除成功");
+                } else {
+                    self.$iosAlert(result.data.msg);
+                }
+            })
+        },
+        downGoods(idx) {
+            
+            var goods = this.goods[idx];
+            var self = this;
+            this.Http.get(this.Api.down(), {
+                goodsId: goods.id
+            }, function (result) {
+                if (result.code === 0) {
+                    self.$emit('remove', goods.id);
+                    self.$iosAlert("下架成功");
+                } else {
+                    self.$iosAlert(result.data.msg);
+                }
+            })
         }
     }
 }

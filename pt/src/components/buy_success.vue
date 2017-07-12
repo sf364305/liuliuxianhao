@@ -22,13 +22,12 @@ export default {
 
         }
     },
-    created(){
-        that.$store.commit("clearFrom");
+    activated(){
+        this.$store.commit("clearFrom");
     },
     methods: {
         back() {
-
-            that.$router.push("/person");
+            this.$router.push("/person");
         }
     }
 }

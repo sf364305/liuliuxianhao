@@ -87,7 +87,7 @@ export default {
                 if (done) done();
                 if (result.data.goods.length > 0) {
                     for (var i = 0; i < result.data.goods.length; i++) {
-                        if(!that.contains(result.data.goods[i])){
+                        if (!that.contains(result.data.goods[i])) {
                             that.goods.push(result.data.goods[i]);
                         }
                     }
@@ -97,9 +97,9 @@ export default {
                 }
             })
         },
-        contains(g){
-            for(var i = 0;i<this.goods.length;i++){
-                if(this.goods[i].id == g.id){
+        contains(g) {
+            for (var i = 0; i < this.goods.length; i++) {
+                if (this.goods[i].id == g.id) {
                     return true;
                 }
             }

@@ -176,6 +176,7 @@ export default {
 
             if (this.startTime) {
                 this.dateChange();
+                this.checkTime();
             }
         },
         submitOrder() {
@@ -263,6 +264,19 @@ export default {
                 type:self.leaseType
             }, function (result) {
                 self.endTime = result.data.endTime;
+            })
+        },
+        checkTime(){
+            var self = this;
+            this.Http.get(this.Api.checkTime(), {
+                goodsId:self.goods.id,
+                startTime:self.startTime,
+                goodsNum:self.goodsNum,
+                leaseType:self.leaseType
+            }, function (result) {
+                if(result.data.result){
+                    self.$iosAlert("您选择的时间与其他用户冲突");
+                }
             })
         }
     },

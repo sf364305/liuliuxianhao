@@ -44,7 +44,7 @@ export default {
         }
     },
     methods: {
-        server(){
+        server() {
             this.callServer();
         },
         toDetail(orderId) {
@@ -65,34 +65,48 @@ export default {
         },
         deleteRe(orderId) {
             var that = this;
-            this.Http.get(this.Api.deleteReOrder(), {
-                orderId: orderId
-            }, function (result) {
-                console.log(result);
-                //移除订单结构
-                this.$emit('remove', orderId)
-
-            })
+            this.$iosConfirm("确定删除订单?")
+                .then(function () {
+                    that.Http.get(that.Api.deleteReOrder(), {
+                        orderId: orderId
+                    }, function (result) {
+                        //移除订单结构
+                        that.$emit('remove', orderId)
+                    })
+                }, function () {
+                    console.log('取消');
+                });
         },
         cancel(orderId) {
             var that = this;
-            //移除订单结构
-            this.$emit('remove', orderId)
-            this.Http.get(this.Api.cancelOrder(), {
-                orderId: orderId
-            }, function (result) {
-                console.log(result);
-            })
+            this.$iosConfirm("确定取消?")
+                .then(function () {
+                    //移除订单结构
+                    that.$emit('remove', orderId)
+                    that.Http.get(that.Api.cancelOrder(), {
+                        orderId: orderId
+                    }, function (result) {
+                        console.log(result);
+                    })
+                }, function () {
+                    console.log('取消');
+                });
+
         },
         sure(orderId) {
             var that = this;
-            //移除订单结构
-            this.$emit('remove', orderId)
-            this.Http.get(this.Api.sureOrder(), {
-                orderId: orderId
-            }, function (result) {
-                console.log(result);
-            })
+            this.$iosConfirm("确认收货后货款将直接打给卖家，且不允许申请仲裁")
+                .then(function () {
+                    //移除订单结构
+                    that.$emit('remove', orderId)
+                    that.Http.get(that.Api.sureOrder(), {
+                        orderId: orderId
+                    }, function (result) {
+                        console.log(result);
+                    })
+                }, function () {
+                    console.log('取消');
+                });
         }
     }
 }
