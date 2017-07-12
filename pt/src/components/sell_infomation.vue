@@ -207,9 +207,10 @@ export default {
             disabled: false,
             images:[],
             goods: {
+                goodsId:'',
                 type: 0,
                 categoryId: '',
-                images: "",
+                images: '',
                 name: '',
                 detail: '',
                 accountId: '',
@@ -234,8 +235,10 @@ export default {
         }
     },
     activated() {
+        this.images=[];
         if (this.$route.params.categoryId == 0) {
             this.goods = this.$store.state.Goods;
+            this.goods.goodsId = this.$store.state.Goods.id;
             this.goods.categoryId = this.$store.state.Goods.category.id;
             for(var i = 0;i < this.goods.goodsImages.length;i++){
                 this.images.push(this.goods.goodsImages[i].qiniuKey);
@@ -243,9 +246,6 @@ export default {
         } else {
             this.goods.categoryId = this.$route.params.categoryId;
         }
-    },
-    activated() {
-
     },
     methods: {
         changeMach: function (e) {

@@ -258,6 +258,7 @@ export default {
             disabled:false,
             images:[],
             goods: {
+                goodsId:"",
                 type: 1,
                 categoryId: '',
                 images: "",
@@ -284,8 +285,10 @@ export default {
         }
     },
     activated() {
+        this.images=[];
         if (this.$route.params.categoryId == 0) {
             this.goods = this.$store.state.Goods;
+            this.goods.goodsId = this.$store.state.Goods.id;
             this.goods.categoryId = this.$store.state.Goods.category.id;
             this.goods.deposit = this.$store.state.Goods.goodsLeaseInfo.deposit;
             this.goods.hourCost = this.$store.state.Goods.goodsLeaseInfo.hourCost;
@@ -311,7 +314,6 @@ export default {
             }
         },
         addGoods() {
-
             var errorMsg = null;
             if (!this.goods.name) {
                 errorMsg = "请输入商品标题";
