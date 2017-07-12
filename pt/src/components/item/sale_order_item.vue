@@ -79,7 +79,7 @@ export default {
         },
         cancel(orderId) {
             var that = this;
-            this.$iosConfirm("确定取消?")
+            this.$iosConfirm("确定取消订单?")
                 .then(function () {
                     //移除订单结构
                     that.$emit('remove', orderId)

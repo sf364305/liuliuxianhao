@@ -50,7 +50,7 @@
             <div class="sell-status1" v-if="g.type==0"></div>
             <div class="sell-status" v-if="g.type==1"></div>
             <!--按钮-->
-            <div class="wait-you" v-if="!g.isShelves">
+            <div class="wait-you" v-if="g.status==1">
                 <span class="wait-cancel" @click="delGoods(index)">删除商品</span>
                 <span class="wait-sure" @click="editGoods(index)">编缉</span>
             </div>
@@ -92,7 +92,7 @@ export default {
             
             this.$iosConfirm("确定取消?")
                 .then(function () {
-                    this.Http.get(this.Api.deleteGoods(), {
+                    self.Http.get(self.Api.deleteGoods(), {
                         goodsId: goods.id
                     }, function (result) {
                         if (result.code === 0) {
@@ -113,7 +113,7 @@ export default {
             this.$iosConfirm("确定取消?")
                 .then(function () {
                     //移除订单结构
-                    this.Http.get(this.Api.down(), {
+                    self.Http.get(self.Api.down(), {
                         goodsId: goods.id
                     }, function (result) {
                         if (result.code === 0) {

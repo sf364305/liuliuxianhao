@@ -4,8 +4,8 @@ import axios from 'axios'
 
 // const base = 'http://localhost:8080/front';
 
-const base = 'http://d9s0anp.hk1.mofasuidao.cn/front';
-//const base = 'http://192.168.0.112:8081/front';
+//const base = 'http://d9s0anp.hk1.mofasuidao.cn/front';
+const base = 'http://192.168.0.112:8081/front';
 //const base = 'http://c.chovans.cn/front';
 
 //API,接口列表
@@ -145,7 +145,7 @@ Vue.prototype.Http = {
         if (api !== Vue.prototype.Api.getToken()) {
             params.token = this.token;
         }
-        console.log("参数：" + JSON.stringify(params));
+        
 
         axios.post(api, params, {
             emulateJSON: true,
@@ -154,7 +154,7 @@ Vue.prototype.Http = {
             }
         }).then((response) => {
             // 响应成功回调,错误统一处理
-            console.log(api, response.data);
+            console.log(api,JSON.stringify(params), response.data);
             if (response.data.code == 0) {
                 callback(response.data);
             } else {

@@ -8,7 +8,7 @@
       <!--</transition>-->
       </keep-alive>
     </div>
-    <!--<vue-loading v-if="$store.state.Loading" type="spin" color="rgb(101, 186, 239)" :size="{ width: '20%', height: '20%' }" style="padding: 40%;transform: translateY(30%);z-index: 99999;position: absolute;left: 0;top: 0;"></vue-loading>-->
+    <vue-loading v-if="$store.state.Loading" type="spin" color="rgb(101, 186, 239)" :size="{ width: '20%', height: '20%' }" style="padding: 40%;transform: translateY(30%);z-index: 99999;position: absolute;left: 0;top: 0;"></vue-loading>
   </div>
 </template>
 <script>

@@ -41,11 +41,11 @@
             </div>
             <div>
                 <label for="">开始时间：</label>
-                <input class="papular-start" v-model="startTime" readonly="readonly" name="appDateTime" id="appDateTime" type="text" placeholder="请选择开始时间" unselectable="on">
+                <input class="papular-start" v-model="startTime" readonly="readonly" name="appDateTime" id="appDateTime" type="text" placeholder="请选择开始时间" style="-webkit-user-select: none;" unselectable="on">
             </div>
             <div>
                 <label for="">结束时间：</label>
-                <input type="text" placeholder="结束时间" v-model="endTime" name="" readOnly="true" class="papular-over" unselectable="on"/>
+                <input type="text" placeholder="结束时间" v-model="endTime" name="" readOnly="true" class="papular-over" unselectable="on" style="-webkit-user-select: none;"/>
             </div>
             <div>
                 <label for="">刷人气平台ID：</label>
