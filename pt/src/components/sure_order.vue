@@ -120,10 +120,10 @@
                 <span @click="submitOrder" class="detail-pay">确认购买</span>
             </div>
         </div>
+        <div class="alertLoading"></div>
     </div>
 </template>
 <script>
-import InfiniteLoading from 'vue-infinite-loading';
 import '../assets/js/touch.min.js'
 import Alert from '../templates/Alert.vue'
 import Header from '../templates/Header.vue'
@@ -199,6 +199,7 @@ export default {
             } else if (this.goods.type == 1) {
                 amount = this.lessCost[this.leaseType] * this.goodsNum + this.lessCost[this.leaseType] * this.goodsNum * this.goods.goodsLeaseInfo.deposit;
             }
+            $(".alertLoading").css("display","block");
             self.$store.commit('setLoading', true);      
             this.Http.get(this.Api.confirmOrder(), {
                 phone: self.phone,
@@ -211,7 +212,8 @@ export default {
                 startTime:self.startTime
             }, function (result) {
                 console.log(result)
-                //self.$store.commit('setLoading', false);
+                $(".alertLoading").css("display","none");
+                self.$store.commit('setLoading', false);
                 if (result.code === 0) {
                     var order = {
                         goodsName: result.data.goodsName,
@@ -221,7 +223,7 @@ export default {
                         orderId: result.data.orderId
                     }
                     self.$store.commit('setOrder', order);
-                    //self.$router.push("/buy");
+                    self.$router.push("/buy");
                 } else {
                     self.$iosAlert(result.msg);
                 }
