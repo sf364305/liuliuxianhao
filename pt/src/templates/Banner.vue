@@ -41,6 +41,7 @@ export default {
             var swiper = new Swiper('.swiper-container', {
                 pagination: '.swiper-pagination',
                 paginationClickable: true,
+                autoplayDisableOnInteraction : false,
                 loop: true,
                 speed: 600,
                 autoplay: 2000,

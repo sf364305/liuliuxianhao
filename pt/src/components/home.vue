@@ -131,6 +131,21 @@ export default {
             })
         }
     },
+    mounted() {
+        var a = 0;
+        var h = $(".announ li").height();
+        var n = $(".announ li").length;
+        setInterval(function() {
+            a++;
+            if(a>n-1) {
+                a = 0;
+            }
+            var top = a*h;
+            $(".announ").css({
+                "marginTop": -top
+            })
+        },2000)
+    },
     components: {
         'app-banner': Banner,
         'app-goods': Goods,
