@@ -22,7 +22,7 @@
         <div class="sell-hot"></div>
     
         <div class="wait-you" v-if="order.status == 1">
-            <span class="wait-cancel" @click="deleteRe(order.id)">取消订单</span>
+            <span class="wait-cancel" @click="deleteRe(order.id)">删除订单</span>
             <span class="wait-sure" @click="pay(order.id)">支付订单</span>
         </div>
         <div class="wait-you" v-if="order.status == 2">

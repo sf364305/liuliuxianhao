@@ -123,6 +123,9 @@ Vue.prototype.Api = {
     },
     getQiniuImage(){
         return base + '/qiniu/getImage';
+    },
+    refundPay() {
+        return base + '/order/refundList';
     }
 };
 

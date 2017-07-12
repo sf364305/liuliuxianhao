@@ -68,17 +68,29 @@ export default {
 
         },
         submitCer() {
+            
             var that = this;
+            if (!(/^1[34578]\d{9}$/.test(that.phone))) {
+                that.$iosAlert("手机号码有误，请重填");
+                return false;
+            } else if (!(/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(that.cardId))) {
+                that.$iosAlert("身份证号码有误，请重填");
+                return false;
+            }else if(!/^[\u4e00-\u9fa5]+(·[\u4e00-\u9fa5]+)*$/.test(that.realName)){
+                that.$iosAlert("请填写真实姓名");
+                return false;
+            }
             this.Http.get(this.Api.verified(), {
                 userId:that.userId,
                 realName:that.realName,
                 cardId:that.cardId,
                 phone:that.phone
             }, function (result) {
+                that.$iosAlert("提交信息成功，请耐心等待审核！");
                 console.log(result);
                 if (result.code == 0) {
                     that.$store.commit("clearFrom");
-                    that.$router.push("/person");
+                    //that.$router.push("/person");
                 } else {
                     that.$iosAlert(result.msg);
                 }

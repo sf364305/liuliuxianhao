@@ -8,7 +8,7 @@
       <!--</transition>-->
       </keep-alive>
     </div>
-    <vue-loading v-if="$store.state.Loading" type="bubbles" color="#666" :size="{ width: '20%', height: '20%' }" style="padding: 40%;transform: translateY(30%);z-index: 10;position: absolute;left: 0;top: 0;"></vue-loading>
+    <vue-loading v-if="$store.state.Loading" type="bubbles" color="#666" :size="{ width: '20%', height: '20%' }" style="padding: 40%;transform: translateY(30%);z-index: 100;position: absolute;left: 0;top: 0;"></vue-loading>
   </div>
 </template>
 <script>

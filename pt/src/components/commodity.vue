@@ -181,27 +181,47 @@ export default {
     },
     methods: {
         change1: function () {
+            //添加阻止事件
+            document.addEventListener("touchmove", function(e) {    //禁止浏览器默认行为
+                e.preventDefault();
+            }, false);
             $(".alert-com, .alert-com-outer").css("display", "block");
             $(".alert-com-diff").css("display", "block").siblings().css("display", "none");
             $(".com-text").addClass('comtext-show').siblings().removeClass('comtext-show');
         },
         change2: function () {
+            //添加阻止事件
+            document.addEventListener("touchmove", function(e) {    //禁止浏览器默认行为
+                e.preventDefault();
+            }, false);
             $(".alert-com, .alert-com-outer").css("display", "block");
             $(".alert-com-inf").css("display", "block").siblings().css("display", "none");
             $(".com-text2").addClass('comtext-show').siblings().removeClass('comtext-show');
         },
         change3: function () {
+            //添加阻止事件
+            document.addEventListener("touchmove", function(e) {    //禁止浏览器默认行为
+                e.preventDefault();
+            }, false);
             $(".alert-com, .alert-com-outer").css("display", "block");
             $(".alert-com-time").css("display", "block").siblings().css("display", "none");
             $(".com-text3").addClass('comtext-show').siblings().removeClass('comtext-show');
         },
         closeA: function () {
             $(".alert-com, .alert-com-outer").css("display", "none");
+            //移除添加阻止事件
+            document.addEventListener("touchmove", function(e) {    //禁止浏览器默认行为
+                e.preventDefault();
+            }, true);
         },
         changeSex: function (e) {
             $(e.target).addClass('choiced-show').parent().siblings().find('i').removeClass('choiced-show');
         },
         submit() {
+            //移除添加阻止事件
+            document.addEventListener("touchmove", function(e) {    //禁止浏览器默认行为
+                e.preventDefault();
+            }, true);
             //获取列表
             var that = this;
             // setTimeout(function () {

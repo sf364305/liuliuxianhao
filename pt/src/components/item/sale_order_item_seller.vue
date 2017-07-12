@@ -21,8 +21,7 @@
             <span class="wait-sure">支付订单</span>
         </div>
         <div class="wait-you" v-if="order.status == 2">
-            <span class="wait-cancel" @click="cancel(order.id)">取消订单</span>
-            <span class="wait-sure" @click="server()">联系客服</span>
+            <span class="wait-sure" @click="server()" style="width:100%;">联系客服</span>
         </div>
         <!--<div class="wait-you" v-if="order.status == 3">
             <span class="wait-cancel" @click="server()">申请仲裁</span>
