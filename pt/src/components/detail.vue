@@ -274,7 +274,6 @@ export default {
                     }
                 }
                 $(".alert-big").attr("img-data", index);
-                console.log(Math.abs(index));
                 $(".big-show img").eq(Math.abs(index)).fadeIn(400).siblings().fadeOut(400);
                 $(".big-show-pointer span").eq(Math.abs(index)).addClass("show-pointer").siblings().removeClass("show-pointer");
             }
@@ -297,7 +296,6 @@ export default {
                     }
                 }
                 $(".alert-big").attr("img-data", index);
-                console.log(Math.abs(index));
                 $(".big-show img").eq(Math.abs(index)).fadeIn(400).siblings().fadeOut(400);
                 $(".big-show-pointer span").eq(Math.abs(index)).addClass("show-pointer").siblings().removeClass("show-pointer");
             }
@@ -316,16 +314,15 @@ export default {
             }
             $(".big-show-pointer span").eq(0).addClass("show-pointer");
             var index = $(".detail-pic-center").attr("img-data");
-            console.log(index);
             $(".big-show img").eq(Math.abs(index)).css("display", "block").siblings().css("display", "none");
             $(".alert-big").attr("img-data", index);
         },
         closeAlert() {
             $(".alert-big").css("display", "none");
             //移除添加阻止事件
-            document.addEventListener("touchmove", function(e) {    //禁止浏览器默认行为
-                e.preventDefault();
-            }, true);
+            // document.addEventListener("touchmove", function(e) {    //禁止浏览器默认行为
+            //     e.preventDefault();
+            // }, true);
         },
         detail(i) {
             this.isDetail = i;
