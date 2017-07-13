@@ -89,7 +89,6 @@ export default {
                 }, function () {
                     console.log('取消');
                 });
-
         },
         sure(orderId) {
             var that = this;

@@ -4,7 +4,6 @@
         <div class="detail-inner clearfix">
             <p class="detail-pic-left">
                 点
-                
                 <br/>击
                 <br/>图
                 <br/>片
@@ -87,7 +86,7 @@
                             <em v-if="goods.sex == 0">
                                 男
                             </em>
-                            <em v-if="goods.sex == 2">
+                            <em v-if="goods.sex == 1">
                                 女
                             </em>
                         </li>

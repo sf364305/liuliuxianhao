@@ -53,6 +53,7 @@ import order_list_merchant from './components/order_list_merchant'
 import goods_list_merchant from './components/goods_list_merchant'
 import goods_item_collect from './components/goods_item_collect'
 import order_detail from './components/order_detail'
+import refuned_list from './components/refuned_list'
 // 使用router
 Vue.use(Router)
 Vue.use(Vuex)
@@ -200,6 +201,9 @@ var routes = [{
 }, {
   path: '/order_detail/:id',
   component: order_detail
+}, {
+  path: '/refunedList',
+  component: refuned_list
 }];
 
 // 实例化路由

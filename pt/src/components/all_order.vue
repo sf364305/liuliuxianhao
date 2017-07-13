@@ -18,7 +18,7 @@
                 <i>{{user.completeCount}}</i>
                 <span></span>
             </a>
-            <a @click="orderList(0)" class="person-arbitration-all" replace>交易失败
+            <a @click="refunedList()" class="person-arbitration-all" replace>交易失败
                 <i>{{user.refundCount}}</i>
                 <span></span>
             </a>
@@ -66,6 +66,9 @@ export default {
         },
         orderListCollect(status) {
             this.$router.push('/goods_item_collect/'+status);
+        },
+        refunedList(){
+            this.$router.push('/refunedList');
         }
     }, components: {
         "app-header": Header

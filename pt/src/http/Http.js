@@ -126,6 +126,9 @@ Vue.prototype.Api = {
     },
     refundPay() {
         return base + '/order/refundList';
+    },
+    getRefunedList(){
+        return base + '/order/refundList';
     }
 };
 
