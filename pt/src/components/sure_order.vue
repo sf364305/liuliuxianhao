@@ -285,7 +285,6 @@ export default {
     components: {
         'app-header': Header,
         'app-alert': Alert,
-        'InfiniteLoading':InfiniteLoading
     }
 }
 </script>
