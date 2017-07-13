@@ -180,7 +180,7 @@ export default {
                 }
             }
 
-            this.price = per * this.count * this.quantity;
+            this.price = (per * 10000 * this.count * this.quantity)/10000;
         },
         boolGet() {
             if (this.startTime != "") {
