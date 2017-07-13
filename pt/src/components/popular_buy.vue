@@ -67,15 +67,15 @@ export default {
         pay(){
             var self = this;
             var orderId = this.$store.state.Order.id;
+            $(".alertLoading").fadeIn(100);
             this.Http.get(this.Api.payOrder(), {
                 orderId: orderId
             }, function (result) {
+                $(".alertLoading").hide();
                 if (result.code === 0) {
                     self.payInfo = JSON.parse(result.data.payJson);
                     self.callWxPay(self.payInfo);
-                } else {
-                    console.log(result.msg);
-                }
+                } 
             })
         }
     },

@@ -14,7 +14,7 @@
                 <i>{{user.merchantArbitrationCount}}</i>
                 <span></span>
             </a>
-            <a @click="goodsList(1)" class="person-shelves-all" replace>已上架
+            <!-- <a @click="goodsList(1)" class="person-shelves-all" replace>已上架
                 <i>{{user.upShelvesCount}}</i>
                 <span></span>
             </a>
@@ -25,12 +25,12 @@
             <a @click="goodsList(2)" class="person-shelves-all" replace>审核中
                 <i>{{user.approveCount}}</i>
                 <span></span>
-            </a>
+            </a> -->
             <a @click="merchantOrderList(4)" class="person-seccess-all" replace>交易成功
                 <i>{{user.successCount}}</i>
                 <span></span>
             </a>
-            <a @click="merchantOrderList(5)" class="person-defeat-all" replace>交易失败
+            <a @click="merchantOrderList(0)" class="person-defeat-all" replace>交易失败
                 <i>{{user.failCount}}</i>
                 <span></span>
             </a>

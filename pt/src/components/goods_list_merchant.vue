@@ -32,6 +32,8 @@ export default {
             this.title = "已下架";
         } else if (this.status == 2) {
             this.title = "审核中";
+        } else if (this.status == 3) {
+            this.title = "审核失败";
         }
         this.getGoodsByStatus();
     },

@@ -16,13 +16,13 @@ export default {
     name: 'certification',
     data() {
         return {
-            title:"实名认证"
+            title: "实名认证"
         }
     },
     methods: {
-    },
-    go(){
-        this.$router.push('/certification_else');
+        go() {
+            this.$router.push('/certification_else');
+        }
     },
     components: {
         "app-header": Header

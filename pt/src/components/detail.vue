@@ -303,6 +303,10 @@ export default {
             }
         },
         clickBig() {
+            //添加阻止事件
+            // document.addEventListener("touchmove", function(e) {    //禁止浏览器默认行为
+            //     e.preventDefault();
+            // }, false); 
             var divL = $(".detail-right-inner div").length;
             $(".alert-big").css("display", "block");
             if(divL == 1) {
@@ -318,6 +322,10 @@ export default {
         },
         closeAlert() {
             $(".alert-big").css("display", "none");
+            //移除添加阻止事件
+            document.addEventListener("touchmove", function(e) {    //禁止浏览器默认行为
+                e.preventDefault();
+            }, true);
         },
         detail(i) {
             this.isDetail = i;

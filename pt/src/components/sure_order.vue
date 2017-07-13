@@ -76,7 +76,7 @@
                 <div class="qq-number clearfix">
                     <label for="">
                         <em>*</em>联系Q&nbsp;Q：</label>
-                    <input type="text" name="userqq" value="" placeholder="请输入联系QQ" v-model="qq" :value="$store.state.User.qq" />
+                    <input type="number" name="userqq" value="" placeholder="请输入联系QQ" v-model="qq" :value="$store.state.User.qq" />
                 </div>
             </form>
         </section>
@@ -120,7 +120,7 @@
                 <span @click="submitOrder" class="detail-pay">确认购买</span>
             </div>
         </div>
-        <div class="alertLoading"></div>
+         <div class="alertLoading"></div> 
     </div>
 </template>
 <script>
@@ -192,7 +192,6 @@ export default {
                 this.$iosAlert("请选择开始时间");
                 return false;
             }
-
             var amount = 0;
             if (this.goods.type == 0) {
                 amount = this.goods.price;
@@ -224,8 +223,6 @@ export default {
                     }
                     self.$store.commit('setOrder', order);
                     self.$router.push("/buy");
-                } else {
-                    self.$iosAlert(result.msg);
                 }
             })
         },
@@ -284,7 +281,7 @@ export default {
     },
     components: {
         'app-header': Header,
-        'app-alert': Alert,
+        'app-alert': Alert
     }
 }
 </script>

@@ -155,9 +155,7 @@ export default {
                 if (result.code === 0) {
                     self.payInfo = JSON.parse(result.data.payJson);
                     self.callWxPay(self.payInfo);
-                } else {
-                    self.$iosAlert(result.data.msg);
-                }
+                } 
             })
         },
         getOrderDetail() {

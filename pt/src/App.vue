@@ -3,16 +3,35 @@
     <div class="contianer">
       <!-- 路由中的几个组件在这里被渲染，默认被渲染的为第一个组件，也就是home组件  -->
       <keep-alive>
-      <!--<transition :name="transitionName">-->
+        <!--<transition :name="transitionName">-->
         <router-view class="child-view"></router-view>
-      <!--</transition>-->
+        <!--</transition>-->
       </keep-alive>
     </div>
-    <vue-loading v-if="$store.state.Loading" type="bubbles" color="#666" :size="{ width: '20%', height: '20%' }" style="padding: 40%;transform: translateY(30%);z-index: 10;position: absolute;left: 0;top: 0;"></vue-loading>
+    <div class="alertLoading">
+      <div style="margin-top: 50%;text-align: center;">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+          <rect x="0" y="10" width="4" height="10" fill="#333" opacity="0.2">
+            <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="0.6s" repeatCount="indefinite" />
+            <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
+            <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0s" dur="0.6s" repeatCount="indefinite" />
+          </rect>
+          <rect x="8" y="10" width="4" height="10" fill="#333" opacity="0.2">
+            <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+            <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+            <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+          </rect>
+          <rect x="16" y="10" width="4" height="10" fill="#333" opacity="0.2">
+            <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+            <animate attributeName="height" attributeType="XML" values="10; 20; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+            <animate attributeName="y" attributeType="XML" values="10; 5; 10" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+          </rect>
+        </svg>
+      </div>
+    </div>
   </div>
 </template>
 <script>
-import vueLoading from 'vue-loading-template'
 export default {
   data() {
     return {
@@ -22,22 +41,21 @@ export default {
   , beforeRouteUpdate(to, from, next) {
     let isBack = this.$router.isBack
     if (isBack) {
-    this.transitionName = 'slide-right'
+      this.transitionName = 'slide-right'
     } else {
-    this.transitionName = 'slide-left'
+      this.transitionName = 'slide-left'
     }
     this.$router.isBack = false
     next()
   },
   components: {
-    vueLoading
   }
 }
 </script>
 <style>
 .child-view {
   /*position: absolute;*/
-  top:0;
+  top: 0;
   left: 0;
   width: 100%;
   transition: all .8s cubic-bezier(.55, 0, .1, 1);

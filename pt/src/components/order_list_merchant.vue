@@ -40,7 +40,7 @@ export default {
             this.title = "已发货";
         } else if (this.status == 4) {
             this.title = "交易成功";
-        } else if (this.status == 5) {
+        } else if (this.status == 0) {
             this.title = "交易失败";
         }
         this.getMerchantInfoByStatus();

@@ -18,7 +18,7 @@
                 <i>{{user.completeCount}}</i>
                 <span></span>
             </a>
-            <a @click="orderList(5)" class="person-arbitration-all" replace>退款
+            <a @click="orderList(0)" class="person-arbitration-all" replace>交易失败
                 <i>{{user.refundCount}}</i>
                 <span></span>
             </a>

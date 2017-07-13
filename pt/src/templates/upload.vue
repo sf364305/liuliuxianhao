@@ -1,8 +1,8 @@
 <template>
     <div class="release_pic clearfix">
     
-        <div class="realease_picbtn" v-for="img in images" :key="img">
-            <img :src="$store.state.Setting.qiniuUrl + img" alt="" title="">
+        <div class="realease_picbtn" v-for="(img,index) in images" :key="img">
+            <img :src="$store.state.Setting.qiniuUrl + img" alt="" title="" @click="del(index)">
         </div>
     
         <div class="realease_picbtn" data="0">
@@ -56,9 +56,17 @@ export default {
             var self = this;
             self.Http.get(self.Api.getQiniuImage(), {
                 mediaId: serverId
-            },
-                function (result) {
+            },function (result) {
                     self.images.push(result.data.key);
+                });
+        },
+        del(index){
+            var self = this;
+            this.$iosConfirm("删除图片?")
+                .then(function () {
+                   self.images.splice(index,1);
+                }, function () {
+                    console.log('取消');
                 });
         },
         update(e) {

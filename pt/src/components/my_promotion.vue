@@ -51,6 +51,7 @@ export default {
         },
         refresh(done) {
             this.page = 0;
+            this.users= [];
             this.getReferred(done);
         },
         infinite(done) {

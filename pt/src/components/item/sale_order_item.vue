@@ -17,15 +17,15 @@
         </a>
         <div class="sell-status1"></div>
         <div class="wait-you" v-if="order.status == 1">
-            <span class="wait-cancel" @click="deleteRe(order.id)">取消订单</span>
-            <span class="wait-sure" @click="pay(order.id)">支付订单</span>
+            <span class="wait-cancel" @click="deleteRe(order.id)">删除订单</span>
+            <span class="wait-sure"  @click="pay(order.id)">支付订单</span>
         </div>
         <div class="wait-you" v-if="order.status == 2">
             <span class="wait-cancel" @click="cancel(order.id)">取消订单</span>
-            <span class="wait-sure" @click="server()">联系客服</span>
+            <span class="wait-sure"  @click="server()">联系客服</span>
         </div>
         <div class="wait-you" v-if="order.status == 3">
-            <span class="wait-cancel" @click="server()">申请仲裁</span>
+            <span class="wait-cancel" @click="arbitration(order.id)">申请仲裁</span>
             <span class="wait-sure" @click="sure(order.id)">确认收货</span>
         </div>
     
@@ -58,9 +58,7 @@ export default {
                 if (result.code === 0) {
                     self.payInfo = JSON.parse(result.data.payJson);
                     self.callWxPay(self.payInfo);
-                } else {
-                    self.$iosAlert(result.data.msg);
-                }
+                } 
             })
         },
         deleteRe(orderId) {
@@ -100,6 +98,22 @@ export default {
                     //移除订单结构
                     that.$emit('remove', orderId)
                     that.Http.get(that.Api.sureOrder(), {
+                        orderId: orderId
+                    }, function (result) {
+                        console.log(result);
+                    })
+                }, function () {
+                    console.log('取消');
+                });
+        },
+        arbitration(orderId) {
+            var that = this;
+
+            this.$iosConfirm("确定申请仲裁后请联系客服沟通")
+                .then(function () {
+                    //移除订单结构
+                    that.$emit('remove', orderId)
+                    that.Http.get(that.Api.arbitrationOrder(), {
                         orderId: orderId
                     }, function (result) {
                         console.log(result);

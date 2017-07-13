@@ -50,11 +50,10 @@
             <div class="sell-status1" v-if="g.type==0"></div>
             <div class="sell-status" v-if="g.type==1"></div>
             <!--按钮-->
-            <div class="wait-you" v-if="g.status==1">
+            <div class="wait-you" v-if="g.status==1 || g.status == 2">
                 <span class="wait-cancel" @click="delGoods(index)">删除商品</span>
                 <span class="wait-sure" @click="editGoods(index)">编缉</span>
             </div>
-            {{goods.isShelves}}
             <div class="wait-you" v-if="g.isShelves">
                 <span class="wait-sure" style="width:100%;" @click="downGoods(index)">下架</span>
             </div>
@@ -98,8 +97,6 @@ export default {
                         if (result.code === 0) {
                             self.$emit('remove', goods.id);
                             self.$iosAlert("删除成功");
-                        } else {
-                            self.$iosAlert(result.data.msg);
                         }
                     })
                 }, function () {
@@ -119,9 +116,7 @@ export default {
                         if (result.code === 0) {
                             self.$emit('remove', goods.id);
                             self.$iosAlert("下架成功");
-                        } else {
-                            self.$iosAlert(result.data.msg);
-                        }
+                        } 
                     })
                 }, function () {
                     console.log('取消');

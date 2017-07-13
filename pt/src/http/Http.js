@@ -121,8 +121,11 @@ Vue.prototype.Api = {
     checkTime() {
         return base + '/order/choose';
     },
-    getQiniuImage(){
+    getQiniuImage() {
         return base + '/qiniu/getImage';
+    },
+    refundPay() {
+        return base + '/order/refundList';
     }
 };
 
@@ -148,7 +151,7 @@ Vue.prototype.Http = {
         if (api !== Vue.prototype.Api.getToken()) {
             params.token = this.token;
         }
-        
+
 
         axios.post(api, params, {
             emulateJSON: true,
@@ -157,12 +160,11 @@ Vue.prototype.Http = {
             }
         }).then((response) => {
             // 响应成功回调,错误统一处理
-            console.log(api,JSON.stringify(params), response.data);
-            if (response.data.code == 0) {
-                callback(response.data);
-            } else {
+            console.log(api, JSON.stringify(params), response.data);
+            if (response.data.code != 0) {
                 Vue.prototype.$iosAlert(response.data.msg);
             }
+            callback(response.data);
         }, (response) => {
             // 响应错误回调
             Vue.prototype.$iosAlert("网络不好哦~");

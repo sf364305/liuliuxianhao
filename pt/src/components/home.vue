@@ -46,9 +46,6 @@
     </div>
 </template>
 <script>
-import Router from 'vue-router'
-import Vue from 'vue'
-Vue.use(Router)
 //引入组件和图片
 import Banner from '../templates/Banner.vue'
 import Goods from '../templates/Goods.vue'

@@ -286,9 +286,7 @@ export default {
                     self.$iosAlert("提交成功，平台将在1个工作日内审核，请关注公众号接收提醒。");
                     self.$store.commit("clearFrom");
                     self.$router.push("/person");
-                } else {
-                    self.$iosAlert(result.msg);
-                }
+                } 
             })
         },
         initQiniu() { }

@@ -352,9 +352,7 @@ export default {
                     console.log(result);
 
                     self.$router.push("/person");
-                } else {
-                    self.$iosAlert(result.msg);
-                }
+                } 
             })
         }
     },

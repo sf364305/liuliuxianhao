@@ -47,8 +47,8 @@ export default {
             this.title = "待确认";
         } else if (this.status == 4) {
             this.title = "交易成功";
-        } else if (this.status == 5) {
-            this.title = "退款";
+        } else if (this.status == 0) {
+            this.title = "交易失败";
         } else if(this.status == -1){
             this.title = "仲裁中";
         }
@@ -60,13 +60,19 @@ export default {
     methods: {
         getBuyInfoByStatus(done) {
             var that = this;
-            this.Http.get(this.Api.getBuyInfoByStatus(), {
-                status:that.status,
+            var url = this.Api.getBuyInfoByStatus();
+            var params =  {
                 page: that.page,
                 size: that.size
-            }, function (result) {
+            }
+            if(this.status == 0){
+                url = this.Api.refundPay();
+            }else{
+                params.status = this.status;
+            }
+            this.Http.get(url,params, function (result) {
                 if (done) done();
-                if (result.data.orders.length > 0) {
+                if (result.data.orders && result.data.orders.length > 0) {
                     for (var i = 0; i < result.data.orders.length; i++) {
                         if(result.data.orders[i].status == that.status){
                             that.orders.push(result.data.orders[i]);
@@ -79,12 +85,10 @@ export default {
             })
         },
         refresh(done) {
-            console.log("刷新");
             this.page = 0;
             this.getBuyInfoByStatus(done);
         },
         infinite(done) {
-        console.log("加载");
             this.page += 1;
             this.getBuyInfoByStatus(done);
         },

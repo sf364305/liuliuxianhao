@@ -93,8 +93,8 @@ const store = new Vuex.Store({
     popFrom(state) {
       state.FromView.pop();// = state.FromView.slice(0, state.FromView.length - 1);
     },
-    clearFrom(state){
-      while(state.FromView.length > 1){
+    clearFrom(state) {
+      while (state.FromView.length > 1) {
         state.FromView.pop();
       }
     },
@@ -191,13 +191,13 @@ var routes = [{
 }, {
   path: '/orders_merchant/:status',
   component: order_list_merchant
-},{
+}, {
   path: '/goods_list_merchant/:status',
   component: goods_list_merchant
-},{
+}, {
   path: '/goods_item_collect/:status',
   component: goods_item_collect
-},{
+}, {
   path: '/order_detail/:id',
   component: order_detail
 }];
@@ -213,26 +213,38 @@ Router.prototype.goBack = function () {
 
 vueRouter.beforeEach((to, from, next) => {
   console.log(from.path);
-  if (to.path != "/") {  // 判断该路由是否需要登录权限
-    if (Vue.prototype.Http.token) {  // 通过vuex state获取当前的token是否存在
-      var v = vm.$store.state.FromView[vm.$store.state.FromView.length - 1];
-      if (v == to.path) {
-        vm.$store.commit('popFrom');
+  $(".alertLoading").fadeIn(100);
+
+  setTimeout(function () {
+    if (to.path != "/") {  // 判断该路由是否需要登录权限
+      if (Vue.prototype.Http.token) {  // 通过vuex state获取当前的token是否存在
+        var v = vm.$store.state.FromView[vm.$store.state.FromView.length - 1];
+        if (v == to.path) {
+          vm.$store.commit('popFrom');
+        } else {
+          vm.$store.commit('pushFrom', from.path);
+        }
+        next();
+        console.log("当前路由：", vm.$store.state.FromView);
       } else {
-        vm.$store.commit('pushFrom', from.path);
+        next({
+          path: '/',
+          query: { redirect: from.fullPath }  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+        })
       }
-      next();
-      console.log("当前路由：", vm.$store.state.FromView);
     } else {
-      next({
-        path: '/',
-        query: { redirect: from.fullPath }  // 将跳转的路由path作为参数，登录成功后跳转到该路由
-      })
+      next();
     }
-  } else {
-    next();
-  }
+  }, 100);
+
 })
+vueRouter.afterEach((to, from) => {
+  setTimeout(function () {
+    $(".alertLoading").hide();
+  }, 300);
+
+})
+
 // 创建和挂载根实例
 var vm = new Vue({
   el: '#app',
