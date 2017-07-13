@@ -4,11 +4,6 @@
         <div class="detail-inner clearfix">
             <p class="detail-pic-left">
                 点
-
-
-
-
-                
                 <br/>击
                 <br/>图
                 <br/>片
