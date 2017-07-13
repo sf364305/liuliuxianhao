@@ -171,6 +171,7 @@
 import Header from '../templates/Header.vue'
 import Goods from '../templates/Goods.vue'
 export default {
+    
     name: 'detail',
     data() {
         return {
