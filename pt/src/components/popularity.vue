@@ -169,18 +169,17 @@ export default {
             for (var i = 0; i < this.goods.length; i++) {
                 if (this.goods[i].id == this.goodsId) {
                     if (this.popularType == 0) {
-                        per = this.goods[i].goodsPopularityInfo.hourPrice;
+                        per = this.goods[i].goodsPopularityInfo.hourPrice * 10000;
                     } else if (this.popularType == 1) {
-                        per = this.goods[i].goodsPopularityInfo.dayPrice;
+                        per = this.goods[i].goodsPopularityInfo.dayPrice * 10000;
                     } else if (this.popularType == 2) {
-                        per = this.goods[i].goodsPopularityInfo.weekPrice;
+                        per = this.goods[i].goodsPopularityInfo.weekPrice * 10000;
                     } else if (this.popularType == 3) {
-                        per = this.goods[i].goodsPopularityInfo.monthPrice;
+                        per = this.goods[i].goodsPopularityInfo.monthPrice * 10000;
                     }
                 }
             }
-
-            this.price = (per * 10000 * this.count * this.quantity)/10000;
+            this.price = (Math.round(per) * this.count * this.quantity)/10000;
         },
         boolGet() {
             if (this.startTime != "") {
