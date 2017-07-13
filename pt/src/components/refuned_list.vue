@@ -74,6 +74,7 @@ export default {
                 }
             })
         },
+        
         refresh(done) {
             this.page = 0;
             this.getRefunedList(done);
