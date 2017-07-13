@@ -17,7 +17,7 @@ export default {
         }
     },
     created(){
-        this.path = "http://xcn.tunnel.qydev.com/front/getCode/" + this.Http.token+"/";
+        this.path = "http://api.66xianhao.com/front/getCode/" + this.Http.token+"/";
         console.log(this.path);
     },
     methods: {
