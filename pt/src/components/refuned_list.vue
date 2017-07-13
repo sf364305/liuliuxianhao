@@ -11,8 +11,8 @@
                         </span>
                         <span class="sever">
                             <em class="com-game">所属卖家：</em>
-                            <i class="game-sever" v-if="!r.merchant">{{r.merchant.name}}</i>
-                            <i class="game-sever" v-if="r.merchant">六六闲号</i>
+                            <i class="game-sever" v-if="r.merchant">{{r.merchant.name}}</i>
+                            <i class="game-sever" v-if="!r.merchant">六六闲号</i>
                         </span>
                         <div class="sell-inf clearfix">
                             <em>生成时间：</em>
