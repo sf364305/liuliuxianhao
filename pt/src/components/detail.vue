@@ -4,6 +4,11 @@
         <div class="detail-inner clearfix">
             <p class="detail-pic-left">
                 点
+
+
+
+
+                
                 <br/>击
                 <br/>图
                 <br/>片
@@ -307,8 +312,6 @@ export default {
             // document.addEventListener("touchmove", function(e) {    //禁止浏览器默认行为
             //     e.preventDefault();
             // }, false); 
-
-            
             var divL = $(".detail-right-inner div").length;
             $(".alert-big").css("display", "block");
             if(divL == 1) {
