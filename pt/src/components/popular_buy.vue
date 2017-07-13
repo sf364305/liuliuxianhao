@@ -6,7 +6,7 @@
             <ul>
                 <li>
                     <span>价格：</span>
-                    <em>￥200</em>
+                    <em>￥{{$store.state.Order.amount}}</em>
                 </li>
                 <li>
                     <span>订单号：</span>
