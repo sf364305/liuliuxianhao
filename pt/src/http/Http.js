@@ -216,7 +216,7 @@ Vue.prototype.callWxPay = function (payInfo) {
 
 Vue.prototype.callServer = function () {
     console.log("联系客服");
-    Vue.prototype.$iosAlert("联系客服");
+    Vue.prototype.$iosAlert("客服系统升级维护中，请暂时通过公众号联系平台，感谢您的支持！");
 }
 
 // http request 拦截器
