@@ -196,7 +196,7 @@ export default {
             if (this.goods.type == 0) {
                 amount = this.goods.price;
             } else if (this.goods.type == 1) {
-                amount = this.lessCost[this.leaseType] * this.goodsNum + this.lessCost[this.leaseType] * this.goodsNum * this.goods.goodsLeaseInfo.deposit;
+                amount = this.lessCost[this.leaseType] * this.goodsNum + this.lessCost[this.leaseType] * this.goods.goodsLeaseInfo.deposit;
             }
             $(".alertLoading").css("display","block");
             self.$store.commit('setLoading', true);      
