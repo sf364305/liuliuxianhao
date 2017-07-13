@@ -4,7 +4,7 @@
         <scroller :on-infinite="infinite" ref="scroller" style="margin-top:4rem;">
             <ul class="com-list">
                 <li v-for="r in refunds" :key="r.id">
-                    <a @click="toDetail(r.order.goods.id)" class="game-name" replace style="padding-bottom: 0.5rem;">
+                    <a @click="toDetail(r.order.id)" class="game-name" replace style="padding-bottom: 0.5rem;">
                         <span class="name-title clearfix">
                             <img :src="$store.state.Setting.qiniuUrl + r.order.goods.category.img" alt="">
                             <em>{{r.order.goods.name}}</em>
@@ -58,6 +58,9 @@ export default {
         this.getRefunedList();
     },
     methods: {
+        toDetail(orderId) {
+            this.$router.push("/order_detail/" + orderId);
+        },
         getRefunedList(done) {
             var that = this;
             this.Http.get(this.Api.getRefunedList(), {
