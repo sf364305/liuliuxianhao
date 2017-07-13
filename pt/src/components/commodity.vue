@@ -186,7 +186,7 @@ export default {
         if (this.$route.params.id == "0" || this.$route.params.id == "1") {
             this.condition.type = this.$route.params.id;
             this.condition.categoryId = "";
-        } else if (this.$route.params.id.length > 8) {
+        } else {
             this.condition.categoryId = this.$route.params.id;
         }
         this.submit();
