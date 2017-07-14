@@ -10,7 +10,7 @@
             <div class="announcement">
                 <ul class="announ" id="announ">
                     <li v-for="notice in $store.state.Notices" v-bind:key="notice.id">
-                        <span>{{notice.title}}</span>
+                        <span>{{notice.content}}</span>
                     </li>
                 </ul>
             </div>
@@ -28,8 +28,8 @@
                 </ul>
             </section>
             <ul class="project clearfix">
-                <li v-for="(c,index) in $store.state.Categroy" v-bind:key="c.id">
-                    <a class="index-ying" replace @click="linkCom(index)" v-if="c.isShow">
+                <li v-for="(c,index) in $store.state.Categroy" v-bind:key="c.id" v-if="c.isShow">
+                    <a class="index-ying" replace @click="linkCom(index)" >
                         <img :src="$store.state.Setting.qiniuUrl + c.img" alt="">{{c.name}}</a>
                 </li>
             </ul>

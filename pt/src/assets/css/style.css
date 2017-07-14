@@ -354,7 +354,7 @@
     border-radius: 50%;
     font-size: 0.85rem;
     text-align: center;
-    background: #aaa;
+    background: red;
 }
 .person-dif-con .person-con-show {
     display: block;
@@ -756,7 +756,7 @@
 }
 /*商品信息样式*/
 .detail-inner {
-    position: relative;
+    position: initial;
     width: 94%;
     height: 21.67rem;
     margin: 1.5rem auto;

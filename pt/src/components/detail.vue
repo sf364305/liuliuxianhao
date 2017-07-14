@@ -13,7 +13,7 @@
                 <br/>图
             </p>
             <div class="detail-pic-center" img-data="0">
-                <img :src="$store.state.Setting.qiniuUrl + goods.goodsImages[0].qiniuKey" alt="" @click="clickBig"/>
+                <img :src="$store.state.Setting.qiniuUrl + goods.goodsImages[0].qiniuKey" alt="" @click="clickBig" />
             </div>
             <div class="detail-pic-right">
                 <div class="detail-right-inner">
@@ -27,7 +27,7 @@
         </div>
         <div class="alert-big">
             <div class="big-show" id="icons">
-                <img v-for="imgs in goods.goodsImages" :key="imgs.id" :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" @click="closeAlert"/>
+                <img v-for="imgs in goods.goodsImages" :key="imgs.id" :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" @click="closeAlert" />
             </div>
             <div class="pic-left-alert" @click="moveLeft"></div>
             <div class="pic-right-alert" @click="moveRight"></div>
@@ -171,7 +171,7 @@
 import Header from '../templates/Header.vue'
 import Goods from '../templates/Goods.vue'
 export default {
-    
+
     name: 'detail',
     data() {
         return {
@@ -179,14 +179,14 @@ export default {
             goodsId: "",
             goods: {
                 sex: 0,
-                goodsImages:[{'qiniuKey':'logo_index.png'}],
-                category:{
-                    img:"logo_index.png"
+                goodsImages: [{ 'qiniuKey': 'logo_index.png' }],
+                category: {
+                    img: "logo_index.png"
                 },
                 merchant: {
-                    creditLevel:""
+                    creditLevel: ""
                 },
-                name:"加载中"
+                name: "加载中"
             },
             isCollection: false,
             collection: "收藏",//isCollection ? "已收藏" : "收藏",
@@ -194,13 +194,10 @@ export default {
             recommendGoods: []
         }
     },
-    created() {
-        this.goodsId = this.$route.params.id;
-        this.getGoodsInfo();
-
-    },
     activated() {
-    this.goodsId = this.$route.params.id;
+        this.goodsId = this.$route.params.id;
+        console.error("获取商品id",this.goodsId);
+        console.error("嗯？",this.$router.options.routes);
         this.getGoodsInfo();
     },
     methods: {
@@ -260,18 +257,18 @@ export default {
         },
         moveLeft() {
             var divL = $(".detail-right-inner div").length;
-            var imgD =  $(".alert-big").attr("img-data");
+            var imgD = $(".alert-big").attr("img-data");
             moveA(imgD, true);
             function moveA(index, bool) {
-                if(bool) {
+                if (bool) {
                     index++;
-                    if(index > 0) {
+                    if (index > 0) {
                         index = 0;
                     }
                 } else {
                     index--;
-                    if(index < -divL+1) {
-                        index = -divL+1;
+                    if (index < -divL + 1) {
+                        index = -divL + 1;
                     }
                 }
                 $(".alert-big").attr("img-data", index);
@@ -281,19 +278,19 @@ export default {
         },
         moveRight() {
             var divL = $(".detail-right-inner div").length;
-            var imgD =  $(".alert-big").attr("img-data");
-            
+            var imgD = $(".alert-big").attr("img-data");
+
             moveA(imgD, false);
             function moveA(index, bool) {
-                if(bool) {
+                if (bool) {
                     index++;
-                    if(index > 0) {
+                    if (index > 0) {
                         index = 0;
                     }
                 } else {
                     index--;
-                    if(index < -divL+1) {
-                        index = -divL+1;
+                    if (index < -divL + 1) {
+                        index = -divL + 1;
                     }
                 }
                 $(".alert-big").attr("img-data", index);
@@ -308,7 +305,7 @@ export default {
             // }, false); 
             var divL = $(".detail-right-inner div").length;
             $(".alert-big").css("display", "block");
-            if(divL == 1) {
+            if (divL == 1) {
                 $(".pic-left-alert").css("display", "none");
                 $(".pic-right-alert").css("display", "none");
                 $(".big-show-pointer").css("display", "none");
@@ -344,7 +341,7 @@ export default {
                 goodsId: that.goodsId
             }, function (result) {
                 console.log(result);
-                
+
                 that.goods = result.data.goods;
                 that.isCollection = result.data.isCollection;
                 that.collection = that.isCollection ? "已收藏" : "收藏";
@@ -354,6 +351,20 @@ export default {
         buy() {
             this.$store.commit('setGoods', this.goods);
             this.$router.push('/sure_order');
+        },
+        deactivated() {
+            // this.$destroy();
+        }
+    },
+    watch: {
+        '$route'(to, from) {
+            // this.$destroy();
+            this.goodsId = this.$route.params.id;
+            this.getGoodsInfo();
+            var t = setTimeout(function() {
+                document.body.scrollTop = 0;
+                clearTimeout(t);
+            }, 300);
         }
     },
     components: {

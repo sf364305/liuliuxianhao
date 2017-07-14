@@ -219,33 +219,36 @@ vueRouter.beforeEach((to, from, next) => {
   console.log(from.path);
   $(".alertLoading").fadeIn(100);
 
-  setTimeout(function () {
+  var t = setTimeout(function () {
     if (to.path != "/") {  // 判断该路由是否需要登录权限
       if (Vue.prototype.Http.token) {  // 通过vuex state获取当前的token是否存在
         var v = vm.$store.state.FromView[vm.$store.state.FromView.length - 1];
         if (v == to.path) {
+          console.log("pop");
           vm.$store.commit('popFrom');
         } else {
+          console.log("push");
           vm.$store.commit('pushFrom', from.path);
         }
         next();
         console.log("当前路由：", vm.$store.state.FromView);
       } else {
         next({
-          path: '/',
-          query: { redirect: from.fullPath }  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+          path: '/'
+          // query: { redirect: from.fullPath }  // 将跳转的路由path作为参数，登录成功后跳转到该路由
         })
       }
     } else {
       next();
     }
+    clearTimeout(t);
   }, 100);
 
 })
 vueRouter.afterEach((to, from) => {
   setTimeout(function () {
     $(".alertLoading").hide();
-  }, 300);
+  }, to.fullPath.indexOf("detail") > 0 ? 1000: 300);
 
 })
 

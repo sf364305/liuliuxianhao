@@ -1,6 +1,6 @@
 <template>
     <ul class="com-list">
-        <li v-for="(g,index) in goods" :key="g.name">
+        <li v-for="(g,index) in goods" :key="g.name+g.id+index">
             <a class="game-name" replace @click="toDetail(index)">
                 <span class="name-title clearfix">
                     <img :src="$store.state.Setting.qiniuUrl + g.category.img" alt="">

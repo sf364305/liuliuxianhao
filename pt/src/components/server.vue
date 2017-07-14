@@ -51,7 +51,7 @@ export default {
             // $(".server-alert-outer").css("display", "none")
         },
         closeShow: function () {
-            self.callServer();
+            this.callServer();
             // $(".server-alert-outer").css("display", "block")
         }
     }, components: {
