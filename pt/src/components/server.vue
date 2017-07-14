@@ -20,7 +20,7 @@
                 <textarea id="detail" name="detail" maxlength="200" placeholder="请输入您的留言" rows="8"></textarea>
             </div>
             <div class="server-sub" style="border: none;">
-                <input type="submit" name="" value="提交" class="server-submit" @click="closeShow" />
+                <input type="button" name="" value="提交" class="server-submit" @click="closeShow" />
             </div>
         </form>
         <div class="server-alert-outer" @click="closeAlert">
@@ -48,10 +48,11 @@ export default {
     },
     methods: {
         closeAlert: function () {
-            $(".server-alert-outer").css("display", "none")
+            // $(".server-alert-outer").css("display", "none")
         },
         closeShow: function () {
-            $(".server-alert-outer").css("display", "block")
+            self.callServer();
+            // $(".server-alert-outer").css("display", "block")
         }
     }, components: {
         'app-footer': Footer
