@@ -196,8 +196,6 @@ export default {
     },
     activated() {
         this.goodsId = this.$route.params.id;
-        console.error("获取商品id",this.goodsId);
-        console.error("嗯？",this.$router.options.routes);
         this.getGoodsInfo();
     },
     methods: {
@@ -358,13 +356,14 @@ export default {
     },
     watch: {
         '$route'(to, from) {
-            // this.$destroy();
-            this.goodsId = this.$route.params.id;
-            this.getGoodsInfo();
-            var t = setTimeout(function() {
-                document.body.scrollTop = 0;
-                clearTimeout(t);
-            }, 300);
+            if (to.fullPath.indexOf("detail") > 0) {
+                this.goodsId = this.$route.params.id;
+                this.getGoodsInfo();
+                var t = setTimeout(function () {
+                    document.body.scrollTop = 0;
+                    clearTimeout(t);
+                }, 300);
+            }
         }
     },
     components: {

@@ -57,12 +57,12 @@
                 <span>结束时间</span>
                 <em>{{order.endTime}}</em>
             </li>
-            <li class="clearfix" v-if="order.goods.goodsSaleInfo || order.goods.goodsLeaseInfo">
+            <li class="clearfix" v-if="order.goods">
                 <span>授权情况</span>
-                <em v-if="order.goods.goodsSaleInfo ==null ? order.goods.goodsLeaseInfo.bind : order.goods.goodsSaleInfo.bind == 4">未授权</em>
-                <em v-if="order.goods.goodsSaleInfo ==null ? order.goods.goodsLeaseInfo.bind : order.goods.goodsSaleInfo.bind == 1">QQ</em>
-                <em v-if="order.goods.goodsSaleInfo ==null ? order.goods.goodsLeaseInfo.bind :  order.goods.goodsSaleInfo.bind == 2">微信</em>
-                <em v-if="order.goods.goodsSaleInfo ==null ? order.goods.goodsLeaseInfo.bind :  order.goods.goodsSaleInfo.bind == 3">微博</em>
+                <em v-if="order.goods.bind == 4">未授权</em>
+                <em v-if="order.goods.bind == 1">QQ</em>
+                <em v-if="order.goods.bind == 2">微信</em>
+                <em v-if="order.goods.bind == 3">微博</em>
             </li>
             <li class="clearfix" v-if="order.goods.grade">
                 <span>账号等级</span>
@@ -72,27 +72,16 @@
                 <span>ID</span>
                 <em>{{order.goods.accountID}}</em>
             </li>
-            <li class="clearfix" v-if="order.goods.goodsSaleInfo">
+            <li class="clearfix" v-if="order.goods">
                 <span>性别</span>
-                <em v-if="order.goods.goodsSaleInfo.sex == 0">男</em>
-                <em v-if="order.goods.goodsSaleInfo.sex == 1">女</em>
+                <em v-if="order.goods.sex == 0">男</em>
+                <em v-if="order.goods.sex == 1">女</em>
             </li>
-            <li class="clearfix" v-if="order.goods.goodsLeaseInfo">
-                <span>性别</span>
-                <em v-if="order.goods.goodsLeaseInfo.sex == 0">男</em>
-                <em v-if="order.goods.goodsLeaseInfo.sex == 1">女</em>
-            </li>
-            <li class="clearfix" v-if="order.goods.goodsSaleInfo">
+            <li class="clearfix" v-if="order.goods">
                 <span>绑定情况</span>
-                <em v-if="order.goods.goodsSaleInfo.bind == 1">手机绑定</em>
-                <em v-if="order.goods.goodsSaleInfo.bind == 2">邮箱绑定</em>
-                <em v-if="order.goods.goodsSaleInfo.bind == 3">未绑定</em>
-            </li>
-            <li class="clearfix" v-if="order.goods.goodsLeaseInfo">
-                <span>绑定情况</span>
-                <em v-if="order.goods.goodsLeaseInfo.bind == 1">手机绑定</em>
-                <em v-if="order.goods.goodsLeaseInfo.bind == 2">邮箱绑定</em>
-                <em v-if="order.goods.goodsLeaseInfo.bind == 3">未绑定</em>
+                <em v-if="order.goods.bind == 1">手机绑定</em>
+                <em v-if="order.goods.bind == 2">邮箱绑定</em>
+                <em v-if="order.goods.bind == 3">未绑定</em>
             </li>
             <li class="clearfix" v-if="order.goods.goodsPopularInfo">
                 <span>人气</span>
