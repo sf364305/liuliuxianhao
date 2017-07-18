@@ -36,6 +36,7 @@ export default {
     },
     methods: {
         setCurrTab(){
+            this.$store.commit('clearFrom');
             var url = window.location.href;
             if(url.endsWith('home')){
                 this.isHome = true;
