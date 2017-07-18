@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="../assets/images/loading.gif" style="width:40%;transform:translateX(76%) translateY(125%);"></img>
+    <!-- <img src="../assets/images/loading.gif" style="width:40%;transform:translateX(76%) translateY(125%);"></img> -->
   </div>
 </template>
 <script>
@@ -9,14 +9,30 @@ import '../assets/js/jweixin-1.2.0.js'
 export default {
   created() {
     this.getToken();
-    this.getConfig();
   },
   deactivated() {
     this.$destroy();
   },
   methods: {
     getToken() {
-      this.Http.setToken(this.GetQueryString('token'));
+      var t = this.GetQueryString('token');
+      if (t) {
+        //存入cookie
+        var d = new Date;
+        //10秒钟过期
+        d.setTime(d.getTime() +  10 * 1000);
+        window.document.cookie = "xianhao_token=" + t + ";path=/;expires=" + d.toGMTString();
+        window.location.href = "/";
+      } else {
+        t = window.document.cookie.match('(^|;)?xianhao_token=([^;]*)(;|$)');
+        if (!t) {
+          // window.location.href = "http://api.66xianhao.com";
+          window.location.href = "http://localhost:8080";
+        } else {
+          this.Http.setToken(t[2]);
+          this.getConfig();
+        }
+      }
     },
     GetQueryString(name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -39,7 +55,6 @@ export default {
         that.$store.commit('setUser', result.data.user);
       })
     },
-    
   }
 }
 </script>

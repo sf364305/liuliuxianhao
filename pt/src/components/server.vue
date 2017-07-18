@@ -9,15 +9,15 @@
         <form aciton="" method="" class="server-form">
             <div>
                 <label for="">电话</label>
-                <input type="text" placeholder="请输入您的手机号码" name="" value="" class="server-tele" />
+                <input v-model="feedback.phone" type="text" placeholder="请输入您的手机号码" name="" value="" class="server-tele" />
             </div>
             <div>
                 <label for="">QQ</label>
-                <input type="text" placeholder="请输入您的QQ号码" name="" value="" class="server-qq" />
+                <input v-model="feedback.qq" type="text" placeholder="请输入您的QQ号码" name="" value="" class="server-qq" />
             </div>
             <div class="add-com server-messeage" style="border: none;">
                 <h2>留言内容：</h2>
-                <textarea id="detail" name="detail" maxlength="200" placeholder="请输入您的留言" rows="8"></textarea>
+                <textarea id="detail" v-model="feedback.content" name="detail" maxlength="200" placeholder="请输入您的留言" rows="8"></textarea>
             </div>
             <div class="server-sub" style="border: none;">
                 <input type="button" name="" value="提交" class="server-submit" @click="closeShow" />
@@ -43,15 +43,30 @@ import Footer from '../templates/Footer.vue'
 export default {
     data: function () {
         return {
-            title: '给我们留言'
+            title: '给我们留言',
+            feedback: {
+                phone: "",
+                qq: "",
+                content: ""
+            }
         }
     },
     methods: {
-        closeAlert: function () {
-            // $(".server-alert-outer").css("display", "none")
+        closeAlert(){
+            
         },
-        closeShow: function () {
-            this.callServer();
+        closeShow () {
+            if (!this.feedback.phone && !this.feedback.qq) {
+                this.$iosAlert("请至少填写一种联系方式");
+                return;
+            }
+
+            var self = this;
+            this.Http.get(this.Api.addFeedback(), this.feedback, function (result) {
+                if (result.code == 0) {
+                    self.$iosAlert("我们已收到您的信息，感谢您的支持！");
+                }
+            })
             // $(".server-alert-outer").css("display", "block")
         }
     }, components: {
