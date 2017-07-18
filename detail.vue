@@ -15,25 +15,23 @@
             <div class="detail-pic-center" img-data="0">
                 <img :src="$store.state.Setting.qiniuUrl + goods.goodsImages[0].qiniuKey" alt="" @click="clickBig" />
             </div>
-            <div class="detail-pic-right">
-                <div class="detail-right-inner">
-                    <div v-for="imgs in goods.goodsImages" :key="imgs.id">
+            <div class="detail-pic-right swiper-container">
+                <div class="detail-right-inner swiper-wrapper">
+                    <div v-for="imgs in goods.goodsImages" :key="imgs.id" class="swiper-slide">
                         <img :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" alt="" />
                     </div>
                 </div>
                 <div class="pic-top" @click="moveT"></div>
                 <div class="pic-bottom" @click="moveT2"></div>
+                <div class="swiper-pagination swiper-pagination-white"></div>
             </div>
         </div>
-        <div class="alert-big swiper-container" style="position:fixed;z-index:1000;">
-            <div class="swiper-wrapper">
-                <div class="big-show swiper-slide" id="icons" v-for="imgs in goods.goodsImages" :key="imgs.id">
-                    <img :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" @click="closeAlert" />
-                </div>
+        <div class="alert-big">
+            <div class="big-show" id="icons">
+                <img v-for="imgs in goods.goodsImages" :key="imgs.id" :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" @click="closeAlert" />
             </div>
-            <!-- 如果需要导航按钮 -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="pic-left-alert" @click="moveLeft"></div>
+            <div class="pic-right-alert" @click="moveRight"></div>
         </div>
         <div class="over-detail" style="padding-bottom:5rem;">
             <div class="detail-inf clearfix">
@@ -170,8 +168,7 @@
     </div>
 </template>
 <script> 
-import Swiper from 'swiper'
-import 'swiper/dist/css/swiper.min.css'
+
 import Header from '../templates/Header.vue'
 import Goods from '../templates/Goods.vue'
 export default {
@@ -201,8 +198,6 @@ export default {
     activated() {
         this.goodsId = this.$route.params.id;
         this.getGoodsInfo();
-        this.getRecomend();
-        this.getCollection();
     },
     methods: {
         moveT: function () {
@@ -259,21 +254,84 @@ export default {
                 }, 500)
             }
         },
+        moveLeft() {
+            var divL = $(".detail-right-inner div").length;
+            var imgD = $(".alert-big").attr("img-data");
+            moveA(imgD, true);
+            function moveA(index, bool) {
+                if (bool) {
+                    index++;
+                    if (index > 0) {
+                        index = 0;
+                    }
+                } else {
+                    index--;
+                    if (index < -divL + 1) {
+                        index = -divL + 1;
+                    }
+                }
+                $(".alert-big").attr("img-data", index);
+                $(".big-show img").eq(Math.abs(index)).fadeIn(400).siblings().fadeOut(400);
+                $(".big-show-pointer span").eq(Math.abs(index)).addClass("show-pointer").siblings().removeClass("show-pointer");
+            }
+        },
+        moveRight() {
+            var divL = $(".detail-right-inner div").length;
+            var imgD = $(".alert-big").attr("img-data");
+
+            moveA(imgD, false);
+            function moveA(index, bool) {
+                if (bool) {
+                    index++;
+                    if (index > 0) {
+                        index = 0;
+                    }
+                } else {
+                    index--;
+                    if (index < -divL + 1) {
+                        index = -divL + 1;
+                    }
+                }
+                $(".alert-big").attr("img-data", index);
+                $(".big-show img").eq(Math.abs(index)).fadeIn(400).siblings().fadeOut(400);
+                $(".big-show-pointer span").eq(Math.abs(index)).addClass("show-pointer").siblings().removeClass("show-pointer");
+            }
+        },
         clickBig() {
-            $(".over-detail").css("display","none");
-            var a = Math.abs($(".detail-pic-center").attr("img-data"));
-            $(".alert-big").css("display", "block");
-            var swiper = new Swiper('.swiper-container', {
-                 // 如果需要前进后退按钮
-                nextButton: '.swiper-button-next',
-                prevButton: '.swiper-button-prev',
-                loop: false,
+            //添加阻止事件
+             document.addEventListener("touchmove", function(e) {    //禁止浏览器默认行为
+                 e.preventDefault();
+             }, false); 
+             var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                autoplayDisableOnInteraction : false,
+                loop: true,
+                speed: 600,
+                autoplay: 2000,
+                onTouchEnd: function () {
+                    swiper.startAutoplay()
+                }
             });
-            swiper.slideTo(a, 0, false);
+            var divL = $(".detail-right-inner div").length;
+            $(".alert-big").css("display", "block");
+            if (divL == 1) {
+                $(".pic-left-alert").css("display", "none");
+                $(".pic-right-alert").css("display", "none");
+                $(".big-show-pointer").css("display", "none");
+            }
+            $(".big-show-pointer span").eq(0).addClass("show-pointer");
+            var index = $(".detail-pic-center").attr("img-data");
+            $(".big-show img").eq(Math.abs(index)).css("display", "block").siblings().css("display", "none");
+            $(".alert-big").attr("img-data", index);
+
         },
         closeAlert() {
-            $(".over-detail").css("display","block")
             $(".alert-big").css("display", "none");
+            //移除添加阻止事件
+             document.addEventListener("touchmove", function(e) {    //禁止浏览器默认行为
+                 e.preventDefault();
+             }, true);
         },
         detail(i) {
             this.isDetail = i;
@@ -294,27 +352,11 @@ export default {
                 goodsId: that.goodsId
             }, function (result) {
                 console.log(result);
-                that.goods = result.data.goods;               
-            })
-        },
-        getRecomend() {
-            var that = this;
-            this.Http.get(this.Api.getRecomend(), {
-                goodsId: that.goodsId
-            }, function (result) {
-                console.log(result,"999");
+
+                that.goods = result.data.goods;
+                that.isCollection = result.data.isCollection;
+                that.collection = that.isCollection ? "已收藏" : "收藏";
                 that.recommendGoods = result.data.recomendGoodses;
-            })
-        },
-        getCollection() {
-            var that = this;
-            this.Http.get(this.Api.getCollection(), {
-                goodsId: that.goodsId,
-                userId: that.userId
-            }, function (result) {
-                console.log(result,"5555555");
-                that.isCollection = result.data.isCollect;
-                that.collection = result.data.isCollect? "已收藏" : "收藏";
             })
         },
         buy() {
@@ -324,7 +366,6 @@ export default {
         deactivated() {
             // this.$destroy();
         }
-
     },
     watch: {
         '$route'(to, from) {

@@ -6,7 +6,7 @@ import axios from 'axios'
 
 // const base = 'http://xcn.tunnel.qydev.com/front';
 // const base = 'http://192.168.0.112:8081/front';
-const base = 'http://localhost:8080/front';
+const base = 'http://c.chovans.cn/front';
 
 //API,接口列表
 Vue.prototype.Api = {
@@ -132,7 +132,14 @@ Vue.prototype.Api = {
     },
     addFeedback(){
         return base + '/home/addFeedback';
+    },
+    getRecomend(){
+        return base + '/common/recomendGoods';
+    },
+    getCollection(){
+        return base + '/common/isCollect';
     }
+
 };
 
 //Http基本类，统一处理

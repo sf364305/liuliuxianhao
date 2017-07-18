@@ -2,7 +2,12 @@
     <div class="home">
         <scroller :on-refresh="refresh" :on-infinite="infinite" ref="scroller" style="margin-bottom:4rem;">
             <header class="index-logo" id="index-logo">
-                <router-link to="/commodity/all" class="search-index" replace></router-link>
+                <form action="" method="post" class="search-key">
+                    <div>
+                        <input type="text" value="" name="" class="search-word" placeholder="请输入您想要查找的关键字" style="">
+                        <router-link to="/commodity/all" class="search-index" replace></router-link>
+                    </div>
+                </form>
             </header>
             <div>
                 <app-banner></app-banner>
@@ -50,7 +55,6 @@
 import Banner from '../templates/Banner.vue'
 import Goods from '../templates/Goods.vue'
 import Footer from '../templates/Footer.vue'
-
 export default {
     name: 'home',
     data() {
@@ -211,18 +215,16 @@ export default {
     position: relative;
     width: 100%;
     height: 5rem;
-    background: url("../assets/images/logo_index.png") center center no-repeat;
-    background-size: 28.4% auto;
 }
 
 .search-index {
     position: absolute;
-    right: 6%;
+    right: 12%;
     top: 0rem;
     width: 2.2rem;
     height: 5rem;
     background: url("../assets/images/search.png") center center no-repeat;
-    background-size: 100% auto;
+    background-size: 80% auto;
 }
 
 .announcement {

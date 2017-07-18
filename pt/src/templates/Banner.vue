@@ -49,7 +49,7 @@ export default {
                     swiper.startAutoplay()
                 }
             });
-        }
+        },
     },
     mounted() {
         console.log('mounted', this);

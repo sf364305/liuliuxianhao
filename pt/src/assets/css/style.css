@@ -40,6 +40,26 @@
     margin: 0 auto;
     color: #fff;
 }
+.search-key {
+    padding: 1rem 0;
+}
+.search-key div {
+    width: 80%;
+    height: 3rem;
+    margin: 0 auto;
+    border: 1px solid #dcdcdc;
+    border-radius: 3px;
+}
+.search-word {
+    display: block;
+    width: 95%;
+    height: 100%;
+    padding-left: 5%;
+    border: none;
+    outline: none;
+    line-height: 3rem;
+    font-size: 1.1rem;
+}
 .announ-close {
     position: absolute;
     top: auto;
@@ -154,6 +174,10 @@
 .name-title  em {
     float: left;
     margin-left: 2%;
+    width: 85%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .index-news {
     overflow: hidden;
@@ -176,7 +200,7 @@
 .sell-status, .sell-status1,.sell-hot {
     position: absolute;
     top: 0;
-    right: -4%;
+    right: -7%;
     width: 8rem;
     height: 5rem;
     background: url(../images/lease_status.png) center 0 no-repeat;
@@ -184,11 +208,11 @@
 }
 .sell-status1 {
     background: url(../images/sell_status.png) center 0 no-repeat;
-    background-size: 70% auto;
+    background-size: 50% auto;
 }
 .sell-hot {
     background: url(../images/hot.png) center 0 no-repeat;
-    background-size: 70% auto;
+    background-size: 50% auto;
 }
 /*导航样式*/
 .index-home {
@@ -349,12 +373,12 @@
     top: 0;
     width: 1.5rem;
     height: 1.5rem;
-    color: white;
+    color: red;
     line-height: 1.6rem;
     border-radius: 50%;
     font-size: 0.85rem;
     text-align: center;
-    background: red;
+    background: #aaa;
 }
 .person-dif-con .person-con-show {
     display: block;
@@ -839,6 +863,15 @@
     height: 100%;
     z-index: 1000;
 }
+.alert-big img {
+    width: 100%;
+    height: auto;
+}
+.error img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
 .pic-left-alert {
     position: absolute;
     top: 0;
@@ -960,6 +993,10 @@
     display: inline-block;
     height: 2rem;
     line-height: 2rem;
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .detail-in-collect i {
     float: left;
@@ -2199,7 +2236,7 @@ select {
     top: 0;
     right: 10%;
     height: 3.2rem;
-    color: #999;
+    color: red;
     line-height: 3.2rem;
 }
 .all-order-list a span {

@@ -13,6 +13,8 @@ import iosAlertView from 'vue-ios-alertview'
 
 // 引入项目的四个模块组件
 import './assets/css/reset.css'
+import './assets/css/animate.min.css'
+import './assets/js/swiper.animate1.0.2.min.js'
 import './assets/css/style.css'
 import './assets/js/jquery-1.11.3.min.js'
 import './assets/js/mobiscroll_002.js'
@@ -54,6 +56,8 @@ import goods_list_merchant from './components/goods_list_merchant'
 import goods_item_collect from './components/goods_item_collect'
 import order_detail from './components/order_detail'
 import refuned_list from './components/refuned_list'
+import error_404 from './components/error_404'
+import error_500 from './components/error_500'
 // 使用router
 Vue.use(Router)
 Vue.use(Vuex)
@@ -204,6 +208,12 @@ var routes = [{
 }, {
   path: '/refunedList',
   component: refuned_list
+}, {
+  path: '/error_404',
+  component: error_404
+}, {
+  path: '/error_500',
+  component: error_500
 }];
 
 // 实例化路由
