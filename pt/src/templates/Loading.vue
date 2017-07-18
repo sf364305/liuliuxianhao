@@ -22,7 +22,7 @@ export default {
         //10秒钟过期
         d.setTime(d.getTime() +  10 * 1000);
         window.document.cookie = "xianhao_token=" + t + ";path=/;expires=" + d.toGMTString();
-        window.location.href = "/";
+        window.location.href = "/?t="+d.getTime();
       } else {
         t = window.document.cookie.match('(^|;)?xianhao_token=([^;]*)(;|$)');
         if (!t) {
