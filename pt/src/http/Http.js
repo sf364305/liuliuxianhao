@@ -6,7 +6,7 @@ import axios from 'axios'
 //const base = 'http://api.66xianhao.com/front';
 
 // const base = 'http://xcn.tunnel.qydev.com/front';
-Vue.prototype.host = 'http://test.api.66mkt.com/front';
+Vue.prototype.host = 'http://test.api.66mkt.com/';
 
 // const base = 'http://c.chovans.cn/front';
 // Vue.prototype.host = 'http://localhost:8080/';
