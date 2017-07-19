@@ -33,9 +33,9 @@
             <li class="alert-com-inf alert-com-show">
                 <form action="" method="post">
                     <!--<div class="clearfix">
-                        <label for="">关键词：</label>
-                        <input v-model="condition.keyword" type="text" value="" name="" class="key-word" placeholder="请输入想查找的关键信息" style="border: none;width: 75%;text-align: left;">
-                    </div>-->
+                            <label for="">关键词：</label>
+                            <input v-model="condition.keyword" type="text" value="" name="" class="key-word" placeholder="请输入想查找的关键信息" style="border: none;width: 75%;text-align: left;">
+                        </div>-->
                     <div class="plat-comm clearfix">
                         <span>平台：</span>
                         <label>
@@ -100,37 +100,37 @@
                     <div class="certification-com clearfix">
                         <span>身份认证：</span>
                         <label>
-                            <input v-model="condition.identification" type="radio" checked="checked" name="bind" value="2"></input>
+                            <input v-model="condition.identification" type="radio" checked="checked" name="identification" value="2"></input>
                             <i class="choice-sho" v-bind:class="{'choiced-show':condition.identification == 2}" @click="changeIden(2)"></i>
                             <em class="choice-text">已认证</em>
                         </label>
                         <label>
-                            <input v-model="condition.identification" type="radio" name="bind" value="1"></input>
+                            <input v-model="condition.identification" type="radio" name="identification" value="1"></input>
                             <i class="choice-sho" v-bind:class="{'choiced-show':condition.identification == 1}" @click="changeIden(1)"></i>
                             <em class="choice-text">未认证</em>
                         </label>
                     </div>
                     <div class="com-sub">
-                        <input type="reset" name="" value="重置" class="com-reset"></input>
+                        <input type="reset" name="" value="重置" class="com-reset" @click="reset()"></input>
                         <input type="button" name="" value="确定" class="com-submit" @click="submit(true)"></input>
                     </div>
                 </form>
             </li>
             <li class="alert-com-time">
                 <div class="price-sort">
-                    <label class="alert-all-dif" @click="submit">
+                    <label class="alert-all-dif" @click="submit(true)">
                         <em v-if="condition.sort===''" class="com-time-show">>默认排序</em>
                         <em v-else class="">默认排序</em>
                         <input v-model="condition.sort" type="radio" value="" name="price" class="key-word" checked="checked">
                         <span>（按时间倒序）</span>
                     </label>
-                    <label class="alert-all-dif" @click="submit">
+                    <label class="alert-all-dif" @click="submit(true)">
                         <em v-if="condition.sort==1" class="com-time-show">>价格↓</em>
                         <em v-else class="">价格↓</em>
                         <input v-model="condition.sort" type="radio" value="1" name="price" class="key-word" checked="checked">
                         <span style="padding-left: 20%">（按价格从高到低）</span>
                     </label>
-                    <label class="alert-all-dif" @click="submit">
+                    <label class="alert-all-dif" @click="submit(true)">
                         <em v-if="condition.sort=='0'" class="com-time-show">>价格↑</em>
                         <em v-else class="">价格↑</em>
                         <span style="padding-left: 20%">（按价格从低到高）</span>
@@ -175,8 +175,28 @@ export default {
     },
     activated() {
         this.goods = [];
-        //进入重置搜索条件
-        this.condition = {
+        this.reset();
+        if (this.$route.params.id == "0" || this.$route.params.id == "1") {
+            this.condition.type = this.$route.params.id;
+            this.condition.categoryId = "";
+        } else {
+            this.condition.categoryId = this.$route.params.id;
+            if (this.$route.params.id != "all") {
+                this.condition.keyword = this.$route.params.id;
+            }
+        }
+        this.submit();
+    },
+    methods: {
+        back() {
+            var v = this.$store.state.FromView[this.$store.state.FromView.length - 1];
+            this.$router.push(v);
+            console.log("跳转页面", v);
+            // this.$router.back(-1);
+        },
+        reset() {
+            //进入重置搜索条件
+            this.condition = {
                 type: "",
                 keyword: "",
                 categoryId: "",
@@ -191,27 +211,10 @@ export default {
                 page: 0,
                 size: 20
             }
-        if (this.$route.params.id == "0" || this.$route.params.id == "1") {
-            this.condition.type = this.$route.params.id;
-            this.condition.categoryId = "";
-        } else {
-            this.condition.categoryId = this.$route.params.id;
-            if(this.$route.params.id != "all") {
-                this.condition.keyword = this.$route.params.id;
-            }
-        }
-        this.submit();
-    },
-    methods: {
-        back() {
-            var v = this.$store.state.FromView[this.$store.state.FromView.length-1];
-            this.$router.push(v);
-            console.log("跳转页面",v);
-            // this.$router.back(-1);
         },
         searchAll() {
             var text = this.condition.keyword;
-            this.submit(true); 
+            this.submit(true);
         },
         change1: function () {
             //添加阻止事件
@@ -247,27 +250,27 @@ export default {
                 e.preventDefault();
             }, true);
         },
-        changeSex(sex){
+        changeSex(sex) {
             this.condition.sex = sex;
             // $(e.target).addClass('choiced-show').parent().siblings().find('i').removeClass('choiced-show');
         },
-        changeBind(bind){
+        changeBind(bind) {
             this.condition.bind = bind;
         },
-        changeIden(identification){
+        changeIden(identification) {
             this.condition.identification = identification;
         },
-        changePlat(index){
-            if(index){
+        changePlat(index) {
+            if (index) {
                 this.condition.categoryId = this.$store.state.Categroy[index].id;
-            }else{
+            } else {
                 this.condition.categoryId = ''
             }
-            
+
         },
-        changeType(type){
+        changeType(type) {
             this.condition.type = type;// < 0?'':type;
-            this.submit();
+            this.submit(true);
         },
         submit(clear) {
             //移除添加阻止事件
@@ -275,7 +278,7 @@ export default {
                 e.preventDefault();
             }, true);
             //获取列表
-            if(clear){
+            if (clear) {
                 this.goods = [];
             }
             var that = this;
@@ -288,7 +291,7 @@ export default {
                         }
                     }
                 }
-                 that.$refs.scroller.finishInfinite(true);
+                that.$refs.scroller.finishInfinite(true);
             })
             that.closeA();
         },
@@ -302,7 +305,7 @@ export default {
             this.submit();
             that.condition.page += 1;
         },
-        activated(){
+        activated() {
             self.goods = [];
         },
         contains(g) {

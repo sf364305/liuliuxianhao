@@ -75,6 +75,9 @@ export default {
         this.getHomeGoodsList();
         this.getJsConfig();
     },
+    activated(){
+        this.searchText = "";
+    },
     methods: {
         linkCom(ids) {
             var goodsId = this.$store.state.Categroy[ids].id;
