@@ -178,16 +178,14 @@
     float: left;
     width: 1.5rem;
     height: auto;
-    margin-top: 0.1rem;
+    /*margin-top: 0.1rem;*/
 }
 .name-title  em {
     float: left;
-    margin-left: 2%;
     width: 85%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-weight: bold;
 }
 .index-news {
     overflow: hidden;
@@ -196,10 +194,11 @@
 .com-list .price {
     position: absolute;
     right: 10%;
-    top: 3.2rem;
+    top: 4rem;
+    color: #e44154;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 1.92rem;
+    font-size: 1.5rem;
     text-align: right;
     
 }
@@ -390,6 +389,7 @@
     background: #fff;
     border: 1px solid #333;
 }
+
 .person-dif-con .person-con-show {
     display: block;
 }
@@ -873,6 +873,8 @@
 }
 .alert-big {
     display: none;
+}
+.alert-big-out {
     position: fixed;
     top: 0;
     left: 0;

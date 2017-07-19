@@ -25,7 +25,7 @@
                 <div class="pic-bottom" @click="moveT2"></div>
             </div>
         </div>
-        <div class="alert-big swiper-container" style="position:fixed;z-index:1000;">
+        <div class="swiper-container alert-big-out" v-bind:class="{'alert-big':isShow}" style="position:fixed;z-index:1000;">
             <div class="swiper-wrapper">
                 <div class="big-show swiper-slide" id="icons" v-for="imgs in goods.goodsImages" :key="imgs.id">
                     <img :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" @click="closeAlert" />
@@ -175,7 +175,6 @@ import 'swiper/dist/css/swiper.min.css'
 import Header from '../templates/Header.vue'
 import Goods from '../templates/Goods.vue'
 export default {
-
     name: 'detail',
     data() {
         return {
@@ -195,10 +194,12 @@ export default {
             isCollection: false,
             collection: "收藏",//isCollection ? "已收藏" : "收藏",
             isDetail: true,
+            isShow: true,
             recommendGoods: []
         }
     },
     activated() {
+        this.isShow = true;
         this.goodsId = this.$route.params.id;
         this.getGoodsInfo();
         this.getRecomend();
