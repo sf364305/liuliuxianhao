@@ -22,12 +22,12 @@ export default {
         //10秒钟过期
         d.setTime(d.getTime() + 1000 * 60 * 1000);
         window.document.cookie = "xianhao_token=" + t + ";path=/;expires=" + d.toGMTString();
-        window.location.href = "/";
+        window.location.href = "/?t="+d.getTime();
       } else {
         t = window.document.cookie.match('(^|;)?xianhao_token=([^;]*)(;|$)');
         if (!t) {
-          // window.location.href = "http://api.66xianhao.com";
-          window.location.href = "http://localhost:8080";
+          window.location.href = "http://api.66xianhao.com";
+          // window.location.href = "http://localhost:8080";
         } else {
           this.Http.setToken(t[2]);
           this.getConfig();

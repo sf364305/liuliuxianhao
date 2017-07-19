@@ -2,11 +2,13 @@ import Vue from 'vue'
 import axios from 'axios'
 
 
-// const base = 'http://api.66xianhao.com/front';
+//const base = 'http://api.66xianhao.com/front';
 
 // const base = 'http://xcn.tunnel.qydev.com/front';
 // const base = 'http://192.168.0.112:8081/front';
+
 const base = 'http://c.chovans.cn/front';
+
 
 //API,接口列表
 Vue.prototype.Api = {
