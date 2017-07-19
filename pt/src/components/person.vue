@@ -127,7 +127,7 @@ export default {
             var self = this;
             this.Http.get(this.Api.getUserInfo(), null, function (result) {
                 self.userInfo = result.data;
-                console.log(self.userInfo,"----")
+                self.$store.commit('setUser',self.userInfo.user);
             })
         },
         refresh(done) {

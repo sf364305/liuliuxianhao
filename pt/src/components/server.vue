@@ -29,8 +29,11 @@
                 <p>提交成功</p>
             </div>
         </div>
+        <iframe v-if="serverOnline" id="iframe" name="iframe" :src="serverUrl" frameborder="no" style="width: 100%;height: 51rem;border: none;position: absolute;top: 0;left: 0;z-index:9999;background: white;">
+    
+        </iframe>
+    
         <div class="nav-bottom">
-            <!-- 引入公用的尾部 footer组件 -->
             <app-footer></app-footer>
         </div>
     </div>
@@ -48,14 +51,27 @@ export default {
                 phone: "",
                 qq: "",
                 content: ""
-            }
+            },
+            serverUrl: "",
+            serverOnline: true
         }
     },
+    created() {
+        var self = this;
+        this.Http.get(this.Api.getServerUrl(), null, function (result) {
+            self.serverUrl = result.data.url+"?t="+new Date().getTime();
+        })
+
+        //event 参数中有 data 属性，就是父窗口发送过来的数据
+        window.addEventListener("message", function (event) {
+            self.serverOnline = (event.data == "online" ? true:false);
+        }, false);
+    },
     methods: {
-        closeAlert(){
-            
+        closeAlert() {
+
         },
-        closeShow () {
+        closeShow() {
             if (!this.feedback.phone && !this.feedback.qq) {
                 this.$iosAlert("请至少填写一种联系方式");
                 return;
@@ -68,7 +84,7 @@ export default {
                 }
             })
             // $(".server-alert-outer").css("display", "block")
-        }
+        },
     }, components: {
         'app-footer': Footer
     }
