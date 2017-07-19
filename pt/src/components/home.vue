@@ -94,6 +94,7 @@ export default {
                 page: that.page,
                 size: that.size
             }, function (result) {
+                console.log(result,"9999")
                 if (done) done();
                 if (result.data.goods.length > 0) {
                     for (var i = 0; i < result.data.goods.length; i++) {

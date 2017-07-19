@@ -4,7 +4,7 @@
             <a class="game-name" replace @click="toDetail(index)">
                 <span class="name-title clearfix">
                     <img :src="$store.state.Setting.qiniuUrl + g.category.img" alt="">
-                    <em>{{g.name}}</em>
+                    <em>{{"【"+g.grade+"级"+"·"+g.category.name+"】"}}{{g.name}}</em>
                 </span>
                 <span class="sever" v-if="g.type==0">
                     <em class="com-game">绑定情况：</em>
