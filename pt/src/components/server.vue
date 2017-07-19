@@ -64,6 +64,7 @@ export default {
 
         //event 参数中有 data 属性，就是父窗口发送过来的数据
         window.addEventListener("message", function (event) {
+            console.log("收到客服系统反馈："+event.data);
             self.serverOnline = (event.data == "online" ? true:false);
         }, false);
     },
