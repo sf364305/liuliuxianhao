@@ -28,8 +28,7 @@ export default {
       } else {
         t = window.document.cookie.match('(^|;)?xianhao_token=([^;]*)(;|$)');
         if (!t) {
-          // window.location.href = "http://api.66xianhao.com";
-          window.location.href = "http://localhost:8080";
+          window.location.href = "http://test.api.66xianhao.com";
         } else {
           this.Http.setToken(t[2]);
           this.getConfig();

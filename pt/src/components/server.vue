@@ -56,7 +56,7 @@ export default {
             serverOnline: true
         }
     },
-    created() {
+    activated() {
         var self = this;
         this.Http.get(this.Api.getServerUrl(), null, function (result) {
             self.serverUrl = result.data.url+"?t="+new Date().getTime();
