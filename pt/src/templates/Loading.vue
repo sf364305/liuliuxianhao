@@ -20,11 +20,9 @@ export default {
         //存入cookie
         var d = new Date;
         //10秒钟过期
-<<<<<<< HEAD
+
         d.setTime(d.getTime() + 1000 * 60 * 1000);
-=======
-        d.setTime(d.getTime() + 100 * 60 * 1000);
->>>>>>> 85a0346a95aa90f1b4bba0794ffbc7760455d9fd
+
         window.document.cookie = "xianhao_token=" + t + ";path=/;expires=" + d.toGMTString();
         window.location.href = "/?t="+d.getTime();
       } else {

@@ -3,9 +3,9 @@
         <scroller :on-refresh="refresh" :on-infinite="infinite" ref="scroller" style="margin-bottom:4rem;">
             <header class="index-logo" id="index-logo">
                 <form action="" method="post" class="search-key">
-                    <div>
-                        <input type="text" value="" name="" class="search-word" placeholder="请输入您想要查找的关键字" style="">
-                        <router-link to="/commodity/all" class="search-index" replace></router-link>
+                    <div style="width:80%;height:3rem;">
+                        <input type="text" value="" name="" class="search-word" placeholder="请输入您想要查找的关键字" v-model="searchText">
+                        <a class="search-index" replace @click="searchAll"></a>
                     </div>
                 </form>
             </header>
@@ -61,7 +61,8 @@ export default {
         return {
             page: 0,
             size: 10,
-            goods: []
+            goods: [],
+            searchText: ""
         }
     },
     created() {
@@ -78,6 +79,14 @@ export default {
         linkCom(ids) {
             var goodsId = this.$store.state.Categroy[ids].id;
             this.$router.push("/commodity/" + goodsId);
+        },
+        searchAll() {
+            var text = this.searchText;
+            if(text=="") {
+                this.$router.push("/commodity/"+"all");
+            } else {
+                this.$router.push("/commodity/" + text);
+            }
         },
         getHomeGoodsList(done) {
             var that = this;

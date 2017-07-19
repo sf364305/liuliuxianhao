@@ -1,6 +1,14 @@
 <template>
     <div class="commodity">
-        <app-header :header="title"></app-header>
+        <header class="index-logo-com" id="index-logo">
+            <form action="" method="post" class="search-key">
+                <div style="border-radius:20px;border:1px solid #aaa;">
+                    <input type="text" value="" name="" class="search-word" placeholder="请输入您想要查找的关键字" v-model="condition.keyword" style="width:85%;margin-left:5%;font-size:1rem;">
+                    <a class="search-index-com" replace @click="searchAll"></a>
+                </div>
+            </form>
+            <span class="return-back" @click="back"></span>
+        </header>
         <ul class="com-choice clearfix">
             <li class="com-text comtext-show" @click="change1">商品类型</li>
             <li class="com-text2" @click="change2">筛选</li>
@@ -24,10 +32,10 @@
             </li>
             <li class="alert-com-inf alert-com-show">
                 <form action="" method="post">
-                    <div class="clearfix">
+                    <!--<div class="clearfix">
                         <label for="">关键词：</label>
                         <input v-model="condition.keyword" type="text" value="" name="" class="key-word" placeholder="请输入想查找的关键信息" style="border: none;width: 75%;text-align: left;">
-                    </div>
+                    </div>-->
                     <div class="plat-comm clearfix">
                         <span>平台：</span>
                         <label>
@@ -188,10 +196,23 @@ export default {
             this.condition.categoryId = "";
         } else {
             this.condition.categoryId = this.$route.params.id;
+            if(this.$route.params.id != "all") {
+                this.condition.keyword = this.$route.params.id;
+            }
         }
         this.submit();
     },
     methods: {
+        back() {
+            var v = this.$store.state.FromView[this.$store.state.FromView.length-1];
+            this.$router.push(v);
+            console.log("跳转页面",v);
+            // this.$router.back(-1);
+        },
+        searchAll() {
+            var text = this.condition.keyword;
+            this.submit(true); 
+        },
         change1: function () {
             //添加阻止事件
             document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为

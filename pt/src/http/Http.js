@@ -3,12 +3,12 @@ import axios from 'axios'
 
 
 
-const base = 'http://api.66xianhao.com/front';
+//const base = 'http://api.66xianhao.com/front';
 
 // const base = 'http://xcn.tunnel.qydev.com/front';
 // const base = 'http://192.168.0.112:8081/front';
 
-//const base = 'http://c.chovans.cn/front';
+const base = 'http://c.chovans.cn/front';
 
 // const base = 'http://api.66xianhao.com/front';
 
@@ -141,16 +141,14 @@ Vue.prototype.Api = {
     addFeedback(){
         return base + '/home/addFeedback';
     },
-<<<<<<< HEAD
     getRecomend(){
         return base + '/common/recomendGoods';
     },
     getCollection(){
         return base + '/common/isCollect';
-=======
+    },
     getServerUrl(){
         return base + '/utils/getServerUrl';
->>>>>>> 85a0346a95aa90f1b4bba0794ffbc7760455d9fd
     }
 
 };

@@ -44,11 +44,20 @@
     padding: 1rem 0;
 }
 .search-key div {
-    width: 80%;
-    height: 3rem;
+    width: 60%;
+    height: 2rem;
     margin: 0 auto;
     border: 1px solid #dcdcdc;
     border-radius: 3px;
+}
+.search-index-com {
+    position: absolute;
+    right: 22%;
+    top: 0rem;
+    width: 2.2rem;
+    height: 4rem;
+    background: url("../images/search.png") center center no-repeat;
+    background-size: 60% auto;
 }
 .search-word {
     display: block;
@@ -601,7 +610,12 @@
     font-size: 1.33rem;
     z-index: 9;
 }
-.commodity-head span {
+.index-logo-com {
+    position: relative;
+    width: 100%;
+    height: 4rem;
+}
+.commodity-head span, .index-logo-com span {
     display: block;
     position: absolute;
     left: 3%;
