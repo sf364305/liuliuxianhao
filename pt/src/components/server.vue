@@ -29,7 +29,7 @@
                 <p>提交成功</p>
             </div>
         </div>
-        <iframe v-if="serverOnline" id="iframe" name="iframe" :src="serverUrl" frameborder="no" style="width: 100%;height: 51rem;border: none;position: absolute;top: 0;left: 0;z-index:9999;background: white;">
+        <iframe v-if="serverOnline == true" id="iframe" name="iframe" :src="serverUrl" frameborder="no" style="width: 100%;height: 90%;border: none;position: absolute;top: 0;left: 0;z-index:9999;background: white;">
     
         </iframe>
     
@@ -64,6 +64,7 @@ export default {
 
         //event 参数中有 data 属性，就是父窗口发送过来的数据
         window.addEventListener("message", function (event) {
+            console.log("收到客服系统反馈：",event.data);
             self.serverOnline = (event.data == "online" ? true:false);
         }, false);
     },
