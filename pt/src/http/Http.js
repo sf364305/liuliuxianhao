@@ -6,11 +6,11 @@ import axios from 'axios'
 //const base = 'http://api.66xianhao.com/front';
 
 // const base = 'http://xcn.tunnel.qydev.com/front';
-const base = 'http://test.api.66mkt.com/front';
+Vue.prototype.host = 'http://test.api.66mkt.com/front';
 
 // const base = 'http://c.chovans.cn/front';
-
-//const base = 'http://localhost:8080/front';
+// Vue.prototype.host = 'http://localhost:8080/';
+const base = Vue.prototype.host + 'front';
 
 //API,接口列表
 Vue.prototype.Api = {
@@ -145,6 +145,9 @@ Vue.prototype.Api = {
     },
     getServerUrl(){
         return base + '/utils/getServerUrl';
+    },
+    getOrderServerUrl(){
+        return base + '/utils/getOrderServerUrl';
     }
 
 };
@@ -231,9 +234,10 @@ Vue.prototype.callWxPay = function (payInfo) {
     });
 }
 
-Vue.prototype.callServer = function () {
-    console.log("联系客服");
-    Vue.prototype.$iosAlert("客服系统升级维护中，请暂时通过公众号联系平台，感谢您的支持！");
+Vue.prototype.callServer = function (orderId) {
+    console.log('/order_server/'+orderId);
+    this.$router.push('/order_server/'+orderId);
+    // Vue.prototype.$iosAlert("客服系统升级维护中，请暂时通过公众号联系平台，感谢您的支持！");
 }
 
 // http request 拦截器

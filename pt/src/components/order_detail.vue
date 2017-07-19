@@ -134,7 +134,7 @@ export default {
     },
     methods: {
         server(){
-            this.callServer();
+            this.callServer(this.order.id);
         },
         pay(orderId) {
             var self = this;

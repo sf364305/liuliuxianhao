@@ -1,6 +1,6 @@
 <template>
     <div id="server">
-        <h1>{{title}}</h1>
+        <app-header :header="title"></app-header>
         <div class="messeage-tit">
             <h2>*客服在线时间</h2>
             <p>工作日 09:00 - 21:00</p>
@@ -23,42 +23,35 @@
                 <input type="button" name="" value="提交" class="server-submit" @click="closeShow" />
             </div>
         </form>
-        <div class="server-alert-outer" @click="closeAlert">
-            <div class="server-alert">
-                <h2>提示</h2>
-                <p>提交成功</p>
-            </div>
-        </div>
-        <iframe v-if="serverOnline == true" id="iframe" name="iframe" :src="serverUrl" frameborder="no" style="width: 100%;height: 91%;border: none;position: absolute;top: 0;left: 0;z-index:9999;background: white;">
+        <iframe v-if="serverOnline == true" id="iframe" name="iframe" :src="serverUrl" frameborder="no" style="width: 100%;height: 94%;margin-top:10%;border: none;position: absolute;top: 0;left: 0;z-index:9999;background: white;">
     
         </iframe>
-    
-        <div class="nav-bottom">
-            <app-footer></app-footer>
-        </div>
     </div>
 </template>
 <style>
 
 </style>
 <script>
-import Footer from '../templates/Footer.vue'
+import Header from '../templates/Header.vue'
 export default {
     data: function () {
         return {
-            title: '给我们留言',
+            title:"正在连接客服",
+            serverUrl:"",
             feedback: {
                 phone: "",
                 qq: "",
                 content: ""
             },
-            serverUrl: "",
             serverOnline: true
         }
     },
     activated() {
         var self = this;
-        this.Http.get(this.Api.getServerUrl(), null, function (result) {
+        var id = this.$route.params.orderId;
+        this.Http.get(this.Api.getOrderServerUrl(), {
+            orderId:id
+        }, function (result) {
             self.serverUrl = result.data.url+"?t="+new Date().getTime();
         })
 
@@ -66,12 +59,14 @@ export default {
         window.addEventListener("message", function (event) {
             console.log("收到客服系统反馈：",event.data);
             self.serverOnline = (event.data == "online" ? true:false);
+            if(self.serverOnline == true){
+                self.title = "六六闲号客服"
+            }else{
+                self.title = "未有客服在线，请留言"
+            }
         }, false);
     },
     methods: {
-        closeAlert() {
-
-        },
         closeShow() {
             if (!this.feedback.phone && !this.feedback.qq) {
                 this.$iosAlert("请至少填写一种联系方式");
@@ -82,18 +77,13 @@ export default {
             this.Http.get(this.Api.addFeedback(), this.feedback, function (result) {
                 if (result.code == 0) {
                     self.$iosAlert("我们已收到您的信息，感谢您的支持！");
+                    self.$store.commit("clearFrom");
+                    self.$router.push('/person');
                 }
             })
-            // $(".server-alert-outer").css("display", "block")
-        },
+        }
     }, components: {
-        'app-footer': Footer
+        'app-header': Header
     }
 }
 </script>
-
-<style>
-.finished {
-    display: none;
-}
-</style>

@@ -58,6 +58,8 @@ import order_detail from './components/order_detail'
 import refuned_list from './components/refuned_list'
 import error_404 from './components/error_404'
 import error_500 from './components/error_500'
+import order_server from './components/order.server'
+
 // 使用router
 Vue.use(Router)
 Vue.use(Vuex)
@@ -214,6 +216,9 @@ var routes = [{
 }, {
   path: '/error_500',
   component: error_500
+}, {
+  path: '/order_server/:orderId',
+  component: order_server
 }];
 
 // 实例化路由
