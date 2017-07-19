@@ -137,7 +137,7 @@
 }
 .com-list li {
     position: relative;
-    padding: 0.5rem 3% 0rem;
+    padding: 1rem 3% 0.5rem;
     margin-bottom: 1.2rem;
     box-shadow: 1px 1px 5px 2px rgba(50,50,50,0.2), 1px 1px 1px -11px rgba(50,50,50,0.2);  
 }
@@ -154,8 +154,8 @@
 }
 .sell-credit, .lease-credit, .sell-inf, .lease-inf, .sever {
     margin-bottom: 0.3rem;
-    color: #222;
-    font-size: 0.95rem;
+    color: #555;
+    font-size: 1rem;
 }
 .sell-credit em, .lease-credit em, .lease-credit span, .lease-inf em, .lease-inf span {
     float: left;
@@ -187,6 +187,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-weight: bold;
 }
 .index-news {
     overflow: hidden;
@@ -194,10 +195,9 @@
 }
 .com-list .price {
     position: absolute;
-    right: 15%;
-    top: 2.5rem;
+    right: 10%;
+    top: 3.2rem;
     text-overflow: ellipsis;
-    color: red;
     white-space: nowrap;
     font-size: 1.92rem;
     text-align: right;
@@ -380,14 +380,15 @@
     display: inline-block;
     right: 19px;
     top: 0;
-    width: 1.5rem;
-    height: 1.5rem;
-    color: red;
-    line-height: 1.6rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    color: #666;
+    line-height: 1.3rem;
     border-radius: 50%;
     font-size: 0.85rem;
     text-align: center;
-    background: #aaa;
+    background: #fff;
+    border: 1px solid #333;
 }
 .person-dif-con .person-con-show {
     display: block;
@@ -460,6 +461,7 @@
     color: #333;
     font-size: 1.17rem;
     line-height: 3.92rem;
+    font-weight: 600;
 }
 .person-code {
     background: url("../images/code.png") 5px center no-repeat;
@@ -490,9 +492,10 @@
     background: url("../images/abtion.png") 5px center no-repeat;
     background-size: 5% auto;
 }
-.person-cer em {
+.person-income-con .person-cer em {
     float: right;
     margin-right: 10%;
+    font-weight: normal;
 }
 /*实名认证*/
 .certification-pic {
@@ -607,7 +610,7 @@
     border-bottom: 1px solid #dcdcdc;
     line-height: 4rem;
     color: #333;
-    font-size: 1.33rem;
+    font-size: 1.5rem;
     z-index: 9;
 }
 .index-logo-com {
@@ -620,7 +623,7 @@
     position: absolute;
     left: 3%;
     top: 0;
-    width: 5%;
+    width: 7%;
     height: 4rem;
     background: url("../images/arrow.png") 5px center no-repeat;
     background-size: 100% auto;
