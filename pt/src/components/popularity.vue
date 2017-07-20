@@ -130,6 +130,8 @@ export default {
                 "bottom": "0"
             }, 500);
             $(".papular-plat-choice").css("display", "block").siblings().css("display", "none");
+
+            this.$refs.scroller.scrollTo(0,500,true);
         },
         closePopu() {
             var dataId = $(".alert-plat-papular").attr("data-id");
