@@ -31,7 +31,7 @@
         </div>
         <div class="wait-you" v-if="order.status == 2 && order.arbitrationStatus !=1">
             <span class="wait-cancel" @click="cancel(order.id)">取消订单</span>
-            <span class="wait-sure" @click="server()">联系客服</span>
+            <span class="wait-sure" @click="server(order.id)">联系客服</span>
         </div>
         <div class="wait-you" v-if="order.status == 3 && order.arbitrationStatus !=1">
             <span class="wait-cancel" @click="arbitrationStatus(order.id)">申请仲裁</span>
@@ -39,7 +39,7 @@
         </div>
         
         <div class="wait-you" v-if="order.arbitrationStatus == 1">
-            <span class="wait-sure" @click="server()" style="width:100%;">联系客服</span>
+            <span class="wait-sure" @click="server(order.id)" style="width:100%;">联系客服</span>
         </div>
         <div class="wait-you" v-if="order.status == 4 && order.arbitrationStatus !=1">
             <!--<span class="wait-cancel">申请仲裁</span>-->
@@ -60,8 +60,8 @@ export default {
     },
     props: ['order'],
     methods: {
-        server(){
-            this.callServer();
+        server(id){
+            this.callServer(id);
         },
         toDetail(orderId){
             this.$router.push("/order_detail/"+orderId);
