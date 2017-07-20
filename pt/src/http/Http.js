@@ -9,7 +9,7 @@ import axios from 'axios'
 Vue.prototype.serverHost = 'http://server.66mkt.com/';
 
 // Vue.prototype.host = 'http://c.chovans.cn/';
-Vue.prototype.host = 'http://api.66mkt.com/';
+Vue.prototype.host = 'http://api.66xianhao.com/';
 const base = Vue.prototype.host + 'front';
 
 //API,接口列表
