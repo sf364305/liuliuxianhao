@@ -17,7 +17,7 @@ export default {
     data() {
         return {
             // images: []
-            localIds: []
+            localIds: [],
         }
     },
     props: ['images'],
@@ -30,43 +30,41 @@ export default {
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: function (res) {
                     self.localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                    self.syncUpload(self.localIds[0]);
+                    self.syncUpload(self.localIds);
 
                 }
             });
         },
-        syncUpload(localId) {
+        syncUpload() {
             var self = this;
             wx.uploadImage({
-                localId: localId,
+                localId: self.localIds[0],
                 isShowProgressTips: 1,
                 success: function (res) {
-                    console.log(serverId);
                     var serverId = res.serverId; // 返回图片的服务器端ID
-                    self.notifyServer(serverId);
-                    //其他对serverId做处理的代码
-                    self.localIds.splice(0, 1);
-                    if (self.localIds.length > 0) {
-                        setTimeout(function() {
-                            self.syncUpload(self.localIds);    
-                        }, 300);
-                    }
+                    self.Http.get(self.Api.getQiniuImage(), {
+                        mediaId: serverId
+                    }, function (result) {
+                        self.images.push(result.data.key);
+                        //其他对serverId做处理的代码
+                        self.localIds.splice(0, 1);
+                        if (self.localIds.length > 0) {
+                            self.syncUpload(self.localIds);
+                        }
+                    });
+
                 }
             });
         },
         notifyServer(serverId) {
             var self = this;
-            self.Http.get(self.Api.getQiniuImage(), {
-                mediaId: serverId
-            },function (result) {
-                    self.images.push(result.data.key);
-                });
+
         },
-        del(index){
+        del(index) {
             var self = this;
             this.$iosConfirm("删除图片?")
                 .then(function () {
-                   self.images.splice(index,1);
+                    self.images.splice(index, 1);
                 }, function () {
                     console.log('取消');
                 });
