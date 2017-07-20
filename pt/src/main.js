@@ -269,7 +269,7 @@ vueRouter.beforeEach((to, from, next) => {
 vueRouter.afterEach((to, from) => {
   setTimeout(function () {
     $(".alertLoading").hide();
-  },to.fullPath.indexOf("detail")>0?600:300);
+  },to.fullPath.indexOf("detail")>0?300:300);
 
 })
 

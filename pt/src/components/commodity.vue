@@ -2,7 +2,8 @@
     <div class="commodity">
         <header class="index-logo-com" id="index-logo">
             <div style="" class="com-search-head">
-                <input type="text" value="" name="" class="search-word" placeholder="请输入您想要查找的关键字" v-model="condition.keyword" style="width:85%;margin-left:5%;font-size:1rem;line-height:2rem;">
+                <input type="text" value="" name="" class="search-word" placeholder="请输入关键字" v-model="condition.keyword" style="width:85%;margin-left:5%;font-size:1rem;line-height:2rem;"
+                 v-on:keyup.13="searchAll">
                 <a class="search-index-com" replace @click="searchAll"></a>
             </div>
             <span class="return-back" @click="back"></span>
@@ -172,32 +173,30 @@ export default {
         }
     },
     activated() {
-        this.goods = [];
         if (this.$store.state.IsSearch == false) {
+            this.goods = [];
             this.reset();
-            if (this.$route.params.id == "0" || this.$route.params.id == "1") {
-                this.condition.type = this.$route.params.id;
+            if (this.$route.params.id == "_0" || this.$route.params.id == "_1") {
+                this.condition.type = this.$route.params.id.replace("_","");
                 this.condition.categoryId = "";
             } else {
                 this.condition.categoryId = this.$route.params.id;
-                if (this.$route.params.id != "all") {
-                    this.condition.keyword = this.$route.params.id;
+                if (this.$route.params.id.startsWith("__")) {
+                    this.condition.keyword = this.$route.params.id.replace("__","");
                 }
             }
-            
+            this.submit();
         }
-
-        this.submit();
+        this.$refs.scroller.finishInfinite(false);
         this.$store.commit('setIsSearch', false);
-
-
+    },
+    deactivated(){
+        this.$refs.scroller.finishInfinite(true);
     },
     methods: {
         back() {
             var v = this.$store.state.FromView[this.$store.state.FromView.length - 1];
             this.$router.push(v);
-            console.log("跳转页面", v);
-            // this.$router.back(-1);
         },
         reset() {
             //进入重置搜索条件
@@ -219,31 +218,32 @@ export default {
         },
         searchAll() {
             var text = this.condition.keyword;
+            console.error("searchAll");
             this.submit(true);
         },
         change1: function () {
             //添加阻止事件
-            document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
-                e.preventDefault();
-            }, false);
+            // document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
+            //     e.preventDefault();
+            // }, false);
             $(".alert-com, .alert-com-outer").css("display", "block");
             $(".alert-com-diff").css("display", "block").siblings().css("display", "none");
             $(".com-text").addClass('comtext-show').siblings().removeClass('comtext-show');
         },
         change2: function () {
             //添加阻止事件
-            document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
-                e.preventDefault();
-            }, false);
+            // document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
+            //     e.preventDefault();
+            // }, false);
             $(".alert-com, .alert-com-outer").css("display", "block");
             $(".alert-com-inf").css("display", "block").siblings().css("display", "none");
             $(".com-text2").addClass('comtext-show').siblings().removeClass('comtext-show');
         },
         change3: function () {
             //添加阻止事件
-            document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
-                e.preventDefault();
-            }, false);
+            // document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
+            //     e.preventDefault();
+            // }, false);
             $(".alert-com, .alert-com-outer").css("display", "block");
             $(".alert-com-time").css("display", "block").siblings().css("display", "none");
             $(".com-text3").addClass('comtext-show').siblings().removeClass('comtext-show');
@@ -251,9 +251,9 @@ export default {
         closeA: function () {
             $(".alert-com, .alert-com-outer").css("display", "none");
             //移除添加阻止事件
-            document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
-                e.preventDefault();
-            }, true);
+            // document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
+            //     e.preventDefault();
+            // });
         },
         changeSex(sex) {
             this.condition.sex = sex;
@@ -274,25 +274,29 @@ export default {
 
         },
         changeType(type) {
+            console.log("type");
             this.condition.type = type;// < 0?'':type;
             this.submit(true);
         },
         changeSort(sort){
+            console.log("sort");
             this.condition.sort = sort;
             this.submit(true);
         },
         submit(clear) {
             //移除添加阻止事件
-            document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
-                e.preventDefault();
-            }, true);
+            // document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
+            //     e.preventDefault();
+            // }, true);
             //获取列表
             if (clear) {
                 this.goods = [];
+                this.condition.page = 0;
             }
+            
             var that = this;
-            that.$refs.scroller.triggerPullToRefresh(true);
-            that.condition.page = 0;
+            // that.$refs.scroller.finishInfinite(false);
+            // that.$refs.scroller.triggerPullToRefresh();
             that.Http.get(that.Api.getGoodsList(), that.condition, function (result) {
                 if (result.data.goods && result.data.goods.length > 0) {
                     for (var i = 0; i < result.data.goods.length; i++) {
@@ -301,22 +305,27 @@ export default {
                         }
                     }
                 }
-                // that.$refs.scroller.finishInfinite(true);
+                if(result.data.goods && result.data.goods.length < 20){
+                        that.$refs.scroller.finishInfinite(true);
+                    }else{
+                        that.$refs.scroller.finishInfinite(false);
+                    }
+                // that.$refs.scroller.finishInfinite(false);
+                // 
             })
             that.closeA();
         },
         refresh(done) {
+            console.log("refresh");
             this.goods = [];
             this.condition.page = 0;
             done();
         },
         infinite(done) {
+            console.log("infinite");
             var that = this;
-            this.submit();
+            this.submit(false);
             that.condition.page += 1;
-        },
-        activated() {
-            self.goods = [];
         },
         contains(g) {
             for (var i = 0; i < this.goods.length; i++) {

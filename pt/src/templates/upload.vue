@@ -47,7 +47,9 @@ export default {
                     //其他对serverId做处理的代码
                     self.localIds.splice(0, 1);
                     if (self.localIds.length > 0) {
-                        self.syncUpload(self.localIds);
+                        setTimeout(function() {
+                            self.syncUpload(self.localIds);    
+                        }, 300);
                     }
                 }
             });

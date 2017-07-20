@@ -202,9 +202,30 @@ export default {
     activated() {
         //搜索条件禁止回填
         this.$store.commit('setIsSearch',true);
+
+        //重置goods
+        this.goods= {
+                sex: 0,
+                goodsImages: [{ 'qiniuKey': 'logo_index.png' }],
+                category: {
+                    img: "logo_index.png"
+                },
+                merchant: {
+                    creditLevel: ""
+                },
+                name: "加载中"
+            }
+
         this.isShow = true;
         this.goodsId = this.$route.params.id;
-        this.getGoodsInfo();
+
+        this.goods = this.$store.state.Goods;
+        
+        if(!this.$store.state.Goods){
+            this.getGoodsInfo();
+        }
+        this.$store.commit('setGoods',null);
+
         this.getRecomend();
         this.getCollection();
         $(".over-detail").css("display","block");
