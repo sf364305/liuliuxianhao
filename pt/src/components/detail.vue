@@ -364,8 +364,9 @@ export default {
             if (to.fullPath.indexOf("detail") > 0) {
                 this.goodsId = this.$route.params.id;
                 this.getGoodsInfo();
+                var self = this;
                 var t = setTimeout(function () {
-                    document.body.scrollTop = 0;
+                    self.scrollTo(0,0,false);
                     clearTimeout(t);
                 }, 300);
             }
