@@ -1,17 +1,17 @@
 <template>
     <div class="detail">
         <app-header :header="title"></app-header>
-            <div class="swiper-container alert-big" style="position:fixed;z-index:1000;">
-                <div class="swiper-wrapper">
-                    <div class="big-show swiper-slide" id="icons" v-for="imgs in goods.goodsImages" :key="imgs.id">
-                        <img :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" @click="closeAlert" />
-                    </div>
+        <div class="swiper-container alert-big" style="position:fixed;z-index:1000;">
+            <div class="swiper-wrapper">
+                <div class="big-show swiper-slide" id="icons" v-for="imgs in goods.goodsImages" :key="imgs.id">
+                    <img :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" @click="closeAlert" />
                 </div>
-                <!-- 如果需要导航按钮 -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
             </div>
-        <scroller  ref="scroller" style="margin-bottom:4rem;margin-top:4rem;">
+            <!-- 如果需要导航按钮 -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        <scroller ref="scroller" style="margin-bottom:4rem;margin-top:4rem;">
             <div class="detail-inner clearfix">
                 <p class="detail-pic-left">
                     点
@@ -201,41 +201,41 @@ export default {
     },
     activated() {
         //搜索条件禁止回填
-        this.$store.commit('setIsSearch',true);
+        this.$store.commit('setIsSearch', true);
 
         //重置goods
-        this.goods= {
-                sex: 0,
-                goodsImages: [{ 'qiniuKey': 'logo_index.png' }],
-                category: {
-                    img: "logo_index.png"
-                },
-                merchant: {
-                    creditLevel: ""
-                },
-                name: "加载中"
-            }
+        this.goods = {
+            sex: 0,
+            goodsImages: [{ 'qiniuKey': 'logo_index.png' }],
+            category: {
+                img: "logo_index.png"
+            },
+            merchant: {
+                creditLevel: ""
+            },
+            name: "加载中"
+        }
 
         this.isShow = true;
         this.goodsId = this.$route.params.id;
 
         this.goods = this.$store.state.Goods;
-        
+
         // if(this.$store.state.Goods != null){
-            // this.getGoodsInfo();
+        // this.getGoodsInfo();
         // }
-        this.$store.commit('setGoods',null);
+        this.$store.commit('setGoods', null);
 
         this.getRecomend();
         this.getCollection();
-        $(".over-detail").css("display","block");
+        $(".over-detail").css("display", "block");
         $(".alert-big").css("display", "none");
-        setTimeout(function() {
-            $(".detail-pic-center").attr("img-data",0);
+        setTimeout(function () {
+            $(".detail-pic-center").attr("img-data", 0);
             $(".detail-right-inner").css({
                 "marginTop": 0
             })
-        },500)
+        }, 500)
     },
     methods: {
         moveT: function () {
@@ -294,18 +294,18 @@ export default {
         },
         clickBig() {
             $(".alert-big").css("display", "block");
-            $(".over-detail").css("display","none");
+            $(".over-detail").css("display", "none");
             var a = Math.abs($(".detail-pic-center").attr("img-data"));
             var swiper = new Swiper('.swiper-container', {
-                 // 如果需要前进后退按钮
+                // 如果需要前进后退按钮
                 nextButton: '.swiper-button-next',
                 prevButton: '.swiper-button-prev',
-                onlyExternal : true,
+                onlyExternal: true,
             });
             swiper.slideTo(a, 0, false);
         },
         closeAlert() {
-            $(".over-detail").css("display","block")
+            $(".over-detail").css("display", "block")
             $(".alert-big").css("display", "none");
         },
         detail(i) {
@@ -327,7 +327,7 @@ export default {
                 goodsId: that.goodsId
             }, function (result) {
                 console.log(result);
-                that.goods = result.data.goods;               
+                that.goods = result.data.goods;
             })
         },
         getRecomend() {
@@ -335,7 +335,7 @@ export default {
             this.Http.get(this.Api.getRecomend(), {
                 goodsId: that.goodsId
             }, function (result) {
-                console.log(result,"999");
+                console.log(result, "999");
                 that.recommendGoods = result.data.recomendGoodses;
             })
         },
@@ -345,9 +345,9 @@ export default {
                 goodsId: that.goodsId,
                 userId: that.userId
             }, function (result) {
-                console.log(result,"5555555");
+                console.log(result, "5555555");
                 that.isCollection = result.data.isCollect;
-                that.collection = result.data.isCollect? "已收藏" : "收藏";
+                that.collection = result.data.isCollect ? "已收藏" : "收藏";
             })
         },
         buy() {
@@ -363,7 +363,11 @@ export default {
         '$route'(to, from) {
             if (to.fullPath.indexOf("detail") > 0) {
                 this.goodsId = this.$route.params.id;
-                this.getGoodsInfo();
+                // this.getGoodsInfo();
+
+                this.goods = this.$store.state.Goods;
+                this.$store.commit('setGoods', null);
+
                 var t = setTimeout(function () {
                     document.body.scrollTop = 0;
                     clearTimeout(t);
