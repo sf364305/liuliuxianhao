@@ -293,6 +293,7 @@ export default {
                 this.goods = [];
             }
             var that = this;
+            that.$refs.scroller.triggerPullToRefresh(true);
             that.condition.page = 0;
             that.Http.get(that.Api.getGoodsList(), that.condition, function (result) {
                 if (result.data.goods && result.data.goods.length > 0) {
@@ -302,12 +303,12 @@ export default {
                         }
                     }
                 }
-                that.$refs.scroller.finishInfinite(true);
+                // that.$refs.scroller.finishInfinite(true);
             })
             that.closeA();
         },
         refresh(done) {
-            self.goods = [];
+            this.goods = [];
             this.condition.page = 0;
             done();
         },

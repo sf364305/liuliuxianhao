@@ -78,6 +78,9 @@ export default {
     activated(){
         this.searchText = "";
     },
+    deactivated(){
+        this.$refs.scroller.finishInfinite(true);
+    },
     methods: {
         linkCom(ids) {
             var goodsId = this.$store.state.Categroy[ids].id;
