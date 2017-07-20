@@ -1,166 +1,168 @@
 <template>
     <div class="detail">
         <app-header :header="title"></app-header>
-        <div class="detail-inner clearfix">
-            <p class="detail-pic-left">
-                点
-                <br/>击
-                <br/>图
-                <br/>片
-                <br/>查
-                <br/>看
-                <br/>大
-                <br/>图
-            </p>
-            <div class="detail-pic-center" img-data="0">
-                <img :src="$store.state.Setting.qiniuUrl + goods.goodsImages[0].qiniuKey" alt="" @click="clickBig" />
-            </div>
-            <div class="detail-pic-right">
-                <div class="detail-right-inner">
-                    <div v-for="imgs in goods.goodsImages" :key="imgs.id">
-                        <img :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" alt="" />
+            <div class="swiper-container alert-big" style="position:fixed;z-index:1000;">
+                <div class="swiper-wrapper">
+                    <div class="big-show swiper-slide" id="icons" v-for="imgs in goods.goodsImages" :key="imgs.id">
+                        <img :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" @click="closeAlert" />
                     </div>
                 </div>
-                <div class="pic-top" @click="moveT"></div>
-                <div class="pic-bottom" @click="moveT2"></div>
+                <!-- 如果需要导航按钮 -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
             </div>
-        </div>
-        <div class="swiper-container alert-big-out" v-bind:class="{'alert-big':isShow}" style="position:fixed;z-index:1000;">
-            <div class="swiper-wrapper">
-                <div class="big-show swiper-slide" id="icons" v-for="imgs in goods.goodsImages" :key="imgs.id">
-                    <img :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" @click="closeAlert" />
+        <scroller  ref="scroller" style="margin-bottom:4rem;margin-top:4rem;">
+            <div class="detail-inner clearfix">
+                <p class="detail-pic-left">
+                    点
+                    <br/>击
+                    <br/>图
+                    <br/>片
+                    <br/>查
+                    <br/>看
+                    <br/>大
+                    <br/>图
+                </p>
+                <div class="detail-pic-center" img-data="0">
+                    <img :src="$store.state.Setting.qiniuUrl + goods.goodsImages[0].qiniuKey" alt="" @click="clickBig" />
+                </div>
+                <div class="detail-pic-right">
+                    <div class="detail-right-inner">
+                        <div v-for="imgs in goods.goodsImages" :key="imgs.id">
+                            <img :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" alt="" />
+                        </div>
+                    </div>
+                    <div class="pic-top" @click="moveT"></div>
+                    <div class="pic-bottom" @click="moveT2"></div>
                 </div>
             </div>
-            <!-- 如果需要导航按钮 -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
-        <div class="over-detail" style="padding-bottom:5rem;">
-            <div class="detail-inf clearfix">
-                <div class="detail-in-left">
-                    <span class="detail-in-name">
-                        <img :src="$store.state.Setting.qiniuUrl + goods.category.img" alt="" />
-                        <em>{{goods.name}}</em>
-                    </span>
-                    <span class="detail-in-price">￥{{goods.price}}</span>
-                </div>
-                <div class="detail-in-position">
-                    <div class="sell-first1 clearfix">
-                        <span>
-                            <em>首次出售</em>
+            <div class="over-detail" style="padding-bottom:5rem;">
+                <div class="detail-inf clearfix">
+                    <div class="detail-in-left">
+                        <span class="detail-in-name">
+                            <img :src="$store.state.Setting.qiniuUrl + goods.category.img" alt="" />
+                            <em>{{goods.name}}</em>
                         </span>
-                        <em>商品属性：</em>
+                        <span class="detail-in-price">￥{{goods.price}}</span>
                     </div>
-                    <div class="sell-credit clearfix">
-                        <span v-for="n in goods.merchant.creditLevel" :key="n.id"></span>
-                        <em>卖家信用：</em>
-                    </div>
-                    <div class="sell-deal clearfix">
-                        <span>{{goods.merchant.successNum}}笔（成交率：{{goods.merchant.successRate}}%）</span>
-                        <em>最近成交：</em>
+                    <div class="detail-in-position">
+                        <div class="sell-first1 clearfix">
+                            <span>
+                                <em>首次出售</em>
+                            </span>
+                            <em>商品属性：</em>
+                        </div>
+                        <div class="sell-credit clearfix">
+                            <span v-for="n in goods.merchant.creditLevel" :key="n.id"></span>
+                            <em>卖家信用：</em>
+                        </div>
+                        <div class="sell-deal clearfix">
+                            <span>{{goods.merchant.successNum}}笔（成交率：{{goods.merchant.successRate}}%）</span>
+                            <em>最近成交：</em>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="detail-information">
-                <div class="detail-nav clearfix">
-                    <span v-bind:class="{'detail-show':isDetail}" @click="detail(true)">商品信息</span>
-                    <span v-bind:class="{'detail-show':!isDetail}" @click="detail(false)">交易说明</span>
+                <div class="detail-information">
+                    <div class="detail-nav clearfix">
+                        <span v-bind:class="{'detail-show':isDetail}" @click="detail(true)">商品信息</span>
+                        <span v-bind:class="{'detail-show':!isDetail}" @click="detail(false)">交易说明</span>
+                    </div>
+                    <div class="detail-else">
+                        <ul class="detail-content" v-if="isDetail">
+                            <li>
+                                <span>所属平台</span>
+                                <em>{{goods.category.name}}</em>
+                            </li>
+                            <li>
+                                <span>账户类型</span>
+                                <em>
+                                    手机账号
+                                </em>
+                            </li>
+                            <li>
+                                <span>账号等级</span>
+                                <em>
+                                    {{goods.grade}}级
+                                </em>
+                            </li>
+                            <li>
+                                <span>性别</span>
+                                <em v-if="goods.sex == 0">
+                                    男
+                                </em>
+                                <em v-if="goods.sex == 1">
+                                    女
+                                </em>
+                            </li>
+                            <li>
+                                <span>绑定情况</span>
+                                <em v-if="goods.bind == 1">
+                                    手机绑定
+                                </em>
+                                <em v-if="goods.bind == 2">
+                                    邮箱绑定
+                                </em>
+                                <em v-if="goods.bind == 3">
+                                    未绑定
+                                </em>
+                            </li>
+                            <li>
+                                <span>认证情况</span>
+                                <em v-if="goods.identification == 1">
+                                    未认证
+                                </em>
+                                <em v-if="goods.identification == 2">
+                                    已认证
+                                </em>
+                            </li>
+                            <li v-if="goods.type == 1">
+                                <span>价格详情</span>
+                                <em>
+                                    <span v-if="goods.goodsLeaseInfo.hourCost">{{goods.goodsLeaseInfo.hourCost}}元/时</span>
+                                    <span v-if="goods.goodsLeaseInfo.dayCost">{{goods.goodsLeaseInfo.dayCost}}元/日</span>
+                                    <span v-if="goods.goodsLeaseInfo.weekCost">{{goods.goodsLeaseInfo.weekCost}}元/周</span>
+                                    <span v-if="goods.goodsLeaseInfo.monthCost">{{goods.goodsLeaseInfo.monthCost}}元/月</span>
+                                </em>
+                            </li>
+                            <li>
+                                <span>描述</span>
+                                <em>{{goods.detail}}</em>
+                            </li>
+                        </ul>
+                        <ul class="descripe" v-if="!isDetail">
+                            <li>
+                                <h2>1.下单支付</h2>
+                                <p>选择满意的账号下单并支付</p>
+                            </li>
+                            <li>
+                                <h2>2.联系客服</h2>
+                                <p>在个人中心-买家-待发货订单中联系客服，等候发货</p>
+                            </li>
+                            <li>
+                                <h2>3.等待发货</h2>
+                                <p>客服开始验号，截图给买家确认是否继续购买，客服进行换绑</p>
+                            </li>
+                            <li>
+                                <h2>4.买家验收</h2>
+                                <p>买家换绑成功后，登录账号进行验收及密码修改</p>
+                            </li>
+                            <li>
+                                <h2>5.确认收货</h2>
+                                <p>待买家确认收货，或者自动确认收货：48小时。</p>
+                            </li>
+                            <li>
+                                <h2>6.卖家收款</h2>
+                                <p>买家确认收货，交易完成，66闲号通过微信转账给卖家，货款直接到微信钱包。</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="detail-else">
-                    <ul class="detail-content" v-if="isDetail">
-                        <li>
-                            <span>所属平台</span>
-                            <em>{{goods.category.name}}</em>
-                        </li>
-                        <li>
-                            <span>账户类型</span>
-                            <em>
-                                手机账号
-                            </em>
-                        </li>
-                        <li>
-                            <span>账号等级</span>
-                            <em>
-                                {{goods.grade}}级
-                            </em>
-                        </li>
-                        <li>
-                            <span>性别</span>
-                            <em v-if="goods.sex == 0">
-                                男
-                            </em>
-                            <em v-if="goods.sex == 1">
-                                女
-                            </em>
-                        </li>
-                        <li>
-                            <span>绑定情况</span>
-                            <em v-if="goods.bind == 1">
-                                手机绑定
-                            </em>
-                            <em v-if="goods.bind == 2">
-                                邮箱绑定
-                            </em>
-                            <em v-if="goods.bind == 3">
-                                未绑定
-                            </em>
-                        </li>
-                        <li>
-                            <span>认证情况</span>
-                            <em v-if="goods.identification == 1">
-                                未认证
-                            </em>
-                            <em v-if="goods.identification == 2">
-                                已认证
-                            </em>
-                        </li>
-                        <li v-if="goods.type == 1">
-                            <span>价格详情</span>
-                            <em>
-                                <span v-if="goods.goodsLeaseInfo.hourCost">{{goods.goodsLeaseInfo.hourCost}}元/时</span>
-                                <span v-if="goods.goodsLeaseInfo.dayCost">{{goods.goodsLeaseInfo.dayCost}}元/日</span>
-                                <span v-if="goods.goodsLeaseInfo.weekCost">{{goods.goodsLeaseInfo.weekCost}}元/周</span>
-                                <span v-if="goods.goodsLeaseInfo.monthCost">{{goods.goodsLeaseInfo.monthCost}}元/月</span>
-                            </em>
-                        </li>
-                        <li>
-                            <span>描述</span>
-                            <em>{{goods.detail}}</em>
-                        </li>
-                    </ul>
-                    <ul class="descripe" v-if="!isDetail">
-                        <li>
-                            <h2>1.下单支付</h2>
-                            <p>选择满意的账号下单并支付</p>
-                        </li>
-                        <li>
-                            <h2>2.联系客服</h2>
-                            <p>在个人中心-买家-待发货订单中联系客服，等候发货</p>
-                        </li>
-                        <li>
-                            <h2>3.等待发货</h2>
-                            <p>客服开始验号，截图给买家确认是否继续购买，客服进行换绑</p>
-                        </li>
-                        <li>
-                            <h2>4.买家验收</h2>
-                            <p>买家换绑成功后，登录账号进行验收及密码修改</p>
-                        </li>
-                        <li>
-                            <h2>5.确认收货</h2>
-                            <p>待买家确认收货，或者自动确认收货：48小时。</p>
-                        </li>
-                        <li>
-                            <h2>6.卖家收款</h2>
-                            <p>买家确认收货，交易完成，66闲号通过微信转账给卖家，货款直接到微信钱包。</p>
-                        </li>
-                    </ul>
+                <div class="detail-love">
+                    <h2>猜你喜欢</h2>
+                    <app-goods :goods="recommendGoods"></app-goods>
                 </div>
             </div>
-            <div class="detail-love">
-                <h2>猜你喜欢</h2>
-                <app-goods :goods="recommendGoods"></app-goods>
-            </div>
-        </div>
+        </scroller>
         <div class="detail-buy clearfix">
             <span v-bind:class="{'detail-collect':true,'collect-active':isCollection}" @click="setCollection()">
                 {{collection}}
@@ -194,16 +196,20 @@ export default {
             isCollection: false,
             collection: "收藏",//isCollection ? "已收藏" : "收藏",
             isDetail: true,
-            isShow: true,
             recommendGoods: []
         }
     },
     activated() {
-        this.isShow = true;
         this.goodsId = this.$route.params.id;
         this.getGoodsInfo();
         this.getRecomend();
         this.getCollection();
+        setTimeout(function() {
+            $(".detail-pic-center").attr("img-data",0);
+            $(".detail-right-inner").css({
+                "marginTop": 0
+            })
+        },500)
     },
     methods: {
         moveT: function () {
@@ -261,14 +267,14 @@ export default {
             }
         },
         clickBig() {
+            $(".alert-big").css("display", "block");
             $(".over-detail").css("display","none");
             var a = Math.abs($(".detail-pic-center").attr("img-data"));
-            $(".alert-big").css("display", "block");
             var swiper = new Swiper('.swiper-container', {
                  // 如果需要前进后退按钮
                 nextButton: '.swiper-button-next',
                 prevButton: '.swiper-button-prev',
-                loop: false,
+                onlyExternal : true,
             });
             swiper.slideTo(a, 0, false);
         },

@@ -612,6 +612,7 @@
     color: #333;
     font-size: 1.5rem;
     z-index: 9;
+    background: #fff;
 }
 .index-logo-com {
     position: relative;
@@ -873,8 +874,6 @@
 }
 .alert-big {
     display: none;
-}
-.alert-big-out {
     position: fixed;
     top: 0;
     left: 0;
@@ -1235,7 +1234,7 @@
 .sure-inf li span, .sure-stock li span, .sure-price li span, .pay-inf li span, .sell-information li > span, .fill-content li span, .person-inf li span, .person-bind li span, .update-inf li span {
     float: left;
     display: block;
-    width: 24%;
+    width: 26%;
     height: 3rem;
     color: #222;
     line-height: 3.1rem;
@@ -1271,7 +1270,7 @@ select {
 .re_sele, .categroy {
     position: relative;
     float: left;
-    width: 75%;
+    width: 73%;
     height: 3rem;
     border: none;
     line-height: 3rem;

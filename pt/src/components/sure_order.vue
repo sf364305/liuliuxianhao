@@ -2,125 +2,126 @@
     <div class="sure-order">
         <app-alert></app-alert>
         <app-header :header="title"></app-header>
-    
-        <div class="tobuy-tit">商品信息</div>
-        <ul class="sure-inf">
-            <li class="clearfix">
-                <span>商品名称：</span>
-                <em>{{goods.name}}</em>
-            </li>
-            <li class="clearfix">
-                <span>所属平台：</span>
-                <em>{{goods.category.name}}</em>
-            </li>
-            <li class="clearfix">
-                <span>商品类型：</span>
-                <em v-if="goods.type == 0">直播账号</em>
-                <em v-if="goods.type == 1">租赁账号</em>
-            </li>
-    
-        </ul>
-        <ul class="sure-stock" v-if="goods.type == 0">
-            <li class="clearfix">
-                <span>当前库存：</span>
-                <em>1个</em>
-            </li>
-            <li class="clearfix">
-                <span>单价：</span>
-                <em>{{goods.price}}元</em>
-            </li>
-        </ul>
-    
-        <ul class="sure-stock" v-if="goods.type == 1">
-    
-            <li class="clearfix">
-                <span>类型：</span>
-                <em>
-                    <select v-model="leaseType" @change="cal()">
-                        <option v-if="goods.goodsLeaseInfo.hourCost" value="0">时租</option>
-                        <option v-if="goods.goodsLeaseInfo.dayCost" value="1">日租</option>
-                        <option v-if="goods.goodsLeaseInfo.weekCost" value="2">周租</option>
-                        <option v-if="goods.goodsLeaseInfo.monthCost" value="3">月租</option>
-                    </select>
-    
-                    <input type="number" v-model="goodsNum" class="num" placeholder="请输入数量" @input="cal()" maxlength="5" />
-                </em>
-            </li>
-            <li class="clearfix">
-                <span>押金：</span>
-                <em>
-                    <span v-if="goods.goodsLeaseInfo.deposit==1">押一付一</span>
-                    <span v-if="goods.goodsLeaseInfo.deposit==2">押二付一</span>
-                    <span v-if="goods.goodsLeaseInfo.deposit==3">押三付一</span>
-                </em>
-            </li>
-            <li class="clearfix">
-                <span>时间：</span>
-                <em style="height: 6.5rem;">
-                    <input readonly="readonly" v-model="startTime" id="appDateTime" type="text" placeholder="请选择开始时间" style="height: 1.5rem; padding-left:3%; -webkit-user-select: none;"> 
-                    <br/>
-                    <input readonly="readonly" v-model="endTime" type="text" placeholder="请选择开始时间" style="height: 1.5rem; padding-left:3%;-webkit-user-select: none;"> 
-                </em>
-            </li>
-    
-        </ul>
-    
-        <div class="tobuy-inf">交易信息</div>
-        <section class="sure-contact">
-            <form id="form" action="" method="post">
-                <div class="telephone clearfix">
-                    <label for="">
-                        <em>*</em>手机号码：</label>
-                    <input type="number" name="phone" value="" pattern="[0-9]{11}" placeholder="请输入手机号码" maxlength="11" v-model="phone" :value="$store.state.User.phone" />
+        <scroller ref="scroller" style="margin-bottom:4rem;margin-top:4rem;">
+            <div class="tobuy-tit">商品信息</div>
+            <ul class="sure-inf">
+                <li class="clearfix">
+                    <span>商品名称：</span>
+                    <em>{{goods.name}}</em>
+                </li>
+                <li class="clearfix">
+                    <span>所属平台：</span>
+                    <em>{{goods.category.name}}</em>
+                </li>
+                <li class="clearfix">
+                    <span>商品类型：</span>
+                    <em v-if="goods.type == 0">直播账号</em>
+                    <em v-if="goods.type == 1">租赁账号</em>
+                </li>
+        
+            </ul>
+            <ul class="sure-stock" v-if="goods.type == 0">
+                <li class="clearfix">
+                    <span>当前库存：</span>
+                    <em>1个</em>
+                </li>
+                <li class="clearfix">
+                    <span>单价：</span>
+                    <em>{{goods.price}}元</em>
+                </li>
+            </ul>
+        
+            <ul class="sure-stock" v-if="goods.type == 1">
+        
+                <li class="clearfix">
+                    <span>类型：</span>
+                    <em>
+                        <select v-model="leaseType" @change="cal()">
+                            <option v-if="goods.goodsLeaseInfo.hourCost" value="0">时租</option>
+                            <option v-if="goods.goodsLeaseInfo.dayCost" value="1">日租</option>
+                            <option v-if="goods.goodsLeaseInfo.weekCost" value="2">周租</option>
+                            <option v-if="goods.goodsLeaseInfo.monthCost" value="3">月租</option>
+                        </select>
+        
+                        <input type="number" v-model="goodsNum" class="num" placeholder="请输入数量" @input="cal()" maxlength="5" />
+                    </em>
+                </li>
+                <li class="clearfix">
+                    <span>押金：</span>
+                    <em>
+                        <span v-if="goods.goodsLeaseInfo.deposit==1">押一付一</span>
+                        <span v-if="goods.goodsLeaseInfo.deposit==2">押二付一</span>
+                        <span v-if="goods.goodsLeaseInfo.deposit==3">押三付一</span>
+                    </em>
+                </li>
+                <li class="clearfix">
+                    <span>时间：</span>
+                    <em style="height: 6.5rem;">
+                        <input readonly="readonly" v-model="startTime" id="appDateTime" type="text" placeholder="请选择开始时间" style="height: 1.5rem; padding-left:3%; -webkit-user-select: none;"> 
+                        <br/>
+                        <input readonly="readonly" v-model="endTime" type="text" placeholder="请选择开始时间" style="height: 1.5rem; padding-left:3%;-webkit-user-select: none;"> 
+                    </em>
+                </li>
+        
+            </ul>
+        
+            <div class="tobuy-inf">交易信息</div>
+            <section class="sure-contact">
+                <form id="form" action="" method="post">
+                    <div class="telephone clearfix">
+                        <label for="">
+                            <em>*</em>手机号码：</label>
+                        <input type="number" name="phone" value="" pattern="[0-9]{11}" placeholder="请输入手机号码" maxlength="11" v-model="phone" :value="$store.state.User.phone" />
+                    </div>
+                    <div class="qq-number clearfix">
+                        <label for="">
+                            <em>*</em>联系Q&nbsp;Q：</label>
+                        <input type="number" name="userqq" value="" placeholder="请输入联系QQ" v-model="qq" :value="$store.state.User.qq" />
+                    </div>
+                </form>
+            </section>
+            <ul class="sure-price">
+                <li class="clearfix">
+                    <span>购买数：</span>
+                    <!-- <input type="number" value="1" class="sure-num"/> -->
+                    <em v-if="goodsNum != '' && goods.type == 1">{{goodsNum}}</em>
+                    <em v-if="goodsNum == '' && goods.type == 1"></em>
+                    <em v-if="goods.type == 0">1</em>
+                </li>
+                <li class="clearfix">
+                    <span>原价格：</span>
+                    <em v-if="goods.type == 0">{{goods.price}}元</em>
+                    <em v-if="goods.type == 1 && lessCost[leaseType] > 0">
+                        {{lessCost[leaseType] * goodsNum}}元
+                    </em>
+                    <em v-if="goods.type == 1 && lessCost[leaseType] == 0">
+                        卖家暂不支持此种租赁方式
+                    </em>
+                </li>
+                <li class="clearfix">
+                    <span>实付价：</span>
+                    <em v-if="goods.type == 0">{{goods.price}}元</em>
+        
+                    <em v-if="goods.type == 1 && lessCost[leaseType] > 0">
+                        {{lessCost[leaseType] * goodsNum}}元 + {{lessCost[leaseType] * goods.goodsLeaseInfo.deposit}}元 = {{lessCost[leaseType] * goodsNum + lessCost[leaseType] * goods.goodsLeaseInfo.deposit}} 元
+                    </em>
+                    <em v-if="goods.type == 1 && lessCost[leaseType] == 0">
+                        卖家暂不支持此种方式
+                    </em>
+                </li>
+            </ul>
+            <div class="tobuy-outer">
+                <div class="tobuy-prompt">*请确认您的信息准确无误，确保您的交易安全！</div>
+                <div class="protocol">
+                    <span class="pro-check"></span>
+                    <a href="###">《六六交易平台服务协议》</a>
                 </div>
-                <div class="qq-number clearfix">
-                    <label for="">
-                        <em>*</em>联系Q&nbsp;Q：</label>
-                    <input type="number" name="userqq" value="" placeholder="请输入联系QQ" v-model="qq" :value="$store.state.User.qq" />
+                <div class="wallet-submit">
+                    <span @click="submitOrder" class="detail-pay">确认购买</span>
                 </div>
-            </form>
-        </section>
-        <ul class="sure-price">
-            <li class="clearfix">
-                <span>购买数：</span>
-                <!-- <input type="number" value="1" class="sure-num"/> -->
-                <em v-if="goodsNum != '' && goods.type == 1">{{goodsNum}}</em>
-                <em v-if="goodsNum == '' && goods.type == 1"></em>
-                <em v-if="goods.type == 0">1</em>
-            </li>
-            <li class="clearfix">
-                <span>原价格：</span>
-                <em v-if="goods.type == 0">{{goods.price}}元</em>
-                <em v-if="goods.type == 1 && lessCost[leaseType] > 0">
-                    {{lessCost[leaseType] * goodsNum}}元
-                </em>
-                <em v-if="goods.type == 1 && lessCost[leaseType] == 0">
-                    卖家暂不支持此种租赁方式
-                </em>
-            </li>
-            <li class="clearfix">
-                <span>实付价：</span>
-                <em v-if="goods.type == 0">{{goods.price}}元</em>
-    
-                <em v-if="goods.type == 1 && lessCost[leaseType] > 0">
-                    {{lessCost[leaseType] * goodsNum}}元 + {{lessCost[leaseType] * goods.goodsLeaseInfo.deposit}}元 = {{lessCost[leaseType] * goodsNum + lessCost[leaseType] * goods.goodsLeaseInfo.deposit}} 元
-                </em>
-                <em v-if="goods.type == 1 && lessCost[leaseType] == 0">
-                    卖家暂不支持此种方式
-                </em>
-            </li>
-        </ul>
-        <div class="tobuy-outer">
-            <div class="tobuy-prompt">*请确认您的信息准确无误，确保您的交易安全！</div>
-            <div class="protocol">
-                <span class="pro-check"></span>
-                <a href="###">《六六交易平台服务协议》</a>
             </div>
-            <div class="wallet-submit">
-                <span @click="submitOrder" class="detail-pay">确认购买</span>
-            </div>
-        </div>
-         <div class="alertLoading"></div> 
+            <div class="alertLoading"></div>
+        </scroller>
     </div>
 </template>
 <script>

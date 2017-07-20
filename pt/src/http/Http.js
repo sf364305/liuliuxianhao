@@ -6,11 +6,11 @@ import axios from 'axios'
 //const base = 'http://api.66xianhao.com/front';
 
 // const base = 'http://xcn.tunnel.qydev.com/front';
-Vue.prototype.host = 'http://test.api.66mkt.com/';
+//Vue.prototype.host = 'http://test.api.66mkt.com/';
 
-// const base = 'http://c.chovans.cn/front';
+ const base = 'http://c.chovans.cn/front';
 // Vue.prototype.host = 'http://localhost:8080/';
-const base = Vue.prototype.host + 'front';
+//const base = Vue.prototype.host + 'front';
 
 //API,接口列表
 Vue.prototype.Api = {
