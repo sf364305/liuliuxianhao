@@ -1,81 +1,83 @@
 <template>
     <div class="popularity">
         <app-header :header="title"></app-header>
-        <div class="popularity-img">
-            <img src="../assets/images/popula.png" alt="">
-        </div>
-        <div class="popularity-con">
-            <h2>快速提高人气</h2>
-            <!-- <p>快速提高人气快速提高人气快速提高人气快速提高人气快速提高人气快速提高人气快速提高人气快速提高人气</p> -->
-        </div>
-        <form action="" method="" class="popular-form">
-            <div>
-                <label for="">选择平台：</label>
-                <span type="text" placeholder="" name="" readOnly="true" value="点击选择 ∨" @click="changePupa" class="papular-plat">点击选择 ∨</span>
+        <scroller ref="scroller" style="margin-bottom:4rem;margin-top:4rem;">
+            <div class="popularity-img">
+                <img src="../assets/images/popula.png" alt="">
             </div>
-            <div>
-                <label for="">选择人气：</label>
-                <!--<input type="number" v-model="quantity" v-bind:change="cal()" class="papular-pla" />-->
-                <div type="number" v-bind:class="{'popular-type-select':quantity == 5000}" @click="getNum(5000)" style="margin-left:10%;" class="popular-number" value="5000">5000</div>
-                <div type="number" v-bind:class="{'popular-type-select':quantity == 15000}" @click="getNum(15000)" class="popular-number" value="15000">15000</div>
-                <div type="number" v-bind:class="{'popular-type-select':quantity == 25000}" @click="getNum(25000)" class="popular-number" value="25000">25000</div>
-                <div type="number" v-bind:class="{'popular-type-select':quantity == 35000}" @click="getNum(35000)" class="popular-number" value="35000" style="margin-left:10%;">35000</div>
+            <div class="popularity-con">
+                <h2>快速提高人气</h2>
+                <!-- <p>快速提高人气快速提高人气快速提高人气快速提高人气快速提高人气快速提高人气快速提高人气快速提高人气</p> -->
             </div>
-            <div>
-                <label for="">选择类型：</label>
-                <!--<div @click="changeType(0)" v-bind:class="{'popular-type-select':popularType == 0}" class="popular-type" style="margin-left:10%;"> 时 </div>-->
-                <div @click="changeType(1)" v-bind:class="{'popular-type-select':popularType == 1}" class="popular-type" style="margin-left:10%;"> 天 </div>
-                <div @click="changeType(2)" v-bind:class="{'popular-type-select':popularType == 2}" class="popular-type"> 周 </div>
-                <div @click="changeType(3)" v-bind:class="{'popular-type-select':popularType == 3}" class="popular-type"> 月 </div>
-            </div>
-            <div>
-                <label for="">价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格：</label>
-                <input type="text" placeholder="" name="" readOnly="true" :value="'￥'+price" class="papular-price" unselectable="on" />
-                <span class="papular-text">价目表</span>
-            </div>
-            <div>
-                <label for="">数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量：</label>
-                <span class="papular-rem" @click="addLess">-</span>
-                <input type="text" placeholder="" name="" :value="count" v-bind:change="cal()" class="papular-nub" />
-                <span class="papular-add" @click="addNum">+</span>
-            </div>
-            <div>
-                <label for="">开始时间：</label>
-                <input class="papular-start" v-model="startTime" readonly="readonly" name="appDateTime" id="appDateTime" type="text" placeholder="请选择开始时间" style="-webkit-user-select: none;" unselectable="on">
-            </div>
-            <div>
-                <label for="">结束时间：</label>
-                <input type="text" placeholder="结束时间" v-model="endTime" name="" readOnly="true" class="papular-over" unselectable="on" style="-webkit-user-select: none;" />
-            </div>
-            <div>
-                <label for="">刷人气平台ID：</label>
-                <input type="text" v-model="targetId" placeholder="请输入平台ID" name="" value="" class="papular-id" />
-            </div>
-            <div class="add-com-papular">
-                <textarea id="detail" v-model="comment" name="detail" maxlength="200" placeholder="输入备注信息" rows="4"></textarea>
-            </div>
-            <div class="popularity-sub" style="border:none;">
-                <a @click="addOrder" replace class="popularity-submit">立即下单</a>
-            </div>
-            <div class="alert-outer-papular" style="padding-left:0;">
-                <div class="alert-plat-papular">
-                    <div class="papular-plat-head clearfix">
-                        <span class="papular-plat-cancel" @click="closePopu">取消</span>
-                        <span class="papular-plat-sure" @click="surePopu">确定</span>
-                    </div>
-                    <div>
-                        <div class="papular-plat-choice clearfix">
-                            <label v-for="g in goods" :key="g.id">
-                                <!--<input type="radio" checked="checked" name="sell" value="1"/>-->
-                                <img :src="$store.state.Setting.qiniuUrl + g.goodsImages[0].qiniuKey" class="choice-sho-platform choiced-ying-platform" v-bind:class="{'show':(goodsId == g.id)}" @click="changePlat(g.id)">
-                                </img>
-                                <em class="choice-text-platform">{{g.name}}</em>
-                            </label>
+            <form action="" method="" class="popular-form">
+                <div>
+                    <label for="">选择平台：</label>
+                    <span type="text" placeholder="" name="" readOnly="true" value="点击选择 ∨" @click="changePupa" class="papular-plat">点击选择 ∨</span>
+                </div>
+                <div>
+                    <label for="">选择人气：</label>
+                    <!--<input type="number" v-model="quantity" v-bind:change="cal()" class="papular-pla" />-->
+                    <div type="number" v-bind:class="{'popular-type-select':quantity == 5000}" @click="getNum(5000)" style="margin-left:10%;" class="popular-number" value="5000">5000</div>
+                    <div type="number" v-bind:class="{'popular-type-select':quantity == 15000}" @click="getNum(15000)" class="popular-number" value="15000">15000</div>
+                    <div type="number" v-bind:class="{'popular-type-select':quantity == 25000}" @click="getNum(25000)" class="popular-number" value="25000">25000</div>
+                    <div type="number" v-bind:class="{'popular-type-select':quantity == 35000}" @click="getNum(35000)" class="popular-number" value="35000" style="margin-left:10%;">35000</div>
+                </div>
+                <div>
+                    <label for="">选择类型：</label>
+                    <!--<div @click="changeType(0)" v-bind:class="{'popular-type-select':popularType == 0}" class="popular-type" style="margin-left:10%;"> 时 </div>-->
+                    <div @click="changeType(1)" v-bind:class="{'popular-type-select':popularType == 1}" class="popular-type" style="margin-left:10%;"> 天 </div>
+                    <div @click="changeType(2)" v-bind:class="{'popular-type-select':popularType == 2}" class="popular-type"> 周 </div>
+                    <div @click="changeType(3)" v-bind:class="{'popular-type-select':popularType == 3}" class="popular-type"> 月 </div>
+                </div>
+                <div>
+                    <label for="">价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格：</label>
+                    <input type="text" placeholder="" name="" readOnly="true" :value="'￥'+price" class="papular-price" unselectable="on" />
+                    <span class="papular-text">价目表</span>
+                </div>
+                <div>
+                    <label for="">数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量：</label>
+                    <span class="papular-rem" @click="addLess">-</span>
+                    <input type="text" placeholder="" name="" :value="count" v-bind:change="cal()" class="papular-nub" />
+                    <span class="papular-add" @click="addNum">+</span>
+                </div>
+                <div>
+                    <label for="">开始时间：</label>
+                    <input class="papular-start" v-model="startTime" readonly="readonly" name="appDateTime" id="appDateTime" type="text" placeholder="请选择开始时间" style="-webkit-user-select: none;" unselectable="on">
+                </div>
+                <div>
+                    <label for="">结束时间：</label>
+                    <input type="text" placeholder="结束时间" v-model="endTime" name="" readOnly="true" class="papular-over" unselectable="on" style="-webkit-user-select: none;" />
+                </div>
+                <div>
+                    <label for="">刷人气平台ID：</label>
+                    <input type="text" v-model="targetId" placeholder="请输入平台ID" name="" value="" class="papular-id" />
+                </div>
+                <div class="add-com-papular">
+                    <textarea id="detail" v-model="comment" name="detail" maxlength="200" placeholder="输入备注信息" rows="4"></textarea>
+                </div>
+                <div class="popularity-sub" style="border:none;">
+                    <a @click="addOrder" replace class="popularity-submit">立即下单</a>
+                </div>
+                <div class="alert-outer-papular" style="padding-left:0;">
+                    <div class="alert-plat-papular">
+                        <div class="papular-plat-head clearfix">
+                            <span class="papular-plat-cancel" @click="closePopu">取消</span>
+                            <span class="papular-plat-sure" @click="surePopu">确定</span>
+                        </div>
+                        <div>
+                            <div class="papular-plat-choice clearfix">
+                                <label v-for="g in goods" :key="g.id">
+                                    <!--<input type="radio" checked="checked" name="sell" value="1"/>-->
+                                    <img :src="$store.state.Setting.qiniuUrl + g.goodsImages[0].qiniuKey" class="choice-sho-platform choiced-ying-platform" v-bind:class="{'show':(goodsId == g.id)}" @click="changePlat(g.id)">
+                                    </img>
+                                    <em class="choice-text-platform">{{g.name}}</em>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </scroller>
     </div>
 </template>
 <script>

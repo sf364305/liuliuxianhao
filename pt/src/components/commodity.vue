@@ -118,19 +118,19 @@
             </li>
             <li class="alert-com-time">
                 <div class="price-sort">
-                    <label class="alert-all-dif" @click="submit(true)">
+                    <label class="alert-all-dif" @click="changeSort('')">
                         <em v-if="condition.sort===''" class="com-time-show">>默认排序</em>
                         <em v-else class="">默认排序</em>
                         <input v-model="condition.sort" type="radio" value="" name="price" class="key-word" checked="checked">
                         <span>（按时间倒序）</span>
                     </label>
-                    <label class="alert-all-dif" @click="submit(true)">
+                    <label class="alert-all-dif" @click="changeSort(1)">
                         <em v-if="condition.sort==1" class="com-time-show">>价格↓</em>
                         <em v-else class="">价格↓</em>
                         <input v-model="condition.sort" type="radio" value="1" name="price" class="key-word" checked="checked">
                         <span style="padding-left: 20%">（按价格从高到低）</span>
                     </label>
-                    <label class="alert-all-dif" @click="submit(true)">
+                    <label class="alert-all-dif" @click="changeSort(0)">
                         <em v-if="condition.sort=='0'" class="com-time-show">>价格↑</em>
                         <em v-else class="">价格↑</em>
                         <span style="padding-left: 20%">（按价格从低到高）</span>
@@ -277,6 +277,10 @@ export default {
         },
         changeType(type) {
             this.condition.type = type;// < 0?'':type;
+            this.submit(true);
+        },
+        changeSort(sort){
+            this.condition.sort = sort;
             this.submit(true);
         },
         submit(clear) {

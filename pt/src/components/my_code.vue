@@ -17,8 +17,7 @@ export default {
         }
     },
     created(){
-        this.path = "http://api.66xianhao.com/front/getCode/" + this.Http.token+"/";
-        console.log(this.path);
+        this.path = this.host+"/front/getCode/" + this.Http.token+"/";
     },
     methods: {
     },
