@@ -5,12 +5,13 @@ import axios from 'axios'
 
 //const base = 'http://api.66xianhao.com/front';
 
-// const base = 'http://xcn.tunnel.qydev.com/front';
-//Vue.prototype.host = 'http://test.api.66mkt.com/';
+// Vue.prototype.host = 'http://test.api.66mkt.com/';
+// Vue.prototype.serverHost = 'http://localhost:8081/';
+Vue.prototype.serverHost = 'http://test.server.66mkt.com/';
 
- const base = 'http://c.chovans.cn/front';
-// Vue.prototype.host = 'http://localhost:8080/';
-//const base = Vue.prototype.host + 'front';
+// const base = 'http://c.chovans.cn/front';
+Vue.prototype.host = 'http://test.api.66mkt.com/';
+const base = Vue.prototype.host + 'front';
 
 //API,接口列表
 Vue.prototype.Api = {
@@ -148,8 +149,10 @@ Vue.prototype.Api = {
     },
     getOrderServerUrl(){
         return base + '/utils/getOrderServerUrl';
+    },
+    getOnlineServer(){
+        return Vue.prototype.serverHost + '/open/checkServer';
     }
-
 };
 
 //Http基本类，统一处理

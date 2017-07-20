@@ -76,7 +76,8 @@ const store = new Vuex.Store({
     FromView: new Array(),
     Goods: {},
     Order: {},
-    Loading: false
+    Loading: false,
+    IsSearch:false
   },
   mutations: {
     setSetting(state, setting) {
@@ -113,6 +114,9 @@ const store = new Vuex.Store({
     },
     setLoading(state, loading) {
       state.Loading = loading;
+    },
+    setIsSearch(state,is){
+      state.IsSearch = is;
     }
   },
   getters: {
@@ -265,7 +269,7 @@ vueRouter.beforeEach((to, from, next) => {
 vueRouter.afterEach((to, from) => {
   setTimeout(function () {
     $(".alertLoading").hide();
-  },300);
+  },to.fullPath.indexOf("detail")>0?600:300);
 
 })
 

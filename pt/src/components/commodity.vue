@@ -31,9 +31,9 @@
             <li class="alert-com-inf alert-com-show">
                 <form action="" method="post">
                     <!--<div class="clearfix">
-                            <label for="">关键词：</label>
-                            <input v-model="condition.keyword" type="text" value="" name="" class="key-word" placeholder="请输入想查找的关键信息" style="border: none;width: 75%;text-align: left;">
-                        </div>-->
+                                <label for="">关键词：</label>
+                                <input v-model="condition.keyword" type="text" value="" name="" class="key-word" placeholder="请输入想查找的关键信息" style="border: none;width: 75%;text-align: left;">
+                            </div>-->
                     <div class="plat-comm clearfix">
                         <span>平台：</span>
                         <label>
@@ -173,17 +173,24 @@ export default {
     },
     activated() {
         this.goods = [];
-        this.reset();
-        if (this.$route.params.id == "0" || this.$route.params.id == "1") {
-            this.condition.type = this.$route.params.id;
-            this.condition.categoryId = "";
-        } else {
-            this.condition.categoryId = this.$route.params.id;
-            if (this.$route.params.id != "all") {
-                this.condition.keyword = this.$route.params.id;
+        if (this.$store.state.IsSearch == false) {
+            this.reset();
+            if (this.$route.params.id == "0" || this.$route.params.id == "1") {
+                this.condition.type = this.$route.params.id;
+                this.condition.categoryId = "";
+            } else {
+                this.condition.categoryId = this.$route.params.id;
+                if (this.$route.params.id != "all") {
+                    this.condition.keyword = this.$route.params.id;
+                }
             }
+            
         }
+
         this.submit();
+        this.$store.commit('setIsSearch', false);
+
+
     },
     methods: {
         back() {
