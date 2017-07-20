@@ -6,7 +6,7 @@
                     <dt>
                         <img :src="userInfo.user.avatar" alt="">
                     </dt>
-                    <dd>{{userInfo.user.realName}}</dd>
+                    <dd>{{userInfo.user.name}}</dd>
                 </dl>
                 <span class="my-mon">￥{{userInfo.user.commission}}</span>
             </div>
