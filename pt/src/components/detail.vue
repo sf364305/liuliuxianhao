@@ -219,10 +219,10 @@ export default {
         this.isShow = true;
         this.goodsId = this.$route.params.id;
 
-        // this.goods = this.$store.state.Goods;
+        this.goods = this.$store.state.Goods;
         
         // if(this.$store.state.Goods != null){
-            this.getGoodsInfo();
+            // this.getGoodsInfo();
         // }
         this.$store.commit('setGoods',null);
 
