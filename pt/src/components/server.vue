@@ -44,6 +44,7 @@
 <script>
 import Footer from '../templates/Footer.vue'
 export default {
+    name:"server",
     data: function () {
         return {
             title: '给我们留言',
@@ -56,17 +57,15 @@ export default {
             serverOnline: true
         }
     },
-    activated() {
+    created() {
         var self = this;
         this.Http.get(this.Api.getServerUrl(), null, function (result) {
             self.serverUrl = result.data.url+"?t="+new Date().getTime();
         })
 
-        //event 参数中有 data 属性，就是父窗口发送过来的数据
-        window.addEventListener("message", function (event) {
-            console.log("收到客服系统反馈：",event.data);
-            self.serverOnline = (event.data == "online" ? true:false);
-        }, false);
+        this.Http.get(this.Api.getOnlineServer(), null, function (result) {
+            self.serverOnline = (result.data.server == "online" ? true:false);
+        })
     },
     methods: {
         closeAlert() {

@@ -199,6 +199,8 @@ export default {
         }
     },
     activated() {
+        //搜索条件禁止回填
+        this.$store.commit('setIsSearch',true);
         this.isShow = true;
         this.goodsId = this.$route.params.id;
         this.getGoodsInfo();
