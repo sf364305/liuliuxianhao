@@ -2,12 +2,10 @@
     <div class="home">
         <scroller :on-refresh="refresh" :on-infinite="infinite" ref="scroller" style="margin-bottom:4rem;">
             <header class="index-logo" id="index-logo">
-                <form action="" method="post" class="search-key">
-                    <div style="width:80%;height:3rem;">
-                        <input type="text" value="" name="" class="search-word" placeholder="请输入您想要查找的关键字" v-model="searchText">
-                        <a class="search-index" replace @click="searchAll"></a>
-                    </div>
-                </form>
+                <div style="width:80%;height:3rem;border-radius:0;" class="com-search-head">
+                    <input type="text" value="" name="" class="search-word" placeholder="请输入您想要查找的关键字" v-model="searchText">
+                    <a class="search-index" replace @click="searchAll"></a>
+                </div>
             </header>
             <div>
                 <app-banner></app-banner>
@@ -232,10 +230,10 @@ export default {
 
 .search-index {
     position: absolute;
-    right: 12%;
+    right: 5%;
     top: 0rem;
     width: 2.2rem;
-    height: 5rem;
+    height: 3rem;
     background: url("../assets/images/search.png") center center no-repeat;
     background-size: 80% auto;
 }

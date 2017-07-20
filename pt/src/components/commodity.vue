@@ -1,12 +1,10 @@
 <template>
     <div class="commodity">
         <header class="index-logo-com" id="index-logo">
-            <form action="" method="post" class="search-key">
-                <div style="border-radius:20px;border:1px solid #aaa;">
-                    <input type="text" value="" name="" class="search-word" placeholder="请输入您想要查找的关键字" v-model="condition.keyword" style="width:85%;margin-left:5%;font-size:1rem;">
-                    <a class="search-index-com" replace @click="searchAll"></a>
-                </div>
-            </form>
+            <div style="" class="com-search-head">
+                <input type="text" value="" name="" class="search-word" placeholder="请输入您想要查找的关键字" v-model="condition.keyword" style="width:85%;margin-left:5%;font-size:1rem;line-height:2rem;">
+                <a class="search-index-com" replace @click="searchAll"></a>
+            </div>
             <span class="return-back" @click="back"></span>
         </header>
         <ul class="com-choice clearfix">
