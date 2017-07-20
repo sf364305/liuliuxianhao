@@ -366,7 +366,7 @@ export default {
                 this.getGoodsInfo();
                 var self = this;
                 var t = setTimeout(function () {
-                    self.scrollTo(0,0,false);
+                    self.$refs.scroller.scrollTo(0,0,false);
                     clearTimeout(t);
                 }, 300);
             }
