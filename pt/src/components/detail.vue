@@ -221,7 +221,7 @@ export default {
 
         this.goods = this.$store.state.Goods;
         
-        if(!this.$store.state.Goods){
+        if(this.$store.state.Goods != null){
             this.getGoodsInfo();
         }
         this.$store.commit('setGoods',null);
