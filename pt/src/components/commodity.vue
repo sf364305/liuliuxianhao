@@ -128,12 +128,12 @@
                         <em v-if="condition.sort==1" class="com-time-show">>价格↓</em>
                         <em v-else class="">价格↓</em>
                         <input v-model="condition.sort" type="radio" value="1" name="price" class="key-word" checked="checked">
-                        <span style="padding-left: 20%">（按价格从高到低）</span>
+                        <span style="padding-left: 20%">（按价格从低到高）</span>
                     </label>
                     <label class="alert-all-dif" @click="submit(true)">
                         <em v-if="condition.sort=='0'" class="com-time-show">>价格↑</em>
                         <em v-else class="">价格↑</em>
-                        <span style="padding-left: 20%">（按价格从低到高）</span>
+                        <span style="padding-left: 20%">（按价格从高到低）</span>
                         <input v-model="condition.sort" type="radio" value="0" name="price" class="key-word" placeholder="">
                     </label>
                 </div>
