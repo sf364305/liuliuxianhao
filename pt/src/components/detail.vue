@@ -207,6 +207,8 @@ export default {
         this.getGoodsInfo();
         this.getRecomend();
         this.getCollection();
+        $(".over-detail").css("display","block");
+        $(".alert-big").css("display", "none");
         setTimeout(function() {
             $(".detail-pic-center").attr("img-data",0);
             $(".detail-right-inner").css({
