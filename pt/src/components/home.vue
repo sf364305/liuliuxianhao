@@ -3,7 +3,7 @@
         <scroller :on-refresh="refresh" :on-infinite="infinite" ref="scroller" style="margin-bottom:4rem;">
             <header class="index-logo" id="index-logo">
                 <div style="width:80%;height:3rem;border-radius:0;" class="com-search-head">
-                    <input type="text" value="" name="" class="search-word" placeholder="请输入您想要查找的关键字" v-model="searchText">
+                    <input type="text" value="" name="" class="search-word" placeholder="请输入关键字" v-model="searchText" v-on:keyup.13="searchAll">
                     <a class="search-index" replace @click="searchAll"></a>
                 </div>
             </header>
@@ -20,10 +20,10 @@
             <section class="new-content">
                 <ul class="clearfix">
                     <li>
-                        <router-link to="/commodity/0" class="index-sell-buy" replace>买卖账号</router-link>
+                        <router-link to="/commodity/_0" class="index-sell-buy" replace>买卖账号</router-link>
                     </li>
                     <li>
-                        <router-link to="/commodity/1" class="index-lease" replace>租赁账号</router-link>
+                        <router-link to="/commodity/_1" class="index-lease" replace>租赁账号</router-link>
                     </li>
                     <li>
                         <router-link to="/popularity" class="index-popularity" replace>提高人气</router-link>
@@ -58,9 +58,10 @@ export default {
     data() {
         return {
             page: 0,
-            size: 10,
+            size: 40,
             goods: [],
-            searchText: ""
+            searchText: "",
+            timer:null
         }
     },
     created() {
@@ -75,6 +76,10 @@ export default {
     },
     activated(){
         this.searchText = "";
+        this.$store.commit('setIsSearch',false);
+    },
+    deactivated(){
+        // this.$refs.scroller.finishInfinite(true);
     },
     methods: {
         linkCom(ids) {
@@ -84,9 +89,9 @@ export default {
         searchAll() {
             var text = this.searchText;
             if(text=="") {
-                this.$router.push("/commodity/"+"all");
+                this.$router.push("/commodity/all");
             } else {
-                this.$router.push("/commodity/" + text);
+                this.$router.push("/commodity/__" + text);
             }
         },
         getHomeGoodsList(done) {
@@ -95,7 +100,6 @@ export default {
                 page: that.page,
                 size: that.size
             }, function (result) {
-                console.log(result,"9999")
                 if (done) done();
                 if (result.data.goods.length > 0) {
                     for (var i = 0; i < result.data.goods.length; i++) {
@@ -201,7 +205,7 @@ export default {
         var a = 0;
         var h = $(".announ li").height();
         var n = $(".announ li").length;
-        setInterval(function () {
+        this.timer = setInterval(function () {
             a++;
             if (a > n - 1) {
                 a = 0;
@@ -211,6 +215,9 @@ export default {
                 "marginTop": -top
             })
         }, 2000)
+    },
+    deactivated(){
+        clearInterval(this.timer);
     },
     components: {
         'app-banner': Banner,
