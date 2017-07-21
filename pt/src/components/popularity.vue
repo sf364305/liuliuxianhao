@@ -1,7 +1,7 @@
 <template>
     <div class="popularity">
         <app-header :header="title"></app-header>
-        <scroller ref="scroller" style="margin-bottom:4rem;margin-top:4rem;">
+        <scroller  ref="scroller" style="margin-bottom:4rem;margin-top:4rem;">
             <div class="popularity-img">
                 <img src="../assets/images/popula.png" alt="">
             </div>
@@ -58,6 +58,8 @@
                 <div class="popularity-sub" style="border:none;">
                     <a @click="addOrder" replace class="popularity-submit">立即下单</a>
                 </div>
+            </form>
+        </scroller>
                 <div class="alert-outer-papular" style="padding-left:0;">
                     <div class="alert-plat-papular">
                         <div class="papular-plat-head clearfix">
@@ -76,8 +78,6 @@
                         </div>
                     </div>
                 </div>
-            </form>
-        </scroller>
     </div>
 </template>
 <script>
@@ -124,6 +124,10 @@ export default {
             this.quantity = num;
         },
         changePupa() {
+            //添加阻止事件
+            document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
+                e.preventDefault();
+            }, false);
             //var daId = $(".alert-plat-papular").attr("data-id");
             $(".alert-outer-papular").css("display", "block");
             $(".alert-plat-papular").animate({

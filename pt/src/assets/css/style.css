@@ -948,7 +948,7 @@
 }
 .detail-inf {
     position: relative;
-    height: 7.5rem;
+    height: 8.5rem;
     background-color: #fff;
     border-bottom: 2px solid #eee;;
 }
@@ -1352,7 +1352,7 @@ select {
 }
 .sure-contact div label {
     float: left;
-    width: 18%;
+    width: 26%;
     padding-left: 5%;
     height: 3rem;
     line-height: 3rem;
@@ -1360,11 +1360,13 @@ select {
 .sure-contact div label em {
     color: red;
 }
+.sure-order {
+    padding-bottom: 3rem;
+}
 .sure-contact div input {
     float: left;
-    width: 70%;
+    width: 65%;
     height: 3rem;
-    padding-left: 6%;
     border: none;
     outline: none;
     /* margin-top: 0.2rem; */
@@ -1869,14 +1871,14 @@ select {
     line-height: 3rem;
 }
 
-.popular-form img{
+.alert-outer-papular img{
     height: 4rem;
     width: 4rem;
     margin: 1rem;
     opacity: 0.2;
 }
 
-.popular-form img.show{
+.alert-outer-papular img.show{
     opacity: 1;
 }
 
@@ -1982,7 +1984,7 @@ select {
     position: fixed;
     left: 0;
     top: 0rem;
-    width: 94%;
+    width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.3);
     z-index: 60;
@@ -2007,7 +2009,7 @@ select {
 .papular-plat-head {
     background: #eee;
 }
-.popular-form .papular-plat-sure {
+.alert-outer-papular .papular-plat-sure {
     float: right;
     width: 15%;
     height: 3rem;
@@ -2181,6 +2183,7 @@ select {
     line-height: 3.2rem;
     text-align: center;
     font-size: 1.5rem;
+    -webkit-appearance: none;
 }
 .server-alert-outer {
     display: none;
