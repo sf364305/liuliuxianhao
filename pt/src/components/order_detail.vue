@@ -2,8 +2,8 @@
     <div class="sure-order">
         <app-load></app-load>
         <app-header :header="title"></app-header>
-        <scroller ref="scroller" style="margin-bottom:4rem;margin-top:4rem;">
-            <ul class="sure-inf">
+        <scroller ref="scroller" style="margin-bottom:4rem;">
+            <ul class="sure-inf" style="padding-top: 4rem;">
                 <li class="clearfix">
                     <span>订单号</span>
                     <em>{{order.orderNo}}</em>

@@ -1,5 +1,5 @@
 <template>
-    <div class="footer">
+    <div class="footer" style="z-index:999;">
         <div class="footer-wrapper">
             <ul class="nav">
                 <li>

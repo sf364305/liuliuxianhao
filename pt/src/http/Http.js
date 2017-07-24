@@ -8,15 +8,15 @@ import axios from 'axios'
  //Vue.prototype.serverHost = 'http://192.168.0.101:8081/';
 //Vue.prototype.serverHost = 'http://test.server.66mkt.com/';
 //Vue.prototype.host = 'http://192.168.0.101:8081/';
-// const base = 'http://c.chovans.cn/front';
+ //const base = 'http://c.chovans.cn/front';
 
-//Vue.prototype.host = 'http://test.api.66mkt.com/';
+Vue.prototype.host = 'http://test.api.66mkt.com/';
 
 // Vue.prototype.serverHost = 'http://localhost:8081/';
-Vue.prototype.serverHost = 'http://server.66mkt.com/';
+//Vue.prototype.serverHost = 'http://server.66mkt.com/';
 
-// Vue.prototype.host = 'http://c.chovans.cn/';
-Vue.prototype.host = 'http://api.66xianhao.com/';
+ //Vue.prototype.host = 'http://c.chovans.cn/';
+//Vue.prototype.host = 'http://api.66xianhao.com/';
 const base = Vue.prototype.host + 'front';
 
 //API,接口列表

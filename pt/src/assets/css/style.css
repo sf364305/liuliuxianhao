@@ -2185,6 +2185,16 @@ select {
     font-size: 1.5rem;
     -webkit-appearance: none;
 }
+.return-top {
+    display: none;
+    position: fixed;
+    right: 5%;
+    bottom: 6rem;
+    width: 4rem;
+    height: 4rem;
+    background: url(../images/return_top.png) 0 0 no-repeat;
+    background-size: 70% auto;
+}
 .server-alert-outer {
     display: none;
     position: fixed;
@@ -2302,8 +2312,12 @@ select {
     border: 1px solid #44c9ef;
 }
 .promotion-pic li p {
+    overflow: hidden;
+    width: 100%;
     margin: 1rem 0 0.5rem;
     color: #333;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     text-align: center;
     font-size: 1.25rem;
 }
