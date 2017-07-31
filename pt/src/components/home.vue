@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <scroller :on-refresh="refresh" :on-infinite="infinite" ref="scroller" style="margin-bottom:4rem;">
+        <scroller :on-refresh="refresh" :on-infinite="infinite" ref="scroller" style="margin-bottom:4rem;" class="scrollTop">
             <header class="index-logo" id="index-logo">
                 <div style="width:80%;height:3rem;border-radius:0;" class="com-search-head">
                     <input type="text" value="" name="" class="search-word" placeholder="请输入关键字" v-model="searchText" v-on:keyup.13="searchAll">
@@ -44,8 +44,7 @@
         </scroller>
         <div class="nav-bottom">
             <app-footer></app-footer>
-        </div>
-    
+        </div>  
     </div>
 </template>
 <script>
@@ -82,6 +81,7 @@ export default {
         // this.$refs.scroller.finishInfinite(true);
     },
     methods: {
+        
         linkCom(ids) {
             var goodsId = this.$store.state.Categroy[ids].id;
             this.$router.push("/commodity/" + goodsId);
@@ -202,6 +202,7 @@ export default {
         }
     },
     mounted() {
+        
         var a = 0;
         var h = $(".announ li").height();
         var n = $(".announ li").length;
@@ -218,6 +219,7 @@ export default {
     },
     deactivated(){
         clearInterval(this.timer);
+        
     },
     components: {
         'app-banner': Banner,
