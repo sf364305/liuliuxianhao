@@ -149,6 +149,11 @@
                             <i>*</i>押金方式：</span>
                         <div id="deposit" name="deposit" class="re_sele">
                             <label>
+                                <input type="radio" checked="checked" name="deposit" value="0" v-model="goods.deposit" />
+                                <i class="choice-sho"  v-bind:class="{'choiced-show':goods.deposit == 0}" @click="changeMach"></i>
+                                <em class="choice-text">无需押金</em>
+                            </label>
+                            <label>
                                 <input type="radio" checked="checked" name="deposit" value="1" v-model="goods.deposit" />
                                 <i class="choice-sho"  v-bind:class="{'choiced-show':goods.deposit == 1}" @click="changeMach"></i>
                                 <em class="choice-text">押一付一</em>
@@ -171,13 +176,13 @@
                             <em>（写上价格，可多选）</em>
                         </div>
                         <div class="lease-check">
-                            <label>
+                            <!-- <label>
                                 <input type="checkbox" name="check" class="lease-dis" value="1" />
                                 <i class="choice-sho" v-bind:class="{'choiced-show':(goods.hourCost)}"></i>
                                 <em class="choice-text" style="width: 12%;">时租</em>
                                 <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goods.hourCost" maxlength="9"/>
                                 <span>元/时</span>
-                            </label>
+                            </label> -->
                             <label>
                                 <input type="checkbox" name="check" class="lease-dis" value="2" />
                                 <i class="choice-sho" v-bind:class="{'choiced-show':(goods.dayCost)}"></i>
@@ -335,7 +340,7 @@ export default {
                 && this.goods.weekCost == ''
                 && this.goods.monthCost == '') {
                 errorMsg = "至少选择一种支付方式";
-            } else if (this.$refs.images.images.length == 0) {
+            }else if (this.$refs.images.images.length == 0) {
                 errorMsg = "请至少上传一张图片";
             }
             if (errorMsg) {

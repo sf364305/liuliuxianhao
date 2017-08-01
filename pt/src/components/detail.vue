@@ -57,8 +57,9 @@
                             <em>卖家信用：</em>
                         </div>
                         <div class="sell-deal clearfix">
-                            <span>{{goods.merchant.successNum}}笔（成交率：{{goods.merchant.successRate}}%）</span>
-                            <em>最近成交：</em>
+                            <span>成交率：100%</span>
+                            <!-- <span>{{goods.merchant.successNum}}笔（成交率：{{goods.merchant.successRate}}%）</span> -->
+                            <!-- <em>最近成交：</em> -->
                         </div>
                     </div>
                 </div>

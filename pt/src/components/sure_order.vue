@@ -49,6 +49,7 @@
                 <li class="clearfix">
                     <span>押金：</span>
                     <em>
+                        <span v-if="goods.goodsLeaseInfo.deposit==0">无需押金</span>
                         <span v-if="goods.goodsLeaseInfo.deposit==1">押一付一</span>
                         <span v-if="goods.goodsLeaseInfo.deposit==2">押二付一</span>
                         <span v-if="goods.goodsLeaseInfo.deposit==3">押三付一</span>
@@ -135,7 +136,7 @@ export default {
             title: "确认订单",
             goods: { name: '', category: { name: '' } },
             goodsNum: "",
-            leaseType: 0,
+            leaseType: 1,
             lessCost: [0, 0, 0, 0],
             phone: "",
             qq: "",

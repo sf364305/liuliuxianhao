@@ -1,7 +1,7 @@
 <template>
     <div class="buy">
         <app-header :header="title"></app-header>
-        <scroller :on-refresh="refresh" ref="scroller" style="margin-bottom:4rem;margin-top:4rem;">
+        <scroller ref="scroller" style="margin-bottom:4rem;margin-top:4rem;">
             <div class="buy-inf">商品信息</div>
             <ul class="pay-inf">
                 <li class="clearfix">
