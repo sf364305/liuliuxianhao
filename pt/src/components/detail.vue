@@ -222,7 +222,7 @@ export default {
         // this.goods = this.$store.state.Goods;
         
         // if(this.$store.state.Goods != null){
-            this.getGoodsInfo();
+            this.getGoodsInfor();
         // }
         this.$store.commit('setGoods',null);
 
@@ -321,9 +321,9 @@ export default {
 
             })
         },
-        getGoodsInfo() {
+        getGoodsInfor() {
             var that = this;
-            this.Http.get(this.Api.getGoodsInfo(), {
+            this.Http.get(this.Api.getGoodsInfor(), {
                 goodsId: that.goodsId
             }, function (result) {
                 console.log(result);
@@ -363,7 +363,7 @@ export default {
         '$route'(to, from) {
             if (to.fullPath.indexOf("detail") > 0) {
                 this.goodsId = this.$route.params.id;
-                this.getGoodsInfo();
+                this.getGoodsInfor();
                 var self = this;
                 var t = setTimeout(function () {
                     self.$refs.scroller.scrollTo(0,0,false);

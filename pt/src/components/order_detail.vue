@@ -165,7 +165,7 @@ export default {
             this.Http.get(this.Api.cancelOrder(), {
                 orderId: orderId
             }, function (result) {
-                console.log(result);
+                
             })
         }
     },

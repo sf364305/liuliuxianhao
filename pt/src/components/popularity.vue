@@ -60,24 +60,24 @@
                 </div>
             </form>
         </scroller>
-                <div class="alert-outer-papular" style="padding-left:0;">
-                    <div class="alert-plat-papular">
-                        <div class="papular-plat-head clearfix">
-                            <span class="papular-plat-cancel" @click="closePopu">取消</span>
-                            <span class="papular-plat-sure" @click="surePopu">确定</span>
-                        </div>
-                        <div>
-                            <div class="papular-plat-choice clearfix">
-                                <label v-for="g in goods" :key="g.id">
-                                    <!--<input type="radio" checked="checked" name="sell" value="1"/>-->
-                                    <img :src="$store.state.Setting.qiniuUrl + g.goodsImages[0].qiniuKey" class="choice-sho-platform choiced-ying-platform" v-bind:class="{'show':(goodsId == g.id)}" @click="changePlat(g.id)">
-                                    </img>
-                                    <em class="choice-text-platform">{{g.name}}</em>
-                                </label>
-                            </div>
-                        </div>
+        <div class="alert-outer-papular" style="padding-left:0;">
+            <div class="alert-plat-papular">
+                <div class="papular-plat-head clearfix">
+                    <span class="papular-plat-cancel" @click="closePopu">取消</span>
+                    <span class="papular-plat-sure" @click="surePopu">确定</span>
+                </div>
+                <div>
+                    <div class="papular-plat-choice clearfix">
+                        <label v-for="g in goods" :key="g.id">
+                            <!--<input type="radio" checked="checked" name="sell" value="1"/>-->
+                            <img :src="$store.state.Setting.qiniuUrl + g.goodsImages[0].qiniuKey" class="choice-sho-platform choiced-ying-platform" v-bind:class="{'show':(goodsId == g.id)}" @click="changePlat(g.id)">
+                            </img>
+                            <em class="choice-text-platform">{{g.name}}</em>
+                        </label>
                     </div>
                 </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -88,7 +88,7 @@ export default {
     data() {
         return {
             mobiscrollInstance:null,
-            title: "人气专题",
+            title: "人气专题11",
             goodsId: "",
             goods: [],
             popularType: 1,
