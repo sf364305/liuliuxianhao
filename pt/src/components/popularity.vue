@@ -12,7 +12,7 @@
             <form action="" method="" class="popular-form">
                 <div>
                     <label for="">选择平台：</label>
-                    <span type="text" placeholder="" name="" readOnly="true" value="点击选择 ∨" @click="changePupa" class="papular-plat">点击选择 ∨</span>
+                    <span type="text" placeholder="" name="" readOnly="true" value="点击选择 ∨" @click="changePupa" class="papular-plat" id="popularText">点击选择 ∨</span>
                 </div>
                 <div>
                     <label for="">选择人气：</label>
@@ -60,14 +60,14 @@
                 </div>
             </form>
         </scroller>
-        <div class="alert-outer-papular" style="padding-left:0;">
-            <div class="alert-plat-papular">
+        <div class="alert-outer-papular" v-bind:class="{ 'outer-papular': isAle }" style="padding-left:0;">
+            <div class="alert-plat-papular" id="alertPlat">
                 <div class="papular-plat-head clearfix">
                     <span class="papular-plat-cancel" @click="closePopu">取消</span>
                     <span class="papular-plat-sure" @click="surePopu">确定</span>
                 </div>
                 <div>
-                    <div class="papular-plat-choice clearfix">
+                    <div class="papular-plat-choice clearfix" id="popularPlat">
                         <label v-for="g in goods" :key="g.id">
                             <!--<input type="radio" checked="checked" name="sell" value="1"/>-->
                             <img :src="$store.state.Setting.qiniuUrl + g.goodsImages[0].qiniuKey" class="choice-sho-platform choiced-ying-platform" v-bind:class="{'show':(goodsId == g.id)}" @click="changePlat(g.id)">
@@ -88,7 +88,7 @@ export default {
     data() {
         return {
             mobiscrollInstance:null,
-            title: "人气专题11",
+            title: "人气专题",
             goodsId: "",
             goods: [],
             popularType: 1,
@@ -101,6 +101,7 @@ export default {
             comment: "",
             id: '',
             popularNum: '',
+            isAle: false,
         }
     },
     created() {
@@ -117,7 +118,7 @@ export default {
                 self.goods = [];
                 self.goods = result.data.goodses;
                 self.goodsId = self.goods[0].id;
-                $(".alert-plat-papular").attr("data-id", self.goodsId);
+                document.getElementById('alertPlat').setAttribute("data-id", self.goodsId);
             })
         },
         getNum(num) {
@@ -128,36 +129,29 @@ export default {
             document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
                 e.preventDefault();
             }, false);
-            //var daId = $(".alert-plat-papular").attr("data-id");
-            $(".alert-outer-papular").css("display", "block");
-            $(".alert-plat-papular").animate({
-                "bottom": "0"
-            }, 500);
-            $(".papular-plat-choice").css("display", "block").siblings().css("display", "none");
-
-            this.$refs.scroller.scrollTo(0,500,true);
+            this.isAle = true;
+            var elent = document.getElementById('alertPlat');
+            var eleH = elent.offsetHeight;
+            elent.style.bottom = 0;
+            //this.$refs.scroller.scrollTo(0,500,true);
         },
         closePopu() {
-            var dataId = $(".alert-plat-papular").attr("data-id");
+            var dataId = document.getElementById('popularPlat').getAttribute("data-id");
             this.goodsId = dataId;
-            $(".alert-outer-papular").css("display", "none");
-            $(".alert-plat-papular").animate({
-                "bottom": "-22rem"
-            }, 500)
+            this.isAle = false;
         },
         surePopu: function () {
-            $(".alert-plat-papular").attr("data-id", this.goodsId);
-            for (var i = 0; i < $(".papular-plat-choice label").length; i++) {
-                var bool = $(".papular-plat-choice label").eq(i).find("img").hasClass("show");
-                if (bool == true) {
-                    var textB = $(".papular-plat-choice label").eq(i).find("img").siblings("em").html();
+            var popularPlat = document.getElementById('popularPlat');
+            var popularPlatL = popularPlat.getElementsByTagName('label');
+            popularPlat.setAttribute("data-id", this.goodsId);
+            for (var i = 0; i < popularPlatL.length; i++) {
+                var bool = popularPlatL[i].firstChild.className.split(' ').length;
+                if (bool == 3) {
+                    var textB = popularPlatL[i].lastChild.innerHTML;
                 }
             }
-            $(".papular-plat").text(textB);
-            $(".alert-outer-papular").css("display", "none");
-            $(".alert-plat-papular").animate({
-                "bottom": "-22rem"
-            }, 500)
+            document.getElementById('popularText').innerHTML = textB;
+            this.isAle = false;  
         },
         changePlat(id) {
             this.goodsId = id;

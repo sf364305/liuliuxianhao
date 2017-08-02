@@ -21,7 +21,7 @@ export default {
         var d = new Date;
         //10秒钟过期
 
-        d.setTime(d.getTime() + 1000 * 60 * 1000);
+        d.setTime(d.getTime() + 1000 * 60 * 1000*1000);
 
         window.document.cookie = "xianhao_token=" + t + ";path=/;expires=" + d.toGMTString();
         window.location.href = "/?t="+d.getTime();

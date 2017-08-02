@@ -27,7 +27,7 @@
                     <img :src="$store.state.Setting.qiniuUrl + goods.goodsImages[0].qiniuKey" alt="" @click="clickBig" />
                 </div>
                 <div class="detail-pic-right">
-                    <div class="detail-right-inner">
+                    <div class="detail-right-inner" id="detailInner">
                         <div v-for="imgs in goods.goodsImages" :key="imgs.id">
                             <img :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" alt="" />
                         </div>
@@ -240,11 +240,15 @@ export default {
     },
     methods: {
         moveT: function () {
+            var detailInner = document.getElementById('detailInner');
+            var divEle = detailInner.getElementsByTagName('div');
             var imgNu = $(".detail-pic-center").attr("img-data");
+            console.log(divEle);
             show(true, imgNu)
             function show(bool, deNum) {
-                var divH = $(".detail-right-inner div").height();
-                var divL = $(".detail-right-inner div").length;
+                var divH = divEle.offsetHeight;
+                var divL = divEle.length;
+                alert(divH)
                 if (bool) {
                     deNum++;
                     if (deNum > 0) {
@@ -266,11 +270,13 @@ export default {
             }
         },
         moveT2: function () {
+            var detailInner = document.getElementById('detailInner');
+            var divEle = detailInner.getElementsByTagName('div');
             var imgNu = $(".detail-pic-center").attr("img-data");
             show(false, imgNu)
             function show(bool, deNum) {
-                var divH = $(".detail-right-inner div").height();
-                var divL = $(".detail-right-inner div").length;
+                var divH = divEle.offsetHeight;
+                var divL = divEle.length;
                 if (bool) {
                     deNum++;
                     if (deNum > 0) {

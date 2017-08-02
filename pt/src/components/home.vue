@@ -201,8 +201,7 @@ export default {
             })
         }
     },
-    mounted() {
-        
+    mounted() {      
         var a = 0;
         var h = $(".announ li").height();
         var n = $(".announ li").length;

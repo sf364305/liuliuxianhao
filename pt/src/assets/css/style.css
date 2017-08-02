@@ -1992,6 +1992,9 @@ select {
     background: rgba(0,0,0,0.3);
     z-index: 60;
 }
+.popularity .outer-papular {
+    display:block;
+}
 .alert-plat-papular {
     position: fixed;
     left: 0;
