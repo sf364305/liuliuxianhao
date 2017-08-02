@@ -63,7 +63,7 @@ Vue.prototype.Api = {
     getMerchantInfoByStatus() {
         return base + '/order/getMerchantInfoByStatus';
     },
-    getGoodsInfo() {
+    getGoodsInfor() {
         return base + '/common/getGoodsInfo';
     },
     confirmOrder() {

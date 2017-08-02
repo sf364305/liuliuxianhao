@@ -11,11 +11,11 @@
                 <span class="my-mon">￥{{userInfo.user.commission}}</span>
             </div>
             <div class="person-dif clearfix">
-                <span class="person-buyer buy-show" @click="showStatus">买家管理</span>
-                <span class="person-seller" @click="showSta">卖家管理</span>
+                <span class="person-buyer" @click="showStatus" v-bind:class="{ 'buy-show': isSho }">买家管理</span>
+                <span class="person-seller" @click="showStatus" v-bind:class="{ 'buy-show': !isSho }">卖家管理</span>
             </div>
             <ul class="person-dif-con">
-                <li class="person-buyer-con person-con-show clearfix">
+                <li class="person-buyer-con clearfix" v-bind:class="{ 'person-con-show': isAct }">
                     <a @click="orderList(1)" class="person-unpaid" replace>未支付
                         <i v-if="userInfo.waitPayCount > 0">{{userInfo.waitPayCount}}</i>
                     </a>
@@ -33,7 +33,7 @@
                     </a>
                     <router-link to="/all_order" class="person-all" replace>全部订单</router-link>
                 </li>
-                <li class="person-seller-con clearfix">
+                <li class="person-seller-con clearfix" v-bind:class="{ 'person-con-show': !isAct }">
                     <a @click="goodsList(1)" class="person-shelves" replace>已上架
                         <i v-if="userInfo.upShelvesCount > 0">{{userInfo.upShelvesCount}}</i>
                     </a>
@@ -101,7 +101,9 @@ export default {
         return {
             userInfo: {
                 user: {}
-            }
+            },
+            isSho:true,
+            isAct: true
         }
     },
     created() {
@@ -111,17 +113,14 @@ export default {
         this.getUserInfo();
     },
     methods: {
-        showSta() {
-            $(".person-seller").addClass('buy-show');
-            $(".person-buyer").removeClass('buy-show');
-            $(".person-seller-con").addClass('person-con-show');
-            $(".person-buyer-con").removeClass('person-con-show');
-        },
         showStatus() {
-            $(".person-buyer").addClass('buy-show');
-            $(".person-seller").removeClass('buy-show');
-            $(".person-buyer-con").addClass('person-con-show');
-            $(".person-seller-con").removeClass('person-con-show');
+            if(this.isSho||this.isAct) {
+                this.isSho = false;
+                this.isAct = false;
+            } else {
+                this.isSho = true;
+                this.isAct = true;
+            }
         },
         getUserInfo() {
             var self = this;

@@ -652,6 +652,9 @@
     background: #000;
     color: #fff;
 }
+.commodity .com-show {
+    display: block;
+}
 .alert-com {
     display: none;
     position: fixed;
@@ -1613,7 +1616,7 @@ select {
    position: absolute; 
 }
 .fill-foot {
-    padding-left: 4%;
+    padding-left: 6%;
     color: red;
     margin: 0.5rem 0;
 }

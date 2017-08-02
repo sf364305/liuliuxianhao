@@ -9,13 +9,13 @@
             <span class="return-back" @click="back"></span>
         </header>
         <ul class="com-choice clearfix">
-            <li class="com-text comtext-show" @click="change1">商品类型</li>
-            <li class="com-text2" @click="change2">筛选</li>
-            <li class="com-text3" @click="change3">默认排序</li>
+            <li class="com-text" v-bind:class="{ 'comtext-show': isCom }" @click="change1">商品类型</li>
+            <li class="com-text2" v-bind:class="{ 'comtext-show': isCho }" @click="change2">筛选</li>
+            <li class="com-text3" v-bind:class="{ 'comtext-show': isSot }" @click="change3">默认排序</li>
         </ul>
-        <div class="alert-com-outer" @click="closeA"></div>
-        <ul class="alert-com">
-            <li class="alert-com-diff">
+        <div class="alert-com-outer" v-bind:class="{ 'com-show': isClose }" @click="closeA"></div>
+        <ul class="alert-com" v-bind:class="{ 'com-show': isClose }">
+            <li class="alert-com-diff" v-bind:class="{ 'com-show': isCom }">
                 <label class="alert-all-dif" @click="changeType('')">
                     <span style="width:87%;" v-if="condition.type === ''" class="com-sell-all chioced-comd">>全部</span>
                     <span style="width:87%;" v-else class="com-sell-all">全部</span>
@@ -29,7 +29,7 @@
                     <span style="width:87%;" v-else class="com-lease">租赁</span>
                 </label>
             </li>
-            <li class="alert-com-inf alert-com-show">
+            <li class="alert-com-inf" v-bind:class="{ 'com-show': isCho }">
                 <form action="" method="post">
                     <!--<div class="clearfix">
                                 <label for="">关键词：</label>
@@ -115,7 +115,7 @@
                     </div>
                 </form>
             </li>
-            <li class="alert-com-time">
+            <li class="alert-com-time" v-bind:class="{ 'com-show': isSot }">
                 <div class="price-sort">
                     <label class="alert-all-dif" @click="changeSort('')">
                         <em v-if="condition.sort===''" class="com-time-show">>默认排序</em>
@@ -170,6 +170,10 @@ export default {
                 size: 20
             },
             title: "商品列表",
+            isCom: true,
+            isCho: false,
+            isSot: false,
+            isClose: false
         }
     },
     activated() {
@@ -223,37 +227,40 @@ export default {
         },
         change1: function () {
             //添加阻止事件
-            // document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
-            //     e.preventDefault();
-            // }, false);
-            $(".alert-com, .alert-com-outer").css("display", "block");
-            $(".alert-com-diff").css("display", "block").siblings().css("display", "none");
-            $(".com-text").addClass('comtext-show').siblings().removeClass('comtext-show');
+             document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
+                 e.preventDefault();
+             }, false);
+            this.isCom = true;
+            this.isCho = false;
+            this.isSot= false;
+            this.isClose= true;
         },
         change2: function () {
             //添加阻止事件
-            // document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
-            //     e.preventDefault();
-            // }, false);
-            $(".alert-com, .alert-com-outer").css("display", "block");
-            $(".alert-com-inf").css("display", "block").siblings().css("display", "none");
-            $(".com-text2").addClass('comtext-show').siblings().removeClass('comtext-show');
+             document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
+                 e.preventDefault();
+             }, false);
+            this.isCom = false;
+            this.isCho = true;
+            this.isSot= false;
+            this.isClose= true;
         },
         change3: function () {
             //添加阻止事件
-            // document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
-            //     e.preventDefault();
-            // }, false);
-            $(".alert-com, .alert-com-outer").css("display", "block");
-            $(".alert-com-time").css("display", "block").siblings().css("display", "none");
-            $(".com-text3").addClass('comtext-show').siblings().removeClass('comtext-show');
+             document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
+                 e.preventDefault();
+             }, false);
+            this.isCom = false;
+            this.isCho = false;
+            this.isSot= true;
+            this.isClose= true;
         },
         closeA: function () {
-            $(".alert-com, .alert-com-outer").css("display", "none");
+            this.isClose= false;
             //移除添加阻止事件
-            // document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
-            //     e.preventDefault();
-            // });
+             document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
+                 e.preventDefault();
+             });
         },
         changeSex(sex) {
             this.condition.sex = sex;

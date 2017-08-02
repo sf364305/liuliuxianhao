@@ -251,9 +251,9 @@ export default {
         }
     },
     methods: {
-        changeMach: function (e) {
+        /*changeMach: function (e) {
             $(e.target).addClass('choiced-show').parent().siblings().find('i').removeClass('choiced-show');
-        },
+        },*/
         addGoods() {
             var errorMsg;
             if (!this.goods.name) {
