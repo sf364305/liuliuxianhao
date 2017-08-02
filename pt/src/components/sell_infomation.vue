@@ -270,7 +270,8 @@ export default {
                 errorMsg = "请输入联系手机";
             } else if (!this.goods.qq) {
                 errorMsg = "请输入QQ";
-            } else if (this.$refs.images.images.length == 0) {
+            } 
+            else if (this.$refs.images.images.length == 0) {
                 errorMsg = "请至少上传一张图片";
             }
 
