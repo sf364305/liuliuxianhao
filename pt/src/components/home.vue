@@ -72,6 +72,7 @@ export default {
         this.page = 0;
         this.getHomeGoodsList();
         this.getJsConfig();
+        this.getUserInfo();
     },
     activated(){
         this.searchText = "";
@@ -113,6 +114,13 @@ export default {
                 } else {
                     that.$refs.scroller.finishInfinite(true);
                 }
+            })
+        },
+        getUserInfo() {
+            var self = this;
+            this.Http.get(this.Api.getUserInfo(), null, function (result) {
+                self.userInfo = result.data;
+                self.$store.commit('setUser',self.userInfo.user);
             })
         },
         contains(g) {
