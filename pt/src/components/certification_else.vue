@@ -92,7 +92,7 @@ export default {
                         //更变本地用户状态
                         var user = that.$store.state.User;
                         user.userStatus = 1;
-                        self.$store.commit('setUser',user);
+                        that.$store.commit('setUser',user);
 
                         //跳转到我要卖页面
                         that.$store.commit("clearFrom");
