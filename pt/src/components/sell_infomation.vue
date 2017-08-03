@@ -1,7 +1,7 @@
 <template>
     <div class="sell-infomation">
         <app-header :header="title"></app-header>
-        <scroller ref="scroller" style="margin-bottom:4rem;margin-top:4rem;">
+        <!-- <scroller ref="scroller" style="margin-bottom:4rem;margin-top:4rem;"> -->
             <form id="form" action="" enctype="" method="post" class="clearfix">
                 <div class="sell-first">点击添加图片</div>
                 <input type="hidden" id="goods-id">
@@ -195,7 +195,7 @@
                     <input type="button" :disabled="disabled" class="diyStart" @click="addGoods" value="下一步" />
                 </div>
             </form>
-        </scroller>
+        <!-- </scroller> -->
     </div>
 </template>
 <script>
