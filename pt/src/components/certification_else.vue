@@ -15,10 +15,10 @@
                 <input type="text" placeholder="请输入您的手机号码" v-model="phone" value="" />
             </div>
             <!--<div class="certification-tele">
-                <input type="text" placeholder="请输入验证码" v-model="code" value="" class="certification-num" />
-                <span class="get-num" @click="getNum" data-num="1">获取验证码</span>
-                <em class="time-num" v-if="a < 60">{{a}}s</em>
-            </div>-->
+                    <input type="text" placeholder="请输入验证码" v-model="code" value="" class="certification-num" />
+                    <span class="get-num" @click="getNum" data-num="1">获取验证码</span>
+                    <em class="time-num" v-if="a < 60">{{a}}s</em>
+                </div>-->
             <div class="certification-sub">
                 <input type="button" placeholder="" name="" @click="submitCer" value="提交" class="certification-submit" />
             </div>
@@ -31,24 +31,24 @@ export default {
     name: 'certification-else',
     data() {
         return {
-            title:"实名认证",
-            a:60,
-            realName:"",
-            phone:"",
-            cardId:"",
-            code:""
+            title: "实名认证",
+            a: 60,
+            realName: "",
+            phone: "",
+            cardId: "",
+            code: ""
         }
     },
     methods: {
         getNum: function (e) {
-            var self=this;
-            if(self.phone.length != 11){
+            var self = this;
+            if (self.phone.length != 11) {
                 console.log("手机号错误");
                 return;
-            }         
+            }
             var num = $(e.target).attr("data-num");
             console.log(num);
-            $(e.target).attr("data-num", 2);   
+            $(e.target).attr("data-num", 2);
             if (num == 1) {
                 self.a = 60;
                 $(e.target).addClass('get-num-active');
@@ -68,7 +68,6 @@ export default {
 
         },
         submitCer() {
-            
             var that = this;
             if (!(/^1[34578]\d{9}$/.test(that.phone))) {
                 that.$iosAlert("手机号码有误，请重填");
@@ -76,21 +75,33 @@ export default {
             } else if (!(/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(that.cardId))) {
                 that.$iosAlert("身份证号码有误，请重填");
                 return false;
-            }else if(!/^[\u4e00-\u9fa5]+(·[\u4e00-\u9fa5]+)*$/.test(that.realName)){
+            } else if (!/^[\u4e00-\u9fa5]+(·[\u4e00-\u9fa5]+)*$/.test(that.realName)) {
                 that.$iosAlert("请填写真实姓名");
                 return false;
             }
             this.Http.get(this.Api.verified(), {
-                userId:that.userId,
-                realName:that.realName,
-                cardId:that.cardId,
-                phone:that.phone
+                userId: that.userId,
+                realName: that.realName,
+                cardId: that.cardId,
+                phone: that.phone
             }, function (result) {
                 if (result.code == 0) {
                     that.$iosAlert("提交信息成功，请耐心等待审核！");
-                    that.$store.commit("clearFrom");
-                    that.$router.push("/person");
-                } 
+                    //检测是否从我要卖页面跳转
+                    if (that.$store.state.FromView.indexOf("/my_sell")) {
+                        //更变本地用户状态
+                        var user = that.$store.state.User;
+                        user.userStatus = 1;
+                        self.$store.commit('setUser',user);
+
+                        //跳转到我要卖页面
+                        that.$store.commit("clearFrom");
+                        that.$router.push("/my_sell");
+                    } else {
+                        that.$store.commit("clearFrom");
+                        that.$router.push("/person");
+                    }
+                }
             })
         }
     },

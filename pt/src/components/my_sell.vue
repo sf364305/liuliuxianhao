@@ -62,6 +62,12 @@ export default {
             this.categroyId = id;
         },
         nextStep() {
+            //检验是否实名认证
+            if(this.$store.state.User.userStatus == 0
+            ||this.$store.state.User.userStatus == 3){
+                this.$router.push("/certification");
+                return;
+            }
             if (this.isSell) {
                 this.$router.push("/sell_infomation/"+this.categroyId);
             } else {

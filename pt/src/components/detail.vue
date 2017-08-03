@@ -222,9 +222,12 @@ export default {
 
         // this.goods = this.$store.state.Goods;
         
-        // if(this.$store.state.Goods != null){
+        if(!this.$store.state.GoodsCache[this.goodsId]){
             this.getGoodsInfor();
-        // }
+        }else{
+            this.goods = this.$store.state.GoodsCache[this.goodsId];
+            console.log("读取缓存商品",this.goods);
+        }
         this.$store.commit('setGoods',null);
 
         this.getRecomend();
@@ -334,7 +337,7 @@ export default {
                 goodsId: that.goodsId
             }, function (result) {
                 console.log(result);
-                that.goods = result.data.goods;               
+                that.goods = result.data.goods;
             })
         },
         getRecomend() {
@@ -344,6 +347,11 @@ export default {
             }, function (result) {
                 console.log(result,"999");
                 that.recommendGoods = result.data.recomendGoodses;
+                that.recommendGoods.forEach(function(element) {
+                    //加入缓存
+                    that.$store.commit("setGoodsCache",element);
+                }, that);
+                
             })
         },
         getCollection() {
