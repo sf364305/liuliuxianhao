@@ -1,5 +1,4 @@
 
-(function ($) {
     $.mobiscroll.i18n.zh = $.extend($.mobiscroll.i18n.zh, {
         dateFormat: 'yyyy-mm-dd',
         dateOrder: 'yymmdd',
@@ -16,4 +15,4 @@
         timeWheels: 'HHii',
         yearText: '年'
     });
-})(jQuery);
+

@@ -1,17 +1,17 @@
 <template>
     <div class="detail">
         <app-header :header="title"></app-header>
-            <div class="swiper-container alert-big" style="position:fixed;z-index:1000;">
-                <div class="swiper-wrapper">
-                    <div class="big-show swiper-slide" id="icons" v-for="imgs in goods.goodsImages" :key="imgs.id">
-                        <img :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" @click="closeAlert" />
-                    </div>
+        <div class="swiper-container alert-big" v-bind:class="{ 'alert-show': isAlert }" style="position:fixed;z-index:1000;" id="alertBig">
+            <div class="swiper-wrapper alert-trans" id="alertTrans">
+                <div class="big-show swiper-slide" id="icons" v-for="imgs in goods.goodsImages" :key="imgs.id">
+                    <img :src="$store.state.Setting.qiniuUrl + imgs.qiniuKey" @click="closeAlert" />
                 </div>
-                <!-- 如果需要导航按钮 -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
             </div>
-        <scroller  ref="scroller" style="margin-bottom:4rem;margin-top:4rem;">
+            <!-- 如果需要导航按钮 -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        <scroller  ref="scroller" style="">
             <div class="detail-inner clearfix">
                 <p class="detail-pic-left">
                     点
@@ -23,7 +23,7 @@
                     <br/>大
                     <br/>图
                 </p>
-                <div class="detail-pic-center" img-data="0">
+                <div class="detail-pic-center" img-data="0" id="detailCenter">
                     <img :src="$store.state.Setting.qiniuUrl + goods.goodsImages[0].qiniuKey" alt="" @click="clickBig" />
                 </div>
                 <div class="detail-pic-right">
@@ -36,7 +36,7 @@
                     <div class="pic-bottom" @click="moveT2"></div>
                 </div>
             </div>
-            <div class="over-detail" style="padding-bottom:5rem;">
+            <div class="over-detail" v-bind:class="{ 'over-show': isOver }" style="padding-bottom:5rem;" id="overDetail">
                 <div class="detail-inf clearfix">
                     <div class="detail-in-left">
                         <span class="detail-in-name">
@@ -195,6 +195,8 @@ export default {
                 name: "加载中"
             },
             isCollection: false,
+            isOver: false,
+            isAlert: false,
             collection: "收藏",//isCollection ? "已收藏" : "收藏",
             isDetail: true,
             recommendGoods: []
@@ -226,29 +228,31 @@ export default {
             this.getGoodsInfor();
         // }
         this.$store.commit('setGoods',null);
-
         this.getRecomend();
         this.getCollection();
-        $(".over-detail").css("display","block");
-        $(".alert-big").css("display", "none");
+        this.isOver = false;
+        this.isAlert = false;
+        var alertTrans = document.getElementById('alertTrans');
+        var detailCenter = document.getElementById('detailCenter');
+        var detailInner = document.getElementById('detailInner');
         setTimeout(function() {
-            $(".detail-pic-center").attr("img-data",0);
-            $(".detail-right-inner").css({
-                "marginTop": 0
-            })
-        },500)
+            detailCenter.setAttribute("img-data",0);
+            detailInner.style.marginTop = 0 + "px";
+            alertTrans.style.transform = "translateX(0)";
+        },500);
     },
     methods: {
         moveT: function () {
-            var detailInner = document.getElementById('detailInner');
-            var divEle = detailInner.getElementsByTagName('div');
-            var imgNu = $(".detail-pic-center").attr("img-data");
-            console.log(divEle);
+            var detailInner = document.getElementById('detailInner'),
+             divEle = detailInner.getElementsByTagName('div'),
+             detailCenter = document.getElementById('detailCenter'),
+             divImg = detailInner.getElementsByTagName('img'),
+             cenImg = detailCenter.getElementsByTagName('img'),
+             imgNu = detailCenter.getAttribute("img-data");
             show(true, imgNu)
             function show(bool, deNum) {
-                var divH = divEle.offsetHeight;
+                var divH = divEle[0].offsetHeight;
                 var divL = divEle.length;
-                alert(divH)
                 if (bool) {
                     deNum++;
                     if (deNum > 0) {
@@ -260,22 +264,23 @@ export default {
                         deNum = -divL + 1;
                     }
                 }
-                var imgS = $(".detail-right-inner div").eq(Math.abs(deNum)).children("img").attr("src");
-                $(".detail-pic-center img").attr("src", imgS);
-                $(".detail-pic-center").attr("img-data", deNum);
-                var leg = deNum * divH;
-                $(".detail-right-inner").animate({
-                    "marginTop": leg
-                }, 500)
+                var imgS = divImg[Math.abs(deNum)].getAttribute("src");
+                cenImg[0].setAttribute("src", imgS);
+                detailCenter.setAttribute("img-data", deNum);
+                var leg = deNum * divH; 
+                detailInner.style.marginTop = leg+'px';
             }
         },
         moveT2: function () {
-            var detailInner = document.getElementById('detailInner');
-            var divEle = detailInner.getElementsByTagName('div');
-            var imgNu = $(".detail-pic-center").attr("img-data");
+            var detailInner = document.getElementById('detailInner'),
+             divEle = detailInner.getElementsByTagName('div'),
+             detailCenter = document.getElementById('detailCenter'),
+             divImg = detailInner.getElementsByTagName('img'),
+             cenImg = detailCenter.getElementsByTagName('img'),
+             imgNu = detailCenter.getAttribute("img-data");
             show(false, imgNu)
             function show(bool, deNum) {
-                var divH = divEle.offsetHeight;
+                var divH = divEle[0].offsetHeight;
                 var divL = divEle.length;
                 if (bool) {
                     deNum++;
@@ -288,32 +293,34 @@ export default {
                         deNum = -divL + 1;
                     }
                 }
-                console.log(deNum);
-                var imgS = $(".detail-right-inner div").eq(Math.abs(deNum)).children("img").attr("src");
-                console.log(imgS)
-                $(".detail-pic-center img").attr("src", imgS);
-                $(".detail-pic-center").attr("img-data", deNum);
+                var imgS = divImg[Math.abs(deNum)].getAttribute("src");     
+                cenImg[0].setAttribute("src", imgS);
+                detailCenter.setAttribute("img-data", deNum);
                 var leg = deNum * divH;
-                $(".detail-right-inner").animate({
-                    "marginTop": leg
-                }, 500)
+                detailInner.style.marginTop = leg+ "px";
             }
         },
         clickBig() {
-            $(".alert-big").css("display", "block");
-            $(".over-detail").css("display","none");
-            var a = Math.abs($(".detail-pic-center").attr("img-data"));
+            var alertTrans = document.getElementById('alertTrans');
+            var detailCenter = document.getElementById('detailCenter');
+            document.getElementById('alertBig').style.display="block";
+            document.getElementById('overDetail').style.display="none";
+            var a = Math.abs(detailCenter.getAttribute("img-data"));
             var swiper = new Swiper('.swiper-container', {
                  // 如果需要前进后退按钮
                 nextButton: '.swiper-button-next',
                 prevButton: '.swiper-button-prev',
                 onlyExternal : true,
             });
-            swiper.slideTo(a, 0, false);
+            if(a==0) {
+                alertTrans.style.transform = "translateX(0)";
+            } else {
+                swiper.slideTo(a, 0, false);
+            }
         },
         closeAlert() {
-            $(".over-detail").css("display","block")
-            $(".alert-big").css("display", "none");
+            document.getElementById('alertBig').style.display="none";
+            document.getElementById('overDetail').style.display="block";
         },
         detail(i) {
             this.isDetail = i;

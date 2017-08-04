@@ -1,4 +1,4 @@
-(function ($) {
+
     var theme = {
         defaults: {
             dateOrder: 'Mddyy',
@@ -14,5 +14,5 @@
     $.mobiscroll.themes['android-ics'] = theme;
     $.mobiscroll.themes['android-ics light'] = theme;
 
-})(jQuery);
+
 

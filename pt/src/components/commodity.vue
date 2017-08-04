@@ -37,16 +37,18 @@
                             </div>-->
                     <div class="plat-comm clearfix">
                         <span>平台：</span>
-                        <label>
-                            <input type="radio" checked="checked" name="plat" value=""></input>
-                            <i class="choice-sho" v-bind:class="{'choiced-show':!condition.categoryId}" @click="changePlat('')"></i>
-                            <em class="choice-text">全部</em>
-                        </label>
-                        <label v-for="(c,index) in $store.state.Categroy" v-bind:key="c.id">
-                            <input type="radio" v-model="condition.categoryId" name="plat" :value="c.id"></input>
-                            <i class="choice-sho" v-bind:class="{'choiced-show':condition.categoryId == c.id}" @click="changePlat(index)"></i>
-                            <em class="choice-text">{{c.name}}</em>
-                        </label>
+                        <div class="plat-com-right">                     
+                            <label style="width:33%;">
+                                <input type="radio" checked="checked" name="plat" value=""></input>
+                                <i class="choice-sho" v-bind:class="{'choiced-show':!condition.categoryId}" @click="changePlat('')"></i>
+                                <em class="choice-text">全部</em>
+                            </label>
+                            <label v-for="(c,index) in $store.state.Categroy" v-bind:key="c.id" style="width:33%;">
+                                <input type="radio" v-model="condition.categoryId" name="plat" :value="c.id"></input>
+                                <i class="choice-sho" v-bind:class="{'choiced-show':condition.categoryId == c.id}" @click="changePlat(index)"></i>
+                                <em class="choice-text">{{c.name}}</em>
+                            </label>
+                        </div>
                     </div>
                     <div class="clearfix">
                         <label for="">价格范围：</label>
@@ -138,7 +140,7 @@
                 </div>
             </li>
         </ul>
-        <scroller :on-infinite="infinite" ref="scroller" style="margin-top:7rem;">
+        <scroller :on-infinite="infinite" ref="scroller" style="position: fixed;top:7rem;">
             <app-goods :goods="goods"></app-goods>
         </scroller>
     </div>

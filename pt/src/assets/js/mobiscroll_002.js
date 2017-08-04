@@ -7,7 +7,7 @@
  * Licensed under the MIT license.
  *
  */
-(function ($) {
+
 
     function Scroller(elem, settings) {
         var m,
@@ -1128,4 +1128,4 @@
     $.scroller = $.scroller || $.mobiscroll;
     $.fn.scroller = $.fn.scroller || $.fn.mobiscroll;
 
-})(jQuery);
+

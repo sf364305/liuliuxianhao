@@ -17,6 +17,7 @@ import './assets/css/animate.min.css'
 import './assets/js/swiper.animate1.0.2.min.js'
 import './assets/css/style.css'
 import './assets/js/jquery-1.11.3.min.js'
+//import './assets/js/zepto.js'
 import './assets/js/mobiscroll_002.js'
 import './assets/js/mobiscroll_004.js'
 import './assets/css/mobiscroll_002.css'
@@ -26,7 +27,6 @@ import './assets/js/mobiscroll_003.js'
 import './assets/js/mobiscroll_005.js'
 import './assets/css/mobiscroll_003.css'
 import './assets/js/common.js'
-
 import loading from './templates/Loading'
 import server from './components/server'
 import home from './components/home'
@@ -236,7 +236,7 @@ Router.prototype.goBack = function () {
 
 vueRouter.beforeEach((to, from, next) => {
   console.log(from.path);
-  $(".alertLoading").fadeIn(100);
+  //$(".alertLoading").fadeIn(100);
   var t = setTimeout(function () {
     if (to.path != "/") {  // 判断该路由是否需要登录权限
       if (Vue.prototype.Http.token) {  // 通过vuex state获取当前的token是否存在
@@ -267,7 +267,7 @@ vueRouter.beforeEach((to, from, next) => {
 })
 vueRouter.afterEach((to, from) => {
   setTimeout(function () {
-    $(".alertLoading").hide();
+    //$(".alertLoading").hide();
   },to.fullPath.indexOf("detail")>0?600:300);
 
 })
