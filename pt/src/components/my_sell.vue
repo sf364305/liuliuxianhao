@@ -62,11 +62,23 @@ export default {
             this.categroyId = id;
         },
         nextStep() {
-            if (this.isSell) {
-                this.$router.push("/sell_infomation/"+this.categroyId);
+            //检验是否实名认证
+            var self = this;
+            if (this.$store.state.User.userStatus == 0
+                || this.$store.state.User.userStatus == 3) {
+                this.$iosConfirm("发布商品需要实名认证，现在去实名?").then(function () {
+                    self.$router.push("/certification");
+                }, function () {
+                    console.log('取消');
+                });
             } else {
-                this.$router.push("/lease_information/"+this.categroyId);
+                if (this.isSell) {
+                    this.$router.push("/sell_infomation/" + this.categroyId);
+                } else {
+                    this.$router.push("/lease_information/" + this.categroyId);
+                }
             }
+
         }
     },
     components: {

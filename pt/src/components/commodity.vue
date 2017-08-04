@@ -311,6 +311,8 @@ export default {
                     for (var i = 0; i < result.data.goods.length; i++) {
                         if (!that.contains(result.data.goods[i])) {
                             that.goods.push(result.data.goods[i]);
+                            //加入缓存
+                            that.$store.commit("setGoodsCache",result.data.goods[i]);
                         }
                     }
                 }

@@ -204,28 +204,31 @@ export default {
     },
     activated() {
         //搜索条件禁止回填
-        this.$store.commit('setIsSearch',true);
+        this.$store.commit('setIsSearch', true);
 
         //重置goods
-        this.goods= {
-                sex: 0,
-                goodsImages: [{ 'qiniuKey': 'logo_index.png' }],
-                category: {
-                    img: "logo_index.png"
-                },
-                merchant: {
-                    creditLevel: ""
-                },
-                name: "加载中"
-            }
+        this.goods = {
+            sex: 0,
+            goodsImages: [{ 'qiniuKey': 'logo_index.png' }],
+            category: {
+                img: "logo_index.png"
+            },
+            merchant: {
+                creditLevel: ""
+            },
+            name: "加载中"
+        }
 
         this.isShow = true;
         this.goodsId = this.$route.params.id;
 
         // this.goods = this.$store.state.Goods;
-        
-        // if(this.$store.state.Goods != null){
+
+        // if (!this.$store.state.GoodsCache[this.goodsId]) {
             this.getGoodsInfor();
+        // } else {
+            // this.goods = this.$store.state.GoodsCache[this.goodsId];
+            // console.log("读取缓存商品", this.goods);
         // }
         this.$store.commit('setGoods',null);
         this.getRecomend();
@@ -240,6 +243,16 @@ export default {
             detailInner.style.marginTop = 0 + "px";
             alertTrans.style.transform = "translateX(0)";
         },500);
+        this.$store.commit('setGoods', null);
+        this.getRecomend();
+        this.getCollection();
+        setTimeout(function () {
+            $(".detail-pic-center").attr("img-data", 0);
+            $(".detail-right-inner").css({
+                "marginTop": 0
+            })
+        }, 500)
+
     },
     methods: {
         moveT: function () {
@@ -301,16 +314,17 @@ export default {
             }
         },
         clickBig() {
+
             var alertTrans = document.getElementById('alertTrans');
             var detailCenter = document.getElementById('detailCenter');
             document.getElementById('alertBig').style.display="block";
             document.getElementById('overDetail').style.display="none";
-            var a = Math.abs(detailCenter.getAttribute("img-data"));
+            var a = Math.abs($(".detail-pic-center").attr("img-data"));
             var swiper = new Swiper('.swiper-container', {
-                 // 如果需要前进后退按钮
+                // 如果需要前进后退按钮
                 nextButton: '.swiper-button-next',
                 prevButton: '.swiper-button-prev',
-                onlyExternal : true,
+                onlyExternal: true,
             });
             if(a==0) {
                 alertTrans.style.transform = "translateX(0)";
@@ -341,7 +355,7 @@ export default {
                 goodsId: that.goodsId
             }, function (result) {
                 console.log(result);
-                that.goods = result.data.goods;               
+                that.goods = result.data.goods;
             })
         },
         getRecomend() {
@@ -349,8 +363,13 @@ export default {
             this.Http.get(this.Api.getRecomend(), {
                 goodsId: that.goodsId
             }, function (result) {
-                console.log(result,"999");
+                console.log(result, "999");
                 that.recommendGoods = result.data.recomendGoodses;
+                that.recommendGoods.forEach(function (element) {
+                    //加入缓存
+                    that.$store.commit("setGoodsCache", element);
+                }, that);
+
             })
         },
         getCollection() {
@@ -359,9 +378,9 @@ export default {
                 goodsId: that.goodsId,
                 userId: that.userId
             }, function (result) {
-                console.log(result,"5555555");
+                console.log(result, "5555555");
                 that.isCollection = result.data.isCollect;
-                that.collection = result.data.isCollect? "已收藏" : "收藏";
+                that.collection = result.data.isCollect ? "已收藏" : "收藏";
             })
         },
         buy() {
@@ -377,10 +396,16 @@ export default {
         '$route'(to, from) {
             if (to.fullPath.indexOf("detail") > 0) {
                 this.goodsId = this.$route.params.id;
-                this.getGoodsInfor();
+
+                // if (!this.$store.state.GoodsCache[this.goodsId]) {
+                    this.getGoodsInfor();
+                // } else {
+                    // this.goods = this.$store.state.GoodsCache[this.goodsId];
+                    // console.log("读取缓存商品", this.goods);
+                // }
                 var self = this;
                 var t = setTimeout(function () {
-                    self.$refs.scroller.scrollTo(0,0,false);
+                    self.$refs.scroller.scrollTo(0, 0, false);
                     clearTimeout(t);
                 }, 300);
             }

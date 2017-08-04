@@ -77,9 +77,14 @@ const store = new Vuex.Store({
     Goods: {},
     Order: {},
     Loading: false,
-    IsSearch:false
+    IsSearch:false,
+    GoodsCache:{}
   },
   mutations: {
+    setGoodsCache(state,goods){
+      if(goods.id)
+        state.GoodsCache[goods.id] = goods;
+    },
     setSetting(state, setting) {
       state.Setting = setting;
     },

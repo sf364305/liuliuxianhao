@@ -189,7 +189,11 @@ Vue.prototype.Http = {
             }
         }).then((response) => {
             // 响应成功回调,错误统一处理
-            console.log(api, JSON.stringify(params), response.data);
+            if(window.location.href.indexOf("localhost") > 0 
+            || window.location.href.indexOf("test") > 0){
+                console.log(api, JSON.stringify(params), response.data);
+            }
+            
             if (response.data.code != 0) {
                 Vue.prototype.$iosAlert(response.data.msg);
             }

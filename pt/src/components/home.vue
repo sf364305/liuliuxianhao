@@ -72,6 +72,7 @@ export default {
         this.page = 0;
         this.getHomeGoodsList();
         this.getJsConfig();
+        this.getUserInfo();
     },
     activated(){
         this.searchText = "";
@@ -105,12 +106,21 @@ export default {
                     for (var i = 0; i < result.data.goods.length; i++) {
                         if (!that.contains(result.data.goods[i])) {
                             that.goods.push(result.data.goods[i]);
+                            //加入缓存
+                            that.$store.commit("setGoodsCache",result.data.goods[i]);
                         }
                     }
                     that.$refs.scroller.finishInfinite(false);
                 } else {
                     that.$refs.scroller.finishInfinite(true);
                 }
+            })
+        },
+        getUserInfo() {
+            var self = this;
+            this.Http.get(this.Api.getUserInfo(), null, function (result) {
+                self.userInfo = result.data;
+                self.$store.commit('setUser',self.userInfo.user);
             })
         },
         contains(g) {

@@ -56,10 +56,6 @@ export default {
                 }
             });
         },
-        notifyServer(serverId) {
-            var self = this;
-
-        },
         del(index) {
             var self = this;
             this.$iosConfirm("删除图片?")

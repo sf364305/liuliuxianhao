@@ -19,13 +19,15 @@
                     <span v-for="n in g.merchant.creditLevel" :key="n.id"></span>
                 </div>
                 <div class="sell-inf clearfix" v-if="g.type==0">
-                    <em>最近成交：</em>
+                    <em>成交率：</em>
+                    <span>100%</span>
+                    <!-- <em>最近成交：</em>
                     <span v-if="g.merchant.successNum != null">
                         {{g.merchant.successNum}}
                     </span>
                     <span v-if="g.merchant.successNum == null">
                         暂无
-                    </span>
+                    </span> -->
                 </div>
                 <span class="sever" v-if="g.type==1">
                     <em class="com-game">绑定情况：</em>
