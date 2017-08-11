@@ -32,7 +32,7 @@
             </section>
             <ul class="project clearfix">
                 <li v-for="(c,index) in $store.state.Categroy" v-bind:key="c.id" v-if="c.isShow">
-                    <a class="index-ying" replace @click="linkCom(index)" >
+                    <a class="index-ying" replace @click="linkCom(index)">
                         <img :src="$store.state.Setting.qiniuUrl + c.img" alt="">{{c.name}}</a>
                 </li>
             </ul>
@@ -44,7 +44,7 @@
         </scroller>
         <div class="nav-bottom">
             <app-footer></app-footer>
-        </div>  
+        </div>
     </div>
 </template>
 <script>
@@ -60,7 +60,7 @@ export default {
             size: 40,
             goods: [],
             searchText: "",
-            timer:null
+            timer: null
         }
     },
     created() {
@@ -74,18 +74,18 @@ export default {
         this.getJsConfig();
         this.getUserInfo();
     },
-    activated(){
+    activated() {
         this.searchText = "";
-        this.$store.commit('setIsSearch',false);
+        this.$store.commit('setIsSearch', false);
 
         //page
         var page = this.$store.state.ReferencePage;
-        if(page){
-            this.$store.commit('setReferencePage',null);
+        if (page) {
+            this.$store.commit('setReferencePage', null);
             this.$router.push(page);
         }
     },
-    deactivated(){
+    deactivated() {
         // this.$refs.scroller.finishInfinite(true);
     },
     methods: {
@@ -95,7 +95,7 @@ export default {
         },
         searchAll() {
             var text = this.searchText;
-            if(text=="") {
+            if (text == "") {
                 this.$router.push("/commodity/all");
             } else {
                 this.$router.push("/commodity/__" + text);
@@ -113,7 +113,7 @@ export default {
                         if (!that.contains(result.data.goods[i])) {
                             that.goods.push(result.data.goods[i]);
                             //加入缓存
-                            that.$store.commit("setGoodsCache",result.data.goods[i]);
+                            that.$store.commit("setGoodsCache", result.data.goods[i]);
                         }
                     }
                     that.$refs.scroller.finishInfinite(false);
@@ -126,7 +126,7 @@ export default {
             var self = this;
             this.Http.get(this.Api.getUserInfo(), null, function (result) {
                 self.userInfo = result.data;
-                self.$store.commit('setUser',self.userInfo.user);
+                self.$store.commit('setUser', self.userInfo.user);
             })
         },
         contains(g) {
@@ -153,13 +153,75 @@ export default {
                 url: url
             }, function (result) {
                 // debugger;
-                self.Wx.config = result.data.config;
-                //注册微信
-                self.Wx.register();
+                // self.Wx.config = result.data.config;
+                // //注册微信
+                // self.Wx.register();
+                var config = result.data.config;
+                wx.config({
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: config.appId, // 必填，公众号的唯一标识
+                    timestamp: config.timestamp, // 必填，生成签名的时间戳
+                    nonceStr: config.nonceStr, // 必填，生成签名的随机串
+                    signature: config.signature,// 必填，签名，见附录1
+                    jsApiList: ["chooseWXPay", "onMenuShareTimeline", "onMenuShareAppMessage", "onMenuShareQQ", "onMenuShareWeibo", "onMenuShareQZone", "chooseImage", "previewImage", "uploadImage", "downloadImage"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                });
+                wx.ready(function () {
+                    wx.onMenuShareTimeline({
+                        title: "六六闲号", // 分享标题
+                        link: config.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                        imgUrl: 'http://qiniu.66mkt.com/66.jpg', // 分享图标
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                        }
+                    });
+
+                    wx.onMenuShareAppMessage({
+                        title: '六六闲号', // 分享标题
+                        desc: '买卖直播账号，上66闲号', // 分享描述
+                        link: config.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                        imgUrl: 'http://qiniu.66mkt.com/66.jpg', // 分享图标
+                        type: 'link', // 分享类型,music、video或link，不填默认为link
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                        }
+                    });
+
+                    wx.onMenuShareQQ({
+                        title: '六六闲号', // 分享标题
+                        desc: '买卖直播账号，上66闲号', // 分享描述
+                        link: config.link, // 分享链接
+                        imgUrl: 'http://qiniu.66mkt.com/66.jpg', // 分享图标
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                        }
+                    });
+
+                    wx.onMenuShareQZone({
+                        title: '六六闲号', // 分享标题
+                        desc: '买卖直播账号，上66闲号', // 分享描述
+                        link: config.link, // 分享链接
+                        imgUrl: 'http://qiniu.66mkt.com/66.jpg', // 分享图标
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                        }
+                    });
+                })
             })
         }
     },
-    mounted() {      
+    mounted() {
         var a = 0;
         var announ = document.getElementById('announ');
         var liEle = announ.getElementsByTagName('li');
@@ -174,9 +236,9 @@ export default {
             announ.style.marginTop = -top + "px"
         }, 2000)
     },
-    deactivated(){
+    deactivated() {
         clearInterval(this.timer);
-        
+
     },
     components: {
         'app-banner': Banner,
