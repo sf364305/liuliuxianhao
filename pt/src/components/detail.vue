@@ -205,7 +205,6 @@ export default {
     activated() {
         //搜索条件禁止回填
         this.$store.commit('setIsSearch', true);
-
         //重置goods
         this.goods = {
             sex: 0,
@@ -356,6 +355,7 @@ export default {
             }, function (result) {
                 console.log(result);
                 that.goods = result.data.goods;
+                that.Wx.register(window.location.href.split("#")[1],that.goods);
             })
         },
         getRecomend() {

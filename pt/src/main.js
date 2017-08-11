@@ -78,9 +78,13 @@ const store = new Vuex.Store({
     Order: {},
     Loading: false,
     IsSearch:false,
-    GoodsCache:{}
+    GoodsCache:{},
+    ReferencePage:null
   },
   mutations: {
+    setReferencePage(state,page){
+       state.ReferencePage = page;
+    },
     setGoodsCache(state,goods){
       if(goods.id)
         state.GoodsCache[goods.id] = goods;
@@ -254,6 +258,7 @@ vueRouter.beforeEach((to, from, next) => {
           vm.$store.commit('pushFrom', from.path);
         }
         next();
+        // vm.Wx.register(window.location.href.split("#")[1]);
         console.log("当前路由：", vm.$store.state.FromView);
       } else {
         next({

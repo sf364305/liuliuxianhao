@@ -2,16 +2,15 @@ import Vue from 'vue'
 import axios from 'axios'
 
 //开发环境
-
- //Vue.prototype.host = 'http://localhost:8080/';
- //Vue.prototype.serverHost = 'http://localhost:8081/';
+// Vue.prototype.host = 'http://localhost:8080/';
+// Vue.prototype.serverHost = 'http://localhost:8081/';
 
 //测试环境
-// Vue.prototype.host = 'http://test.api.66mkt.com/';
-// Vue.prototype.serverHost = 'http://test.server.66mkt.com/';
+Vue.prototype.host = 'http://test.api.66mkt.com/';
+Vue.prototype.serverHost = 'http://test.server.66mkt.com/';
 //正式环境
- Vue.prototype.host = 'http://api.66xianhao.com/';
- Vue.prototype.serverHost = 'http://server.66xianhao.com/';
+//  Vue.prototype.host = 'http://api.66xianhao.com/';
+//  Vue.prototype.serverHost = 'http://server.66xianhao.com/';
 
 const base = Vue.prototype.host + 'front';
 
@@ -135,28 +134,116 @@ Vue.prototype.Api = {
     refundPay() {
         return base + '/order/refundList';
     },
-    getRefunedList(){
+    getRefunedList() {
         return base + '/order/refundList';
     },
-    addFeedback(){
+    addFeedback() {
         return base + '/home/addFeedback';
     },
-    getRecomend(){
+    getRecomend() {
         return base + '/common/recomendGoods';
     },
-    getCollection(){
+    getCollection() {
         return base + '/common/isCollect';
     },
-    getServerUrl(){
+    getServerUrl() {
         return base + '/utils/getServerUrl';
     },
-    getOrderServerUrl(){
+    getOrderServerUrl() {
         return base + '/utils/getOrderServerUrl';
     },
-    getOnlineServer(){
+    getOnlineServer() {
         return Vue.prototype.serverHost + 'open/checkServer';
     }
 };
+
+Vue.prototype.Wx = {
+    config: {},
+    register: function (page,goods) {
+        var config = this.config;
+        var _link = config.link;
+        var _img = "http://qiniu.66mkt.com/66.jpg";
+        var _title = config.title;
+        var _desc = config.desc;
+        if (page) {
+            if (_link.indexOf("?") > 0) {
+                _link = config.link + "&page=" + page;
+            }
+            else {
+                _link = config.link + "?page=" + page;
+            }
+        }
+
+        if(goods && goods.goodsImages.length > 0){
+            _img = "http://qiniu.66mkt.com/"+goods.goodsImages[0].qiniuKey;
+            _title = goods.name;
+            _desc=  goods.detail;
+        }
+            
+        console.log("分享链接", _link);
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: config.appId, // 必填，公众号的唯一标识
+            timestamp: config.timestamp, // 必填，生成签名的时间戳
+            nonceStr: config.nonceStr, // 必填，生成签名的随机串
+            signature: config.signature,// 必填，签名，见附录1
+            jsApiList: ["chooseWXPay", "onMenuShareTimeline", "onMenuShareAppMessage", "onMenuShareQQ", "onMenuShareWeibo", "onMenuShareQZone", "chooseImage", "previewImage", "uploadImage", "downloadImage"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+        wx.ready(function () {
+            wx.onMenuShareTimeline({
+                title: _title, // 分享标题
+                link: _link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: _img, // 分享图标
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+
+            wx.onMenuShareAppMessage({
+                title: _title, // 分享标题
+                desc: _desc, // 分享描述
+                link: _link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: _img, // 分享图标
+                type: 'link', // 分享类型,music、video或link，不填默认为link
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+
+            wx.onMenuShareQQ({
+                title: _title, // 分享标题
+                desc: _desc, // 分享描述
+                link: _link, // 分享链接
+                imgUrl: _img, // 分享图标
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+
+            wx.onMenuShareQZone({
+                title: _title, // 分享标题
+                desc: _desc, // 分享描述
+                link: _link, // 分享链接
+                imgUrl: _img, // 分享图标
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        })
+    }
+}
 
 //Http基本类，统一处理
 Vue.prototype.Http = {
@@ -189,11 +276,12 @@ Vue.prototype.Http = {
             }
         }).then((response) => {
             // 响应成功回调,错误统一处理
-            if(window.location.href.indexOf("localhost") > 0 
-            || window.location.href.indexOf("test") > 0){
-                console.log(api, JSON.stringify(params), response.data);
+            if (window.location.href.indexOf("localhost") > 0
+                || window.location.href.indexOf("test") > 0
+        || window.location.href.indexOf("c.chovans.cn") > 0) {
+                console.info(api, JSON.stringify(params), response.data);
             }
-            
+
             if (response.data.code != 0) {
                 Vue.prototype.$iosAlert(response.data.msg);
             }
@@ -245,8 +333,8 @@ Vue.prototype.callWxPay = function (payInfo) {
 }
 
 Vue.prototype.callServer = function (orderId) {
-    console.log('/order_server/'+orderId);
-    this.$router.push('/order_server/'+orderId);
+    console.log('/order_server/' + orderId);
+    this.$router.push('/order_server/' + orderId);
     // Vue.prototype.$iosAlert("客服系统升级维护中，请暂时通过公众号联系平台，感谢您的支持！");
 }
 
