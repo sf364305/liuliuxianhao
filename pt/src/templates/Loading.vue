@@ -15,17 +15,24 @@ export default {
   },
   methods: {
     getToken() {
+      var d = new Date;
+      d.setTime(d.getTime() + 1000 * 60 * 1000 * 1000);
+      //token
       var t = this.GetQueryString('token');
       if (t) {
         //存入cookie
-        var d = new Date;
+        //目标页面
+        var page = this.GetQueryString('page');
+        if (page && page != 'null') {
+          window.document.cookie = "xianhao_page=" + page + ";path=/;expires=" + d.toGMTString();
+        }
+
+        //token
         //10秒钟过期
-
-        d.setTime(d.getTime() + 1000 * 60 * 1000*1000);
-
         window.document.cookie = "xianhao_token=" + t + ";path=/;expires=" + d.toGMTString();
-        window.location.href = "/?t="+d.getTime();
+        window.location.href = "/"; //t="+d.getTime()
       } else {
+        //从cookie中取出内容
         t = window.document.cookie.match('(^|;)?xianhao_token=([^;]*)(;|$)');
         if (!t) {
           window.location.href = this.host;
@@ -33,7 +40,14 @@ export default {
           this.Http.setToken(t[2]);
           this.getConfig();
         }
+        var page = window.document.cookie.match('(^|;)?xianhao_page=([^;]*)(;|$)');
+        if (page&&page[2]) {
+          this.$store.commit('setReferencePage', page[2]);
+        }
+        window.document.cookie = "xianhao_page=;path=/;expires=" + new Date().getTime();
       }
+
+
     },
     GetQueryString(name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
