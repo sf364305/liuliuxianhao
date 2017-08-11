@@ -355,7 +355,7 @@ export default {
             }, function (result) {
                 console.log(result);
                 that.goods = result.data.goods;
-                that.Wx.register(window.location.href.split("#")[1],that.goods);
+                // that.Wx.register(window.location.href.split("#")[1],that.goods);
             })
         },
         getRecomend() {
