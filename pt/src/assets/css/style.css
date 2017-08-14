@@ -1227,10 +1227,11 @@
                 
 }
 .sure-stock select{
-    width: 4rem;
+    /*width: 4rem;*/
     /*-webkit-appearance: menulist;*/
     /*text-align-last: center;*/
     height: 100%;
+    color: blue;
     border: none;
     background: white;
 }
@@ -1242,6 +1243,7 @@
     width: 6rem;
     border: 1px solid #ccc;
     height: 60%;
+    margin-left: 5%;
     border-radius: 0.5rem;
     text-align: center;
     outline: none;
@@ -1913,9 +1915,9 @@ select {
 }
 .popular-form .popular-number {
     float: left;
-    width: 15%;
+    width: 20%;
     height: 1.8rem;
-    margin: 0.5rem 2% 0.5rem 0;
+    margin: 0.5rem 5% 0.5rem 0;
     border-radius: 3px;
     text-align: center;
     line-height: 1.8rem;

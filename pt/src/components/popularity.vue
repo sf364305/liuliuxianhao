@@ -14,13 +14,15 @@
                     <label for="">选择平台：</label>
                     <span type="text" placeholder="" name="" readOnly="true" value="点击选择 ∨" @click="changePupa" class="papular-plat" id="popularText">点击选择 ∨</span>
                 </div>
-                <div>
-                    <label for="">选择人气：</label>
+                <div class="clearfix">
+                    <label for="" style="width: 20%;">选择人气：</label>
                     <!--<input type="number" v-model="quantity" v-bind:change="cal()" class="papular-pla" />-->
-                    <div type="number" v-bind:class="{'popular-type-select':quantity == 5000}" @click="getNum(5000)" style="margin-left:10%;" class="popular-number" value="5000">5000</div>
-                    <div type="number" v-bind:class="{'popular-type-select':quantity == 15000}" @click="getNum(15000)" class="popular-number" value="15000">15000</div>
-                    <div type="number" v-bind:class="{'popular-type-select':quantity == 25000}" @click="getNum(25000)" class="popular-number" value="25000">25000</div>
-                    <div type="number" v-bind:class="{'popular-type-select':quantity == 35000}" @click="getNum(35000)" class="popular-number" value="35000" style="margin-left:10%;">35000</div>
+                    <div class="pop-right clearfix" style="float: left;width: 70%; margin-left:8%;">                      
+                        <div type="number" v-bind:class="{'popular-type-select':quantity == 5000}" @click="getNum(5000)" style="" class="popular-number" value="5000">5000</div>
+                        <div type="number" v-bind:class="{'popular-type-select':quantity == 15000}" @click="getNum(15000)" class="popular-number">15000</div>
+                        <div type="number" v-bind:class="{'popular-type-select':quantity == 25000}" @click="getNum(25000)" class="popular-number">25000</div>
+                        <div type="number" v-bind:class="{'popular-type-select':quantity == 35000}" @click="getNum(35000)" class="popular-number" style="">35000</div>
+                    </div>
                 </div>
                 <div>
                     <label for="">选择类型：</label>

@@ -35,14 +35,14 @@
         
                 <li class="clearfix">
                     <span>类型：</span>
-                    <em>
-                        <select v-model="leaseType" @change="cal()">
+                    <em style="color:blue;">
+                        <select v-model="leaseType" @change="cal()" style="text-align:center;">
                             <option v-if="goods.goodsLeaseInfo.hourCost" value="0">时租</option>
                             <option v-if="goods.goodsLeaseInfo.dayCost" value="1">日租</option>
                             <option v-if="goods.goodsLeaseInfo.weekCost" value="2">周租</option>
                             <option v-if="goods.goodsLeaseInfo.monthCost" value="3">月租</option>
                         </select>
-        
+                        ∨
                         <input type="number" v-model="goodsNum" class="num" placeholder="请输入数量" @input="cal()" maxlength="5" />
                     </em>
                 </li>

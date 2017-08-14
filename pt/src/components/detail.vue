@@ -176,7 +176,7 @@
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
 import Header from '../templates/Header.vue'
-import Goods from '../templates/Goods.vue'
+
 export default {
     name: 'detail',
     data() {
@@ -413,7 +413,10 @@ export default {
     },
     components: {
         "app-header": Header,
-        'app-goods': Goods,
+        'app-goods': function (resolve) {
+                //异步组件写法
+                require(['../templates/Goods.vue'], resolve)
+        },
     }
 }
 </script>
