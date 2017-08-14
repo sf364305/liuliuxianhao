@@ -44,7 +44,7 @@ export default {
             }
         }
     },
-    created() {
+    activated(){
         this.order = this.$store.state.Order;
         console.log("全局订单信息", this.order);
     },

@@ -67,226 +67,226 @@ Vue.use(VueScroller)
 Vue.use(iosAlertView);
 
 const store = new Vuex.Store({
-  state: {
-    Setting: {},
-    Categroy: [],
-    Banner: [],
-    Notices: [],
-    User: {},
-    FromView: new Array(),
-    Goods: {},
-    Order: {},
-    Loading: false,
-    IsSearch:false,
-    GoodsCache:{},
-    ReferencePage:null
-  },
-  mutations: {
-    setReferencePage(state,page){
-       state.ReferencePage = page;
+    state: {
+        Setting: {},
+        Categroy: [],
+        Banner: [],
+        Notices: [],
+        User: {},
+        FromView: new Array(),
+        Goods: {},
+        Order: {},
+        Loading: false,
+        IsSearch: false,
+        GoodsCache: {},
+        ReferencePage: null
     },
-    setGoodsCache(state,goods){
-      if(goods.id)
-        state.GoodsCache[goods.id] = goods;
+    mutations: {
+        setReferencePage(state, page) {
+            state.ReferencePage = page;
+        },
+        setGoodsCache(state, goods) {
+            if (goods.id)
+                state.GoodsCache[goods.id] = goods;
+        },
+        setSetting(state, setting) {
+            state.Setting = setting;
+        },
+        setCategroy(state, categroy) {
+            state.Categroy = categroy;
+        },
+        setNotices(state, notices) {
+            state.Notices = notices;
+        },
+        setBanner(state, banners) {
+            state.Banner = banners;
+        },
+        setUser(state, user) {
+            state.User = user;
+        },
+        pushFrom(state, from) {
+            state.FromView.push(from);
+        },
+        popFrom(state) {
+            state.FromView.pop(); // = state.FromView.slice(0, state.FromView.length - 1);
+        },
+        clearFrom(state) {
+            while (state.FromView.length > 1) {
+                state.FromView.pop();
+            }
+        },
+        setGoods(state, goods) {
+            state.Goods = goods;
+        },
+        setOrder(state, order) {
+            state.Order = order;
+        },
+        setLoading(state, loading) {
+            state.Loading = loading;
+        },
+        setIsSearch(state, is) {
+            state.IsSearch = is;
+        }
     },
-    setSetting(state, setting) {
-      state.Setting = setting;
-    },
-    setCategroy(state, categroy) {
-      state.Categroy = categroy;
-    },
-    setNotices(state, notices) {
-      state.Notices = notices;
-    },
-    setBanner(state, banners) {
-      state.Banner = banners;
-    },
-    setUser(state, user) {
-      state.User = user;
-    },
-    pushFrom(state, from) {
-      state.FromView.push(from);
-    },
-    popFrom(state) {
-      state.FromView.pop();// = state.FromView.slice(0, state.FromView.length - 1);
-    },
-    clearFrom(state) {
-      while (state.FromView.length > 1) {
-        state.FromView.pop();
-      }
-    },
-    setGoods(state, goods) {
-      state.Goods = goods;
-    },
-    setOrder(state, order) {
-      state.Order = order;
-    },
-    setLoading(state, loading) {
-      state.Loading = loading;
-    },
-    setIsSearch(state,is){
-      state.IsSearch = is;
+    getters: {
+        getSetting: state => {
+            return state.Setting;
+        }
     }
-  },
-  getters: {
-    getSetting: state => {
-      return state.Setting;
-    }
-  }
 })
 
 // 定义路由
 var routes = [{
-  path: '/',
-  component: loading
+    path: '/',
+    component: loading
 }, {
-  path: '/home',
-  component: home
+    path: '/home',
+    component: home
 }, {
-  path: '/server',
-  component: server
+    path: '/server',
+    component: server
 }, {
-  path: '/person',
-  component: person
+    path: '/person',
+    component: person
 }, {
-  path: '/my_sell',
-  component: my_sell
+    path: '/my_sell',
+    component: my_sell
 }, {
-  path: '/commodity/:id',
-  component: commodity
+    path: '/commodity/:id',
+    component: commodity
 }, {
-  path: '/detail/:id',
-  component: detail
+    path: '/detail/:id',
+    component: detail
 }, {
-  path: '/sure_order',
-  component: sure_order
+    path: '/sure_order',
+    component: sure_order
 }, {
-  path: '/buy',
-  component: buy
+    path: '/buy',
+    component: buy
 }, {
-  path: '/sell_infomation/:categoryId',
-  component: sell_infomation
+    path: '/sell_infomation/:categoryId',
+    component: sell_infomation
 }, {
-  path: '/lease_information/:categoryId',
-  component: lease_information
+    path: '/lease_information/:categoryId',
+    component: lease_information
 }, {
-  path: '/certification',
-  component: certification
+    path: '/certification',
+    component: certification
 }, {
-  path: '/certification_else',
-  component: certification_else
+    path: '/certification_else',
+    component: certification_else
 }, {
-  path: '/popularity',
-  component: popularity
+    path: '/popularity',
+    component: popularity
 }, {
-  path: '/popular_buy',
-  component: popular_buy
+    path: '/popular_buy',
+    component: popular_buy
 }, {
-  path: '/wait_send',
-  component: wait_send
+    path: '/wait_send',
+    component: wait_send
 }, {
-  path: '/all_order',
-  component: all_order
+    path: '/all_order',
+    component: all_order
 }, {
-  path: '/all_order_seller',
-  component: all_order_seller
+    path: '/all_order_seller',
+    component: all_order_seller
 }, {
-  path: '/my_code',
-  component: my_code
+    path: '/my_code',
+    component: my_code
 }, {
-  path: '/my_promotion',
-  component: my_promotion
+    path: '/my_promotion',
+    component: my_promotion
 }, {
-  path: '/income_con',
-  component: income_con
+    path: '/income_con',
+    component: income_con
 }, {
-  path: '/buy_success',
-  component: buy_success
+    path: '/buy_success',
+    component: buy_success
 }, {
-  path: '/buy_defeat',
-  component: buy_defeat
+    path: '/buy_defeat',
+    component: buy_defeat
 }, {
-  path: '/orders/:status',
-  component: order_list
+    path: '/orders/:status',
+    component: order_list
 }, {
-  path: '/orders_merchant/:status',
-  component: order_list_merchant
+    path: '/orders_merchant/:status',
+    component: order_list_merchant
 }, {
-  path: '/goods_list_merchant/:status',
-  component: goods_list_merchant
+    path: '/goods_list_merchant/:status',
+    component: goods_list_merchant
 }, {
-  path: '/goods_item_collect/:status',
-  component: goods_item_collect
+    path: '/goods_item_collect/:status',
+    component: goods_item_collect
 }, {
-  path: '/order_detail/:id',
-  component: order_detail
+    path: '/order_detail/:id',
+    component: order_detail
 }, {
-  path: '/refunedList',
-  component: refuned_list
+    path: '/refunedList',
+    component: refuned_list
 }, {
-  path: '/error_404',
-  component: error_404
+    path: '/error_404',
+    component: error_404
 }, {
-  path: '/error_500',
-  component: error_500
+    path: '/error_500',
+    component: error_500
 }, {
-  path: '/order_server/:orderId',
-  component: order_server
+    path: '/order_server/:orderId',
+    component: order_server
 }];
 
 // 实例化路由
 var vueRouter = new Router({
-  routes
+    routes
 })
 
-Router.prototype.goBack = function () {
-  this.isBack = true
+Router.prototype.goBack = function() {
+    this.isBack = true
 }
 
 vueRouter.beforeEach((to, from, next) => {
-  console.log(from.path);
-  //$(".alertLoading").fadeIn(100);
-  var t = setTimeout(function () {
-    if (to.path != "/") {  // 判断该路由是否需要登录权限
-      if (Vue.prototype.Http.token) {  // 通过vuex state获取当前的token是否存在
-        var v = vm.$store.state.FromView[vm.$store.state.FromView.length - 1];
-        if (v == to.path) {
-          console.log("pop");
-          vm.$store.commit('popFrom');
+    console.log(from.path);
+    $(".alertLoading").fadeIn(100);
+    var t = setTimeout(function() {
+        if (to.path != "/") { // 判断该路由是否需要登录权限
+            if (Vue.prototype.Http.token) { // 通过vuex state获取当前的token是否存在
+                var v = vm.$store.state.FromView[vm.$store.state.FromView.length - 1];
+                if (v == to.path) {
+                    console.log("pop");
+                    vm.$store.commit('popFrom');
+                } else {
+                    console.log("push");
+                    vm.$store.commit('pushFrom', from.path);
+                }
+                next();
+                // vm.Wx.register(window.location.href.split("#")[1]);
+                console.log("当前路由：", vm.$store.state.FromView);
+            } else {
+                next({
+                    path: '/'
+                        // query: { redirect: from.fullPath }  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+                })
+            }
         } else {
-          console.log("push");
-          vm.$store.commit('pushFrom', from.path);
+            next();
         }
-        next();
-        // vm.Wx.register(window.location.href.split("#")[1]);
-        console.log("当前路由：", vm.$store.state.FromView);
-      } else {
-        next({
-          path: '/'
-          // query: { redirect: from.fullPath }  // 将跳转的路由path作为参数，登录成功后跳转到该路由
-        })
-      }
-    } else {
-      next();
-    }
-    clearTimeout(t);
-  }, 100);
+        clearTimeout(t);
+    }, 100);
 
-  _czc.push([to.path,to.path,from.path]);
+    _czc.push([to.path, to.path, from.path]);
 
 })
 vueRouter.afterEach((to, from) => {
-  setTimeout(function () {
-    //$(".alertLoading").hide();
-  },to.fullPath.indexOf("detail")>0?600:300);
+    setTimeout(function() {
+        $(".alertLoading").hide();
+    }, to.fullPath.indexOf("detail") > 0 ? 600 : 300);
 
 })
 
 // 创建和挂载根实例
 var vm = new Vue({
-  el: '#app',
-  store: store,
-  router: vueRouter,
-  template: '<App></App>',
-  components: { App }
+    el: '#app',
+    store: store,
+    router: vueRouter,
+    template: '<App></App>',
+    components: { App }
 })

@@ -159,7 +159,7 @@ Vue.prototype.Api = {
 
 Vue.prototype.Wx = {
     config: {},
-    register: function (page,goods) {
+    register: function(page, goods) {
         var config = this.config;
         var _link = config.link;
         var _img = "http://qiniu.66mkt.com/66.jpg";
@@ -168,36 +168,35 @@ Vue.prototype.Wx = {
         if (page) {
             if (_link.indexOf("?") > 0) {
                 _link = config.link + "&page=" + page;
-            }
-            else {
+            } else {
                 _link = config.link + "?page=" + page;
             }
         }
 
-        if(goods && goods.goodsImages.length > 0){
-            _img = "http://qiniu.66mkt.com/"+goods.goodsImages[0].qiniuKey;
+        if (goods && goods.goodsImages.length > 0) {
+            _img = "http://qiniu.66mkt.com/" + goods.goodsImages[0].qiniuKey;
             _title = goods.name;
-            _desc=  goods.detail;
+            _desc = goods.detail;
         }
-            
+
         console.log("分享链接", _link);
         wx.config({
             debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
             appId: config.appId, // 必填，公众号的唯一标识
             timestamp: config.timestamp, // 必填，生成签名的时间戳
             nonceStr: config.nonceStr, // 必填，生成签名的随机串
-            signature: config.signature,// 必填，签名，见附录1
+            signature: config.signature, // 必填，签名，见附录1
             jsApiList: ["chooseWXPay", "onMenuShareTimeline", "onMenuShareAppMessage", "onMenuShareQQ", "onMenuShareWeibo", "onMenuShareQZone", "chooseImage", "previewImage", "uploadImage", "downloadImage"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         });
-        wx.ready(function () {
+        wx.ready(function() {
             wx.onMenuShareTimeline({
                 title: _title, // 分享标题
                 link: _link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: _img, // 分享图标
-                success: function () {
+                success: function() {
                     // 用户确认分享后执行的回调函数
                 },
-                cancel: function () {
+                cancel: function() {
                     // 用户取消分享后执行的回调函数
                 }
             });
@@ -208,10 +207,10 @@ Vue.prototype.Wx = {
                 link: _link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: _img, // 分享图标
                 type: 'link', // 分享类型,music、video或link，不填默认为link
-                success: function () {
+                success: function() {
                     // 用户确认分享后执行的回调函数
                 },
-                cancel: function () {
+                cancel: function() {
                     // 用户取消分享后执行的回调函数
                 }
             });
@@ -221,10 +220,10 @@ Vue.prototype.Wx = {
                 desc: _desc, // 分享描述
                 link: _link, // 分享链接
                 imgUrl: _img, // 分享图标
-                success: function () {
+                success: function() {
                     // 用户确认分享后执行的回调函数
                 },
-                cancel: function () {
+                cancel: function() {
                     // 用户取消分享后执行的回调函数
                 }
             });
@@ -234,10 +233,10 @@ Vue.prototype.Wx = {
                 desc: _desc, // 分享描述
                 link: _link, // 分享链接
                 imgUrl: _img, // 分享图标
-                success: function () {
+                success: function() {
                     // 用户确认分享后执行的回调函数
                 },
-                cancel: function () {
+                cancel: function() {
                     // 用户取消分享后执行的回调函数
                 }
             });
@@ -252,7 +251,7 @@ Vue.prototype.Http = {
         console.log('设置token：' + _token);
         this.token = _token;
     },
-    get: function (api, params, callback) {
+    get: function(api, params, callback) {
 
         if (!api) {
             console.error('url is empty');
@@ -276,9 +275,9 @@ Vue.prototype.Http = {
             }
         }).then((response) => {
             // 响应成功回调,错误统一处理
-            if (window.location.href.indexOf("localhost") > 0
-                || window.location.href.indexOf("test") > 0
-        || window.location.href.indexOf("c.chovans.cn") > 0) {
+            if (window.location.href.indexOf("localhost") > 0 ||
+                window.location.href.indexOf("test") > 0 ||
+                window.location.href.indexOf("c.chovans.cn") > 0) {
                 console.info(api, JSON.stringify(params), response.data);
             }
 
@@ -303,7 +302,7 @@ Vue.prototype.Http = {
     }
 };
 
-Vue.prototype.callWxPay = function (payInfo) {
+Vue.prototype.callWxPay = function(payInfo) {
     var self = this;
     wx.chooseWXPay({
         timestamp: payInfo.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
@@ -311,28 +310,28 @@ Vue.prototype.callWxPay = function (payInfo) {
         package: payInfo.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
         signType: payInfo.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
         paySign: payInfo.paySign, // 支付签名
-        success: function (res) {
+        success: function(res) {
             // 支付成功后的回调函数
             self.$router.push("/buy_success");
         },
-        fail: function (res) {
+        fail: function(res) {
             //接口调用失败时执行的回调函数。
-            self.$iosAlert(result.msg);
+            self.$iosAlert(res.msg);
         },
-        complete: function (res) {
+        complete: function(res) {
             //接口调用完成时执行的回调函数，无论成功或失败都会执行。
         },
-        cancel: function (res) {
+        cancel: function(res) {
             //用户点击取消时的回调函数，仅部分有用户取消操作的api才会用到。
             self.$iosAlert('用户取消');
         },
-        trigger: function (res) {
+        trigger: function(res) {
             //监听Menu中的按钮点击时触发的方法，该方法仅支持Menu中的相关接口。
         }
     });
 }
 
-Vue.prototype.callServer = function (orderId) {
+Vue.prototype.callServer = function(orderId) {
     console.log('/order_server/' + orderId);
     this.$router.push('/order_server/' + orderId);
     // Vue.prototype.$iosAlert("客服系统升级维护中，请暂时通过公众号联系平台，感谢您的支持！");
