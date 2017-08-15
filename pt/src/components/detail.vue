@@ -362,7 +362,6 @@ export default {
             this.Http.get(this.Api.getRecomend(), {
                 goodsId: that.goodsId
             }, function (result) {
-                console.log(result, "999");
                 that.recommendGoods = result.data.recomendGoodses;
                 that.recommendGoods.forEach(function (element) {
                     //加入缓存
@@ -377,7 +376,6 @@ export default {
                 goodsId: that.goodsId,
                 userId: that.userId
             }, function (result) {
-                console.log(result, "5555555");
                 that.isCollection = result.data.isCollect;
                 that.collection = result.data.isCollect ? "已收藏" : "收藏";
             })

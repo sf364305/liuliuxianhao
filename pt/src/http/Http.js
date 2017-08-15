@@ -6,13 +6,11 @@ import axios from 'axios'
 // Vue.prototype.serverHost = 'http://localhost:8081/';
 
 //测试环境
- Vue.prototype.host = 'http://test.api.66mkt.com/';
- Vue.prototype.serverHost = 'http://test.server.66mkt.com/';
+Vue.prototype.host = 'http://test.api.66mkt.com/';
+Vue.prototype.serverHost = 'http://test.server.66mkt.com/';
 //正式环境
 //Vue.prototype.host = 'http://api.66xianhao.com/';
 //Vue.prototype.serverHost = 'http://server.66mkt.com/';
-//Vue.prototype.host = 'http://test.api.66mkt.com/';
-//Vue.prototype.serverHost = 'http://test.server.66mkt.com/';
 
 const base = Vue.prototype.host + 'front';
 
@@ -163,7 +161,7 @@ Vue.prototype.Wx = {
     config: {},
     register: function(page, goods) {
         var config = this.config;
-        var _link = config.link;
+        var _link = config.link || "";
         var _img = "http://qiniu.66mkt.com/66.jpg";
         var _title = config.title;
         var _desc = config.desc;
@@ -351,3 +349,5 @@ Vue.prototype.callServer = function(orderId) {
 //     err => {
 //         return Promise.reject(err);
 //     });
+
+//右侧入
