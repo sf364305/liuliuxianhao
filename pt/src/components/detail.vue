@@ -353,9 +353,8 @@ export default {
             this.Http.get(this.Api.getGoodsInfor(), {
                 goodsId: that.goodsId
             }, function (result) {
-                console.log(result);
                 that.goods = result.data.goods;
-                // that.Wx.register(window.location.href.split("#")[1],that.goods);
+                that.Wx.register(window.location.href.split("#")[1],that.goods);
             })
         },
         getRecomend() {

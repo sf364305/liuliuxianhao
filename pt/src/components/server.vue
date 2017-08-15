@@ -72,8 +72,8 @@ export default {
 
         },
         closeShow() {
-            if (!this.feedback.phone && !this.feedback.qq) {
-                this.$iosAlert("请至少填写一种联系方式");
+            if (!this.feedback.phone) {
+                this.$iosAlert("请填写手机号，以便我们的客服及时联系您");
                 return;
             }
 
