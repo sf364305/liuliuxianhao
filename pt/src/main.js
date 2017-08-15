@@ -245,10 +245,6 @@ Router.prototype.goBack = function() {
 vueRouter.beforeEach((to, from, next) => {
     console.log(from.path);
     $(".alertLoading").fadeIn(100);
-    if (vm.Wx) {
-        vm.Wx.register();
-    }
-
     var t = setTimeout(function() {
         if (to.path != "/") { // 判断该路由是否需要登录权限
             if (Vue.prototype.Http.token) { // 通过vuex state获取当前的token是否存在
@@ -260,6 +256,7 @@ vueRouter.beforeEach((to, from, next) => {
                     console.log("push");
                     vm.$store.commit('pushFrom', from.path);
                 }
+                vm.Wx.register();
                 next();
                 // vm.Wx.register(window.location.href.split("#")[1]);
                 console.log("当前路由：", vm.$store.state.FromView);
