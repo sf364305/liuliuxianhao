@@ -30,7 +30,6 @@
                     <em>{{goods.price}}元</em>
                 </li>
             </ul>
-        
             <ul class="sure-stock" v-if="goods.type == 1">
         
                 <li class="clearfix">

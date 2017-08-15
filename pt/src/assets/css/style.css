@@ -820,7 +820,7 @@
     position: initial;
     width: 94%;
     height: 21.67rem;
-    margin: 5.5rem auto;
+    margin: 5.5rem auto 0;
     background-color: #efe;
     box-shadow: 1px 1px 5px 2px rgba(80,80,80,0.2), 1px 1px 1px -11px rgba(80,80,80,0.2);
 }
