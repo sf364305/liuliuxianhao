@@ -254,6 +254,7 @@ vueRouter.beforeEach((to, from, next) => {
                     vm.$store.commit('popFrom');
                 } else {
                     console.log("push");
+                    vm.Wx.register();
                     vm.$store.commit('pushFrom', from.path);
                 }
                 next();
