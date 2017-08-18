@@ -1720,7 +1720,7 @@ select {
 .release_pic div img {
     float: left;
     width: 100%;
-    height: auto;  
+    height: 9rem;  
 }
 .realease_picbtn {
     position: relative;

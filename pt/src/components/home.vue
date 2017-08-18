@@ -3,7 +3,7 @@
         <scroller :on-refresh="refresh" :on-infinite="infinite" ref="scroller" style="margin-bottom:4rem;" class="scrollTop">
             <header class="index-logo" id="index-logo">
                 <div style="width:80%;height:3rem;border-radius:0;" class="com-search-head">
-                    <input type="text" value="" name="" class="search-word" placeholder="请输入关键字" v-model="searchText" v-on:keyup.13="searchAll">
+                    <input type="text" value="" name="" class="search-word" placeholder="请输入关键字66" v-model="searchText" v-on:keyup.13="searchAll">
                     <a class="search-index" replace @click="searchAll"></a>
                 </div>
             </header>

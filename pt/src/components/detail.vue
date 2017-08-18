@@ -217,7 +217,6 @@ export default {
             },
             name: "加载中"
         }
-
         this.isShow = true;
         this.goodsId = this.$route.params.id;
 
