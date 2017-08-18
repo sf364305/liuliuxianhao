@@ -74,7 +74,7 @@ export default {
                 if (done) done();
                 if (result.data.orders && result.data.orders.length > 0) {
                     for (var i = 0; i < result.data.orders.length; i++) {
-                        if(result.data.orders[i].status == that.status){
+                        if(result.data.orders[i].status == that.status || (result.data.orders[i].arbitrationStatus == 1 && that.status == -1)){
                             that.orders.push(result.data.orders[i]);
                         }
                     }

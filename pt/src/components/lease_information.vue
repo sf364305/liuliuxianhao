@@ -309,6 +309,7 @@ export default {
         } else {
             this.goods.categoryId = this.$route.params.categoryId;
         }
+        this.Wx.register(window.location.href.split("#")[1]);
     },
     methods: {
         addGoods() {

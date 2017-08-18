@@ -53,7 +53,7 @@ export default {
     created() {
         this.categroyId = this.$store.state.Categroy[0].id;
     },
-
+    
     methods: {
         changeSell() {
             this.isSell = !this.isSell;
