@@ -256,6 +256,7 @@ vueRouter.beforeEach((to, from, next) => {
                     console.log("push");
                     vm.$store.commit('pushFrom', from.path);
                 }
+                vm.Wx.register();
                 next();
                 // vm.Wx.register(window.location.href.split("#")[1]);
                 console.log("当前路由：", vm.$store.state.FromView);
