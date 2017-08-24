@@ -1821,7 +1821,7 @@ select {
     width: 25%;
     height: 2rem;
     text-align: center;
-    border-bottom: 1px solid #777;;
+    border-bottom: 1px solid #777;
 }
 .lease-check span {
     display: inline-block;
