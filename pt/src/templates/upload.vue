@@ -21,6 +21,9 @@ export default {
         }
     },
     props: ['images'],
+    activated() {
+        self.Wx.register();
+    },
     methods: {
         wxUpdate() {
             var self = this;
