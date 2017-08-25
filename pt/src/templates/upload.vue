@@ -45,31 +45,29 @@ export default {
         syncUpload(localImagesIds) {
             var self = this;
             var localId = localImagesIds[0];
-            alert('localId')
+            alert(localId)
             //解决IOS无法上传的坑
             if (localId.indexOf("wxlocalresource") != -1) {
                 localId = localId.replace("wxlocalresource", "wxLocalResource");
-            }
-                       
-                wx.uploadImage({
-                    localId: localId,
-                    isShowProgressTips: 1,
-                    success: function (res) {
-                        var serverId = res.serverId; // 返回图片的服务器端ID
-                        self.Http.get(self.Api.getQiniuImage(), {
-                            mediaId: serverId
-                        }, function (result) {
-                            self.images.push(result.data.key);
-                            //其他对serverId做处理的代码
-                            self.localIds.splice(0, 1);
-                            if (self.localIds.length > 0) {
-                                self.syncUpload(self.localIds);
-                            }
-                        });
+            }          
+            wx.uploadImage({
+                localId: localId,
+                isShowProgressTips: 1,
+                success: function (res) {
+                    var serverId = res.serverId; // 返回图片的服务器端ID
+                    self.Http.get(self.Api.getQiniuImage(), {
+                        mediaId: serverId
+                    }, function (result) {
+                        self.images.push(result.data.key);
+                        //其他对serverId做处理的代码
+                        self.localIds.splice(0, 1);
+                        if (self.localIds.length > 0) {
+                            self.syncUpload(self.localIds);
+                        }
+                    });
 
-                    }
-                });
-            
+                }
+            });  
         },
         del(index) {
             var self = this;
