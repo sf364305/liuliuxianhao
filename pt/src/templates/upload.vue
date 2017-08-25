@@ -22,7 +22,7 @@ export default {
     },
     props: ['images'],
     activated() {
-        self.Wx.register();
+        this.Wx.register();
     },
     methods: {
         wxUpdate() {
