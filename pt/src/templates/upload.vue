@@ -24,7 +24,7 @@ export default {
     activated() {
         setTimeout(function() {
             this.Wx.register();
-            
+            this.update();
         },300)
     },
     methods: {
@@ -50,7 +50,7 @@ export default {
             if (localId.indexOf("wxlocalresource") != -1) {
                 localId = localId.replace("wxlocalresource", "wxLocalResource");
             }
-            wx.ready(function() {           
+                       
                 wx.uploadImage({
                     localId: localId,
                     isShowProgressTips: 1,
@@ -69,7 +69,7 @@ export default {
 
                     }
                 });
-            }
+            
         },
         del(index) {
             var self = this;
