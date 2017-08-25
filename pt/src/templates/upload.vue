@@ -22,9 +22,10 @@ export default {
     },
     props: ['images'],
     activated() {
+        var self = this;
         setTimeout(function() {
-            this.Wx.register();
-            this.update();
+            self.Wx.register();
+            self.update();
         },300)
     },
     methods: {
