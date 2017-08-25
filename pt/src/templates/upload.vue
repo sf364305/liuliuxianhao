@@ -36,7 +36,7 @@ export default {
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: function (res) {
-                    alert('成功')
+                    // alert('成功')
                     self.localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                     self.syncUpload(self.localIds);
 
@@ -46,7 +46,7 @@ export default {
         syncUpload(localImagesIds) {
             var self = this;
             var localId = localImagesIds[0];
-            alert(localId)
+            // alert(localId)
             //解决IOS无法上传的坑
             if (localId.indexOf("wxlocalresource") != -1) {
                 localId = localId.replace("wxlocalresource", "wxLocalResource");
