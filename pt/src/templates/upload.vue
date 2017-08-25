@@ -25,7 +25,7 @@ export default {
         var self = this;
         setTimeout(function() {
             self.Wx.register();
-            self.update();
+            // self.update();
         },300)
     },
     methods: {
