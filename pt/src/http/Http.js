@@ -160,6 +160,11 @@ Vue.prototype.Api = {
 Vue.prototype.Wx = {
     config: {},
     register: function(page, goods) {
+
+        if(config == undefined || !config){
+            return;
+        }
+
         var config = this.config;
         var _link = config.link || "";
         var _img = "http://qiniu.66mkt.com/66.jpg";
