@@ -24,7 +24,7 @@ export default {
     activated() {
         setTimeout(function() {
             this.Wx.register();
-            this.update();
+            
         },300)
     },
     methods: {
