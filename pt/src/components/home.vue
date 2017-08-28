@@ -154,6 +154,7 @@ export default {
             }, function (result) {
                 // debugger;
                 self.Wx.config = result.data.config;
+                console.log("config",result.data.config);
                 // //注册微信
                 self.Wx.register();
             })

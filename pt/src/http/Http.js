@@ -161,7 +161,7 @@ Vue.prototype.Wx = {
     config: {},
     register: function(page, goods) {
         if(config == undefined || !config){
-            console.error("config",config);
+            console.error("config error");
             return;
         }
 

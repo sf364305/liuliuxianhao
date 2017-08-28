@@ -380,6 +380,7 @@ export default {
             })
         },
         buy() {
+            var self = this;
             if (this.$store.state.User.userStatus == 0
                 || this.$store.state.User.userStatus == 3) {
                 this.$iosConfirm("发布商品需要实名认证，现在去实名?").then(function () {
