@@ -160,7 +160,7 @@ Vue.prototype.Api = {
 Vue.prototype.Wx = {
     config: {},
     register: function(page, goods) {
-        if(config == undefined || !config){
+        if(this.config == undefined || !this.config){
             console.error("config error");
             return;
         }

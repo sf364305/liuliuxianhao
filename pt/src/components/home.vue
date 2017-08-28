@@ -152,7 +152,6 @@ export default {
             this.Http.get(this.Api.getJsSign(), {
                 url: url
             }, function (result) {
-                // debugger;
                 self.Wx.config = result.data.config;
                 console.log("config",result.data.config);
                 // //注册微信
