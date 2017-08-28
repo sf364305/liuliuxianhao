@@ -1855,6 +1855,9 @@ select {
     outline: none;
 }
 /*提高人气*/
+.popularity-con p {
+    color: red;
+}
 .popularity-img img {
     display: block;
     width: 100%;
