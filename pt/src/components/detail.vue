@@ -380,8 +380,17 @@ export default {
             })
         },
         buy() {
-            this.$store.commit('setGoods', this.goods);
-            this.$router.push('/sure_order');
+            if (this.$store.state.User.userStatus == 0
+                || this.$store.state.User.userStatus == 3) {
+                this.$iosConfirm("发布商品需要实名认证，现在去实名?").then(function () {
+                    self.$router.push("/certification");
+                }, function () {
+                    console.log('取消');
+                });
+            }else{
+                this.$store.commit('setGoods', this.goods);
+                this.$router.push('/sure_order');
+            }
         },
         deactivated() {
             // this.$destroy();
