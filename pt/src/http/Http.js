@@ -205,7 +205,6 @@ Vue.prototype.Wx = {
                     // 用户取消分享后执行的回调函数
                 }
             });
-
             wx.onMenuShareAppMessage({
                 title: _title, // 分享标题
                 desc: _desc, // 分享描述
