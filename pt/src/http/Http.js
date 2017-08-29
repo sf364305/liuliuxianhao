@@ -160,20 +160,20 @@ Vue.prototype.Api = {
 Vue.prototype.Wx = {
     config: {},
     register: function(page, goods) {
-        // var self = this;
+        var self = this;
         var url = location.href.split('#')[0];
         Vue.prototype.Http.get(Vue.prototype.Api.getJsSign(), {
             url: url
         }, function (result) {
-            this.config = result.data.config;
+            self.config = result.data.config;
             console.log("config",result.data.config);
             // //注册微信
-            if(this.config == undefined || !this.config){
+            if(self.config == undefined || !self.config){
                 console.error("config error");
                 return;
             }
     
-            var config = this.config;
+            var config = self.config;
             var _link = config.link || "";
             var _img = "http://qiniu.66mkt.com/66.jpg";
             var _title = config.title;
