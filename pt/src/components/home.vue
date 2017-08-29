@@ -147,16 +147,7 @@ export default {
             this.getHomeGoodsList(done);
         },
         getJsConfig() {
-            var self = this;
-            var url = location.href.split('#')[0];
-            this.Http.get(this.Api.getJsSign(), {
-                url: url
-            }, function (result) {
-                self.Wx.config = result.data.config;
-                console.log("config",result.data.config);
-                // //注册微信
-                self.Wx.register();
-            })
+            this.Wx.register();
         }
     },
     mounted() {
