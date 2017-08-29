@@ -8,7 +8,7 @@
         <div class="realease_picbtn" data="0">
             <img data-id="img_0" src="../assets/images/add.png" alt="" title="">
             <div style="display:none;" id="none"></div>
-            <input @click="wxUpdate" id="platFileBtn" name="file" type="button" />
+            <input @click="selectImg" id="platFileBtn" name="file" type="button" />
         </div>
     </div>
 </template>
