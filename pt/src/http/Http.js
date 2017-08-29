@@ -159,7 +159,7 @@ Vue.prototype.Api = {
 
 Vue.prototype.Wx = {
     config: {},
-    register: function(page, goods) {
+    register: function(page, goods,callback) {
         var self = this;
         var url = location.href.split('#')[0];
         Vue.prototype.Http.get(Vue.prototype.Api.getJsSign(), {
@@ -252,6 +252,10 @@ Vue.prototype.Wx = {
                         // 用户取消分享后执行的回调函数
                     }
                 });
+
+                if(callback){
+                    callback();
+                }
             })
             return true;
         })

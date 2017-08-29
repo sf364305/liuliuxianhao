@@ -18,17 +18,22 @@ export default {
         return {
             // images: []
             localIds: [],
+            isRegister:false
         }
     },
     props: ['images'],
     activated() {
-        var self = this;
-        setTimeout(function() {
-            self.Wx.register();
-            self.update(e);
-        },300)
+        this.isRegister=false;
     },
     methods: {
+        selectImg(){
+            if(this.isRegister){
+                wxUpdate();
+            }else{
+                this.Wx.register(undefined,undefined,this.wxUpdate());
+                this.isRegister = true;
+            }
+        },
         wxUpdate() {
             var self = this;
             wx.chooseImage({
