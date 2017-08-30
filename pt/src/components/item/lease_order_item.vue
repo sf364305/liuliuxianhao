@@ -34,7 +34,7 @@
             <span class="wait-sure" @click="server(order.id)">联系客服</span>
         </div>
         <div class="wait-you" v-if="order.status == 3 && order.arbitrationStatus !=1">
-            <span class="wait-cancel" @click="arbitrationStatus(order.id)">申请仲裁</span>
+            <span class="wait-cancel" @click="arbitration(order.id)">申请仲裁</span>
             <span class="wait-sure" @click="sure(order.id)">确认收货</span>
         </div>
     
