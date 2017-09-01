@@ -6,7 +6,7 @@
         </div>
 
         
-        <div class="realease_picbtn" data="0" @click.native="selectImg()">
+        <div v-show="reload" class="realease_picbtn" data="0" @click.native="selectImg()">
             <img data-id="img_0" src="../assets/images/add.png" alt="" title="">
             <div style="display:none;" id="none"></div>
             <input id="platFileBtn" name="file" type="button" />
@@ -19,10 +19,18 @@ export default {
         return {
             // images: []
             localIds: [],
+            reload : true
         }
     },
     props: ['images'],
     activated() {
+        var self = this;
+        setTimeout(function(){
+            console.log("重新渲染组件")
+            self.reload = false;
+            self.reload = true;
+        },300)
+
     },
     methods: {
         selectImg(){
