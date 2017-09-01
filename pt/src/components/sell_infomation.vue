@@ -6,9 +6,7 @@
                 <div class="sell-first">点击添加图片</div>
                 <input type="hidden" id="goods-id">
                 <div class="pic-dis" style="display: none;"></div>
-                <lazy-render :time="300" track-by-data>
-                    <app-upload ref="images" :images="images"></app-upload>
-                </lazy-render>
+                <app-upload ref="images" :images="images"></app-upload>
                 <div class="sell-second">填写详细信息</div>
                 <ul class="sell-information clearfix">
                     <li class="clearfix">
