@@ -4,8 +4,9 @@
         <div class="realease_picbtn" v-for="(img,index) in images" :key="img">
             <img :src="$store.state.Setting.qiniuUrl + img" alt="" title="" @click="del(index)">
         </div>
-    
-        <div class="realease_picbtn" data="0" @click="selectImg()" v-on:click="selectImg()">
+
+        
+        <div v-show="allow" class="realease_picbtn" data="0" @click="selectImg()">
             <img data-id="img_0" src="../assets/images/add.png" alt="" title="">
             <div style="display:none;" id="none"></div>
             <input id="platFileBtn" name="file" type="button" />
@@ -18,15 +19,17 @@ export default {
         return {
             // images: []
             localIds: [],
+            allow:false
         }
     },
     props: ['images'],
     activated() {
-
+        setTimeout(function(){
+            allow = true;
+        },300)
     },
     methods: {
         selectImg(){
-            alert("请选择图片");
             this.Wx.register(undefined,undefined,this.wxUpdate());
         },
         wxUpdate() {
