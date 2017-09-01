@@ -6,7 +6,7 @@
         </div>
 
         
-        <div v-show="allow" class="realease_picbtn" data="0" @click="selectImg()">
+        <div class="realease_picbtn" data="0" @click="selectImg()">
             <img data-id="img_0" src="../assets/images/add.png" alt="" title="">
             <div style="display:none;" id="none"></div>
             <input id="platFileBtn" name="file" type="button" />
@@ -19,14 +19,10 @@ export default {
         return {
             // images: []
             localIds: [],
-            allow:false
         }
     },
     props: ['images'],
     activated() {
-        setTimeout(function(){
-            allow = true;
-        },300)
     },
     methods: {
         selectImg(){
