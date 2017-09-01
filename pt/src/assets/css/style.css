@@ -1701,6 +1701,7 @@ select {
 }
 .release_pic {
     margin-bottom: 1rem;
+    position: relative;
 }
 .sell-first {
     width: 100%;
@@ -1716,6 +1717,7 @@ select {
     width: 30%;
     height: 9rem;
     margin: 0.5rem 0 0rem 2.5%;
+    z-index: 999;
 }
 .release_pic div img {
     float: left;
