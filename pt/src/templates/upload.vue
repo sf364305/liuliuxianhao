@@ -26,6 +26,7 @@ export default {
     },
     methods: {
         selectImg(){
+            alert("请选择图片");
             this.Wx.register(undefined,undefined,this.wxUpdate());
         },
         wxUpdate() {
