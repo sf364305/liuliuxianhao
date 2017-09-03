@@ -25,7 +25,7 @@
                 </label>
             </div>
             <div class="sell-next-in">
-                <a @click="nextStep" class="sell-in-next">下一步</a>
+                <button type="button" @click="nextStep" class="sell-in-next">下一步</button>
             </div>
         </form>
         <div class="nav-bottom">
@@ -72,10 +72,10 @@ export default {
                     console.log('取消');
                 });
             } else {
-                if (this.isSell) {
-                    this.$router.push("/sell_infomation/" + this.categroyId);
+                if (self.isSell) {
+                    self.$router.push("/sell_infomation/" + self.categroyId);
                 } else {
-                    this.$router.push("/lease_information/" + this.categroyId);
+                    self.$router.push("/lease_information/" + self.categroyId);
                 }
             }
 

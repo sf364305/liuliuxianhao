@@ -1586,6 +1586,7 @@ select {
     font-size: 1.75rem;
     position: fixed;
     bottom: 4.5rem;
+    border:none;
 }
 .add-picture {
     /* overflow: hidden; */
