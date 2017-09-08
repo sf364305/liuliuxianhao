@@ -201,8 +201,7 @@
                     </li>
                 </ul>
                 <div class="sell-next">
-                    <!-- <input type="button" :disabled="disabled" class="diyStart" @click="addGoods" value="下一步" /> -->
-                    <input type="button" :disabled="disabled" class="diyStart" @click="selectUploadImg" value="下一步" />
+                    <input type="button" :disabled="disabled" class="diyStart" @click="addGoods" value="下一步" />
                 </div>
             </form>
         <!-- </scroller> -->
