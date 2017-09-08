@@ -263,7 +263,6 @@ export default {
     },
     methods: {
         selectUploadImg(){
-            alert("66")
             this.Wx.register(undefined,undefined,this.wxUpdate());
         },
         wxUpdate() {
