@@ -1,15 +1,15 @@
 <template>
-    <div class="release_pic clearfix" @click="selectImg('点的最大层')">
+    <div class="release_pic clearfix">
     
         <div class="realease_picbtn" v-for="(img,index) in images" :key="img">
             <img :src="$store.state.Setting.qiniuUrl + img" alt="" title="" @click="del(index)">
         </div>
 
         
-        <div class="realease_picbtn" data="0" @click="selectImg('点的div')">
+        <div class="realease_picbtn" data="0" v-on:click="selectImg">
             <img data-id="img_0" src="../assets/images/add.png" alt="" title="">
             <div style="display:none;" id="none"></div>
-            <input id="platFileBtn" name="file" type="button" @click="selectImg('点的input')"/>
+            <input id="platFileBtn" name="file" type="button"/>
         </div>
     </div>
 </template>
@@ -23,11 +23,11 @@ export default {
     },
     props: ['images'],
     activated() {
-        
+        this.Wx.register(undefined,undefined,this.wxUpdate());
     },
     methods: {
-        selectImg(a){
-            alert(a);
+        selectImg(){
+            alert("66")
             this.Wx.register(undefined,undefined,this.wxUpdate());
         },
         wxUpdate() {
