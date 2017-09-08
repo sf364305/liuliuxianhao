@@ -3,17 +3,17 @@
         <app-header :header="title"></app-header>
         <!-- <scroller ref="scroller" style="margin-bottom:4rem;margin-top:4rem;"> -->
             <form id="form" action="" enctype="" method="post" class="clearfix">
-                <div class="sell-first" v-on:click="selectImg">点击添加图片</div>
+                <div class="sell-first" v-on:click="selectUploadImg">点击添加图片</div>
                 <input type="hidden" id="goods-id">
                 <div class="pic-dis" style="display: none;"></div>
-                <div class="release_pic clearfix" v-on:click="selectImg">   
+                <div class="release_pic clearfix" v-on:click="selectUploadImg">   
                     <div class="realease_picbtn" v-for="(img,index) in images" :key="img">
                         <img :src="$store.state.Setting.qiniuUrl + img" alt="" title="" @click="del(index)">
                     </div>   
-                    <div class="realease_picbtn" data="0" v-on:click="selectImg">
+                    <div class="realease_picbtn" data="0" v-on:click="selectUploadImg">
                         <img data-id="img_0" src="../assets/images/add.png" alt="" title="">
                         <div style="display:none;" id="none"></div>
-                        <input id="platFileBtn" name="file" type="button" v-on:click="selectImg"/>
+                        <input id="platFileBtn" name="file" type="button" v-on:click="selectUploadImg"/>
                     </div>
                 </div>
                 <div class="sell-second">填写详细信息</div>
@@ -261,7 +261,7 @@ export default {
         this.Wx.register(window.location.href.split("#")[1]);
     },
     methods: {
-        selectImg(){
+        selectUploadImg(){
             alert("66")
             this.Wx.register(undefined,undefined,this.wxUpdate());
         },
