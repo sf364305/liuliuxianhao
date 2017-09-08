@@ -294,7 +294,8 @@ export default {
     },
     components: {
         "app-header": Header,
-        'app-upload': Upload,
+        // 'app-upload': Upload,
+        "app-upload": resolve => {require(['../templates/upload.vue'], resolve)},//懒加载
     }
 }
 </script>
