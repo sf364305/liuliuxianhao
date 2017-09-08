@@ -1,11 +1,8 @@
 <template>
-    <div class="release_pic clearfix">
-    
+    <div class="release_pic clearfix">   
         <div class="realease_picbtn" v-for="(img,index) in images" :key="img">
             <img :src="$store.state.Setting.qiniuUrl + img" alt="" title="" @click="del(index)">
-        </div>
-
-        
+        </div>   
         <div class="realease_picbtn" data="0" v-on:click="selectImg">
             <img data-id="img_0" src="../assets/images/add.png" alt="" title="">
             <div style="display:none;" id="none"></div>
@@ -23,11 +20,10 @@ export default {
     },
     props: ['images'],
     activated() {
-        this.Wx.register(undefined,undefined,this.wxUpdate());
+
     },
     methods: {
         selectImg(){
-            alert("66")
             this.Wx.register(undefined,undefined,this.wxUpdate());
         },
         wxUpdate() {
