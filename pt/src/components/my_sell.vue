@@ -25,7 +25,7 @@
                 </label>
             </div>
             <div class="sell-next-in">
-                <button type="button" @click="nextStep" class="sell-in-next">下一步</button>
+                <button type="button" @click="nextStep" class="sell-in-next">下 一 步</button>
             </div>
         </form>
         <div class="nav-bottom">
