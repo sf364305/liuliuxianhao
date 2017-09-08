@@ -27,9 +27,11 @@ export default {
     },
     methods: {
         selectImg(){
+            alert("点到我了")
             this.Wx.register(undefined,undefined,this.wxUpdate());
         },
         wxUpdate() {
+            alert("调用接口")
             var self = this;
             wx.chooseImage({
                 count: 9, // 默认9
