@@ -3,7 +3,7 @@
         <div class="realease_picbtn" v-for="(img,index) in images" :key="img">
             <img :src="$store.state.Setting.qiniuUrl + img" alt="" title="" @click="del(index)">
         </div>   
-        <div class="realease_picbtn" data="0" v-on:click="selectImg">
+        <div class="realease_picbtn" data="0" @click="selectImg">
             <img data-id="img_0" src="../assets/images/add.png" alt="" title="">
             <div style="display:none;" id="none"></div>
             <input id="platFileBtn" name="file" type="button"/>
@@ -36,8 +36,10 @@ export default {
                     // alert('成功')
                     self.localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                     self.syncUpload(self.localIds);
-
-                }
+                },
+                fail: function (res) {  
+                   alterShowMessage("操作提示", JSON.stringify(res), "1", "确定", "", "", "");  
+               } 
             });
         },
         syncUpload(localImagesIds) {
@@ -63,8 +65,12 @@ export default {
                             self.syncUpload(self.localIds);
                         }
                     });
-
-                }
+                },
+                fail: function (error) {  
+                    picPath = '';  
+                    localIds = '';  
+                    alert(Json.stringify(error)); 
+                } 
             });  
         },
         del(index) {
@@ -86,7 +92,6 @@ export default {
                     'key': 'orderReview/' + d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.valueOf() + '.' + type[type.length - 1],
                     'bucket': 'liuliuxianhao',//七牛的地址，这个是你自己配置的（变量）
                 };
-
                 let param = new FormData(); //创建form对象
                 param.append('chunk', '0');//断点传输
                 param.append('chunks', '1');
