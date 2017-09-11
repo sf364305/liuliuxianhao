@@ -23,7 +23,7 @@ export default {
 
     },
     methods: {
-        selectImg(){
+        selectImg() {
             this.Wx.register(undefined,undefined,this.wxUpdate());
         },
         wxUpdate() {
