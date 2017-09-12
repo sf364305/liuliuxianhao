@@ -52,7 +52,7 @@ export default {
                 //localId = localId.replace("wxlocalresource", "wxLocalResource");
             //}          
             wx.uploadImage({
-                alert("666")
+                alert("666"),
                 localId: localId,
                 isShowProgressTips: 1,
                 success: function (res) {
