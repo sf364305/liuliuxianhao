@@ -33,13 +33,13 @@ export default {
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: function (res) {
-                     alert('调用相册')
+                    //  alert('调用相册')
                     self.localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                     self.syncUpload(self.localIds);
                 },
                 fail: function (res) {
-                   alert("调用相册失败")
-                   alert("操作提示"+ JSON.stringify(res));  
+                //    alert("调用相册失败")
+                   alert("调用相册失败，请刷新重试："+ JSON.stringify(res));  
                } 
             });
         },
