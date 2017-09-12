@@ -39,7 +39,7 @@ export default {
                 },
                 fail: function (res) {
                    alert("调用相册失败")
-                   alterShowMessage("操作提示", JSON.stringify(res), "1", "确定", "", "", "");  
+                   alert("操作提示"+ JSON.stringify(res));  
                } 
             });
         },
