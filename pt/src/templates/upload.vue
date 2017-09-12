@@ -33,11 +33,12 @@ export default {
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: function (res) {
-                    // alert('成功')
+                     alert('调用相册')
                     self.localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                     self.syncUpload(self.localIds);
                 },
-                fail: function (res) {  
+                fail: function (res) {
+                   alert("调用相册失败")
                    alterShowMessage("操作提示", JSON.stringify(res), "1", "确定", "", "", "");  
                } 
             });
@@ -47,13 +48,14 @@ export default {
             var localId = localImagesIds[0];
             // alert(localId)
             //解决IOS无法上传的坑
-            if (localId.indexOf("wxlocalresource") != -1) {
-                localId = localId.replace("wxlocalresource", "wxLocalResource");
-            }          
+            //if (localId.indexOf("wxlocalresource") != -1) {
+                //localId = localId.replace("wxlocalresource", "wxLocalResource");
+            //}          
             wx.uploadImage({
                 localId: localId,
                 isShowProgressTips: 1,
                 success: function (res) {
+                    alert("成功接收图片")
                     var serverId = res.serverId; // 返回图片的服务器端ID
                     self.Http.get(self.Api.getQiniuImage(), {
                         mediaId: serverId
@@ -66,7 +68,8 @@ export default {
                         }
                     });
                 },
-                fail: function (error) {  
+                fail: function (error) {
+                    alert("未接收到图片ID") 
                     picPath = '';  
                     localIds = '';  
                     alert(Json.stringify(error)); 
