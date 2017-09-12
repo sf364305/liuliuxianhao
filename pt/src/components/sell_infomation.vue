@@ -192,7 +192,7 @@
                     </li>
                 </ul>
                 <div class="sell-next">
-                    <input type="button" :disabled="disabled" class="diyStart" @click="addGoods" value="下一步了" />
+                    <input type="button" :disabled="disabled" class="diyStart" @click="addGoods" value="下 一 步" />
                 </div>
             </form>
         <!-- </scroller> -->

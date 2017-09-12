@@ -55,7 +55,6 @@ export default {
                 localId: localId,
                 isShowProgressTips: 1,
                 success: function (res) {
-                    alert("成功接收图片")
                     var serverId = res.serverId; // 返回图片的服务器端ID
                     self.Http.get(self.Api.getQiniuImage(), {
                         mediaId: serverId
