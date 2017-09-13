@@ -258,7 +258,7 @@ Vue.prototype.Wx = {
                 }
             })
             return true;
-        })
+        },function(){})
 
         
     }
@@ -271,7 +271,7 @@ Vue.prototype.Http = {
         console.log('设置token：' + _token);
         this.token = _token;
     },
-    get: function(api, params, callback) {
+    get: function(api, params, callback,failcallback) {
 
         if (!api) {
             console.error('url is empty');
@@ -308,6 +308,10 @@ Vue.prototype.Http = {
         }, (response) => {
             // 响应错误回调
             // Vue.prototype.$iosAlert("网络不好哦~");
+            if(failcallback) {
+                window.document.cookie = "xianhao_token=" + ";path=/;expires=" + new Date().toGMTString();
+                window.location.reload();
+            }
             console.error('请求错误');
         });
     },
