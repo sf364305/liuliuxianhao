@@ -31,12 +31,9 @@
                 </div>
             </div>
         </div>
-        <iframe v-if="serverOnline == true" id="iframe" name="iframe" :src="serverUrl" frameborder="no" style="width: 100%;height:89%;border: none;position: fixed;top: 0;left: 0;z-index:444;background: white;">
+        <iframe v-if="serverOnline == true" id="iframe" name="iframe" :src="serverUrl" frameborder="no" style="width: 100%;height:91%;border: none;position: absolute;top: 0;left: 0;z-index:444;background: white;">
         </iframe>
-    
-        <div class="nav-bottom">
-            <app-footer></app-footer>
-        </div>
+        <app-footer></app-footer>
     </div>
 </template>
 <style>
