@@ -159,7 +159,7 @@
                     </div>
                 </div>
                 <div class="detail-love">
-                    <h2>猜你喜欢</h2>
+                    <h2 class="posN">猜你喜欢</h2>
                     <app-goods :goods="recommendGoods"></app-goods>
                 </div>
             </div>

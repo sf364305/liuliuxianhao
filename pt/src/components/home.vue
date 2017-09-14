@@ -38,7 +38,7 @@
             </ul>
     
             <div class="index-news">
-                <h2>最新寄售信息</h2>
+                <h2 class="posN">最新寄售信息</h2>
                 <app-goods :goods="goods"></app-goods>
             </div>
         </scroller>
@@ -75,14 +75,14 @@ export default {
         this.getUserInfo();
     },
     activated() {
-        let ls = window.localStorage;
-        let oldY = ls.getItem('transY');
-        ls.clear();
-        setTimeout(function(){
-            $(".scrollTop").children().css({
-                "transform": "translateY(" + oldY + "px)"
-            })
-        },100)
+        //let ls = window.localStorage;
+        //let oldY = ls.getItem('transY');
+        //.clear();
+        //setTimeout(function(){
+            //$(".scrollTop").children().css({
+                //"transform": "translate3d(" + "0px" +","+ oldY +"px"+ ","+"0px)" +" " + "scale(1)"
+            //})
+        //},100)
         this.searchText = "";
         this.$store.commit('setIsSearch', false);
         //page

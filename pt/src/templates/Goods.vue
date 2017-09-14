@@ -65,9 +65,14 @@ export default {
     props: ['goods'],
     methods:{
         toDetail(idx){
-            var a = $(".com-list").parent().parent().css("transform").split(',')[5].split(")")[0];
-            let ls = window.localStorage;
-            ls.setItem("tranY",a);
+            //var bol = $(".com-list").siblings("h2").attr("class");
+            //if(bol == "posN") {
+                //var a = $(".com-list").parent().parent().css("transform").split(',')[5].split(")")[0];
+            //} else {
+                //var a = $(".com-list").parent().css("transform").split(',')[5].split(")")[0];
+            //}
+            //let ls = window.localStorage;
+            //ls.setItem("tranY",a);
             //document.cookie = "top=" + a;
             var goods = this.goods[idx];
             this.$store.commit('setGoods',goods);
