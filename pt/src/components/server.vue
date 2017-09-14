@@ -20,7 +20,7 @@
                     <h2>留言内容：</h2>
                     <textarea id="detail" v-model="feedback.content" name="detail" maxlength="200" placeholder="请输入您的留言" rows="8"></textarea>
                 </div>
-                <div class="server-sub" style="border: none;">
+                <div class="server-sub" style="border: none;margin-top:3rem">
                     <input type="button" name="" value="提交" class="server-submit" @click="closeShow" />
                 </div>
             </form>
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <iframe v-if="serverOnline == true" id="iframe" name="iframe" :src="serverUrl" frameborder="no" style="width: 100%;height: 91%;border: none;position: fixed;top: 0;left: 0;z-index:444;background: white;">
+        <iframe v-if="serverOnline == true" id="iframe" name="iframe" :src="serverUrl" frameborder="no" style="width: 100%;border: none;position: fixed;top: 0;left: 0;z-index:444;background: white;">
     
         </iframe>
     
@@ -61,10 +61,14 @@ export default {
     },
     created() {
         var self = this;
+        var wiH = $(window).height() - $(".footer").height();
         setTimeout(function() {
             if(self.serverOnline == true) {
                 $(".underline-ser").css("display","none");
             }
+            $("#iframe").css({
+                "height": wiH
+            })
         },1000)
         this.Http.get(this.Api.getServerUrl(), null, function (result) {
             self.serverUrl = result.data.url+"?t="+new Date().getTime();
