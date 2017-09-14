@@ -65,9 +65,10 @@ export default {
     props: ['goods'],
     methods:{
         toDetail(idx){
-            var a = document.body.scrollTop;
-            alert(a);
-            document.cookie = "top=" + a;
+            var a = $(".com-list").parent().parent().css("transform").split(',')[5].split(")")[0];
+            let ls = window.localStorage;
+            ls.setItem("tranY",a);
+            //document.cookie = "top=" + a;
             var goods = this.goods[idx];
             this.$store.commit('setGoods',goods);
             var goodsId = this.goods[idx].id;
