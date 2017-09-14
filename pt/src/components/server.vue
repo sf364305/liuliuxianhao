@@ -31,8 +31,7 @@
                 </div>
             </div>
         </div>
-        <iframe v-if="serverOnline == true" id="iframe" name="iframe" :src="serverUrl" frameborder="no" style="width: 100%;border: none;position: fixed;top: 0;left: 0;z-index:444;background: white;">
-    
+        <iframe v-if="serverOnline == true" id="iframe" name="iframe" :src="serverUrl" frameborder="no" style="width: 100%;height:89%;border: none;position: fixed;top: 0;left: 0;z-index:444;background: white;">
         </iframe>
     
         <div class="nav-bottom">
@@ -66,9 +65,6 @@ export default {
             if(self.serverOnline == true) {
                 $(".underline-ser").css("display","none");
             }
-            $("#iframe").css({
-                "height": wiH
-            })
         },1000)
         this.Http.get(this.Api.getServerUrl(), null, function (result) {
             self.serverUrl = result.data.url+"?t="+new Date().getTime();
