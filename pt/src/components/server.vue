@@ -1,32 +1,34 @@
 <template>
     <div id="server">
-        <h1>{{title}}</h1>
-        <div class="messeage-tit">
-            <h2>*客服在线时间</h2>
-            <p>工作日 09:00 - 21:00</p>
-            <p>周六日 10:00 - 21:00</p>
-        </div>
-        <form aciton="" method="" class="server-form">
-            <div>
-                <label for="">电话</label>
-                <input v-model="feedback.phone" type="text" placeholder="请输入您的手机号码" name="" value="" class="server-tele" />
+        <div class="underline-ser">         
+            <h1>{{title}}</h1>
+            <div class="messeage-tit">
+                <h2>*客服在线时间</h2>
+                <p>工作日 09:00 - 21:00</p>
+                <p>周六日 10:00 - 21:00</p>
             </div>
-            <div>
-                <label for="">QQ</label>
-                <input v-model="feedback.qq" type="text" placeholder="请输入您的QQ号码" name="" value="" class="server-qq" />
-            </div>
-            <div class="add-com server-messeage" style="border: none;">
-                <h2>留言内容：</h2>
-                <textarea id="detail" v-model="feedback.content" name="detail" maxlength="200" placeholder="请输入您的留言" rows="8"></textarea>
-            </div>
-            <div class="server-sub" style="border: none;">
-                <input type="button" name="" value="提交" class="server-submit" @click="closeShow" />
-            </div>
-        </form>
-        <div class="server-alert-outer" @click="closeAlert">
-            <div class="server-alert">
-                <h2>提示</h2>
-                <p>提交成功</p>
+            <form aciton="" method="" class="server-form">
+                <div>
+                    <label for="">电话</label>
+                    <input v-model="feedback.phone" type="text" placeholder="请输入您的手机号码" name="" value="" class="server-tele" />
+                </div>
+                <div>
+                    <label for="">QQ</label>
+                    <input v-model="feedback.qq" type="text" placeholder="请输入您的QQ号码" name="" value="" class="server-qq" />
+                </div>
+                <div class="add-com server-messeage" style="border: none;">
+                    <h2>留言内容：</h2>
+                    <textarea id="detail" v-model="feedback.content" name="detail" maxlength="200" placeholder="请输入您的留言" rows="8"></textarea>
+                </div>
+                <div class="server-sub" style="border: none;">
+                    <input type="button" name="" value="提交" class="server-submit" @click="closeShow" />
+                </div>
+            </form>
+            <div class="server-alert-outer" @click="closeAlert">
+                <div class="server-alert">
+                    <h2>提示</h2>
+                    <p>提交成功</p>
+                </div>
             </div>
         </div>
         <iframe v-if="serverOnline == true" id="iframe" name="iframe" :src="serverUrl" frameborder="no" style="width: 100%;height: 91%;border: none;position: absolute;top: 0;left: 0;z-index:9999;background: white;">
@@ -61,7 +63,7 @@ export default {
         var self = this;
         setTimeout(function() {
             if(self.serverOnline == true) {
-                $(".server-form").css("display","none");
+                $(".underline-ser").css("display","none");
             }
         },1000)
         this.Http.get(this.Api.getServerUrl(), null, function (result) {
