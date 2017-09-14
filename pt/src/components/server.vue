@@ -59,6 +59,11 @@ export default {
     },
     created() {
         var self = this;
+        setTimeout(function() {
+            if(self.serverOnline == true) {
+                $(".server-form").css("display","none");
+            }
+        },1000)
         this.Http.get(this.Api.getServerUrl(), null, function (result) {
             self.serverUrl = result.data.url+"?t="+new Date().getTime();
         })
@@ -66,6 +71,16 @@ export default {
         this.Http.get(this.Api.getOnlineServer(), null, function (result) {
             self.serverOnline = (result.data.server == "online" ? true:false);
         })
+    },
+    activated() {
+        setTimeout(function() {   
+            alert(this.serverOnline)
+            console.log(this.serverOnline)
+            if(this.serverOnline == true) {
+                $(".server-form").css("display","none");
+                $("#upload-img").html("")
+            }
+        },1000)
     },
     methods: {
         closeAlert() {
