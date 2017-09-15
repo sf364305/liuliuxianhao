@@ -43,7 +43,12 @@
                             <img :src="$store.state.Setting.qiniuUrl + goods.category.img" alt="" />
                             <em>{{goods.name}}</em>
                         </span>
-                        <span class="detail-in-price">￥{{goods.price}}</span>
+                        <span v-if="goods.type == 1" class="detail-in-price">
+                            <em v-if="goods.goodsLeaseInfo.dayCost">￥{{goods.goodsLeaseInfo.dayCost}}元/日</em>
+                            <em v-if="goods.goodsLeaseInfo.weekCost">￥{{goods.goodsLeaseInfo.weekCost}}元/周</em>
+                            <em v-if="goods.goodsLeaseInfo.monthCost">￥{{goods.goodsLeaseInfo.monthCost}}元/月</em>
+                        </span>
+                        <span v-else class="detail-in-price">￥{{goods.price}}</span>
                     </div>
                     <div class="detail-in-position">
                         <div class="sell-first1 clearfix">
@@ -352,6 +357,7 @@ export default {
             this.Http.get(this.Api.getGoodsInfor(), {
                 goodsId: that.goodsId
             }, function (result) {
+                console.log(result,+"6588")
                 that.goods = result.data.goods;
                 that.Wx.register(window.location.href.split("#")[1],that.goods);
             })

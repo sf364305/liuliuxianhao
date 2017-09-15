@@ -38,7 +38,7 @@
                 </span>
                 <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.hourCost">￥{{g.goodsLeaseInfo.hourCost}}/时</span>
                 <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.dayCost">￥{{g.goodsLeaseInfo.dayCost}}/日</span>
-                <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.weedCos">￥{{g.goodsLeaseInfo.weedCos}}/周</span>
+                <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.weekCost">￥{{g.goodsLeaseInfo.weekCost}}/周</span>
                 <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.monthCost">￥{{g.goodsLeaseInfo.monthCost}}/月</span>
                 <div class="lease-credit clearfix" v-if="g.type==1">
                     <em>租赁等级：</em>
