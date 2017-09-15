@@ -152,6 +152,13 @@ export default {
             this.lessCost[2] = this.goods.goodsLeaseInfo.weekCost;
             this.lessCost[3] = this.goods.goodsLeaseInfo.monthCost;
         }
+        if(this.goods.goodsLeaseInfo.dayCost != null) {
+            this.leaseType = 1
+        } else if(this.goods.goodsLeaseInfo.weekCost != null) {
+            this.leaseType = 2
+        } else if(this.goods.goodsLeaseInfo.monthCost != null) {
+            this.leaseType = 3
+        }
     },
     mounted() {
         var self = this;
