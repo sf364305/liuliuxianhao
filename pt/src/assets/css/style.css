@@ -220,6 +220,12 @@
 .com-list .price + .price{
     display: none;
 }
+.detail-in-price .price-lea {
+    font-size: 1.6rem;
+}
+.detail-in-price .price-lea + .price-lea {
+    display: none;
+}
 .sell-status, .sell-status1,.sell-hot {
     position: absolute;
     top: 0;
@@ -957,7 +963,7 @@
 }
 .detail-inf {
     position: relative;
-    height: 9.5rem;
+    height: 8.8rem;
     background-color: #fff;
     border-bottom: 2px solid #eee;;
 }
@@ -1062,7 +1068,7 @@
     font-size: 1.33rem;
 }
 .detail-in-left {
-    padding-top: 0.5rem;
+    padding-top: 1.5rem;
 }
 .detail-in-left .detail-in-price {
     padding-left: 9%;

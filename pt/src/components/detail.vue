@@ -44,9 +44,9 @@
                             <em>{{goods.name}}</em>
                         </span>
                         <span v-if="goods.type == 1" class="detail-in-price">
-                            <em v-if="goods.goodsLeaseInfo.dayCost">￥{{goods.goodsLeaseInfo.dayCost}}元/日</em>
-                            <em v-if="goods.goodsLeaseInfo.weekCost">￥{{goods.goodsLeaseInfo.weekCost}}元/周</em>
-                            <em v-if="goods.goodsLeaseInfo.monthCost">￥{{goods.goodsLeaseInfo.monthCost}}元/月</em>
+                            <em v-if="goods.goodsLeaseInfo.dayCost" class="price-lea">￥{{goods.goodsLeaseInfo.dayCost}}元/日</em>
+                            <em v-if="goods.goodsLeaseInfo.weekCost" class="price-lea">￥{{goods.goodsLeaseInfo.weekCost}}元/周</em>
+                            <em v-if="goods.goodsLeaseInfo.monthCost" class="price-lea">￥{{goods.goodsLeaseInfo.monthCost}}元/月</em>
                         </span>
                         <span v-else class="detail-in-price">￥{{goods.price}}</span>
                     </div>
