@@ -160,7 +160,7 @@ Vue.prototype.Api = {
 Vue.prototype.Wx = {
     config: {},
     register: function(page, goods,callback) {
-        
+        //alert("注册")
         var self = this;
         var url = location.href.split('#')[0];
         Vue.prototype.Http.get(Vue.prototype.Api.getJsSign(), {
@@ -187,7 +187,6 @@ Vue.prototype.Wx = {
                     _link = config.link + "?page=" + page;
                 }
             }
-    
             if (goods && goods.goodsImages.length > 0) {
                 _img = "http://qiniu.66mkt.com/" + goods.goodsImages[0].qiniuKey;
                 _title = goods.name;
