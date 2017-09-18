@@ -28,7 +28,6 @@ export default {
         // },
         wxUpdate() {
             var self = this;
-            self.Wx.register()
             wx.chooseImage({
                 count: 9, // 默认9
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
