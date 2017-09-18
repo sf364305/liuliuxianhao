@@ -6,7 +6,7 @@
         <div class="realease_picbtn" data="0">
             <img data-id="img_0" src="../assets/images/add.png" alt="" title="">
             <div style="display:none;" id="none"></div>
-            <input id="platFileBtn" @change="update" name="file" type="file"/>
+            <input id="platFileBtn" @change="update" name="file" type="file" accept="image/*"/>
         </div>
     </div>
 </template>
