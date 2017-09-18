@@ -20,7 +20,7 @@ export default {
     },
     props: ['images'],
     activated() {
-
+        //this.Wx.register();
     },
     methods: {
         // selectImg() {
