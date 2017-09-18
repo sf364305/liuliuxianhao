@@ -3,10 +3,10 @@
         <div class="realease_picbtn" v-for="(img,index) in images" :key="img">
             <img :src="$store.state.Setting.qiniuUrl + img" alt="" title="" @click="del(index)">
         </div>   
-        <div class="realease_picbtn" data="0" @click="selectImg">
+        <div class="realease_picbtn" data="0">
             <img data-id="img_0" src="../assets/images/add.png" alt="" title="">
             <div style="display:none;" id="none"></div>
-            <input id="platFileBtn" name="file" type="button"/>
+            <input id="platFileBtn" @change="update" name="file" type="file"/>
         </div>
     </div>
 </template>
@@ -14,18 +14,18 @@
 export default {
     data() {
         return {
-            // images: []
-            localIds: []
+            images: []
+            //localIds: []
         }
     },
-    props: ['images'],
+    //props: ['images'],
     activated() {
         //this.Wx.register();
     },
     methods: {
-         selectImg() {
-             this.Wx.register(undefined,undefined,this.wxUpdate());
-         },
+        // selectImg() {
+        //     this.Wx.register(undefined,undefined,this.wxUpdate());
+        // },
         wxUpdate() {
             var self = this;
             wx.chooseImage({
@@ -77,8 +77,12 @@ export default {
                 });
         },
         update(e) {
+            let param = new FormData(); //创建form对象
+            let config = {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            };
+            let file = e.target.files[0];
             try {
-                let file = e.target.files[0];
                 let d = new Date();
                 let type = file.name.split('.');
                 let tokenParem = {
@@ -86,13 +90,11 @@ export default {
                     'key': 'orderReview/' + d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.valueOf() + '.' + type[type.length - 1],
                     'bucket': 'liuliuxianhao',//七牛的地址，这个是你自己配置的（变量）
                 };
-                let param = new FormData(); //创建form对象
+                
                 param.append('chunk', '0');//断点传输
                 param.append('chunks', '1');
                 param.append('file', file, file.name)
-                let config = {
-                    headers: { 'Content-Type': 'multipart/form-data' }
-                };
+                
             } catch (e) {
                 alert(e);
             }
@@ -100,6 +102,7 @@ export default {
             var that = this;
             that.Http.get(that.Api.getQiniuToken(), null,
                 function (result) {
+                    console.log(result.data.config.token,+"66")
                     var token = result.data.config.token;
                     param.append('token', token);
                     that.uploading(param, config, file.name);//然后将参数上传七牛
