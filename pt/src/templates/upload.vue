@@ -28,6 +28,7 @@ export default {
         // },
         wxUpdate() {
             var self = this;
+            self.Wx.register()
             wx.chooseImage({
                 count: 9, // 默认9
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -46,9 +47,9 @@ export default {
             var localId = localImagesIds[0];
             // alert(localId)
             //解决IOS无法上传的坑
-            //if (localId.indexOf("wxlocalresource") != -1) {
-                //localId = localId.replace("wxlocalresource", "wxLocalResource");
-            //}          
+            if (localId.indexOf("wxlocalresource") != -1) {
+                localId = localId.replace("wxlocalresource", "wxLocalResource");
+            }          
             wx.uploadImage({
                 localId: localId,
                 isShowProgressTips: 1,

@@ -160,7 +160,6 @@ Vue.prototype.Api = {
 Vue.prototype.Wx = {
     config: {},
     register: function(page, goods,callback) {
-        // alert("注册啦")
         var self = this;
         var url = location.href.split('#')[0];
         Vue.prototype.Http.get(Vue.prototype.Api.getJsSign(), {
