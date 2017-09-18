@@ -3,7 +3,7 @@
         <app-header :header="title"></app-header>
         <!-- <scroller ref="scroller" style="margin-bottom:4rem;margin-top:4rem;"> -->
             <form id="form" action="" enctype="" method="post" class="clearfix">
-                <div class="sell-first">点 击 添 加 图 片6</div>
+                <div class="sell-first">点 击 添 加 图 片5</div>
                 <input type="hidden" id="goods-id">
                 <div class="pic-dis" style="display: none;"></div>
                 <app-upload ref="images" :images="images"></app-upload>
