@@ -6,6 +6,7 @@
                 <h2>*客服在线时间</h2>
                 <p>工作日 09:00 - 21:00</p>
                 <p>周六日 10:00 - 21:00</p>
+                <p style="color: red;">*或加客服微信:xianhao666666</p>
             </div>
             <form aciton="" method="" class="server-form">
                 <div>
