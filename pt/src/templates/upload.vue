@@ -6,7 +6,7 @@
         <div class="realease_picbtn" data="0">
             <img data-id="img_0" src="../assets/images/add.png" alt="" title="">
             <div style="display:none;" id="none"></div>
-            <input id="platFileBtn" @change="update" name="file" type="file" accept="image/*"/>
+            <input id="platFileBtn" @change="update" name="file" type="file" accept="image/*" multiple="true"/>
         </div>
     </div>
 </template>
@@ -82,6 +82,7 @@ export default {
                 headers: { 'Content-Type': 'multipart/form-data' }
             };
             let file = e.target.files[0];
+            console.log(file.name+"666");
             try {
                 let d = new Date();
                 let type = file.name.split('.');
@@ -90,11 +91,10 @@ export default {
                     'key': 'orderReview/' + d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.valueOf() + '.' + type[type.length - 1],
                     'bucket': 'liuliuxianhao',//七牛的地址，这个是你自己配置的（变量）
                 };
-                
                 param.append('chunk', '0');//断点传输
                 param.append('chunks', '1');
                 param.append('file', file, file.name)
-                
+                console.log(file.name,+"11");
             } catch (e) {
                 alert(e);
             }
@@ -107,6 +107,7 @@ export default {
                     param.append('token', token);
                     that.uploading(param, config, file.name);//然后将参数上传七牛
                 });
+            console.log(param+"888")
         },
         uploading(param, config, pathName) {
             var self = this;
