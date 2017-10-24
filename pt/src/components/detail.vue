@@ -387,13 +387,19 @@ export default {
         },
         buy() {
             var self = this;
-            if (this.$store.state.User.userStatus == 3) {
-                this.$iosConfirm("租赁商品需要实名认证，现在去实名?").then(function () {
-                    self.$router.push("/certification");
-                }, function () {
-                    console.log('取消');
-                });
-            }else{
+            if(this.goods.type == 1) {          
+                if (this.$store.state.User.userStatus == 0
+                    || this.$store.state.User.userStatus == 3) {
+                    this.$iosConfirm("租赁商品需要实名认证，现在去实名?").then(function () {
+                        self.$router.push("/certification");
+                    }, function () {
+                        console.log('取消');
+                    });
+                } else {
+                    this.$store.commit('setGoods', this.goods);
+                    this.$router.push('/sure_order');
+                }
+            } else {
                 this.$store.commit('setGoods', this.goods);
                 this.$router.push('/sure_order');
             }
