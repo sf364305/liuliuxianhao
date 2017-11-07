@@ -121,6 +121,21 @@
                                     已认证
                                 </em>
                             </li>
+                            <li v-if="goods.type == 1">
+                                <span>押金方式</span>
+                                <em v-if="goods.goodsLeaseInfo.deposit == 0">
+                                    无押金
+                                </em>
+                                <em v-if="goods.goodsLeaseInfo.deposit == 1">
+                                    押一付一
+                                </em>
+                                <em v-if="goods.goodsLeaseInfo.deposit == 2">
+                                    押二付一
+                                </em>
+                                <em v-if="goods.goodsLeaseInfo.deposit == 3">
+                                    押三付一
+                                </em>
+                            </li>
                             <li>
                                 <span>第三方授权</span>
                                 <em v-if="goods.authorization == 1">

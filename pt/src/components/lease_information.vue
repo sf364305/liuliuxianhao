@@ -149,23 +149,23 @@
                             <i>*</i>押金方式：</span>
                         <div id="deposit" name="deposit" class="re_sele">
                             <label>
-                                <input type="radio" checked="checked" name="deposit" value="0" v-model="goods.deposit" />
-                                <i class="choice-sho"  v-bind:class="{'choiced-show':goods.deposit == 0}"></i>
+                                <input type="radio" checked="checked" name="deposit" value="0" v-model="goods.deposit"/>
+                                <i class="choice-sho"  v-bind:class="{'choiced-show':goods.deposit == 0}" @click="shows"></i>
                                 <em class="choice-text">无需押金</em>
                             </label>
                             <label>
                                 <input type="radio" checked="checked" name="deposit" value="1" v-model="goods.deposit" />
-                                <i class="choice-sho"  v-bind:class="{'choiced-show':goods.deposit == 1}"></i>
+                                <i class="choice-sho"  v-bind:class="{'choiced-show':goods.deposit == 1}" @click="shows"></i>
                                 <em class="choice-text">押一付一</em>
                             </label>
                             <label>
                                 <input type="radio" name="deposit" value="2" v-model="goods.deposit" />
-                                <i class="choice-sho" v-bind:class="{'choiced-show':goods.deposit == 2}"></i>
+                                <i class="choice-sho" v-bind:class="{'choiced-show':goods.deposit == 2}" @click="shows"></i>
                                 <em class="choice-text">押二付一</em>
                             </label>
                             <label>
                                 <input type="radio" name="deposit" value="3" v-model="goods.deposit" />
-                                <i class="choice-sho" v-bind:class="{'choiced-show':goods.deposit == 3}"></i>
+                                <i class="choice-sho" v-bind:class="{'choiced-show':goods.deposit == 3}" @click="shows"></i>
                                 <em class="choice-text">押三付一</em>
                             </label>
                         </div>
@@ -187,21 +187,21 @@
                                 <input type="checkbox" name="check" class="lease-dis" value="2" />
                                 <i class="choice-sho" v-bind:class="{'choiced-show':(goods.dayCost)}"></i>
                                 <em class="choice-text" style="width: 12%;">日租</em>
-                                <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goods.dayCost"  maxlength="9"/>
+                                <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goods.dayCost"  @keyup="keyShow" maxlength="9"/>
                                 <span>元/天</span>
                             </label>
                             <label>
                                 <input type="checkbox" name="check" class="lease-dis" value="3" />
                                 <i class="choice-sho" v-bind:class="{'choiced-show':(goods.weekCost)}"></i>
                                 <em class="choice-text" style="width: 12%;">周租</em>
-                                <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goods.weekCost" maxlength="9" />
+                                <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goods.weekCost" @keyup="keyShow" maxlength="9" />
                                 <span>元/周</span>
                             </label>
                             <label>
                                 <input type="checkbox" name="check" class="lease-dis" value="4" />
                                 <i class="choice-sho" v-bind:class="{'choiced-show':(goods.monthCost)}"></i>
                                 <em class="choice-text" style="width: 12%;">月租</em>
-                                <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goods.monthCost" maxlength="9" />
+                                <input type="number" name="check" class="lease-con" value="" placeholder="输入价格" v-model.number="goods.monthCost" @keyup="keyShow" maxlength="9" />
                                 <span>元/月</span>
                             </label>
                         </div>
@@ -294,6 +294,8 @@ export default {
     },
     activated() {
         this.images=[];
+        this.Wx.register(undefined,undefined,undefined);
+        this.Wx.register(window.location.href.split("#")[1]);
         if (this.$route.params.categoryId == 0) {
             this.goods = this.$store.state.Goods;
             this.goods.goodsId = this.$store.state.Goods.id;
@@ -309,10 +311,17 @@ export default {
         } else {
             this.goods.categoryId = this.$route.params.categoryId;
         }
-        this.Wx.register(window.location.href.split("#")[1]);
     },
     methods: {
+        shows(e) {
+            $(e.target).addClass("choiced-show").parent().siblings().find("i").removeClass("choiced-show");
+        },
+        keyShow(e) {
+            $(e.target).siblings("i").addClass("choiced-show");
+        },
         addGoods() {
+            console.log(this.goods.deposit);
+            return false;
             var errorMsg = null;
             if (!this.goods.name) {
                 errorMsg = "请输入商品标题";
@@ -347,8 +356,6 @@ export default {
                 if (result.code == 0) {
                     self.$iosAlert("提交成功，平台将在1个工作日内审核，请关注公众号接收提醒。");
                     self.$store.commit("clearFrom");
-                    console.log(result);
-
                     self.$router.push("/person");
                 } 
             })
