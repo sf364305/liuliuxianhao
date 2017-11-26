@@ -321,7 +321,7 @@ export default {
         },
         addGoods() {
             console.log(this.goods.deposit);
-            return false;
+            // return false;
             var errorMsg = null;
             if (!this.goods.name) {
                 errorMsg = "请输入商品标题";
