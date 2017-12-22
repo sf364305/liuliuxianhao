@@ -354,6 +354,32 @@ Vue.prototype.callWxPay = function(payInfo) {
     });
 }
 
+Vue.prototype.callWxPay2 = function(payInfo) {
+    var self = this;
+
+    WeixinJSBridge.invoke(
+        'getBrandWCPayRequest', {
+            "appId":payInfo.appId,     //公众号名称，由商户传入     
+            "timeStamp":payInfo.timeStamp,         //时间戳，自1970年以来的秒数     
+            "nonceStr":payInfo.nonceStr, //随机串     
+            "package":payInfo.package,     
+            "signType":payInfo.signType,         //微信签名方式：     
+            "paySign":payInfo.paySign //微信签名 
+        },
+        function(res){     
+            if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+                // 支付成功后的回调函数
+                self.$router.push("/buy_success");
+            }else if(res.err_msg == "get_brand_wcpay_request:cancel" ) {
+                // 支付成功后的回调函数
+                self.$iosAlert('用户取消');
+            }else{
+                self.$iosAlert(res.msg);
+            }
+        }
+    ); 
+}
+
 Vue.prototype.callServer = function(orderId) {
     console.log('/order_server/' + orderId);
     this.$router.push('/order_server/' + orderId);
