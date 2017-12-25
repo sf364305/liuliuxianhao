@@ -63,8 +63,8 @@ export default {
                 self.$store.commit('setLoading', false);
                 if (result.code === 0) {
                     self.payInfo = JSON.parse(result.data.payJson);
-                    self.callWxPay(self.payInfo);
-                    // self.callWxPay2(self.payInfo);
+                    // self.callWxPay(self.payInfo);
+                    self.callWxPay2(self.payInfo);
                 } else {
                     console.log(result.msg);
                 }
