@@ -9,8 +9,8 @@ import axios from 'axios'
 //Vue.prototype.host = 'http://test.api.66mkt.com/';
 //Vue.prototype.serverHost = 'http://test.server.66mkt.com/';
 //正式环境
-Vue.prototype.host = 'http://api.66xianhao.com/';
-Vue.prototype.serverHost = 'http://server.66xianhao.com/';
+Vue.prototype.host = 'https://api.66xianhao.com/';
+Vue.prototype.serverHost = 'https://server.66xianhao.com/';
 
 const base = Vue.prototype.host + 'front';
 
