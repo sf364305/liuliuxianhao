@@ -82,7 +82,7 @@ export default {
                 headers: { 'Content-Type': 'multipart/form-data' }
             };
             let file = e.target.files[0];
-            console.log(file.name+"666");
+            // console.log(file.name+"666");
             try {
                 let d = new Date();
                 let type = file.name.split('.');
@@ -107,7 +107,7 @@ export default {
                     param.append('token', token);
                     that.uploading(param, config, file.name);//然后将参数上传七牛
                 });
-            console.log(param+"888")
+            // console.log(param+"888")
         },
         uploading(param, config, pathName) {
             var self = this;
