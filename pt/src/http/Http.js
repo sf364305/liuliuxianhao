@@ -324,7 +324,7 @@ Vue.prototype.Http = {
     }
 };
 
-Vue.prototype.callWxPay = function(payInfo) {
+Vue.prototype.callWxPay2 = function(payInfo) {
     var self = this;
     wx.chooseWXPay({
         timestamp: payInfo.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
@@ -353,7 +353,7 @@ Vue.prototype.callWxPay = function(payInfo) {
     });
 }
 
-Vue.prototype.callWxPay2 = function(payInfo) {
+Vue.prototype.callWxPay = function(payInfo) {
     var self = this;
 
     WeixinJSBridge.invoke(

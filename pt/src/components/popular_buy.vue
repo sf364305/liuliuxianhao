@@ -76,7 +76,7 @@ export default {
                 $(".alertLoading").hide();
                 if (result.code === 0) {
                     self.payInfo = JSON.parse(result.data.payJson);
-                    self.callWxPay2(self.payInfo);
+                    self.callWxPay(self.payInfo);
                 } 
             })
         }
