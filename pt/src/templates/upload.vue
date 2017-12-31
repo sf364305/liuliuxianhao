@@ -94,7 +94,7 @@ export default {
                 param.append('chunk', '0');//断点传输
                 param.append('chunks', '1');
                 param.append('file', file, file.name)
-                alert("拼装成功数据");
+                // alert("拼装成功数据");
             } catch (e) {
                 alert(e);
             }
@@ -102,7 +102,7 @@ export default {
             var that = this;
             that.Http.get(that.Api.getQiniuToken(), null,
                 function (result) {
-                    alert("获取token："+result.data.config.token);
+                    // alert("获取token："+result.data.config.token);
                     var token = result.data.config.token;
                     param.append('token', token);
                     that.uploading(param, config, file.name);//然后将参数上传七牛

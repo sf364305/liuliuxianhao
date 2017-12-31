@@ -321,7 +321,6 @@ Vue.prototype.Http = {
                 alert("上传完成", response.data);
                 callback(response.data.key);
             })
-
     }
 };
 
