@@ -315,10 +315,10 @@ Vue.prototype.Http = {
         });
     },
     upload(param, config, callback) {
-        console.log("开始上传");
+        alert("开始上传");
         axios.post('https://up-z2.qiniu.com', param, config, callback)
             .then(response => {
-                console.log("上传返回", response.data);
+                alert("上传完成", response.data);
                 callback(response.data.key);
             })
 
