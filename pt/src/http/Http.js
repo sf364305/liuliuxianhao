@@ -315,10 +315,8 @@ Vue.prototype.Http = {
         });
     },
     upload(param, config, callback) {
-        alert("开始上传");
         axios.post('https://up-z2.qbox.me', param, config,callback)
             .then(response => {
-                alert("上传完成", response.data);
                 callback(response.data.key);
             })
     }
