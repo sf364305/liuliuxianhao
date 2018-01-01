@@ -113,6 +113,7 @@ export default {
             var self = this;
             this.Http.upload(param, config, function (key) {
                 self.images.push(key);
+                alert(self.images);
             });
         },
     }
