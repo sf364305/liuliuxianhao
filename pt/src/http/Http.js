@@ -316,7 +316,7 @@ Vue.prototype.Http = {
     },
     upload(param, config, callback) {
         alert("开始上传");
-        axios.post('http://up-z2.qiniu.com', param, config, callback)
+        axios.post('https://up.qbox.me', param, config, callback)
             .then(response => {
                 alert("上传完成", response.data);
                 callback(response.data.key);
