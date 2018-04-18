@@ -7,6 +7,7 @@
                 <input type="hidden" id="goods-id">
                 <div class="pic-dis" style="display: none;"></div>
                 <app-upload ref="images" :images="images"></app-upload>
+                <div style="text-align:center;color:red;">图片请一张一张上传</div>
                 <div class="sell-second">填写详细信息</div>
                 <ul class="sell-information clearfix">
                     <li class="clearfix">

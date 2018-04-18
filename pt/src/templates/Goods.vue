@@ -29,8 +29,15 @@
                         暂无
                     </span> -->
                 </div>
-                <span class="sever" v-if="g.type==1">
+                <!-- <span class="sever" v-if="g.type==1">
                     <em class="com-game">绑定情况：</em>
+                    <i class="game-sever" v-if="g.bind == 1">手机绑定</i>
+                    <i class="game-sever" v-if="g.bind == 2">邮箱绑定</i>
+                    <i class="game-sever" v-if="g.bind == 3">无绑定</i>
+                    <i class="game-sever" v-if="g.bind == null">未知</i>
+                </span> -->
+                <span class="sever" v-if="g.type==1">
+                    <em class="com-game">押金方式：</em>
                     <i class="game-sever" v-if="g.bind == 1">手机绑定</i>
                     <i class="game-sever" v-if="g.bind == 2">邮箱绑定</i>
                     <i class="game-sever" v-if="g.bind == 3">无绑定</i>
@@ -46,7 +53,7 @@
                 </div>
                 <div class="lease-inf clearfix" v-if="g.type==1">
                     <em>租赁时间：</em>
-                    <span>不低于1小时</span>
+                    <span>一天起租</span>
                 </div>
             </a>
             <div class="sell-status1" v-if="g.type==0"></div>
