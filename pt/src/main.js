@@ -238,14 +238,14 @@ var vueRouter = new Router({
     routes
 })
 
-Router.prototype.goBack = function() {
+Router.prototype.goBack = function () {
     this.isBack = true
 }
 
 vueRouter.beforeEach((to, from, next) => {
     console.log(from.path);
     $(".alertLoading").fadeIn(100);
-    var t = setTimeout(function() {
+    var t = setTimeout(function () {
         if (to.path != "/") { // 判断该路由是否需要登录权限
             if (Vue.prototype.Http.token) { // 通过vuex state获取当前的token是否存在
                 var v = vm.$store.state.FromView[vm.$store.state.FromView.length - 1];
@@ -263,7 +263,7 @@ vueRouter.beforeEach((to, from, next) => {
             } else {
                 next({
                     path: '/'
-                        // query: { redirect: from.fullPath }  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+                    // query: { redirect: from.fullPath }  // 将跳转的路由path作为参数，登录成功后跳转到该路由
                 })
             }
         } else {
@@ -275,11 +275,12 @@ vueRouter.beforeEach((to, from, next) => {
     _czc.push([to.path, to.path, from.path]);
 
 })
+
+
 vueRouter.afterEach((to, from) => {
-    setTimeout(function() {
+    setTimeout(function () {
         $(".alertLoading").hide();
     }, to.fullPath.indexOf("detail") > 0 ? 600 : 300);
-
 })
 
 // 创建和挂载根实例

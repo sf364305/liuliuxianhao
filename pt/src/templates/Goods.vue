@@ -38,10 +38,10 @@
                 </span> -->
                 <span class="sever" v-if="g.type==1">
                     <em class="com-game">押金方式：</em>
-                    <i class="game-sever" v-if="g.bind == 1">手机绑定</i>
-                    <i class="game-sever" v-if="g.bind == 2">邮箱绑定</i>
-                    <i class="game-sever" v-if="g.bind == 3">无绑定</i>
-                    <i class="game-sever" v-if="g.bind == null">未知</i>
+                    <i class="game-sever" v-if="g.deposit == 0">无需押金</i>
+                    <i class="game-sever" v-if="g.deposit == 1">押一付一</i>
+                    <i class="game-sever" v-if="g.deposit == 2">押二付一</i>
+                    <i class="game-sever" v-if="g.deposit == 3">押三付一</i>
                 </span>
                 <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.hourCost">￥{{g.goodsLeaseInfo.hourCost}}/时</span>
                 <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.dayCost">￥{{g.goodsLeaseInfo.dayCost}}/日</span>
