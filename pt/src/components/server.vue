@@ -74,7 +74,6 @@ export default {
     },
     activated() {
         setTimeout(function() {   
-            alert(this.serverOnline)
             console.log(this.serverOnline)
             if(this.serverOnline == true) {
                 $(".server-form").css("display","none");

@@ -3,12 +3,12 @@
         <app-header :header="title"></app-header>
         <form action="" method="" class="certification-form">
             <div>
-                <label for="">身份证：</label>
-                <input type="text" placeholder="请输入您的身份证" v-model="cardId" value="" />
-            </div>
-            <div>
                 <label for="">真实姓名：</label>
                 <input type="text" placeholder="请输入您的真实姓名" v-model="realName" value="" />
+            </div>
+            <div>
+                <label for="">身份证：</label>
+                <input type="text" placeholder="请输入您的身份证" v-model="cardId" value="" />
             </div>
             <div>
                 <label for="">手机号码：</label>
@@ -69,7 +69,7 @@ export default {
         },
         submitCer() {
             var that = this;
-            if (!(/^1[34578]\d{9}$/.test(that.phone))) {
+            if (!(/^1[3456789]\d{9}$/.test(that.phone))) {
                 that.$iosAlert("手机号码有误，请重填");
                 return false;
             } else if (!(/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(that.cardId))) {
