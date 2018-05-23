@@ -246,12 +246,12 @@
 /*导航样式*/
 .index-home {
     background: url("../images/index_1.png") center 15% no-repeat;
-    background-size: 25% auto;
+    background-size: 22% auto;
 }
 
 .index-person {
     background: url("../images/person_1.png") center 15% no-repeat;
-    background-size: 19% auto;
+    background-size: 16% auto;
 }
 
 .index-sell {
@@ -267,7 +267,7 @@
 .index-person-active {
     color: #00baff;
     background: url("../images/person_active.png") center 15% no-repeat;
-    background-size: 19% auto;
+    background-size: 16% auto;
 }
 .index-server-active {
     color: #00baff;
@@ -277,12 +277,12 @@
 .index-sell-active {
     color: #00baff;
     background: url("../images/sell_active.png") center 15% no-repeat;
-    background-size: 18% auto;
+    background-size: 15% auto;
 }
 .index-home-active {
     color: #00baff;
     background: url("../images/index_active.png") center 15% no-repeat;
-    background-size: 25% auto;
+    background-size: 22% auto;
 }
 
 
