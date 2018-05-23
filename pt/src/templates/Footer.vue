@@ -11,9 +11,9 @@
                 <li>
                     <router-link to="/my_sell" v-bind:class="{ 'index-sell':!isSale ,'index-sell-active': isSale}" replace>我要卖</router-link>
                 </li>
-                <li>
+                <!-- <li>
                     <router-link to="/server" v-bind:class="{ 'index-server':!isServer,'index-server-active': isServer }" replace>联系客服</router-link>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
@@ -62,7 +62,7 @@ export default {
 
 .nav li {
     float: left;
-    width: 25%;
+    width: 33.3333%;
     height: 4.5rem;
     line-height: 4.5rem;
     overflow: hidden;
