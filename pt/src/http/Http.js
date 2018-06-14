@@ -71,8 +71,8 @@ Vue.prototype.Api = {
         return base + '/order/confirmOrder';
     },
     payOrder() {
-        return base + '/order/payOrder';
-        // return base + '/order/payOrder/v2';
+        // return base + '/order/payOrder';
+        return base + '/order/payOrder/v2';
     },
     collection() {
         return base + '/collection/collect';
