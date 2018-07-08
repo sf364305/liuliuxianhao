@@ -155,6 +155,8 @@
     float: left;
     width: 75%;
     padding-left: 0;
+    max-height: 11rem;
+    overflow-y: scroll;
 }
 .com-list li a {
     font-size: 0.95rem;
