@@ -759,26 +759,26 @@
 .alert-com-inf div {
     padding-left: 10%;
     border-top: 1px solid #e5e5e5;
-    max-height: 9rem;
-    overflow-y: scroll;
+    /* max-height: 9rem; */
+    /* overflow-y: scroll; */
 }
-
-.plat-com-right::-webkit-scrollbar {/*滚动条整体样式*/
-    width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+/* 
+.plat-com-right::-webkit-scrollbar {
+    width: 10px;
     height: 1px;
     display: block;
     background: transparent;
 }
-.plat-com-right::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+.plat-com-right::-webkit-scrollbar-thumb {
     border-radius: 10px;
      -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
     background: #535353;
 }
-.plat-com-right::-webkit-scrollbar-track {/*滚动条里面轨道*/
+.plat-com-right::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
     border-radius: 10px;
     background: #EDEDED;
-}
+} */
 
 .alert-com-inf div label, .alert-com-inf div span {
     float: left;

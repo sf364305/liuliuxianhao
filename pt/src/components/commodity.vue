@@ -199,11 +199,11 @@ export default {
     deactivated(){
         this.$refs.scroller.finishInfinite(true);
     },
-    created(){
-        document.body.addEventListener("touchmove", function(e) {
-            e.preventDefault();    
-        })
-    },
+    // created(){
+    //     document.body.addEventListener("touchmove", function(e) {
+    //         e.preventDefault();    
+    //     })
+    // },
     methods: {
         back() {
             var v = this.$store.state.FromView[this.$store.state.FromView.length - 1];
