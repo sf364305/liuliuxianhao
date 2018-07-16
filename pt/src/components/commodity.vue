@@ -244,6 +244,14 @@ export default {
         },
         change2: function () {
             //添加阻止事件
+            var heiH = $(".alert-com-inf").height();
+            if(heiH > 400) {
+                $(".alert-com-inf").css("overflow-y","auto")
+                $(".alert-com-inf").css({
+                    "overflow-y": "auto",
+                    "height": '400px'
+                })
+            }
              document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
                  e.preventDefault();
              }, false);
