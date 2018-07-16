@@ -2511,3 +2511,10 @@ select {
     background: #29bdf8;
     color: #fff;
 }
+.alert-com {
+    overflow-y: auto;
+    height: 100%;
+}
+.alert-com-inf {
+    padding-bottom: 6rem;
+}
