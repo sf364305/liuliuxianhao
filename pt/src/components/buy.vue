@@ -13,7 +13,7 @@
                     <em>{{order.phone}}</em>
                 </li>
                 <li class="clearfix">
-                    <span>QQ号码</span>
+                    <span>微信号</span>
                     <em>{{order.qq}}</em>
                 </li>
                 <li class="clearfix">

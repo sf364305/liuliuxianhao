@@ -18,7 +18,7 @@
                     <em v-if="goods.type == 0">直播账号</em>
                     <em v-if="goods.type == 1">租赁账号</em>
                 </li>
-        
+
             </ul>
             <ul class="sure-stock" v-if="goods.type == 0">
                 <li class="clearfix">
@@ -31,7 +31,7 @@
                 </li>
             </ul>
             <ul class="sure-stock" v-if="goods.type == 1">
-        
+
                 <li class="clearfix">
                     <span>类型：</span>
                     <em style="color:blue;">
@@ -57,14 +57,14 @@
                 <li class="clearfix">
                     <span>时间：</span>
                     <em style="height: 6.5rem;">
-                        <input readonly="readonly" v-model="startTime" id="appDateTime" type="text" placeholder="请选择开始时间" style="height: 1.5rem; padding-left:3%; -webkit-user-select: none;"> 
+                        <input readonly="readonly" v-model="startTime" id="appDateTime" type="text" placeholder="请选择开始时间" style="height: 1.5rem; padding-left:3%; -webkit-user-select: none;">
                         <br/>
-                        <input readonly="readonly" v-model="endTime" type="text" placeholder="请选择开始时间" style="height: 1.5rem; padding-left:3%;-webkit-user-select: none;"> 
+                        <input readonly="readonly" v-model="endTime" type="text" placeholder="请选择开始时间" style="height: 1.5rem; padding-left:3%;-webkit-user-select: none;">
                     </em>
                 </li>
-        
+
             </ul>
-        
+
             <div class="tobuy-inf">交易信息</div>
             <section class="sure-contact">
                 <form id="form" action="" method="post">
@@ -75,8 +75,8 @@
                     </div>
                     <div class="qq-number clearfix">
                         <label for="">
-                            <em>*</em>联系Q&nbsp;Q：</label>
-                        <input type="number" name="userqq" value="" placeholder="请输入联系QQ" v-model="qq" :value="$store.state.User.qq" />
+                            <em>*</em>联系微信号：</label>
+                        <input type="number" name="userqq" value="" placeholder="请输入联系微信号" v-model="qq" :value="$store.state.User.qq" />
                     </div>
                 </form>
             </section>
@@ -101,7 +101,7 @@
                 <li class="clearfix">
                     <span>实付价：</span>
                     <em v-if="goods.type == 0">{{goods.price}}元</em>
-        
+
                     <em v-if="goods.type == 1 && lessCost[leaseType] > 0">
                         {{lessCost[leaseType] * goodsNum}}元 + {{lessCost[leaseType] * goods.goodsLeaseInfo.deposit}}元 = {{lessCost[leaseType] * goodsNum + lessCost[leaseType] * goods.goodsLeaseInfo.deposit}} 元
                     </em>
@@ -190,13 +190,13 @@ export default {
         },
         submitOrder() {
             var self = this;
-            if (!(/^1[34578]\d{9}$/.test(self.phone))) {
-                this.$iosAlert("手机号码有误，请重填");
+            if (!self.phone) {
+                this.$iosAlert("请输入手机号码");
                 return false;
-            } else if (!(/^\d{6,12}$/.test(self.qq))) {
-                this.$iosAlert("qq号码有误，请重填");
+            } else if (!self.qq) {
+                this.$iosAlert("请输入微信号");
                 return false;
-            }else if(self.goods.type == 1 && !self.startTime){
+            } else if(self.goods.type == 1 && !self.startTime){
                 this.$iosAlert("请选择开始时间");
                 return false;
             }
@@ -207,7 +207,7 @@ export default {
                 amount = this.lessCost[this.leaseType] * this.goodsNum + this.lessCost[this.leaseType] * this.goods.goodsLeaseInfo.deposit;
             }
             $(".alertLoading").css("display","block");
-            self.$store.commit('setLoading', true);      
+            self.$store.commit('setLoading', true);
             this.Http.get(this.Api.confirmOrder(), {
                 phone: self.phone,
                 qq: self.qq,
@@ -243,7 +243,7 @@ export default {
             opt.time = { preset: 'time' };
             opt.default = {
                 theme: 'android-ics light', //皮肤样式
-                display: 'modal', //显示方式 
+                display: 'modal', //显示方式
                 mode: 'scroller', //日期选择模式
                 dateFormat: 'yyyy-mm-dd',
                 timeFormat: 'HH:mm:ss',
