@@ -6,8 +6,8 @@
                 <i>{{user.deliveryCount}}</i>
                 <span></span>
             </a>
-            <a @click="merchantOrderList(2)" class="person-transaction-all" replace>交易中
-                <i>{{user.transactionCount}}</i>
+            <a @click="merchantOrderList(2)" class="person-transaction-all" replace>待发货
+                <i>{{user.sellerWaitDeliveryCount}}</i>
                 <span></span>
             </a>
             <a @click="merchantOrderList(-1)" class="person-shelves-all" replace>仲裁中

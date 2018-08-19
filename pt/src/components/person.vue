@@ -49,8 +49,8 @@
                     <a @click="merchantOrderList(3)" class="person-sended" replace>已发货
                         <i v-if="userInfo.deliveryCount > 0">{{userInfo.deliveryCount}}</i>
                     </a>
-                    <a @click="merchantOrderList(2)" class="person-transaction" replace>交易中
-                        <i v-if="userInfo.transactionCount > 0">{{userInfo.transactionCount}}</i>
+                    <a @click="merchantOrderList(2)" class="person-transaction" replace>待发货
+                        <i v-if="userInfo.sellerWaitDeliveryCount > 0">{{userInfo.sellerWaitDeliveryCount}}</i>
                     </a>
                     <a @click="merchantOrderList(4)" class="person-seccess" replace>交易成功
                         <i v-if="userInfo.successCount > 0">{{userInfo.successCount}}</i>

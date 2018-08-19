@@ -35,7 +35,7 @@ export default {
         this.page = 0;
         this.status = this.$route.params.status;
         if (this.status == 2) {
-            this.title = "交易中";
+            this.title = "待发货";
         } else if (this.status == 3) {
             this.title = "已发货";
         } else if (this.status == 4) {
