@@ -46,7 +46,7 @@ export default {
             title: '全部订单',
             user: {
                 deliveryCount: "加载中",
-                transactionCount: "加载中",
+                sellerWaitDeliveryCount: "加载中",
                 successCount: "加载中",
                 failCount: "加载中",
                 upShelvesCount: "加载中",
