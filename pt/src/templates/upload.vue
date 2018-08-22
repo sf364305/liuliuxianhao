@@ -1,8 +1,8 @@
 <template>
-    <div class="release_pic clearfix">   
+    <div class="release_pic clearfix">
         <div class="realease_picbtn" v-for="(img,index) in images" :key="img">
             <img :src="$store.state.Setting.qiniuUrl + img" alt="" title="" @click="del(index)">
-        </div>   
+        </div>
         <div class="realease_picbtn" data="0">
             <img data-id="img_0" src="../assets/images/add.png" alt="" title="">
             <div style="display:none;" id="none"></div>
@@ -18,7 +18,7 @@ export default {
             //localIds: []
         }
     },
-    //props: ['images'],
+    props: ['images'],
     activated() {
         //this.Wx.register();
     },
@@ -37,8 +37,8 @@ export default {
                     self.syncUpload(self.localIds);
                 },
                 fail: function (res) {
-                   alert("调用相册失败，请刷新重试："+ JSON.stringify(res));  
-               } 
+                   alert("调用相册失败，请刷新重试："+ JSON.stringify(res));
+               }
             });
         },
         syncUpload(localImagesIds) {
@@ -48,7 +48,7 @@ export default {
             //解决IOS无法上传的坑
             if (localId.indexOf("wxlocalresource") != -1) {
                 localId = localId.replace("wxlocalresource", "wxLocalResource");
-            }          
+            }
             wx.uploadImage({
                 localId: localId,
                 isShowProgressTips: 1,
@@ -64,8 +64,8 @@ export default {
                             self.syncUpload(self.localIds);
                         }
                     });
-                } 
-            });  
+                }
+            });
         },
         del(index) {
             var self = this;
