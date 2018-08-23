@@ -76,7 +76,7 @@
                     <div class="qq-number clearfix">
                         <label for="">
                             <em>*</em>联系微信号：</label>
-                        <input type="number" name="userqq" value="" placeholder="请输入联系微信号" v-model="qq" :value="$store.state.User.qq" />
+                        <input type="text" name="userqq" value="" placeholder="请输入联系微信号" v-model="qq" :value="$store.state.User.qq" />
                     </div>
                 </form>
             </section>
