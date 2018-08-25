@@ -30,8 +30,12 @@
                 <i>{{user.successCount}}</i>
                 <span></span>
             </a>
-            <a @click="merchantOrderList(0)" class="person-defeat-all" replace>交易失败
+            <a @click="merchantOrderList(-2)" class="person-defeat-all" replace>交易失败
                 <i>{{user.failCount}}</i>
+                <span></span>
+            </a>
+            <a @click="merchantOrderList(0)" class="person-defeat-all" replace>交易取消
+                <i>{{user.cancelCount}}</i>
                 <span></span>
             </a>
         </div>
@@ -53,6 +57,7 @@ export default {
                 downShelvesCount: "加载中",
                 approveCount: "加载中",
                 merchantArbitrationCount: "加载中",
+                cancelCount: "加载中",
             }
         }
     },
