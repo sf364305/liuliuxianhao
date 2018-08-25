@@ -24,7 +24,7 @@
             </div>
         </form>
         <iframe v-if="serverOnline == true" id="iframe" name="iframe" :src="serverUrl" frameborder="no" style="width: 100%;height: 94%;margin-top:10%;border: none;position: absolute;top: 0;left: 0;z-index:9999;background: white;">
-    
+
         </iframe>
     </div>
 </template>
@@ -63,6 +63,9 @@ export default {
             }else{
                 self.title = "未有客服在线，请留言"
             }
+        },function(error){
+            self.serverOnline = false;
+            self.title = "未有客服在线，请留言"
         });
     },
     methods: {
