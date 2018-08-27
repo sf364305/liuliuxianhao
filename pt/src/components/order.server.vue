@@ -3,8 +3,8 @@
         <app-header :header="title"></app-header>
         <div class="messeage-tit">
             <h2>*客服在线时间</h2>
-            <p>工作日 09:00 - 21:00</p>
-            <p>周六日 10:00 - 21:00</p>
+            <p>工作日 09:00 - 23:00</p>
+            <p>周末节假日 12:00 - 23:00</p>
         </div>
         <form aciton="" method="" class="server-form">
             <div>
@@ -12,8 +12,8 @@
                 <input v-model="feedback.phone" type="text" placeholder="请输入您的手机号码" name="" value="" class="server-tele" />
             </div>
             <div>
-                <label for="">QQ</label>
-                <input v-model="feedback.qq" type="text" placeholder="请输入您的QQ号码" name="" value="" class="server-qq" />
+                <label for="">微信</label>
+                <input v-model="feedback.qq" type="text" placeholder="请输入您的微信号" name="" value="" class="server-qq" />
             </div>
             <div class="add-com server-messeage" style="border: none;">
                 <h2>留言内容：</h2>
