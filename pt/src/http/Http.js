@@ -304,14 +304,16 @@ Vue.prototype.Http = {
                 Vue.prototype.$iosAlert(response.data.msg);
             }
             callback(response.data);
-        }, (response) => {
+        }).catch((error) => {
             // 响应错误回调
             // Vue.prototype.$iosAlert("网络不好哦~");
-            if(failcallback) {
+            if(typeof failcallback == 'function') {
+                failcallback(error.response);
+            } else {
+                console.error('请求错误');
                 window.document.cookie = "xianhao_token=" + ";path=/;expires=" + new Date().toGMTString();
                 window.location.reload();
             }
-            console.error('请求错误');
         });
     },
     upload(param, config, callback) {

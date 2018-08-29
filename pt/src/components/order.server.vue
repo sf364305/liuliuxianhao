@@ -63,7 +63,7 @@ export default {
             }else{
                 self.title = "未有客服在线，请留言"
             }
-        });
+        },function(){self.serverOnline = false});
     },
     methods: {
         closeShow() {
