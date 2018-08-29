@@ -63,9 +63,6 @@ export default {
             }else{
                 self.title = "未有客服在线，请留言"
             }
-        },function(error){
-            self.serverOnline = false;
-            self.title = "未有客服在线，请留言"
         });
     },
     methods: {

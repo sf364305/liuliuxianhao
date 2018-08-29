@@ -307,11 +307,9 @@ Vue.prototype.Http = {
         }, (response) => {
             // 响应错误回调
             // Vue.prototype.$iosAlert("网络不好哦~");
-            if(!failcallback) {
+            if(failcallback) {
                 window.document.cookie = "xianhao_token=" + ";path=/;expires=" + new Date().toGMTString();
                 window.location.reload();
-            } else {
-                failcallback(response.response);
             }
             console.error('请求错误');
         });
