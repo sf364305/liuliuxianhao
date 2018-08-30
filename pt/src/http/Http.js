@@ -293,6 +293,7 @@ Vue.prototype.Http = {
                 'Content-Type': 'application/json;charse=UTF-8'
             }
         }).then((response) => {
+			Vue.prototype.$iosAlert("请求成功处理流程");
             // 响应成功回调,错误统一处理
             if (window.location.href.indexOf("localhost") > 0 ||
                 window.location.href.indexOf("test") > 0 ||
@@ -306,7 +307,7 @@ Vue.prototype.Http = {
             callback(response.data);
         }).catch((error) => {
             // 响应错误回调
-            // Vue.prototype.$iosAlert("网络不好哦~");
+            Vue.prototype.$iosAlert("请求失败处理流程");
             if(typeof failcallback == 'function') {
                 failcallback(error);
             } else {
