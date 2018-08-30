@@ -57,18 +57,13 @@ export default {
         })
 
         this.Http.get(this.Api.getOnlineServer(), null, function (result) {
-			self.$iosAlert(result);
-			self.$iosAlert(result.data.server);
             self.serverOnline = (result.data.server == "online" ? true:false);
             if(self.serverOnline == true){
                 self.title = "六六闲号客服"
             }else{
                 self.title = "未有客服在线，请留言"
             }
-        },function(){
-			self.title = "未有客服在线，请留言";
-			self.serverOnline = false;
-		});
+        });
     },
     methods: {
         closeShow() {
