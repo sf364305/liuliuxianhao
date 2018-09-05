@@ -207,7 +207,7 @@
         </div>
     </div>
 </template>
-<script> 
+<script>
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
 import Header from '../templates/Header.vue'
@@ -313,7 +313,7 @@ export default {
                 var imgS = divImg[Math.abs(deNum)].getAttribute("src");
                 cenImg[0].setAttribute("src", imgS);
                 detailCenter.setAttribute("img-data", deNum);
-                var leg = deNum * divH; 
+                var leg = deNum * divH;
                 detailInner.style.marginTop = leg+'px';
             }
         },
@@ -339,7 +339,7 @@ export default {
                         deNum = -divL + 1;
                     }
                 }
-                var imgS = divImg[Math.abs(deNum)].getAttribute("src");     
+                var imgS = divImg[Math.abs(deNum)].getAttribute("src");
                 cenImg[0].setAttribute("src", imgS);
                 detailCenter.setAttribute("img-data", deNum);
                 var leg = deNum * divH;
@@ -417,18 +417,13 @@ export default {
         },
         buy() {
             var self = this;
-            if(this.goods.type == 1) {          
-                if (this.$store.state.User.userStatus == 0
-                    || this.$store.state.User.userStatus == 3) {
-                    this.$iosConfirm("租赁商品需要实名认证，现在去实名?").then(function () {
-                        self.$router.push("/certification");
-                    }, function () {
-                        console.log('取消');
-                    });
-                } else {
-                    this.$store.commit('setGoods', this.goods);
-                    this.$router.push('/sure_order');
-                }
+            if (this.$store.state.User.userStatus == 0
+                || this.$store.state.User.userStatus == 3) {
+                this.$iosConfirm("购买商品需要实名认证，现在去实名?").then(function () {
+                    self.$router.push("/certification");
+                }, function () {
+                    console.log('取消');
+                });
             } else {
                 this.$store.commit('setGoods', this.goods);
                 this.$router.push('/sure_order');
