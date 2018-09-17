@@ -27,6 +27,7 @@
                             <span v-if="r.status == 0">待退款(退款将原路返回)</span>
                             <span v-if="r.status == 1">退款成功</span>
                             <span v-if="r.status == 2">退款失败</span>
+                            <span v-if="r.status == 3">退款中</span>
                         </div>
                     </a>
                     <div class="sell-status1" v-if="r.order.type==0"></div>
@@ -78,7 +79,7 @@ export default {
                 }
             })
         },
-        
+
         refresh(done) {
             this.page = 0;
             this.getRefunedList(done);
