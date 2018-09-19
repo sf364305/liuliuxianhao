@@ -59,7 +59,7 @@
                 </li>
             </ul>
             <div class="person-income-con clearfix">
-                <router-link to="/my_code" class="person-code" replace>我的二维码
+                <!-- <router-link to="/my_code" class="person-code" replace>我的二维码
                     <span></span>
                 </router-link>
                 <router-link to="/my_promotion" class="person-promotion" replace>我的推广
@@ -67,7 +67,7 @@
                 </router-link>
                 <router-link to="/income_con" class="person-income" replace>收益详情
                     <span></span>
-                </router-link>
+                </router-link> -->
                 <router-link v-if="!userInfo.user.userStatus || userInfo.user.userStatus == 0" to="/certification" class="person-cer" replace>实名认证
                     <em>未认证</em>
                     <span></span>
