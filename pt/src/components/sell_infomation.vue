@@ -173,13 +173,13 @@
                 <ul class="account-infor">
                     <li>
                         <label>
-                            <i>*</i>直播账号</label>
-                        <input type="text" name="" value="" placeholder="请输入直播账号" v-model="goods.account" class="accounts"  maxlength="30"/>
+                            <i>*</i>账号</label>
+                        <input type="text" name="" value="" placeholder="请输入账号" v-model="goods.account" class="accounts"  maxlength="30"/>
                     </li>
                     <li>
                         <label>
-                            <i>*</i>账号密码</label>
-                        <input type="text" name="" value="" placeholder="请输入账号密码" v-model="goods.password" class="passwords"  maxlength="30"/>
+                            <i>*</i>密码</label>
+                        <input type="text" name="" value="" placeholder="请输入密码" v-model="goods.password" class="passwords"  maxlength="30"/>
                     </li>
                     <li>
                         <label>
@@ -188,8 +188,8 @@
                     </li>
                     <li>
                         <label>
-                            <i>*</i>QQ号码</label>
-                        <input type="text" name="" value="" placeholder="请输入QQ号码" v-model="goods.qq" class="qq"  maxlength="15"/>
+                            <i>*</i>微信号</label>
+                        <input type="text" name="" value="" placeholder="请输入微信号" v-model="goods.qq" class="qq"  maxlength="25"/>
                     </li>
                 </ul>
                 <div class="sell-next">
@@ -268,8 +268,8 @@ export default {
             } else if (!this.goods.phone) {
                 errorMsg = "请输入联系手机";
             } else if (!this.goods.qq) {
-                errorMsg = "请输入QQ";
-            } 
+                errorMsg = "请输入微信号";
+            }
             else if (this.$refs.images.images.length == 0) {
                 errorMsg = "请至少上传一张图片";
             }
@@ -288,7 +288,7 @@ export default {
                     self.$iosAlert("提交成功，平台将在1个工作日内审核，请关注公众号接收提醒。");
                     self.$store.commit("clearFrom");
                     self.$router.push("/person");
-                } 
+                }
             })
         },
         initQiniu() { }
