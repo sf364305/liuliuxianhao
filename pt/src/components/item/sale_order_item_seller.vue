@@ -14,6 +14,16 @@
                 <em>生成时间：</em>
                 <span>{{order.createOn}}</span>
             </div>
+            <span class="sever" v-if="order.status == 4">
+                <em class="com-game">结算状态：</em>
+                <i class="game-sever" v-if="order.isMerchantPay">未结算</i>
+                <i class="game-sever" v-else-if="order.merchantPayStatus == 0">待结算</i>
+                <i class="game-sever" v-else-if="order.merchantPayStatus == 1">已结算</i>
+            </span>
+            <span class="sever" v-if="order.status == 4">
+                <em class="com-game">结算金额：</em>
+                <i style="color:red;" v-if="order.merchantPayAmount">￥{{order.merchantPayAmount}}</i>
+            </span>
         </a>
         <div class="sell-status1"></div>
         <div class="wait-you" v-if="order.status == 1">
@@ -27,7 +37,7 @@
             <span class="wait-cancel" @click="server()">申请仲裁</span>
             <span class="wait-sure" @click="sure(order.id)">确认收货</span>
         </div>-->
-    
+
         <div class="wait-you" v-if="order.status == 4">
             <!--<span class="wait-cancel">申请仲裁</span>-->
             <!--<span class="wait-sure">确认收货</span>-->
