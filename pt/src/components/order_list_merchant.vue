@@ -24,7 +24,7 @@ export default {
     data() {
         return {
             title: "订单列表",
-            page: 0,
+            page: -1,
             size: 20,
             orders: [],
             status: 0,
@@ -32,7 +32,7 @@ export default {
     },
     activated() {
         this.orders = [];
-        this.page = 0;
+        this.page = -1;
         this.status = this.$route.params.status;
         if (this.status == 2) {
             this.title = "待发货";
@@ -47,7 +47,8 @@ export default {
         } else if (this.status == -2) {
             this.title = "交易失败";
         }
-        this.getMerchantInfoByStatus();
+        //this.getMerchantInfoByStatus();
+        this.$refs.scroller.finishInfinite(false);
     },
     methods: {
         getMerchantInfoByStatus(done) {
