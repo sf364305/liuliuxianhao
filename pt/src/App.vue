@@ -2,11 +2,12 @@
   <div id="app">
     <div class="contianer">
       <!-- 路由中的几个组件在这里被渲染，默认被渲染的为第一个组件，也就是home组件  -->
-      <keep-alive exclude="server">
+      <keep-alive>
         <!--<transition :name="transitionName">-->
-        <router-view class="child-view"></router-view>
+        <router-view v-if="$route.meta.keepAlive" class="child-view"></router-view>
         <!--</transition>-->
       </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive" class="child-view"></router-view>
     </div>
     <div class="alertLoading" id="alertLoading">
       <div style="margin-top: 50%;text-align: center;">

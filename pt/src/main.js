@@ -137,100 +137,197 @@ const store = new Vuex.Store({
 // 定义路由
 var routes = [{
     path: '/',
-    component: loading
+    component: loading,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/home',
-    component: home
+    component: home,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/server',
-    component: server
+    component: server,
+    meta: {
+      keepAlive: false
+    }
 }, {
     path: '/person',
-    component: person
+    component: person,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/my_sell',
-    component: my_sell
+    component: my_sell,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/commodity/:id',
-    component: commodity
+    component: commodity,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/detail/:id',
-    component: detail
+    component: detail,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/sure_order',
-    component: sure_order
+    component: sure_order,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/buy',
-    component: buy
+    component: buy,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/sell_infomation/:categoryId',
-    component: sell_infomation
+    component: sell_infomation,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/lease_information/:categoryId',
-    component: lease_information
+    component: lease_information,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/certification',
-    component: certification
+    component: certification,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/certification_else',
-    component: certification_else
+    component: certification_else,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/popularity',
-    component: popularity
+    component: popularity,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/popular_buy',
-    component: popular_buy
+    component: popular_buy,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/wait_send',
-    component: wait_send
+    component: wait_send,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/all_order',
-    component: all_order
+    component: all_order,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/all_order_seller',
-    component: all_order_seller
+    component: all_order_seller,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/my_code',
-    component: my_code
+    component: my_code,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/my_promotion',
-    component: my_promotion
+    component: my_promotion,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/income_con',
-    component: income_con
+    component: income_con,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/buy_success',
-    component: buy_success
+    component: buy_success,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/buy_defeat',
-    component: buy_defeat
+    component: buy_defeat,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/orders/:status',
-    component: order_list
+    component: order_list,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/orders_merchant/:status',
-    component: order_list_merchant
+    component: order_list_merchant,
+    name:'order_list_merchant',
+    meta: {
+      keepAlive: false
+    }
 }, {
     path: '/goods_list_merchant/:status',
-    component: goods_list_merchant
+    component: goods_list_merchant,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/goods_item_collect/:status',
-    component: goods_item_collect
+    component: goods_item_collect,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/order_detail/:id',
-    component: order_detail
+    component: order_detail,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/refunedList',
-    component: refuned_list
+    component: refuned_list,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/error_404',
-    component: error_404
+    component: error_404,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/error_500',
-    component: error_500
+    component: error_500,
+    meta: {
+      keepAlive: true
+    }
 }, {
     path: '/order_server/:orderId',
-    component: order_server
+    component: order_server,
+    meta: {
+      keepAlive: true
+    }
 }];
 
 // 实例化路由

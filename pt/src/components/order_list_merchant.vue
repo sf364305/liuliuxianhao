@@ -30,7 +30,7 @@ export default {
             status: 0,
         }
     },
-    activated() {
+    created() {
         this.orders = [];
         this.page = -1;
         this.status = this.$route.params.status;
@@ -48,7 +48,7 @@ export default {
             this.title = "交易失败";
         }
         //this.getMerchantInfoByStatus();
-        this.$refs.scroller.finishInfinite(false);
+        //this.$refs.scroller.finishInfinite(false);
     },
     methods: {
         getMerchantInfoByStatus(done) {
