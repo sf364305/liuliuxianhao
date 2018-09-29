@@ -28,16 +28,16 @@ export default {
     data() {
         return {
             title: "订单列表",
-            page: 0,
+            page: -1,
             size: 20,
             orders: [],
             status: 0,
         }
     },
-    activated() {
+    created() {
         this.orders = [];
         console.log("sss",this.$route.params.status);
-        this.page = 0;
+        this.page = -1;
         this.status = this.$route.params.status;
         if (this.status == 1) {
             this.title = "待支付";
@@ -55,7 +55,7 @@ export default {
          else if(this.status == 6){
             this.title = "收藏";
         }
-        this.getBuyInfoByStatus();
+        //this.getBuyInfoByStatus();
     },
     methods: {
         getBuyInfoByStatus(done) {

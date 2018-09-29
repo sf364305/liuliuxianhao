@@ -16,17 +16,17 @@ export default {
     data() {
         return {
             title: "收藏列表",
-            page: 0,
+            page: -1,
             size: 5,
             collections: [],
             status: 0,
             goods:[]
         }
     },
-    activated() {
+    created() {
         this.collections = [];
         this.goods = [];
-        this.page = 0;
+        this.page = -1;
         this.status = this.$route.params.status;
         if (this.status == 1) {
             this.title = "已上架";
@@ -35,7 +35,7 @@ export default {
         } else if (this.status == 2) {
             this.title = "审核中";
         }
-        this.getGoodsByStatus();
+        //this.getGoodsByStatus();
     },
     methods: {
         getGoodsByStatus(done) {

@@ -277,7 +277,7 @@ var routes = [{
     path: '/orders/:status',
     component: order_list,
     meta: {
-      keepAlive: true
+      keepAlive: false
     }
 }, {
     path: '/orders_merchant/:status',
@@ -290,13 +290,13 @@ var routes = [{
     path: '/goods_list_merchant/:status',
     component: goods_list_merchant,
     meta: {
-      keepAlive: true
+      keepAlive: false
     }
 }, {
     path: '/goods_item_collect/:status',
     component: goods_item_collect,
     meta: {
-      keepAlive: true
+      keepAlive: false
     }
 }, {
     path: '/order_detail/:id',
@@ -308,7 +308,7 @@ var routes = [{
     path: '/refunedList',
     component: refuned_list,
     meta: {
-      keepAlive: true
+      keepAlive: false
     }
 }, {
     path: '/error_404',

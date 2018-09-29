@@ -16,15 +16,15 @@ export default {
     data() {
         return {
             title: "商品列表",
-            page: 0,
+            page: -1,
             size: 5,
             goodses: [],
             status: 0,
         }
     },
-    activated() {
+    created() {
         this.goodses = [];
-        this.page = 0;
+        this.page = -1;
         this.status = this.$route.params.status;
         if (this.status == 1) {
             this.title = "已上架";
@@ -35,7 +35,7 @@ export default {
         } else if (this.status == 3) {
             this.title = "审核失败";
         }
-        this.getGoodsByStatus();
+        //this.getGoodsByStatus();
     },
     methods: {
         getGoodsByStatus(done) {

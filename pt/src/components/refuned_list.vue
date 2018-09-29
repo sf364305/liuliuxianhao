@@ -48,15 +48,15 @@ export default {
     data() {
         return {
             title: "退款列表",
-            page: 0,
+            page: -1,
             size: 20,
             refunds: []
         }
     },
-    activated() {
+    created() {
         this.refunds = [];
-        this.page = 0;
-        this.getRefunedList();
+        this.page = -1;
+        //this.getRefunedList();
     },
     methods: {
         toDetail(orderId) {
