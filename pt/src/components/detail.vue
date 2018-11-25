@@ -52,19 +52,19 @@
                     </div>
                     <div class="detail-in-position">
                         <div class="sell-first1 clearfix">
-                            <span>
-                                <em>首次出售</em>
+                            <span style="text-overflow: ellipsis;max-width: 10rem;overflow: hidden;white-space: nowrap;">
+                                {{goods.merchant.name}}
                             </span>
-                            <em>商品属性：</em>
+                            <em>卖家：</em>
                         </div>
                         <div class="sell-credit clearfix">
                             <span v-for="n in goods.merchant.creditLevel" :key="n.id"></span>
                             <em>卖家信用：</em>
                         </div>
                         <div class="sell-deal clearfix">
-                            <span>成交率：100%</span>
-                            <!-- <span>{{goods.merchant.successNum}}笔（成交率：{{goods.merchant.successRate}}%）</span> -->
-                            <!-- <em>最近成交：</em> -->
+                            <!-- <span>成交率：100%</span> -->
+                            <span>{{goods.merchant.successNum}}笔</span>
+                            <em>出售成功：</em>
                         </div>
                     </div>
                 </div>
@@ -164,6 +164,15 @@
                                 <span>描述</span>
                                 <em>{{goods.detail}}</em>
                             </li>
+                            <li>
+                                <span style="color:red;">免责声明</span>
+                                <em style="color:red;">
+                                    <p>1.所展示的商品供求信息由买卖双方自行提供，其真实性、准确性和合法性由信息发布人负责。</p>
+                                    <p>2.帐号真实情况以客服截图为准。</p>
+                                    <p>3.国家法律规定，未成年人不能参与虚拟物品交易。</p>
+                                    <p>4.本平台提供的数字化商品根据商品性质不支持七天无理由退货服务。</p>
+                                </em>
+                            </li>
                         </ul>
                         <ul class="descripe" v-if="!isDetail">
                             <li>
@@ -225,7 +234,9 @@ export default {
                     img: "logo_index.png"
                 },
                 merchant: {
-                    creditLevel: ""
+                    creditLevel: "",
+                    name:"",
+                    successNum:""
                 },
                 name: "加载中"
             },

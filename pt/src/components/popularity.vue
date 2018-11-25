@@ -18,7 +18,7 @@
                 <div class="clearfix">
                     <label for="" style="width: 20%;">选择人气：</label>
                     <!--<input type="number" v-model="quantity" v-bind:change="cal()" class="papular-pla" />-->
-                    <div class="pop-right clearfix" style="float: left;width: 70%; margin-left:8%;">                      
+                    <div class="pop-right clearfix" style="float: left;width: 70%; margin-left:8%;">
                         <div type="number" v-bind:class="{'popular-type-select':quantity == 5000}" @click="getNum(5000)" style="" class="popular-number" value="5000">5000</div>
                         <div type="number" v-bind:class="{'popular-type-select':quantity == 15000}" @click="getNum(15000)" class="popular-number">15000</div>
                         <div type="number" v-bind:class="{'popular-type-select':quantity == 25000}" @click="getNum(25000)" class="popular-number">25000</div>
@@ -54,6 +54,10 @@
                 <div>
                     <label for="">刷人气平台ID：</label>
                     <input type="text" v-model="targetId" placeholder="请输入平台ID" name="" value="" class="papular-id" />
+                </div>
+                <div>
+                    <label for="">联系方式：</label>
+                    <input type="text" v-model="phone" placeholder="请输入联系电话" name="" value="" class="papular-id" />
                 </div>
                 <div class="add-com-papular">
                     <textarea id="detail" v-model="comment" name="detail" maxlength="200" placeholder="输入备注信息" rows="4"></textarea>
@@ -101,6 +105,7 @@ export default {
             startTime: "",
             endTime: "",
             targetId: "",
+            phone: "",
             comment: "",
             id: '',
             popularNum: '',
@@ -108,7 +113,7 @@ export default {
         }
     },
     created() {
-        
+
     },
     activated(){
         this.bindDate();
@@ -154,7 +159,7 @@ export default {
                 }
             }
             document.getElementById('popularText').innerHTML = textB;
-            this.isAle = false;  
+            this.isAle = false;
         },
         changePlat(id) {
             this.goodsId = id;
@@ -210,7 +215,8 @@ export default {
                 quantity: this.quantity,
                 comment: this.comment,
                 count: this.count,
-                startTime: this.startTime
+                startTime: this.startTime,
+                phone:this.phone
             }
 
             this.Http.get(this.Api.confirmPopularOrder(), param, function (result) {
@@ -242,7 +248,7 @@ export default {
             opt.time = { preset: 'time' };
             opt.default = {
                 theme: 'android-ics light', //皮肤样式
-                display: 'modal', //显示方式 
+                display: 'modal', //显示方式
                 mode: 'scroller', //日期选择模式
                 dateFormat: 'yyyy-mm-dd',
                 timeFormat: 'HH:mm:ss',

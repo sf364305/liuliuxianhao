@@ -44,6 +44,10 @@
                         <span>平台ID：</span>
                         <em>{{$store.state.Order.targetId}}</em>
                     </li>
+                    <li>
+                        <span>联系方式：</span>
+                        <em>{{$store.state.Order.phone}}</em>
+                    </li>
                     <li v-if="$store.state.Order.comment">
                         <span>备注：</span>
                         <em>{{$store.state.Order.comment}}</em>
@@ -77,7 +81,7 @@ export default {
                 if (result.code === 0) {
                     self.payInfo = JSON.parse(result.data.payJson);
                     self.callWxPay(self.payInfo);
-                } 
+                }
             })
         }
     },

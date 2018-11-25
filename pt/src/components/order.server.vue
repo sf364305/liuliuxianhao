@@ -37,7 +37,7 @@ export default {
     name:"server",
     data: function () {
         return {
-            title:"正在连接客服",
+            title:"客服在线时间09:00-23:00",
             serverUrl:"",
             feedback: {
                 phone: "",
