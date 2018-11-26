@@ -7,11 +7,10 @@
                     <em>{{"【"+g.grade+"级"+"·"+g.category.name+"】"}}{{g.name}}</em>
                 </span>
                 <span class="sever" v-if="g.type==0">
-                    <em class="com-game">绑定情况：</em>
-                    <i class="game-sever" v-if="g.bind == 1">手机绑定</i>
-                    <i class="game-sever" v-if="g.bind == 2">邮箱绑定</i>
-                    <i class="game-sever" v-if="g.bind == 3">无绑定</i>
-                    <i class="game-sever" v-if="g.bind == null">未知</i>
+                    <em class="com-game">认证情况：</em>
+                    <i class="game-sever" v-if="g.merchant.userStatus == 2">已认证</i>
+                    <i class="game-sever" v-if="g.merchant.userStatus != 2">未认证</i>
+                    <i class="game-sever" v-if="g.merchant.userStatus == null">未知</i>
                 </span>
                 <span class="price" v-if="g.type==0">￥{{g.price}}</span>
                 <div class="sell-credit clearfix" v-if="g.type==0">
@@ -19,8 +18,8 @@
                     <span v-for="n in g.merchant.creditLevel" :key="n.id"></span>
                 </div>
                 <div class="sell-inf clearfix" v-if="g.type==0">
-                    <em>成交率：</em>
-                    <span>100%</span>
+                    <em>出售成功：</em>
+                    <span>{{g.merchant.successNum}}笔</span>
                     <!-- <em>最近成交：</em>
                     <span v-if="g.merchant.successNum != null">
                         {{g.merchant.successNum}}
@@ -57,7 +56,7 @@
                 </div>
             </a>
             <div class="sell-status1" v-if="g.type==0"></div>
-            <div class="sell-status" v-if="g.type==1"></div>      
+            <div class="sell-status" v-if="g.type==1"></div>
         </li>
     </ul>
 </template>

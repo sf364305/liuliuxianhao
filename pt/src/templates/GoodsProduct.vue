@@ -7,11 +7,10 @@
                     <em>{{g.name}}</em>
                 </span>
                 <span class="sever" v-if="g.type==0">
-                    <em class="com-game">绑定情况：</em>
-                    <i class="game-sever" v-if="g.bind == 1">手机绑定</i>
-                    <i class="game-sever" v-if="g.bind == 2">邮箱绑定</i>
-                    <i class="game-sever" v-if="g.bind == 3">无绑定</i>
-                    <i class="game-sever" v-if="g.bind == null">未知</i>
+                    <em class="com-game">认证情况：</em>
+                    <i class="game-sever" v-if="g.merchant.userStatus == 2">已认证</i>
+                    <i class="game-sever" v-if="g.merchant.userStatus != 2">未认证</i>
+                    <i class="game-sever" v-if="g.merchant.userStatus == null">未知</i>
                 </span>
                 <span class="price" v-if="g.type==0">￥{{g.price}}</span>
                 <div class="sell-credit clearfix" v-if="g.type==0">
@@ -19,7 +18,7 @@
                     <span v-for="n in g.merchant.creditLevel" :key="n.id"></span>
                 </div>
                 <div class="sell-inf clearfix" v-if="g.type==0">
-                    <em>最近成交：</em>
+                    <em>出售成功：</em>
                     <span v-if="g.merchant.successNum != null">
                         {{g.merchant.successNum}}
                     </span>
@@ -28,11 +27,10 @@
                     </span>
                 </div>
                 <span class="sever" v-if="g.type==1">
-                    <em class="com-game">绑定情况：</em>
-                    <i class="game-sever" v-if="g.bind == 1">手机绑定</i>
-                    <i class="game-sever" v-if="g.bind == 2">邮箱绑定</i>
-                    <i class="game-sever" v-if="g.bind == 3">无绑定</i>
-                    <i class="game-sever" v-if="g.bind == null">未知</i>
+                    <em class="com-game">认证情况：</em>
+                    <i class="game-sever" v-if="g.merchant.userStatus == 2">已认证</i>
+                    <i class="game-sever" v-if="g.merchant.userStatus != 2">未认证</i>
+                    <i class="game-sever" v-if="g.merchant.userStatus == null">未知</i>
                 </span>
                 <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.hourCost">￥{{g.goodsLeaseInfo.hourCost}}/时</span>
                 <span class="price" v-if="g.type==1 && g.goodsLeaseInfo.dayCost">￥{{g.goodsLeaseInfo.dayCost}}/日</span>
@@ -88,7 +86,7 @@ export default {
         delGoods(idx) {
             var goods = this.goods[idx];
             var self = this;
-            
+
             this.$iosConfirm("确定删除?")
                 .then(function () {
                     self.Http.get(self.Api.deleteGoods(), {
@@ -103,10 +101,10 @@ export default {
                     console.log('取消');
                 });
         },
-        downGoods(idx) {    
+        downGoods(idx) {
             var goods = this.goods[idx];
             var self = this;
-            
+
             this.$iosConfirm("确定下架?")
                 .then(function () {
                     //移除订单结构
@@ -116,7 +114,7 @@ export default {
                         if (result.code === 0) {
                             self.$emit('remove', goods.id);
                             self.$iosAlert("下架成功");
-                        } 
+                        }
                     })
                 }, function () {
                     console.log('取消');
