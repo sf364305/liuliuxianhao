@@ -37,7 +37,7 @@
                             </div>-->
                     <div class="plat-comm clearfix">
                         <span>平台：</span>
-                        <div class="plat-com-right">                     
+                        <div class="plat-com-right">
                             <label style="width:33%;">
                                 <input type="radio" checked="checked" name="plat" value=""></input>
                                 <i class="choice-sho" v-bind:class="{'choiced-show':!condition.categoryId}" @click="changePlat('')"></i>
@@ -201,7 +201,7 @@ export default {
     },
     // created(){
     //     document.body.addEventListener("touchmove", function(e) {
-    //         e.preventDefault();    
+    //         e.preventDefault();
     //     })
     // },
     methods: {
@@ -245,13 +245,14 @@ export default {
         change2: function () {
             //添加阻止事件
             var heiH = $(".alert-com-inf").height();
-            if(heiH > 400) {
+            //if(heiH > 400) {
+                var innerHeight = ($(".alert-com-outer").height() - $(".com-sub").height() - parseFloat($('html').css('font-size'))*12) + 'px';
                 $(".alert-com-inf").css("overflow-y","auto")
                 $(".alert-com-inf").css({
                     "overflow-y": "auto",
-                    "height": '400px'
+                    "height": innerHeight
                 })
-            }
+            //}
              document.addEventListener("touchmove", function (e) {    //禁止浏览器默认行为
                  e.preventDefault();
              }, false);
@@ -315,7 +316,7 @@ export default {
                 this.goods = [];
                 this.condition.page = 0;
             }
-            
+
             var that = this;
             // that.$refs.scroller.finishInfinite(false);
             // that.$refs.scroller.triggerPullToRefresh();
@@ -335,7 +336,7 @@ export default {
                         that.$refs.scroller.finishInfinite(false);
                     }
                 // that.$refs.scroller.finishInfinite(false);
-                // 
+                //
             })
             that.closeA();
         },
