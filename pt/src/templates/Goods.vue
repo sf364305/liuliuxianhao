@@ -8,9 +8,8 @@
                 </span>
                 <span class="sever" v-if="g.type==0">
                     <em class="com-game">认证情况：</em>
-                    <i class="game-sever" v-if="g.merchant.userStatus == 2">已认证</i>
-                    <i class="game-sever" v-if="g.merchant.userStatus != 2">未认证</i>
-                    <i class="game-sever" v-if="g.merchant.userStatus == null">未知</i>
+                    <i class="game-sever" v-if="g.identification == 1">未认证</i>
+                    <i class="game-sever" v-if="g.identification == 2">已认证</i>
                 </span>
                 <span class="price" v-if="g.type==0">￥{{g.price}}</span>
                 <div class="sell-credit clearfix" v-if="g.type==0">

@@ -52,7 +52,7 @@
                     </div>
                     <div class="detail-in-position">
                         <div class="sell-first1 clearfix">
-                            <span style="text-overflow: ellipsis;max-width: 10rem;overflow: hidden;white-space: nowrap;">
+                            <span style="text-overflow: ellipsis;max-width: 7rem;overflow: hidden;white-space: nowrap;">
                                 {{goods.merchant.name}}
                             </span>
                             <em>卖家：</em>
