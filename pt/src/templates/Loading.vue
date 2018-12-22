@@ -30,7 +30,7 @@ export default {
         //token
         //10秒钟过期
         window.document.cookie = "xianhao_token=" + t + ";path=/;expires=" + d.toGMTString();
-        window.location.href = "/"; //t="+d.getTime()
+        window.location.href = "/#"; //t="+d.getTime()
       } else {
         //从cookie中取出内容
         t = window.document.cookie.match('(^|;)?xianhao_token=([^;]*)(;|$)');
