@@ -36,7 +36,7 @@
                         <img :src="$store.state.Setting.qiniuUrl + c.img" alt="">{{c.name}}</a>
                 </li>
             </ul>
-    
+
             <div class="index-news">
                 <h2 class="posN">最新寄售信息</h2>
                 <app-goods :goods="goods"></app-goods>
@@ -118,6 +118,12 @@ export default {
                 if (result.data.goods.length > 0) {
                     for (var i = 0; i < result.data.goods.length; i++) {
                         if (!that.contains(result.data.goods[i])) {
+                            var ls = window.localStorage;
+                            if(ls.getItem(result.data.goods[i].id)){
+                              result.data.goods[i].hit = true;
+                            } else {
+                              result.data.goods[i].hit = false;
+                            }
                             that.goods.push(result.data.goods[i]);
                             //加入缓存
                             that.$store.commit("setGoodsCache", result.data.goods[i]);

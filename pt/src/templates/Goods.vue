@@ -1,6 +1,6 @@
 <template>
     <ul class="com-list">
-        <li v-for="(g,index) in goods" :key="g.name+g.id+index">
+        <li v-for="(g,index) in goods" :key="g.name+g.id+index"  v-bind:class="{hit:g.hit}">
             <a class="game-name" replace @click="toDetail(index)">
                 <span class="name-title clearfix">
                     <img :src="$store.state.Setting.qiniuUrl + g.category.img" alt="">
@@ -80,6 +80,9 @@ export default {
             //ls.setItem("tranY",a);
             //document.cookie = "top=" + a;
             var goods = this.goods[idx];
+            var ls = window.localStorage;
+            ls.setItem(goods.id,"hit");
+            goods.hit = true;
             this.$store.commit('setGoods',goods);
             var goodsId = this.goods[idx].id;
             this.$router.push("/detail/"+goodsId);
