@@ -9,8 +9,8 @@ import axios from 'axios'
 //Vue.prototype.host = 'http://test.api.66mkt.com/';
 //Vue.prototype.serverHost = 'http://test.server.66mkt.com/';
 //正式环境
-Vue.prototype.host = 'https://api.66xianhao.com/';
-Vue.prototype.serverHost = 'https://server.66xianhao.com/';
+Vue.prototype.host = 'http://api.66xianhao.com/';
+Vue.prototype.serverHost = 'http://server.66xianhao.com/';
 
 const base = Vue.prototype.host + 'front';
 
@@ -173,7 +173,7 @@ Vue.prototype.Wx = {
                 console.error("config error");
                 return;
             }
-    
+
             var config = self.config;
             var _link = config.link || "";
             var _img = "http://qiniu.66mkt.com/66.jpg";
@@ -191,7 +191,7 @@ Vue.prototype.Wx = {
                 _title = goods.name;
                 _desc = goods.detail;
             }
-    
+
             console.log("分享链接", _link);
             wx.config({
                 debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -238,7 +238,7 @@ Vue.prototype.Wx = {
                         // 用户取消分享后执行的回调函数
                     }
                 });
-    
+
                 wx.onMenuShareQZone({
                     title: _title, // 分享标题
                     desc: _desc, // 分享描述
@@ -259,7 +259,7 @@ Vue.prototype.Wx = {
             return true;
         },function(){})
 
-        
+
     }
 }
 
@@ -356,14 +356,14 @@ Vue.prototype.callWxPay = function(payInfo) {
 
     WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
-            "appId":payInfo.appId,     //公众号名称，由商户传入     
-            "timeStamp":payInfo.timeStamp,         //时间戳，自1970年以来的秒数     
-            "nonceStr":payInfo.nonceStr, //随机串     
-            "package":payInfo.package,     
-            "signType":payInfo.signType,         //微信签名方式：     
-            "paySign":payInfo.paySign //微信签名 
+            "appId":payInfo.appId,     //公众号名称，由商户传入
+            "timeStamp":payInfo.timeStamp,         //时间戳，自1970年以来的秒数
+            "nonceStr":payInfo.nonceStr, //随机串
+            "package":payInfo.package,
+            "signType":payInfo.signType,         //微信签名方式：
+            "paySign":payInfo.paySign //微信签名
         },
-        function(res){     
+        function(res){
             if(res.err_msg == "get_brand_wcpay_request:ok" ) {
                 // 支付成功后的回调函数
                 self.$router.push("/buy_success");
@@ -374,7 +374,7 @@ Vue.prototype.callWxPay = function(payInfo) {
                 self.$iosAlert(res.msg);
             }
         }
-    ); 
+    );
 }
 
 Vue.prototype.callServer = function(orderId) {
