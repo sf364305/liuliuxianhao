@@ -313,6 +313,7 @@ export default {
             // }, true);
             //获取列表
             if (clear) {
+                this.$refs.scroller.finishPullToRefresh();
                 this.goods = [];
                 this.condition.page = 0;
             }
