@@ -178,7 +178,7 @@ export default {
             isClose: false
         }
     },
-    activated() {
+    created() {
         if (this.$store.state.IsSearch == false) {
             this.goods = [];
             this.reset();
@@ -191,9 +191,8 @@ export default {
                     this.condition.keyword = this.$route.params.id.replace("__","");
                 }
             }
-            this.submit();
         }
-        this.$refs.scroller.finishInfinite(false);
+        //this.$refs.scroller.finishInfinite(false);
         this.$store.commit('setIsSearch', false);
     },
     deactivated(){
@@ -313,14 +312,14 @@ export default {
             // }, true);
             //获取列表
             if (clear) {
-                this.$refs.scroller.finishPullToRefresh();
+                //this.$refs.scroller.finishPullToRefresh();
+                this.$refs.scroller.finishInfinite(true);
                 this.goods = [];
                 this.condition.page = 0;
             }
 
             var that = this;
             // that.$refs.scroller.finishInfinite(false);
-            // that.$refs.scroller.triggerPullToRefresh();
             that.Http.get(that.Api.getGoodsList(), that.condition, function (result) {
                 if (result.data.goods && result.data.goods.length > 0) {
                     for (var i = 0; i < result.data.goods.length; i++) {
@@ -339,9 +338,9 @@ export default {
                 }
                 if(result.data.goods && result.data.goods.length < 20){
                         that.$refs.scroller.finishInfinite(true);
-                    }else{
+                } else if(result.data.goods && result.data.goods.length == 20){
                         that.$refs.scroller.finishInfinite(false);
-                    }
+                }
                 // that.$refs.scroller.finishInfinite(false);
                 //
             })
