@@ -38,9 +38,9 @@
             </ul>
             <div class="tobuy-inf">商品信息</div>
             <ul class="order-contact">
-                <li class="clearfix">
+                <li class="clearfix" v-if="order.goods.category">
                     <span>所属平台</span>
-                    <em>{{order.goods.name}}</em>
+                    <em>{{order.goods.category.name}}</em>
                 </li>
                 <li class="clearfix" v-if="order.type == 2">
                     <span>购买人气</span>
@@ -58,12 +58,12 @@
                     <span>结束时间</span>
                     <em>{{order.endTime}}</em>
                 </li>
-                <li class="clearfix" v-if="order.goods">
-                    <span>授权情况</span>
-                    <em v-if="order.goods.bind == 4">未授权</em>
-                    <em v-if="order.goods.bind == 1">QQ</em>
-                    <em v-if="order.goods.bind == 2">微信</em>
-                    <em v-if="order.goods.bind == 3">微博</em>
+                <li class="clearfix" v-if="order.type == 0 && order.goods.authorization">
+                    <span>第三方授权</span>
+                    <em v-if="order.goods.authorization == 4">未授权</em>
+                    <em v-if="order.goods.authorization == 1">QQ</em>
+                    <em v-if="order.goods.authorization == 2">微信</em>
+                    <em v-if="order.goods.authorization == 3">微博</em>
                 </li>
                 <li class="clearfix" v-if="order.goods.grade">
                     <span>账号等级</span>
@@ -87,10 +87,15 @@
                 <li class="clearfix" v-if="order.goods.goodsPopularInfo">
                     <span>人气</span>
                 </li>
+                <li class="clearfix" v-if="order.type == 0 && order.goods.identification">
+                    <span>身份认证</span>
+                    <em v-if="order.goods.identification == 1">未认证</em>
+                    <em v-if="order.goods.identification == 2">已认证</em>
+                </li>
                 <li class="clearfix">
                     <span>描述</span>
-                    <em v-if="order.goods.remark">{{order.goods.remark}}</em>
-                    <em v-if="!order.goods.remark">暂无描述</em>
+                    <em v-if="order.goods.detail">{{order.goods.detail}}</em>
+                    <em v-if="!order.goods.detail">暂无描述</em>
                 </li>
             </ul>
             <div class="order-button clearfix" v-if="order.status == 1">
@@ -146,7 +151,7 @@ export default {
                 if (result.code === 0) {
                     self.payInfo = JSON.parse(result.data.payJson);
                     self.callWxPay(self.payInfo);
-                } 
+                }
             })
         },
         getOrderDetail() {
@@ -165,7 +170,7 @@ export default {
             this.Http.get(this.Api.cancelOrder(), {
                 orderId: orderId
             }, function (result) {
-                
+
             })
         }
     },
