@@ -44,13 +44,17 @@
                     <span class="papular-add" @click="addNum">+</span>
                 </div>
                 <div>
+                <label for="">时间：</label>
+                <input type="text" class="papular-over" readOnly="true" placeholder="根据发货时间开始计时" />
+                </div>
+                <!-- <div>
                     <label for="">开始时间：</label>
                     <input class="papular-start" v-model="startTime" readonly="readonly" name="appDateTime" id="appDateTime" type="text" placeholder="请选择开始时间" style="-webkit-user-select: none;" unselectable="on">
                 </div>
                 <div>
                     <label for="">结束时间：</label>
                     <input type="text" placeholder="结束时间" v-model="endTime" name="" readOnly="true" class="papular-over" unselectable="on" style="-webkit-user-select: none;" />
-                </div>
+                </div> -->
                 <div>
                     <label for="">刷人气平台ID：</label>
                     <input type="text" v-model="targetId" placeholder="请输入平台ID" name="" value="" class="papular-id" />
@@ -116,7 +120,7 @@ export default {
 
     },
     activated(){
-        this.bindDate();
+        //this.bindDate();
         this.popularityGoods();
     },
     methods: {
@@ -215,7 +219,7 @@ export default {
                 quantity: this.quantity,
                 comment: this.comment,
                 count: this.count,
-                startTime: this.startTime,
+                //startTime: this.startTime,
                 phone:this.phone
             }
 

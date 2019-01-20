@@ -50,14 +50,14 @@
                     <span>主播ID</span>
                     <em>{{order.targetId}}</em>
                 </li>
-                <li class="clearfix" v-if="order.type == 2">
+                <!-- <li class="clearfix" v-if="order.type == 2">
                     <span>开始时间</span>
                     <em>{{order.startTime}}</em>
                 </li>
                 <li class="clearfix" v-if="order.type == 2">
                     <span>结束时间</span>
                     <em>{{order.endTime}}</em>
-                </li>
+                </li> -->
                 <li class="clearfix" v-if="order.type == 0 && order.goods.authorization">
                     <span>第三方授权</span>
                     <em v-if="order.goods.authorization == 4">未授权</em>

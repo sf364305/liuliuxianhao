@@ -28,14 +28,14 @@
                         <span>数量：</span>
                         <em>{{$store.state.Order.count}}</em>
                     </li>
-                    <li>
+                    <!-- <li>
                         <span>开始时间：</span>
                         <em>{{$store.state.Order.startTime}}</em>
                     </li>
                     <li>
                         <span>结束时间：</span>
                         <em>{{$store.state.Order.endTime}}</em>
-                    </li>
+                    </li>-->
                     <li>
                         <span>平台：</span>
                         <em>{{$store.state.Order.goods.name}}</em>

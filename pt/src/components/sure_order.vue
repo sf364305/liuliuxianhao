@@ -42,7 +42,7 @@
                             <option v-if="goods.goodsLeaseInfo.monthCost" value="3">月租</option>
                         </select>
                         ∨
-                        <input type="number" v-model="goodsNum" class="num" placeholder="请输入数量" @input="cal()" maxlength="5" />
+                        <input type="number" v-model="goodsNum" class="num" placeholder="请输入数量" @input="cal()" maxlength="5" />天
                     </em>
                 </li>
                 <li class="clearfix">
@@ -56,10 +56,11 @@
                 </li>
                 <li class="clearfix">
                     <span>时间：</span>
-                    <em style="height: 6.5rem;">
-                        <input readonly="readonly" v-model="startTime" id="appDateTime" type="text" placeholder="请选择开始时间" style="height: 1.5rem; padding-left:3%; -webkit-user-select: none;">
-                        <br/>
-                        <input readonly="readonly" v-model="endTime" type="text" placeholder="请选择开始时间" style="height: 1.5rem; padding-left:3%;-webkit-user-select: none;">
+                    <em style="height: 3.5rem;">
+                        根据上号时间开始计时
+                        <!--<input readonly="readonly" v-model="startTime" id="appDateTime" type="text" placeholder="请选择开始时间" style="height: 1.5rem; padding-left:3%; -webkit-user-select: none;">-->
+                        <!--<br/>-->
+                        <!--<input readonly="readonly" v-model="endTime" type="text" placeholder="请选择开始时间" style="height: 1.5rem; padding-left:3%;-webkit-user-select: none;">-->
                     </em>
                 </li>
 
@@ -162,9 +163,9 @@ export default {
     },
     mounted() {
         var self = this;
-        setTimeout(function () {
-            self.initDatePicker();
-        }, 1000);
+        //setTimeout(function () {
+        //    self.initDatePicker();
+        //}, 1000);
 
     },
     methods: {
@@ -183,10 +184,10 @@ export default {
                 per = this.lessCost[3];
             }
 
-            if (this.startTime) {
-                this.dateChange();
-                this.checkTime();
-            }
+            //if (this.startTime) {
+            //    this.dateChange();
+            //    this.checkTime();
+            //}
         },
         submitOrder() {
             var self = this;
@@ -196,10 +197,11 @@ export default {
             } else if (!self.qq) {
                 this.$iosAlert("请输入微信号");
                 return false;
-            } else if(self.goods.type == 1 && !self.startTime){
-                this.$iosAlert("请选择开始时间");
-                return false;
             }
+            //else if(self.goods.type == 1 && !self.startTime){
+            //    this.$iosAlert("请选择开始时间");
+            //    return false;
+            //}
             var amount = 0;
             if (this.goods.type == 0) {
                 amount = this.goods.price;
@@ -216,7 +218,7 @@ export default {
                 deposit: self.goods.goodsLeaseInfo == null ? "" : self.goods.goodsLeaseInfo.deposit,
                 leaseType: self.leaseType,
                 goodsNum: self.goodsNum,
-                startTime:self.startTime
+                //startTime:self.startTime
             }, function (result) {
                 console.log(result)
                 $(".alertLoading").css("display","none");

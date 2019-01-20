@@ -13,18 +13,18 @@
                 <i v-if="order.leaseType==3" class="game-sever">月租</i>
             </span>
             <span class="price">￥{{order.amount}}</span>
-            <div class="lease-credit clearfix">
+            <!-- <div class="lease-credit clearfix">
                 <em>开始时间：</em>
                 <span>{{order.startTime}}</span>
             </div>
             <div class="lease-inf clearfix">
                 <em>结束时间：</em>
                 <span>{{order.endTime}}</span>
-            </div>
+            </div>-->
         </a>
-    
+
         <div class="sell-status"></div>
-    
+
         <div class="wait-you" v-if="order.status == 1 && order.arbitrationStatus !=1">
             <span class="wait-cancel" @click="deleteRe(order.id)">删除订单</span>
             <span class="wait-sure" @click="pay(order.id)">支付订单</span>
@@ -37,7 +37,7 @@
             <span class="wait-cancel" @click="arbitration(order.id)">申请仲裁</span>
             <span class="wait-sure" @click="sure(order.id)">确认收货</span>
         </div>
-    
+
         <div class="wait-you" v-if="order.arbitrationStatus == 1">
             <span class="wait-sure" @click="server(order.id)" style="width:100%;">联系客服</span>
         </div>

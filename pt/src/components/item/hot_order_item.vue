@@ -14,13 +14,13 @@
                 <em>人气：</em>
                 <span>{{order.quantity}}</span>
             </div>
-            <div class="lease-inf clearfix">
+            <!-- <div class="lease-inf clearfix">
                 <em>服务时间：</em>
                 <span>{{order.startTime}}至{{order.endTime}}</span>
-            </div>
+            </div> -->
         </a>
         <div class="sell-hot"></div>
-    
+
         <div class="wait-you" v-if="order.status == 1">
             <span class="wait-cancel" @click="deleteRe(order.id)">删除订单</span>
             <span class="wait-sure" @click="pay(order.id)">支付订单</span>
@@ -33,7 +33,7 @@
             <span class="wait-cancel" @click="arbitration(order.id)">申请仲裁</span>
             <span class="wait-sure" @click="sure(order.id)">确认收货</span>
         </div>
-    
+
         <div class="wait-you" v-if="order.status == 4">
             <!--<span class="wait-cancel">申请仲裁</span>-->
             <!--<span class="wait-sure">确认收货</span>-->
@@ -63,7 +63,7 @@ export default {
                 if (result.code === 0) {
                     self.payInfo = JSON.parse(result.data.payJson);
                     self.callWxPay(self.payInfo);
-                } 
+                }
             })
         },
         deleteRe(orderId) {
