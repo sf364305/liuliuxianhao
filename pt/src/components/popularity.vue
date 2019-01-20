@@ -44,8 +44,8 @@
                     <span class="papular-add" @click="addNum">+</span>
                 </div>
                 <div>
-                <label for="">时间：</label>
-                <input type="text" class="papular-over" readOnly="true" placeholder="根据发货时间开始计时" />
+                <label for="">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间：</label>
+                <span style="height:3rem;line-height:3rem;">根据发货时间开始计时</span>
                 </div>
                 <!-- <div>
                     <label for="">开始时间：</label>
