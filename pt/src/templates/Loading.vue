@@ -16,7 +16,7 @@ export default {
   methods: {
     getToken() {
       var d = new Date;
-      d.setTime(d.getTime() + 1000 * 6);
+      d.setTime(d.getTime() + 1000 * 120);
       //token
       var t = this.GetQueryString('token');
       if (t) {
@@ -61,7 +61,11 @@ export default {
         that.$store.commit('setNotices', result.data.notices);
         that.$store.commit('setCategroy', result.data.categories);
         that.$store.commit('setSetting', result.data.setting);
-        that.$router.push('/home');
+        if (window.location.search.indexOf('tradeStatus=success') >= 0){
+            that.$router.push('/buy_success');
+        } else {
+            that.$router.push('/home');
+        }
       })
     },
     getUserInfo() {

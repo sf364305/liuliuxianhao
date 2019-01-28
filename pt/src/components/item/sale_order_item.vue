@@ -28,7 +28,7 @@
             <span class="wait-cancel" @click="arbitration(order.id)">申请仲裁</span>
             <span class="wait-sure" @click="sure(order.id)">确认收货</span>
         </div>
-    
+
         <div class="wait-you" v-if="order.status == 4">
             <!--<span class="wait-cancel">申请仲裁</span>-->
             <!--<span class="wait-sure">确认收货</span>-->
@@ -56,9 +56,13 @@ export default {
                 orderId: orderId
             }, function (result) {
                 if (result.code === 0) {
-                    self.payInfo = JSON.parse(result.data.payJson);
-                    self.callWxPay(self.payInfo);
-                } 
+                    if(result.data.payMethod && result.data.payMethod == 'xf'){
+                        window.location.href = result.data.xfPayUrl;
+                    } else {
+                        self.payInfo = JSON.parse(result.data.payJson);
+                        self.callWxPay(self.payInfo);
+                    }
+                }
             })
         },
         deleteRe(orderId) {

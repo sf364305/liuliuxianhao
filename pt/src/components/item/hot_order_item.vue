@@ -61,8 +61,12 @@ export default {
                 orderId: orderId
             }, function (result) {
                 if (result.code === 0) {
-                    self.payInfo = JSON.parse(result.data.payJson);
-                    self.callWxPay(self.payInfo);
+                    if(result.data.payMethod && result.data.payMethod == 'xf'){
+                        window.location.href = result.data.xfPayUrl;
+                    } else {
+                        self.payInfo = JSON.parse(result.data.payJson);
+                        self.callWxPay(self.payInfo);
+                    }
                 }
             })
         },

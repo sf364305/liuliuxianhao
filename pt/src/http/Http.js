@@ -2,8 +2,8 @@ import Vue from 'vue'
 import axios from 'axios'
 
 //开发环境
-// Vue.prototype.host = 'http://localhost:8080/';
-// Vue.prototype.serverHost = 'http://localhost:8081/';
+//Vue.prototype.host = 'http://localhost:8081/';
+//Vue.prototype.serverHost = 'http://localhost:8082/';
 
 //测试环境
 //Vue.prototype.host = 'http://test.api.66mkt.com/';
