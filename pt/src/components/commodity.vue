@@ -182,26 +182,6 @@ export default {
         if (this.$store.state.IsSearch == false) {
             this.goods = [];
             this.reset();
-            var conditionStr = window.sessionStorage.getItem("condition");
-            if (conditionStr && conditionStr.length > 0) {
-                this.condition = JSON.parse(conditionStr);
-                this.condition.page = -1;
-                if (window.sessionStorage.getItem("isCom") == "true") {
-                    this.isCom = true;
-                    this.isCho = false;
-                    this.isSot = false;
-                }
-                if (window.sessionStorage.getItem("isCho")  == "true") {
-                    this.isCom = false;
-                    this.isCho = true;
-                    this.isSot = false;
-                }
-                if (window.sessionStorage.getItem("isSot") == "true") {
-                    this.isCom = false;
-                    this.isCho = false;
-                    this.isSot = true;
-                }
-            }
             if (this.$route.params.id == "_0" || this.$route.params.id == "_1") {
                 this.condition.type = this.$route.params.id.replace("_","");
                 //this.condition.categoryId = "";
@@ -340,10 +320,6 @@ export default {
 
             var that = this;
             // that.$refs.scroller.finishInfinite(false);
-            window.sessionStorage.setItem("condition",JSON.stringify(that.condition));
-            window.sessionStorage.setItem("isCom",this.isCom);
-            window.sessionStorage.setItem("isCho",this.isCho);
-            window.sessionStorage.setItem("isSot",this.isSot);
             that.Http.get(that.Api.getGoodsList(), that.condition, function (result) {
                 if (result.data.goods && result.data.goods.length > 0) {
                     for (var i = 0; i < result.data.goods.length; i++) {
