@@ -290,7 +290,8 @@ Vue.prototype.Http = {
         axios.post(api, params, {
             emulateJSON: true,
             headers: {
-                'Content-Type': 'application/json;charse=UTF-8'
+                'Content-Type': 'application/json;charse=UTF-8',
+                'token': this.token
             }
         }).then((response) => {
             // 响应成功回调,错误统一处理
