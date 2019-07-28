@@ -59,6 +59,7 @@ import refuned_list from './components/refuned_list'
 import error_404 from './components/error_404'
 import error_500 from './components/error_500'
 import order_server from './components/order.server'
+import service_protocol from './components/service_protocol'
 // 使用router
 Vue.use(Router)
 Vue.use(Vuex)
@@ -328,6 +329,12 @@ var routes = [{
     meta: {
       keepAlive: true
     }
+}, {
+  path: '/service_protocol',
+  component: service_protocol,
+  meta: {
+    keepAlive: true
+  }
 }];
 
 // 实例化路由
