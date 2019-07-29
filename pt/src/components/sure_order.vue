@@ -115,7 +115,7 @@
                 <div class="tobuy-prompt">*请确认您的信息准确无误，确保您的交易安全！</div>
                 <div class="protocol">
                     <span class="pro-check"></span>
-                    <a href="javascript:void(0);" @click="showServiceProtocol">《六六交易平台服务协议》</a>
+                    <a style="color:#576b95;" @click="showServiceProtocol">《66闲号平台服务协议》</a>
                 </div>
                 <div class="wallet-submit">
                     <span @click="submitOrder" class="detail-pay">确认购买</span>

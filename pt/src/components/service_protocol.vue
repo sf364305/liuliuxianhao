@@ -3,8 +3,7 @@
     <app-load></app-load>
     <app-header :header="title"></app-header>
     <scroller ref="scroller" style="margin-bottom:4rem;">
-      <div class="rich_media_content " style="font-size:1.2rem;word-wrap: break-word;text-align: justify;">
-        <p><br></p>
+      <div class="rich_media_content " style="font-size:1.25rem;word-wrap: break-word;text-align: justify;padding:0.8rem;line-height:2rem;">
         <p><br></p>
         <p><br></p>
         <p><br></p>
