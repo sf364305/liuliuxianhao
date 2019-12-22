@@ -14,11 +14,13 @@
                 <label for="">手机号码：</label>
                 <input type="text" placeholder="请输入您的手机号码" v-model="phone" value="" />
             </div>
-            <!--<div class="certification-tele">
-                    <input type="text" placeholder="请输入验证码" v-model="code" value="" class="certification-num" />
-                    <span class="get-num" @click="getNum" data-num="1">获取验证码</span>
-                    <em class="time-num" v-if="a < 60">{{a}}s</em>
-                </div>-->
+            <div>
+                <label style="width:40%;">
+                  <img :src="captchaSrc" @click="initCaptcha" style="width:100%;height:100%;"/>
+                </label>
+                <input type="text" placeholder="请输入验证码" v-model="code" value="" style="width:45%;" />
+
+            </div>
             <div class="certification-sub">
                 <input type="button" placeholder="" name="" @click="submitCer" value="提交" class="certification-submit" />
             </div>
@@ -36,10 +38,21 @@ export default {
             realName: "",
             phone: "",
             cardId: "",
-            code: ""
+            code: "",
+            captchaSrc: ""
         }
     },
+    mounted () {
+        this.initCaptcha();
+    },
     methods: {
+        initCaptcha(){
+            var _this = this;
+            this.Http.getRequest(this.Api.getCaptcha(), function (result) {
+                var imageBase64 = result.data.imageBase64;
+                _this.captchaSrc = imageBase64;
+            })
+        },
         getNum: function (e) {
             var self = this;
             if (self.phone.length != 11) {
@@ -78,12 +91,16 @@ export default {
             } else if (!/^[\u4e00-\u9fa5]+(·[\u4e00-\u9fa5]+)*$/.test(that.realName)) {
                 that.$iosAlert("请填写真实姓名");
                 return false;
+            } else if (that.code === '') {
+                that.$iosAlert("请填写验证码");
+                return false;
             }
             this.Http.get(this.Api.verified(), {
                 userId: that.userId,
                 realName: that.realName,
                 cardId: that.cardId,
-                phone: that.phone
+                phone: that.phone,
+                code: that.code
             }, function (result) {
                 if (result.code == 0) {
                     that.$iosAlert("提交信息成功，请耐心等待审核！");
@@ -101,6 +118,8 @@ export default {
                         that.$store.commit("clearFrom");
                         that.$router.push("/person");
                     }
+                } else {
+                    that.initCaptcha();
                 }
             })
         }

@@ -154,6 +154,9 @@ Vue.prototype.Api = {
     },
     getOnlineServer() {
         return Vue.prototype.serverHost + 'open/checkServer';
+    },
+    getCaptcha() {
+      return base + '/captcha/base64';
     }
 };
 
@@ -320,6 +323,25 @@ Vue.prototype.Http = {
             .then(response => {
                 callback(response.data.key);
             })
+    },
+    getRequest(api, callback,failcallback){
+      if (!api) {
+        console.error('url is empty');
+        return;
+      }
+
+      axios({
+        url: api,
+        method: 'get',
+        headers: {
+          'token': this.token
+        }
+      }).then((response) => {
+        callback(response.data);
+      }, (response) => {
+        console.error('请求错误');
+        failcallback(response)
+      });
     }
 };
 
