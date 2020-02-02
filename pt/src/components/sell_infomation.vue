@@ -15,6 +15,36 @@
                             <i>*</i>商品标题：</span>
                         <input id="name" name="name" type="text" value="" placeholder="请输入商品的标题" v-model="goods.name" maxlength="50"/>
                     </li>
+                    <li class="clearfix" v-if="isShortVideo">
+                      <span><i>*</i>粉丝数量：</span>
+                      <input id="fansCount" type="number" name="fansCount" value="" placeholder="请输入粉丝数量" v-model="goods.fansCount" maxlength="9"/>
+                    </li>
+                    <li class="clearfix" v-if="isDouyin">
+                      <span><i>*</i>点赞数量：</span>
+                      <input id="likeCount" type="number" name="likeCount" value="" placeholder="请输入点赞数量" v-model="goods.likeCount" maxlength="9"/>
+                    </li>
+                    <li class="sell-sex clearfix" v-if="isShortVideo">
+                          <span>
+                              <i>*</i>粉丝偏向：
+                          </span>
+                      <div id="fansType" name="fansType" class="re_sele">
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" checked="checked" name="fansType" value="0" v-model="goods.fansType"  style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.fansType == '0'}"></i>
+                          <em class="choice-text">均衡</em>
+                        </label>
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" name="fansType" value="1" v-model="goods.fansType" style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.fansType == '1'}"></i>
+                          <em class="choice-text">男粉多</em>
+                        </label>
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" name="fansType" value="2" v-model="goods.fansType" style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.fansType == '2'}"></i>
+                          <em class="choice-text">女粉多</em>
+                        </label>
+                      </div>
+                    </li>
                     <li class="clearfix">
                         <span>&nbsp;账号ID：</span>
                         <input id="account" name="account" type="text" value="" placeholder="没有填无" v-model="goods.accountId" maxlength="30"/>
@@ -23,6 +53,10 @@
                         <span>
                             <i>*</i>角色等级：</span>
                         <input id="grade" type="number" name="grade" value="" placeholder="请输入角色等级" v-model="goods.grade" maxlength="9"/>
+                    </li>
+                    <li class="clearfix" v-if="isMomo">
+                        <span><i>*</i>财富等级：</span>
+                        <input id="wealthGrade" type="number" name="wealthGrade" value="" placeholder="请输入财富等级" v-model="goods.wealthGrade" maxlength="9"/>
                     </li>
                     <li class="sell-sex clearfix">
                         <span>
@@ -34,11 +68,16 @@
                                 <em class="choice-text">男</em>
                             </label>
                             <label>
-                                <input type="radio" name="sex" value="1" v-
+                                <input type="radio" name="sex" value="1" v-model="goods.sex" />
                                 <i class="choice-sho" v-bind:class="{'choiced-show':goods.sex == 1}"></i>
                                 <em class="choice-text">女</em>
                             </label>
                         </div>
+                    </li>
+                    <li class="clearfix" v-if="isLive">
+                          <span>
+                              <i>*</i>下次改名价格：</span>
+                      <input id="renameAmount" type="number" name="renameAmount" value="" placeholder="请输入下次改名价格" v-model="goods.renameAmount" maxlength="9"/>
                     </li>
                     <li class="sell-sex clearfix">
                         <span>
@@ -116,7 +155,7 @@
                                 <input type="radio" name="authorization" value="1" v-model="goods.authorization" />
                                 <i class="choice-sho" v-bind:class="{'choiced-show':goods.authorization == 1}"></i>
                                 <em class="choice-text">QQ</em>
-                            </label style="width: 24%; margin-right: 0;">
+                            </label>
                             <label style="width: 24%; margin-right: 0;">
                                 <input type="radio" name="authorization" value="2" v-model="goods.authorization" />
                                 <i class="choice-sho" v-bind:class="{'choiced-show':goods.authorization == 2}"></i>
@@ -145,12 +184,171 @@
                             </label>
                         </div>
                     </li>
+                    <li class="sell-sex clearfix" v-if="isShortVideo">
+                            <span>
+                                <i>*</i>加V认证：
+                            </span>
+                      <div id="authenticationType" name="authenticationType" class="re_sele">
+                        <label style="float: left;width: 29%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" checked="checked" name="authenticationType" value="0" v-model="goods.authenticationType"  style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.authenticationType == '0'}"></i>
+                          <em class="choice-text">未认证</em>
+                        </label>
+                        <label style="float: left;width: 29%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" name="authenticationType" value="1" v-model="goods.authenticationType" style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.authenticationType == '1'}"></i>
+                          <em class="choice-text">个人认证</em>
+                        </label>
+                        <label style="float: left;width: 29%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" name="authenticationType" value="2" v-model="goods.authenticationType" style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.authenticationType == '2'}"></i>
+                          <em class="choice-text">企业认证</em>
+                        </label>
+                        <label style="float: left;width: 29%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" name="authenticationType" value="3" v-model="goods.authenticationType" style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.authenticationType == '3'}"></i>
+                          <em class="choice-text">机构认证</em>
+                        </label>
+                      </div>
+                    </li>
+                    <li class="sell-sex clearfix" v-if="isShortVideo">
+                          <span>
+                              <i>*</i>有无违规：
+                          </span>
+                      <div id="violation" name="violation" class="re_sele">
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" checked="checked" name="violation" value="0" v-model="goods.violation"  style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.violation == '0'}"></i>
+                          <em class="choice-text">无违规</em>
+                        </label>
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" name="violation" value="1" v-model="goods.violation" style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.violation == '1'}"></i>
+                          <em class="choice-text">有违规</em>
+                        </label>
+                      </div>
+                    </li>
                     <li class="sell-sex clearfix">
                         <span>
-                            <i>*</i>支付方式：</span>
-                        <div id="payway" name="payway" class="re_sele">
+                            <i>*</i>有无直播间：
+                        </span>
+                        <div id="openLive" name="openLive" class="re_sele">
+                          <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                            <input type="radio" checked="checked" name="openLive" value="0" v-model="goods.openLive"  style="display: none;"/>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.openLive == '0'}"></i>
+                            <em class="choice-text">无直播间</em>
+                          </label>
+                          <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                            <input type="radio" name="openLive" value="1" v-model="goods.openLive" style="display: none;"/>
+                            <i class="choice-sho" v-bind:class="{'choiced-show':goods.openLive == '1'}"></i>
+                            <em class="choice-text">有直播间</em>
+                          </label>
+                        </div>
+                    </li>
+                    <li class="sell-sex clearfix" v-if="isShortVideo">
+                      <span><i>*</i>长视频：</span>
+                      <div id="longVideo" name="longVideo" class="re_sele">
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" checked="checked" name="longVideo" value="0" v-model="goods.longVideo"  style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.longVideo == '0'}"></i>
+                          <em class="choice-text">未开通</em>
+                        </label>
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" name="longVideo" value="1" v-model="goods.longVideo" style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.longVideo == '1'}"></i>
+                          <em class="choice-text">已开通</em>
+                        </label>
+                      </div>
+                    </li>
+                    <li class="sell-sex clearfix" v-if="isKuaishou">
+                      <span><i>*</i>快接单功能：</span>
+                      <div id="quickOrder" name="quickOrder" class="re_sele">
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" checked="checked" name="quickOrder" value="0" v-model="goods.quickOrder"  style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.quickOrder == '0'}"></i>
+                          <em class="choice-text">未开通</em>
+                        </label>
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" name="quickOrder" value="1" v-model="goods.quickOrder" style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.quickOrder == '1'}"></i>
+                          <em class="choice-text">已开通</em>
+                        </label>
+                      </div>
+                    </li>
+                    <li class="sell-sex clearfix" v-if="isKuaishou">
+                      <span><i>*</i>快手小店：</span>
+                      <div id="quickShop" name="quickShop" class="re_sele">
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" checked="checked" name="quickShop" value="0" v-model="goods.quickShop"  style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.quickShop == '0'}"></i>
+                          <em class="choice-text">未开通</em>
+                        </label>
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" name="quickShop" value="1" v-model="goods.quickShop" style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.quickShop == '1'}"></i>
+                          <em class="choice-text">已开通</em>
+                        </label>
+                      </div>
+                    </li>
+                    <li class="sell-sex clearfix" v-if="isKuaishou">
+                      <span><i>*</i>付费教学视频：</span>
+                      <div id="teachingVideo" name="teachingVideo" class="re_sele">
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" checked="checked" name="teachingVideo" value="0" v-model="goods.teachingVideo"  style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.teachingVideo == '0'}"></i>
+                          <em class="choice-text">未开通</em>
+                        </label>
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" name="teachingVideo" value="1" v-model="goods.teachingVideo" style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.teachingVideo == '1'}"></i>
+                          <em class="choice-text">已开通</em>
+                        </label>
+                      </div>
+                    </li>
+                    <li class="sell-sex clearfix" v-if="isDouyin">
+                      <span><i>*</i>星图功能：</span>
+                      <div id="starImage" name="starImage" class="re_sele">
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" checked="checked" name="starImage" value="0" v-model="goods.starImage"  style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.starImage == '0'}"></i>
+                          <em class="choice-text">未开通</em>
+                        </label>
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" name="starImage" value="1" v-model="goods.starImage" style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.starImage == '1'}"></i>
+                          <em class="choice-text">已开通</em>
+                        </label>
+                      </div>
+                    </li>
+                    <li class="sell-sex clearfix" v-if="isDouyin">
+                      <span><i>*</i>抖音橱窗：</span>
+                      <div id="showcase" name="showcase" class="re_sele">
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" checked="checked" name="showcase" value="0" v-model="goods.showcase"  style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.showcase == '0'}"></i>
+                          <em class="choice-text">未开通</em>
+                        </label>
+                        <label style="float: left;width: 30%;height: 3rem;margin-right: 2%;">
+                          <input type="radio" name="showcase" value="1" v-model="goods.showcase" style="display: none;"/>
+                          <i class="choice-sho" v-bind:class="{'choiced-show':goods.showcase == '1'}"></i>
+                          <em class="choice-text">已开通</em>
+                        </label>
+                      </div>
+                    </li>
+                    <li class="clearfix" v-if="isLive">
+                      <span>&nbsp;贵族：</span>
+                      <input id="nobleGrade" name="nobleGrade" type="text" value="" placeholder="贵族" v-model="goods.nobleGrade" maxlength="20"/>
+                    </li>
+                    <li class="clearfix" v-if="isLive">
+                      <span>贵族到期时间：</span>
+                      <input id="nobleExpireDate" name="nobleGrade" type="text" value="" placeholder="例：2020.5.15" v-model="goods.nobleExpireDate" maxlength="10"/>
+                    </li>
+
+                    <li class="sell-sex clearfix">
+                        <span><i>*</i>支付方式：</span>
+                        <div id="payMethod" name="payMethod" class="re_sele">
                             <label>
-                                <input type="radio" checked="checked" name="payway" value="1" />
+                                <input type="radio" checked="checked" name="payMethod" value="0" v-model="goods.payMethod" style="display: none;"/>
                                 <i class="choice-sho choiced-show"></i>
                                 <em class="choice-text" style="width:75%;">现金结算</em>
                             </label>
@@ -234,8 +432,42 @@ export default {
                 account: '',
                 password: '',
                 phone: '',
-                qq: ''
+                qq: '',
+                wealthGrade: '',
+                renameAmount: '',
+                openLive: '0',
+                payMethod: '0',
+                fansCount: '',
+                likeCount:'',
+                nobleGrade: '',
+                nobleExpireDate: '',
+                fansType:'0',
+                authenticationType: '0',
+                violation: '0',
+                longVideo: '0',
+                quickOrder: '0',
+                starImage: '0',
+                quickShop: '0',
+                showcase: '0',
+                teachingVideo: '0',
             }
+        }
+    },
+    computed: {
+        isMomo: function(){
+            return this.goods.categoryId == this.$store.state.Setting.momoId
+        },
+        isDouyin: function(){
+            return this.goods.categoryId == this.$store.state.Setting.douyinId
+        },
+        isKuaishou: function(){
+            return this.goods.categoryId == this.$store.state.Setting.kuaishouId
+        },
+        isShortVideo: function(){
+            return this.isDouyin || this.isKuaishou
+        },
+        isLive: function(){
+            return !(this.isDouyin || this.isKuaishou)
         }
     },
     activated() {
@@ -269,8 +501,17 @@ export default {
                 errorMsg = "请输入联系手机";
             } else if (!this.goods.qq) {
                 errorMsg = "请输入微信号";
-            }
-            else if (this.$refs.images.images.length == 0) {
+            } else if (this.isShortVideo && !this.goods.fansCount) {
+                errorMsg = "请输入粉丝数量";
+            } else if (this.isDouyin && !this.goods.likeCount) {
+                errorMsg = "请输入点赞数量";
+            } else if (this.isMomo && !this.goods.wealthGrade) {
+                errorMsg = "请输入财富等级";
+            } else if (this.isLive && this.goods.nobleExpireDate && !/^\d{4}\.\d{1,2}\.\d{1,2}$/.test(this.goods.nobleExpireDate)){
+                errorMsg = "请输入正确的过期日期";
+            } else if (this.isLive && !this.goods.renameAmount){
+                errorMsg = "请输入下次改名价格";
+            } else if (this.$refs.images.images.length == 0) {
                 errorMsg = "请至少上传一张图片";
             }
 
