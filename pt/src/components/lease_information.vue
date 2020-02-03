@@ -289,7 +289,8 @@ export default {
                 account: '',
                 password: '',
                 phone: '',
-                qq: ''
+                qq: '',
+                payMethod: '0'
             }
         }
     },

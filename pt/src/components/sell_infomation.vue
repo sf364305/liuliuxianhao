@@ -76,7 +76,7 @@
                     </li>
                     <li class="clearfix" v-if="isLive">
                           <span>
-                              <i>*</i>下次改名价格：</span>
+                              <i>*</i>改名价格：</span>
                       <input id="renameAmount" type="number" name="renameAmount" value="" placeholder="请输入下次改名价格" v-model="goods.renameAmount" maxlength="9"/>
                     </li>
                     <li class="sell-sex clearfix">
@@ -341,7 +341,7 @@
                     </li>
                     <li class="clearfix" v-if="isLive">
                       <span>贵族到期时间：</span>
-                      <input id="nobleExpireDate" name="nobleGrade" type="text" value="" placeholder="例：2020.5.15" v-model="goods.nobleExpireDate" maxlength="10"/>
+                      <input id="nobleExpireDate" name="nobleExpireDate" type="text" value="" placeholder="例：2020.5.15" v-model="goods.nobleExpireDate" maxlength="10"/>
                     </li>
 
                     <li class="sell-sex clearfix">
@@ -491,6 +491,8 @@ export default {
                 errorMsg = "请输入商品标题";
             } else if (!this.goods.grade) {
                 errorMsg = "请输入等级";
+            } else if (this.goods.grade && !/^\d+$/.test(this.goods.grade)) {
+                errorMsg = "等级需为整数";
             } else if (!this.goods.price) {
                 errorMsg = "请输入商品价格";
             } else if (!this.goods.account) {
@@ -503,10 +505,16 @@ export default {
                 errorMsg = "请输入微信号";
             } else if (this.isShortVideo && !this.goods.fansCount) {
                 errorMsg = "请输入粉丝数量";
+            } else if (this.isShortVideo && this.goods.fansCount && !/^\d+$/.test(this.goods.fansCount)){
+                errorMsg = "粉丝数量需为整数";
             } else if (this.isDouyin && !this.goods.likeCount) {
                 errorMsg = "请输入点赞数量";
+            } else if (this.isDouyin && this.goods.likeCount && !/^\d+$/.test(this.goods.likeCount)) {
+                errorMsg = "点赞数量需为整数";
             } else if (this.isMomo && !this.goods.wealthGrade) {
                 errorMsg = "请输入财富等级";
+            } else if (this.isMomo && this.goods.wealthGrade && !/^\d+$/.test(this.goods.wealthGrade)) {
+                errorMsg = "财富等级需为整数";
             } else if (this.isLive && this.goods.nobleExpireDate && !/^\d{4}\.\d{1,2}\.\d{1,2}$/.test(this.goods.nobleExpireDate)){
                 errorMsg = "请输入正确的过期日期";
             } else if (this.isLive && !this.goods.renameAmount){
