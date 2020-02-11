@@ -160,6 +160,96 @@
                                     <span v-if="goods.goodsLeaseInfo.monthCost">{{goods.goodsLeaseInfo.monthCost}}元/月</span>
                                 </em>
                             </li>
+                            <li v-if="isSale && isMomo">
+                              <span>财富等级</span>
+                              <em>
+                                {{goods.wealthGrade}}
+                              </em>
+                            </li>
+                            <li v-if="isSale && isLive">
+                              <span>改名价格</span>
+                              <em v-if="goods.renameAmount">
+                                ￥{{goods.renameAmount}}
+                              </em>
+                            </li>
+                            <li v-if="isSale && isLive">
+                              <span>直播间</span>
+                              <em v-if="goods.openLive">已开通</em>
+                              <em v-else>未开通</em>
+                            </li>
+                            <li v-if="isSale && isLive">
+                              <span>贵族等级</span>
+                              <em v-if="goods.nobleGrade">
+                                {{goods.nobleGrade}}
+                              </em>
+                            </li>
+                            <li v-if="isSale && isLive">
+                              <span>贵族到期</span>
+                              <em>
+                                {{goods.nobleExpireDate}}
+                              </em>
+                            </li>
+                            <li v-if="isSale && isShortVideo">
+                              <span>粉丝数量</span>
+                              <em>
+                                {{goods.fansCount}}
+                              </em>
+                            </li>
+                            <li v-if="isSale && isDouyin">
+                              <span>点赞数量</span>
+                              <em>
+                                {{goods.likeCount}}
+                              </em>
+                            </li>
+                            <li v-if="isSale && isShortVideo">
+                              <span>粉丝偏向</span>
+                              <em v-if="goods.fansType==0">均衡</em>
+                              <em v-if="goods.fansType==1">男粉多</em>
+                              <em v-if="goods.fansType==2">女粉多</em>
+                            </li>
+                            <li v-if="isSale && isShortVideo">
+                              <span>加V认证</span>
+                              <em v-if="goods.authenticationType==0">未认证</em>
+                              <em v-if="goods.authenticationType==1">个人认证</em>
+                              <em v-if="goods.authenticationType==2">企业认证</em>
+                              <em v-if="goods.authenticationType==2">机构认证</em>
+                            </li>
+                            <li v-if="isSale && isShortVideo">
+                              <span>有无违规</span>
+                              <em v-if="goods.violation">有违规</em>
+                              <em v-else>无违规</em>
+                            </li>
+                            <li v-if="isSale && isShortVideo">
+                              <span>长视频</span>
+                              <em v-if="goods.longVideo">已开通</em>
+                              <em v-else>未开通</em>
+                            </li>
+                            <li v-if="isSale && isKuaishou">
+                              <span>快接单功能</span>
+                              <em v-if="goods.quickOrder">已开通</em>
+                              <em v-else>未开通</em>
+                            </li>
+                            <li v-if="isSale && isKuaishou">
+                              <span>快手小店</span>
+                              <em v-if="goods.quickShop">已开通</em>
+                              <em v-else>未开通</em>
+                            </li>
+                            <li v-if="isSale && isKuaishou">
+                              <span>付费教学视频</span>
+                              <em v-if="goods.teachingVideo">已开通</em>
+                              <em v-else>未开通</em>
+                            </li>
+                            <li v-if="isSale && isDouyin">
+                              <span>星图功能</span>
+                              <em v-if="goods.starImage">已开通</em>
+                              <em v-else>未开通</em>
+                            </li>
+                            <li v-if="isSale && isDouyin">
+                              <span>抖音橱窗</span>
+                              <em v-if="goods.showcase">已开通</em>
+                              <em v-else>未开通</em>
+                            </li>
+
                             <li>
                                 <span>描述</span>
                                 <em>{{goods.detail}}</em>
@@ -246,6 +336,26 @@ export default {
             collection: "收藏",//isCollection ? "已收藏" : "收藏",
             isDetail: true,
             recommendGoods: []
+        }
+    },
+    computed: {
+        isMomo: function(){
+            return this.goods.category.id == this.$store.state.Setting.momoId
+        },
+        isDouyin: function(){
+            return this.goods.category.id == this.$store.state.Setting.douyinId
+        },
+        isKuaishou: function(){
+            return this.goods.category.id == this.$store.state.Setting.kuaishouId
+        },
+        isShortVideo: function(){
+            return this.isDouyin || this.isKuaishou
+        },
+        isLive: function(){
+            return !(this.isDouyin || this.isKuaishou)
+        },
+        isSale: function () {
+            return this.goods.type == 0;
         }
     },
     activated() {
