@@ -102,6 +102,8 @@ const store = new Vuex.Store({
             state.Banner = banners;
         },
         setUser(state, user) {
+          qimoClientId.userId = user.openId;
+          qimoClientId.nickName = user.name;
             state.User = user;
         },
         pushFrom(state, from) {

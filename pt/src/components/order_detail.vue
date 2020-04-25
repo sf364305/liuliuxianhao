@@ -103,10 +103,10 @@
             </div>
             <div class="order-button clearfix" v-if="order.status == 2">
                 <span class="order-button-delete" @click="cancel(order.id)">删除</span>
-                <span class="order-button-sure" @click="server()">联系客服</span>
+                <span class="order-button-sure" @click="server(order.id)">联系客服</span>
             </div>
             <div class="order-button clearfix" v-if="order.status == 3">
-                <span class="order-button-sure" @click="server()">联系客服</span>
+                <span class="order-button-sure" @click="server(order.id)">联系客服</span>
             </div>
         </scroller>
     </div>
