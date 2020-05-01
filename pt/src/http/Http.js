@@ -179,7 +179,7 @@ Vue.prototype.Wx = {
 
             var config = self.config;
             var _link = config.link || "";
-            var _img = "http://qiniu.66mkt.com/66.jpg";
+            var _img = "http://qiniu.66xianhao.com/66.jpg";
             var _title = config.title;
             var _desc = config.desc;
             if (page) {
@@ -190,7 +190,7 @@ Vue.prototype.Wx = {
                 }
             }
             if (goods && goods.goodsImages.length > 0) {
-                _img = "http://qiniu.66mkt.com/" + goods.goodsImages[0].qiniuKey;
+                _img = "http://qiniu.66xianhao.com/" + goods.goodsImages[0].qiniuKey;
                 _title = goods.name;
                 _desc = goods.detail;
             }
