@@ -140,10 +140,6 @@ export default {
             this.Http.get(this.Api.getUserInfo(), null, function (result) {
                 self.userInfo = result.data;
                 self.$store.commit('setUser', self.userInfo.user);
-                var script=document.createElement('script');
-                script.type="text/javascript";
-                script.src='https://ykf-webchat.7moor.com/javascripts/7moorInit.js?accessId=7b1afd80-84a8-11ea-81ec-9357914b68ce&autoShow=false&language=ZHCN';
-                document.body.appendChild(script);
             })
         },
         contains(g) {

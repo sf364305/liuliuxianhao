@@ -2,8 +2,8 @@ import Vue from 'vue'
 import axios from 'axios'
 
 //开发环境
-// Vue.prototype.host = 'http://localhost:8081/';
-// Vue.prototype.serverHost = 'http://localhost:8082/';
+//Vue.prototype.host = 'http://localhost:8081/';
+//Vue.prototype.serverHost = 'http://localhost:8082/';
 
 //测试环境
 //Vue.prototype.host = 'http://test.api.66mkt.com/';
@@ -402,12 +402,7 @@ Vue.prototype.callWxPay = function(payInfo) {
 
 Vue.prototype.callServer = function(orderId) {
     console.log('/order_server/' + orderId);
-    if(orderId){
-      var customField = {"orderId":orderId,"link":'http://api.66xianhao.com/admin/order/detail?id='+orderId}
-      qimoClientId.customField = customField
-    }
-    qimoChatClick();
-  // this.$router.push('/order_server/' + orderId);
+    this.$router.push('/order_server/' + orderId);
     // Vue.prototype.$iosAlert("客服系统升级维护中，请暂时通过公众号联系平台，感谢您的支持！");
 }
 
