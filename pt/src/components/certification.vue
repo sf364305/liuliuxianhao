@@ -21,7 +21,18 @@ export default {
     },
     methods: {
         go() {
-            this.$router.push('/certification_else');
+            //this.$router.push('/certification_else');
+            var self = this;
+            this.Http.get(this.Api.getRealNameDetectUrl(), null, function (result) {
+                $(".alertLoading").css("display","none");
+                self.$store.commit('setLoading', false);
+                window.location.href = result.data.url;
+                if (result.code === 0) {
+                    window.location.href = result.data.url;
+                } else {
+                    console.log(result.msg);
+                }
+            })
         }
     },
     components: {

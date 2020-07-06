@@ -157,6 +157,9 @@ Vue.prototype.Api = {
     },
     getCaptcha() {
       return base + '/captcha/base64';
+    },
+    getRealNameDetectUrl(){
+      return base + '/user/real-name/detect';
     }
 };
 
