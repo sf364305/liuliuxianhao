@@ -82,7 +82,7 @@
                     <em>审核不通过</em>
                     <span></span>
                 </router-link>
-                <router-link to="/user/info/update" class="person-cer">个人信息
+                <router-link to="/user/info/update" class="person-cer">联系电话和微信
                      <em>去修改</em>
                 </router-link>
             </div>
