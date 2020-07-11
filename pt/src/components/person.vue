@@ -82,6 +82,9 @@
                     <em>审核不通过</em>
                     <span></span>
                 </router-link>
+                <router-link to="/user/info/update" class="person-cer">个人信息
+                     <em>去修改</em>
+                </router-link>
             </div>
         </scroller>
         <div class="nav-bottom">

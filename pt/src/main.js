@@ -60,6 +60,7 @@ import error_404 from './components/error_404'
 import error_500 from './components/error_500'
 import order_server from './components/order.server'
 import service_protocol from './components/service_protocol'
+import user_info_update from './components/user_info_update'
 // 使用router
 Vue.use(Router)
 Vue.use(Vuex)
@@ -131,6 +132,9 @@ const store = new Vuex.Store({
     getters: {
         getSetting: state => {
             return state.Setting;
+        },
+        getUser: state => {
+          return state.User;
         }
     }
 })
@@ -335,7 +339,14 @@ var routes = [{
   meta: {
     keepAlive: true
   }
-}];
+}, {
+  path: '/user/info/update',
+  component: user_info_update,
+  meta: {
+    keepAlive: false
+  }
+}
+];
 
 // 实例化路由
 var vueRouter = new Router({
