@@ -6,14 +6,18 @@
         <label for="">昵称：</label>
         <span class="user-info">{{$store.state.User.name}}</span>
       </div>
+<!--      <div>-->
+<!--        <label for="">真实姓名：</label>-->
+<!--        <span class="user-info">{{$store.state.User.realName}}</span>-->
+<!--      </div>-->
       <div>
-        <label for="">真实姓名：</label>
-        <span class="user-info">{{$store.state.User.realName}}</span>
+        <label for="">微信账号：</label>
+        <input type="text" placeholder="请输入您的微信账号" v-model="weiXinAccount" maxlength="100"/>
       </div>
-      <div>
-        <label for="">支付宝账号：</label>
-        <input type="text" placeholder="请输入您的支付宝账号" v-model="zhiFuBaoAccount" maxlength="100"/>
-      </div>
+<!--      <div>-->
+<!--        <label for="">支付宝账号：</label>-->
+<!--        <input type="text" placeholder="请输入您的支付宝账号" v-model="zhiFuBaoAccount" maxlength="100"/>-->
+<!--      </div>-->
       <div>
         <label for="">手机号码：</label>
         <input type="text" placeholder="请输入您的手机号码" v-model="phone" />
@@ -40,6 +44,7 @@
                 title: "个人信息",
                 realName: "",
                 phone: "",
+                weiXinAccount: "",
                 zhiFuBaoAccount: "",
                 code: "",
                 captchaSrc: ""
@@ -59,6 +64,7 @@
             },
             initUserInfo(){
                 this.phone = this.$store.state.User.phone;
+                this.weiXinAccount = this.$store.state.User.weiXinAccount;
                 this.zhiFuBaoAccount = this.$store.state.User.zhiFuBaoAccount;
             },
             getNum: function (e) {
@@ -98,6 +104,7 @@
                     return false;
                 }
                 this.Http.get(this.Api.updateUserInfo(), {
+                    weiXinAccount: that.weiXinAccount,
                     zhiFuBaoAccount: that.zhiFuBaoAccount,
                     phone: that.phone,
                     code: that.code
@@ -106,7 +113,8 @@
                         //更变本地用户状态
                         var user = that.$store.state.User;
                         user.phone = that.phone;
-                        user.zhiFuBaoAccount = that.phone;
+                        user.weiXinAccount = that.weiXinAccount;
+                        user.zhiFuBaoAccount = that.zhiFuBaoAccount;
                         that.$store.commit('setUser',user);
                         //跳转到我
                         that.$store.commit("clearFrom");

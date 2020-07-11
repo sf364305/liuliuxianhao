@@ -72,12 +72,12 @@
                     <div class="telephone clearfix">
                         <label for="">
                             <em>*</em>手机号码：</label>
-                        <input type="number" name="phone" value="" pattern="[0-9]{11}" placeholder="请输入手机号码" maxlength="11" v-model="phone" :value="$store.state.User.phone" />
+                        <input type="number" name="phone" value="" pattern="[0-9]{11}" placeholder="请输入手机号码" maxlength="11" v-model="phone"/>
                     </div>
                     <div class="qq-number clearfix">
                         <label for="">
                             <em>*</em>联系微信号：</label>
-                        <input type="text" name="userqq" value="" placeholder="请输入联系微信号" v-model="qq" :value="$store.state.User.qq" />
+                        <input type="text" name="userqq" value="" placeholder="请输入联系微信号" v-model="qq" />
                     </div>
                 </form>
             </section>
@@ -145,6 +145,8 @@ export default {
         }
     },
     activated() {
+        this.phone = this.$store.state.User.phone;
+        this.qq = this.$store.state.User.weiXinAccount;
         this.goods = this.$store.state.Goods;
         console.log("订单商品：", this.goods);
         if (this.goods.type == 1) {
@@ -153,12 +155,14 @@ export default {
             this.lessCost[2] = this.goods.goodsLeaseInfo.weekCost;
             this.lessCost[3] = this.goods.goodsLeaseInfo.monthCost;
         }
-        if(this.goods.goodsLeaseInfo.dayCost != null) {
-            this.leaseType = 1
-        } else if(this.goods.goodsLeaseInfo.weekCost != null) {
-            this.leaseType = 2
-        } else if(this.goods.goodsLeaseInfo.monthCost != null) {
-            this.leaseType = 3
+        if(this.goods.goodsLeaseInfo != null){
+            if(this.goods.goodsLeaseInfo.dayCost != null) {
+                this.leaseType = 1
+            } else if(this.goods.goodsLeaseInfo.weekCost != null) {
+                this.leaseType = 2
+            } else if(this.goods.goodsLeaseInfo.monthCost != null) {
+                this.leaseType = 3
+            }
         }
     },
     mounted() {
