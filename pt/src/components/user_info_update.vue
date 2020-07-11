@@ -10,10 +10,6 @@
 <!--        <label for="">真实姓名：</label>-->
 <!--        <span class="user-info">{{$store.state.User.realName}}</span>-->
 <!--      </div>-->
-      <div>
-        <label for="">微信账号：</label>
-        <input type="text" placeholder="请输入您的微信账号" v-model="weiXinAccount" maxlength="100"/>
-      </div>
 <!--      <div>-->
 <!--        <label for="">支付宝账号：</label>-->
 <!--        <input type="text" placeholder="请输入您的支付宝账号" v-model="zhiFuBaoAccount" maxlength="100"/>-->
@@ -21,6 +17,10 @@
       <div>
         <label for="">手机号码：</label>
         <input type="text" placeholder="请输入您的手机号码" v-model="phone" />
+      </div>
+      <div>
+        <label for="">微信号：</label>
+        <input type="text" placeholder="请输入联系您的微信号" v-model="weiXinAccount" maxlength="100"/>
       </div>
       <div>
         <label style="width:40%;">
