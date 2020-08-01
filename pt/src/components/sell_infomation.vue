@@ -15,6 +15,21 @@
                             <i>*</i>商品标题：</span>
                         <input id="name" name="name" type="text" value="" placeholder="请输入商品的标题" v-model="goods.name" maxlength="50"/>
                     </li>
+                  <li class="sell-sex clearfix" v-if="isShortVideo">
+                    <span><i>*</i>账号类型：</span>
+                    <div id="accountType" name="accountType" class="re_sele">
+                      <label style="float: left;width: 50%;height: 3rem;margin-right: 2%;">
+                        <input type="radio" checked="checked" name="accountType" value="0" v-model="goods.accountType" style="display: none;"/>
+                        <i class="choice-sho" v-bind:class="{'choiced-show':goods.accountType == 0}"></i>
+                        <em class="choice-text">粉丝号</em>
+                      </label>
+                      <label style="float: left;width: 45%;height: 3rem;margin-right: 2%;">
+                        <input type="radio" name="accountType" value="1" v-model="goods.accountType" style="display: none;"/>
+                        <i class="choice-sho" v-bind:class="{'choiced-show':goods.accountType == 1}"></i>
+                        <em class="choice-text">等级号</em>
+                      </label>
+                    </div>
+                  </li>
                     <li class="clearfix" v-if="isShortVideo">
                       <span><i>*</i>粉丝数量：</span>
                       <input id="fansCount" type="number" name="fansCount" value="" placeholder="请输入粉丝数量" v-model="goods.fansCount" maxlength="9"/>
@@ -450,6 +465,7 @@ export default {
                 quickShop: '0',
                 showcase: '0',
                 teachingVideo: '0',
+                accountType: '0'
             }
         }
     },

@@ -63,6 +63,24 @@
                         <input type="number" v-model="condition.maxLevel" value="" name="" class="key-leve2" placeholder="999">
                     </div>
                     <div class="sex-com clearfix">
+                      <span>账号类型：</span>
+                      <label>
+                        <input v-model="condition.accountType" type="radio" checked="checked" name="accountType" value=""></input>
+                        <i class="choice-sho" v-bind:class="{'choiced-show':condition.accountType===''}" @click="changeAccountType('')"></i>
+                        <em class="choice-text">不限</em>
+                      </label>
+                      <label>
+                        <input v-model="condition.accountType" type="radio" name="accountType" value="0"></input>
+                        <i class="choice-sho" v-bind:class="{'choiced-show':condition.accountType == '0'}" @click="changeAccountType(0)"></i>
+                        <em class="choice-text">粉丝号</em>
+                      </label>
+                      <label>
+                        <input v-model="condition.accountType" type="radio" name="accountType" value="1"></input>
+                        <i class="choice-sho" v-bind:class="{'choiced-show':condition.accountType == '1'}" @click="changeAccountType(1)"></i>
+                        <em class="choice-text">等级号</em>
+                      </label>
+                    </div>
+                    <div class="sex-com clearfix">
                         <span>性别：</span>
                         <label>
                             <input v-model="condition.sex" type="radio" checked="checked" name="sex" value=""></input>
@@ -168,6 +186,7 @@ export default {
                 sex: "",
                 bind: "",
                 identification: "",
+                accountType: "",
                 page: 0,
                 size: 20
             },
@@ -222,6 +241,7 @@ export default {
                 sex: "",
                 bind: "",
                 identification: "",
+                accountType: "",
                 page: -1,
                 size: 20
             }
@@ -293,7 +313,6 @@ export default {
             } else {
                 this.condition.categoryId = ''
             }
-
         },
         changeType(type) {
             console.log("type");
@@ -304,6 +323,9 @@ export default {
             console.log("sort");
             this.condition.sort = sort;
             this.submit(true);
+        },
+        changeAccountType(type){
+            this.condition.accountType = type;
         },
         submit(clear) {
             //移除添加阻止事件
