@@ -35,7 +35,7 @@ export default {
         //从cookie中取出内容
         t = window.document.cookie.match('(^|;)?xianhao_token=([^;]*)(;|$)');
         if (!t) {
-          window.location.href = this.host;
+          window.location.href = this.host+'login';
         } else {
           this.Http.setToken(t[2]);
           this.getConfig();
