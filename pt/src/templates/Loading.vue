@@ -16,7 +16,7 @@ export default {
   methods: {
     getToken() {
       var d = new Date;
-      d.setTime(d.getTime() + 1000 * 120);
+      d.setTime(d.getTime() + 1000*60*60*24*7);
       //token
       var t = this.GetQueryString('token');
       if (t) {
