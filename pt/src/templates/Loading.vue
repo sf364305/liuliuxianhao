@@ -8,6 +8,7 @@
 import '../assets/js/jweixin-1.2.0.js'
 export default {
   created() {
+    window.localStorage.clear();
     this.getToken();
   },
   deactivated() {
