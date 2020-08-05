@@ -174,7 +174,7 @@ var routes = [{
     path: '/commodity/:id',
     component: commodity,
     meta: {
-      keepAlive: false
+      keepAlive: true
     }
 }, {
     path: '/detail/:id',

@@ -197,7 +197,7 @@ export default {
             isClose: false
         }
     },
-    created() {
+    activated() {//created
         if (this.$store.state.IsSearch == false) {
             this.goods = [];
             this.reset();
@@ -211,7 +211,7 @@ export default {
                 }
             }
         }
-        //this.$refs.scroller.finishInfinite(false);
+        this.$refs.scroller.finishInfinite(false);
         this.$store.commit('setIsSearch', false);
     },
     deactivated(){
