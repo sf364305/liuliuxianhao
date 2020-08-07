@@ -86,6 +86,9 @@
                      <em>去修改</em>
                 </router-link>
             </div>
+          <div class="quit-div">
+            <input type="button" name="" value="退出" class="server-submit" @click="quit" />
+          </div>
         </scroller>
         <div class="nav-bottom">
             <!-- 引入公用的尾部 footer组件 -->
@@ -94,7 +97,24 @@
     </div>
 </template>
 <style>
+  .quit-div{
+    width: 85%;
+    margin: 0 auto 0.8rem;
+  }
+  .quit-div input{
+    display: block;
+    width: 100%;
+    height: 3.2rem;
 
+    /*margin: 5rem auto;*/
+    color: #fff;
+    border: none;
+    background: #cc0707;
+    line-height: 3.2rem;
+    font-size: 1.75rem;
+    text-align: center;
+    -webkit-appearance: none;
+  }
 </style>
 <script>
 import Footer from '../templates/Footer.vue'
@@ -149,6 +169,13 @@ export default {
         },
         orderListCollect(status) {
             this.$router.push('/goods_item_collect/'+status);
+        },
+        quit(){
+            var d = new Date;
+            d.setTime(d.getTime() - 1000*60);
+            var t = this.Http.token;
+            window.document.cookie = "xianhao_token=" + t + ";path=/;expires=" + d.toGMTString();
+            window.location.href = this.host +"login";
         }
     },
     components: {
