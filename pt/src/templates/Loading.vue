@@ -64,6 +64,8 @@ export default {
         that.$store.commit('setSetting', result.data.setting);
         if (window.location.search.indexOf('tradeStatus=success') >= 0){
             that.$router.push('/buy_success');
+        } else if (window.location.search.indexOf('tradeStatus=confirm') >= 0){
+            that.$router.push('/buy_back');
         } else {
             that.$router.push('/home');
         }

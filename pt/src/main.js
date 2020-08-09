@@ -49,6 +49,7 @@ import my_code from './components/my_code'
 import my_promotion from './components/my_promotion'
 import income_con from './components/income_con'
 import buy_success from './components/buy_success'
+import buy_back from './components/buy_back'
 import buy_defeat from './components/buy_defeat'
 import order_list from './components/order_list'
 import order_list_merchant from './components/order_list_merchant'
@@ -269,6 +270,12 @@ var routes = [{
 }, {
     path: '/buy_success',
     component: buy_success,
+    meta: {
+      keepAlive: true
+    }
+}, {
+    path: '/buy_back',
+    component: buy_back,
     meta: {
       keepAlive: true
     }
