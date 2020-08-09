@@ -79,8 +79,8 @@ export default {
             }, function (result) {
                 $(".alertLoading").hide();
                 if (result.code === 0) {
-                    if(result.data.payMethod && result.data.payMethod == 'xf'){
-                        window.location.href = result.data.xfPayUrl;
+                    if(result.data.payUrl){
+                        window.location.href = result.data.payUrl;
                     } else {
                         self.payInfo = JSON.parse(result.data.payJson);
                         self.callWxPay(self.payInfo);

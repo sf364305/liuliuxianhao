@@ -62,13 +62,12 @@ export default {
                 $(".alertLoading").css("display","none");
                 self.$store.commit('setLoading', false);
                 if (result.code === 0) {
-                    if(result.data.payMethod && result.data.payMethod == 'xf'){
-                        window.location.href = result.data.xfPayUrl;
+                    if(result.data.payUrl){
+                        window.location.href = result.data.payUrl;
                     } else {
                         self.payInfo = JSON.parse(result.data.payJson);
                         self.callWxPay(self.payInfo);
                     }
-                    // self.callWxPay2(self.payInfo);
                 } else {
                     console.log(result.msg);
                 }
