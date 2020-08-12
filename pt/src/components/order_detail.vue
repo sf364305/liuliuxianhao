@@ -144,19 +144,20 @@ export default {
             this.callServer(this.order.id);
         },
         pay(orderId) {
-            var self = this;
-            this.Http.get(this.Api.payOrder(), {
-                orderId: orderId
-            }, function (result) {
-                if (result.code === 0) {
-                    if(result.data.payUrl){
-                        window.location.href = result.data.payUrl;
-                    } else {
-                        self.payInfo = JSON.parse(result.data.payJson);
-                        self.callWxPay(self.payInfo);
-                    }
-                }
-            })
+            this.$router.push('/payment');
+            // var self = this;
+            // this.Http.get(this.Api.payOrder(), {
+            //     orderId: orderId
+            // }, function (result) {
+            //     if (result.code === 0) {
+            //         if(result.data.payUrl){
+            //             window.location.href = result.data.payUrl;
+            //         } else {
+            //             self.payInfo = JSON.parse(result.data.payJson);
+            //             self.callWxPay(self.payInfo);
+            //         }
+            //     }
+            // })
         },
         getOrderDetail() {
             var self = this;

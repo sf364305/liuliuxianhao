@@ -53,25 +53,26 @@ export default {
     },
     methods: {
         pay() {
-            var self = this;
-            $(".alertLoading").css("display","block");
-            self.$store.commit('setLoading', true);
-            this.Http.get(this.Api.payOrder(), {
-                orderId: self.order.orderId
-            }, function (result) {
-                $(".alertLoading").css("display","none");
-                self.$store.commit('setLoading', false);
-                if (result.code === 0) {
-                    if(result.data.payUrl){
-                        window.location.href = result.data.payUrl;
-                    } else {
-                        self.payInfo = JSON.parse(result.data.payJson);
-                        self.callWxPay(self.payInfo);
-                    }
-                } else {
-                    console.log(result.msg);
-                }
-            })
+            this.$router.push('/payment');
+            // var self = this;
+            // $(".alertLoading").css("display","block");
+            // self.$store.commit('setLoading', true);
+            // this.Http.get(this.Api.payOrder(), {
+            //     orderId: self.order.orderId
+            // }, function (result) {
+            //     $(".alertLoading").css("display","none");
+            //     self.$store.commit('setLoading', false);
+            //     if (result.code === 0) {
+            //         if(result.data.payUrl){
+            //             window.location.href = result.data.payUrl;
+            //         } else {
+            //             self.payInfo = JSON.parse(result.data.payJson);
+            //             self.callWxPay(self.payInfo);
+            //         }
+            //     } else {
+            //         console.log(result.msg);
+            //     }
+            // })
         }
     },
     components: {

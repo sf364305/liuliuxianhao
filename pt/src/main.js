@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App'
+import VueClipboard from 'vue-clipboard2'
 // 引入router路由
 import Router from 'vue-router'
 //  引入http
@@ -49,6 +50,7 @@ import my_code from './components/my_code'
 import my_promotion from './components/my_promotion'
 import income_con from './components/income_con'
 import buy_success from './components/buy_success'
+import payment from './components/payment'
 import buy_back from './components/buy_back'
 import buy_defeat from './components/buy_defeat'
 import order_list from './components/order_list'
@@ -67,6 +69,7 @@ Vue.use(Router)
 Vue.use(Vuex)
 Vue.use(VueScroller)
 Vue.use(iosAlertView);
+Vue.use(VueClipboard);
 
 const store = new Vuex.Store({
     state: {
@@ -351,6 +354,12 @@ var routes = [{
   component: user_info_update,
   meta: {
     keepAlive: false
+  }
+}, {
+  path: '/payment',
+  component: payment,
+  meta: {
+    keepAlive: true
   }
 }
 ];
