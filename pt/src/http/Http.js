@@ -163,6 +163,12 @@ Vue.prototype.Api = {
     },
     updateUserInfo(){
       return base + '/user/update'
+    },
+    getMessageList(){
+      return base + '/message/list'
+    },
+    getMessageOperate(){
+      return base + '/message/detail/'
     }
 };
 

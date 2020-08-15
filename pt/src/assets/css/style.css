@@ -239,6 +239,20 @@
     background: url(../images/sell_status.png) center 0 no-repeat;
     background-size: 50% auto;
 }
+.new-message{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2.3rem;
+  height: 2.3rem;
+  background-size: 50% auto;
+  color: #FFF;
+  background-color: red;
+  border-bottom-left-radius: 2.5rem;
+  font-size: 1rem;
+  text-align: right;
+  line-height: 2rem;
+}
 .sell-hot {
     background: url(../images/hot.png) center 0 no-repeat;
     background-size: 50% auto;
@@ -513,10 +527,20 @@
     background: url("../images/abtion.png") 5px center no-repeat;
     background-size: 5% auto;
 }
+.person-cer-message{
+  background: url("../images/wait_sure.png") 5px center no-repeat;
+  background-size: 5% auto;
+}
 .person-income-con .person-cer em {
     float: right;
     margin-right: 10%;
     font-weight: normal;
+}
+.person-income-con .person-cer-message em {
+  float: right;
+  margin-right: 10%;
+  font-weight: normal;
+  color:red;
 }
 /*实名认证*/
 .certification-pic {

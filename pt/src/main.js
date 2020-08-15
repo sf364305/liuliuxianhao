@@ -64,6 +64,8 @@ import error_500 from './components/error_500'
 import order_server from './components/order.server'
 import service_protocol from './components/service_protocol'
 import user_info_update from './components/user_info_update'
+import message_list from './components/message_list'
+import message_detail from './components/message_detail'
 // 使用router
 Vue.use(Router)
 Vue.use(Vuex)
@@ -360,6 +362,18 @@ var routes = [{
   component: payment,
   meta: {
     keepAlive: true
+  }
+}, {
+  path: '/message/list',
+  component: message_list,
+  meta: {
+    keepAlive: false
+  }
+}, {
+  path: '/message_detail/:id',
+  component: message_detail,
+  meta: {
+    keepAlive: false
   }
 }
 ];
