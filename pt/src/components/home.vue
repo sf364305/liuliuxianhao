@@ -56,7 +56,7 @@ export default {
     name: 'home',
     data() {
         return {
-            page: 0,
+            page: -1,
             size: 40,
             goods: [],
             searchText: "",
@@ -69,8 +69,8 @@ export default {
 
         // this.getNotices();
         // this.getCategroy();
-        this.page = 0;
-        this.getHomeGoodsList();
+        this.page = -1;
+        //this.getHomeGoodsList();
         this.getJsConfig();
         this.getUserInfo();
     },
@@ -93,7 +93,7 @@ export default {
         }
     },
     deactivated() {
-        // this.$refs.scroller.finishInfinite(true);
+        this.$refs.scroller.finishInfinite(true);
     },
     methods: {
         linkCom(ids) {
@@ -118,12 +118,12 @@ export default {
                 if (result.data.goods.length > 0) {
                     for (var i = 0; i < result.data.goods.length; i++) {
                         if (!that.contains(result.data.goods[i])) {
-                            // var ls = window.localStorage;
-                            // if(ls.getItem(result.data.goods[i].id)){
-                            //   result.data.goods[i].hit = true;
-                            // } else {
-                            //   result.data.goods[i].hit = false;
-                            // }
+                            var ls = window.sessionStorage;
+                            if(ls.getItem(result.data.goods[i].id)){
+                              result.data.goods[i].hit = true;
+                            } else {
+                              result.data.goods[i].hit = false;
+                            }
                             that.goods.push(result.data.goods[i]);
                             //加入缓存
                             that.$store.commit("setGoodsCache", result.data.goods[i]);
