@@ -156,7 +156,7 @@ var routes = [{
     path: '/home',
     component: home,
     meta: {
-      keepAlive: true
+      keepAlive: false
     }
 }, {
     path: '/server',
