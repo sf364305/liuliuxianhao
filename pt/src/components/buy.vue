@@ -27,7 +27,7 @@
             </ul>
             <div class="alertLoading"></div>
             <div class="pay-time">*订单支付有效时间30分钟</div>
-            <a @click="pay" class="pay-method" replace>微信支付</a>
+            <a @click="pay" class="pay-method" replace>去支付</a>
         </scroller>
     </div>
 </template>

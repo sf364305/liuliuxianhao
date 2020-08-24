@@ -55,7 +55,7 @@
                 </ul>
             </div>
             <div class="popular-paid-outer">
-                <a herf="javascript:void(0);" @click="pay()" title="">微信支付</a>
+                <a herf="javascript:void(0);" @click="pay()" title="">去支付</a>
             </div>
         </scroller>
     </div>

@@ -46,9 +46,8 @@
 
       <div class="tip-div">
         <div><i class="tip-star">*</i><p class="tip-title">温馨提示：</p></div>
-        <div><p class="tip-content" v-if="tabType == 'zhifubao'">1、建议先联系客服，确认账号是否还在，再进行转账</p></div>
-        <div><p class="tip-content" v-if="tabType == 'zhifubao'">2、转账时，请再三确认账号和名称是否正确，如有疑问可以联系官网客服</p></div>
-        <div><p class="tip-content" v-if="tabType == 'bank'">1、转账充值时，请再三确认银行账号和账号户名是否正确，如有疑问可联系在线客服</p></div>
+        <div><p class="tip-content">1、建议先联系客服，确认账号是否还在，再进行转账</p></div>
+        <div><p class="tip-content">2、转账时，请再三确认账号和名称是否正确，如有疑问可以联系企业QQ客服：800179661</p></div>
       </div>
     </div>
   </div>
