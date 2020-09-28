@@ -25,9 +25,9 @@
                     <li>
                         <router-link to="/commodity/_1" class="index-lease" replace>租赁账号</router-link>
                     </li>
-                    <li>
-                        <router-link to="/popularity" class="index-popularity" replace>提高人气</router-link>
-                    </li>
+<!--                    <li>-->
+<!--                        <router-link to="/popularity" class="index-popularity" replace>提高人气</router-link>-->
+<!--                    </li>-->
                 </ul>
             </section>
             <ul class="project clearfix">
@@ -279,8 +279,10 @@ export default {
     float: left;
     width: 33%;
     height: 3rem;
-    border-right: 1px solid #999;
+    /*border-right: 1px solid #999;*/
     line-height: 3rem;
+    margin-left: 9%;
+    margin-right: 7%;
 }
 
 .new-content ul li:last-child {

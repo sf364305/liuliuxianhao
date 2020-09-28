@@ -117,7 +117,7 @@
     float: left;
     width: 33%;
     height: 3rem;
-    border-right: 1px solid #999;
+    /*border-right: 1px solid #999;*/
     line-height: 3rem;
 }
 .new-content ul li:last-child {
