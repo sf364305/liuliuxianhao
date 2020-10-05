@@ -8,7 +8,7 @@
                     </dt>
                     <dd>{{userInfo.user.name}}</dd>
                 </dl>
-                <span class="my-mon" @click="toMyAccount()">￥{{userInfo.user.cashAmount}}</span>
+                <span class="my-mon" @click="toMyAccount()">￥{{userInfo.user.cashAmount}}，充值</span>
             </div>
             <div class="person-dif clearfix">
                 <span class="person-buyer" @click="showStatus" v-bind:class="{ 'buy-show': isSho }">买家管理</span>
