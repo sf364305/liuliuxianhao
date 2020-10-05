@@ -66,6 +66,7 @@ import service_protocol from './components/service_protocol'
 import user_info_update from './components/user_info_update'
 import message_list from './components/message_list'
 import message_detail from './components/message_detail'
+import pay_order from './components/pay_order'
 // 使用router
 Vue.use(Router)
 Vue.use(Vuex)
@@ -372,6 +373,12 @@ var routes = [{
 }, {
   path: '/message_detail/:id',
   component: message_detail,
+  meta: {
+    keepAlive: false
+  }
+}, {
+  path: '/pay/order/:id',
+  component: pay_order,
   meta: {
     keepAlive: false
   }

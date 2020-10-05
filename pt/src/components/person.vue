@@ -8,7 +8,7 @@
                     </dt>
                     <dd>{{userInfo.user.name}}</dd>
                 </dl>
-                <span class="my-mon">￥{{userInfo.user.commission}}</span>
+                <span class="my-mon" @click="toMyAccount()">￥{{userInfo.user.cashAmount}}</span>
             </div>
             <div class="person-dif clearfix">
                 <span class="person-buyer" @click="showStatus" v-bind:class="{ 'buy-show': isSho }">买家管理</span>
@@ -170,6 +170,15 @@ export default {
             var t = this.Http.token;
             window.document.cookie = "xianhao_token=" + t + ";path=/;expires=" + d.toGMTString();
             window.location.href = this.host +"login";
+        },
+        toMyAccount(){
+            var token = "";
+            var cookieArray = window.document.cookie.match('(^|;)?xianhao_token=([^;]*)(;|$)');
+            if(cookieArray){
+                token = cookieArray[2];
+            }
+            var accountUrl = this.host + "mall/mine/account?token="+token
+            window.location.href = accountUrl;
         }
     },
     components: {

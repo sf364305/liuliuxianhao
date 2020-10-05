@@ -144,7 +144,7 @@ export default {
             this.callServer(this.order.id);
         },
         pay(orderId) {
-            this.$router.push('/payment');
+            this.$router.push("/pay/order/"+orderId);
             // var self = this;
             // this.Http.get(this.Api.payOrder(), {
             //     orderId: orderId

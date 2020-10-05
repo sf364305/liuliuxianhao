@@ -8,7 +8,6 @@
 import '../assets/js/jweixin-1.2.0.js'
 export default {
   created() {
-    window.localStorage.clear();
     this.getToken();
   },
   deactivated() {
@@ -62,10 +61,15 @@ export default {
         that.$store.commit('setNotices', result.data.notices);
         that.$store.commit('setCategroy', result.data.categories);
         that.$store.commit('setSetting', result.data.setting);
-        if (window.location.search.indexOf('tradeStatus=success') >= 0){
+        let orderId = window.localStorage.getItem("waitPayOrderId");
+        if(orderId){
+            that.$router.push("/pay/order/"+orderId);
+        } else if (window.location.search.indexOf('tradeStatus=success') >= 0){
             that.$router.push('/buy_success');
         } else if (window.location.search.indexOf('tradeStatus=confirm') >= 0){
             that.$router.push('/buy_back');
+        } else if (window.location.hash.indexOf('person') >= 0){
+            that.$router.push('/person');
         } else {
             that.$router.push('/home');
         }

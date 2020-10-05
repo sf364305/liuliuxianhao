@@ -56,7 +56,7 @@ export default {
         toDetail(orderId) {
             this.$router.push("/order_detail/" + orderId);
         }, pay(orderId) {
-            this.$router.push('/payment');
+            this.$router.push("/pay/order/"+orderId);
             // var self = this;
             // this.Http.get(this.Api.payOrder(), {
             //     orderId: orderId

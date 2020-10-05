@@ -71,7 +71,7 @@ export default {
     },
     methods: {
         pay(){
-            this.$router.push('/payment');
+            this.$router.push("/pay/order/"+this.$store.state.Order.id);
             // var self = this;
             // var orderId = this.$store.state.Order.id;
             // $(".alertLoading").fadeIn(100);
