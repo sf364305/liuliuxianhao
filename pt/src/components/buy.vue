@@ -53,7 +53,7 @@ export default {
     },
     methods: {
         pay() {
-            this.$router.push('/payment');
+            this.$router.push("/pay/order/"+this.order.orderId);
             // var self = this;
             // $(".alertLoading").css("display","block");
             // self.$store.commit('setLoading', true);
