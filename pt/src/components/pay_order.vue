@@ -123,7 +123,7 @@ export default {
     },
     methods: {
         pay() {
-            if(this.$store.state.User.cashAmount <= this.order.amount){
+            if(this.$store.state.User.cashAmount < this.order.amount){
                 this.toCharge();
             } else{
                 this.showPassword = true;
