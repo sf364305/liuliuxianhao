@@ -236,7 +236,7 @@ export default {
                         orderId: result.data.orderId
                     }
                     self.$store.commit('setOrder', order);
-                    self.$router.push("/buy");
+                    self.$router.push("/pay/order/"+result.data.orderId);
                 }
             })
         },

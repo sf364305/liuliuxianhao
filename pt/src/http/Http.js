@@ -92,6 +92,9 @@ Vue.prototype.Api = {
     getOrderGoodsDetail() {
         return base + '/order/getOrderGoodsDetail';
     },
+    toPayOrderDetail() {
+        return base + '/order/toPayOrderDetail';
+    },
     sureOrder() {
         return base + '/order/sure';
     },

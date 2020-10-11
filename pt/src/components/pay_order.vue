@@ -26,8 +26,24 @@
                 </li>
             </ul>
             <div class="alertLoading"></div>
-            <div class="pay-time">余额支付（{{cashAmount}}元）</div>
-            <a @click="pay" class="pay-method" replace>去支付</a>
+            <div class="pay-time">余额支付（{{amountView.cashAmount}}元）</div>
+            <ul class="pay-inf">
+              <li class="clearfix">
+                <span>我的余额</span>
+                <em style="width:40%">{{amountView.cashAmount}}元</em>
+                <span class="refresh-btn" @click="getOrderDetail">刷新</span>
+              </li>
+              <li class="clearfix">
+                <span>商品价格</span>
+                <em>{{-amountView.orderAmount}}元</em>
+              </li>
+              <li class="clearfix">
+                <span>合计</span>
+                <em>{{amountView.remainAmount}}元</em>
+              </li>
+            </ul>
+
+            <a @click="pay" class="pay-method">{{btnText}}</a>
 
           <!-- 输入支付密码 -->
           <div class="g-model js-password-wrap" v-if="showPassword">
@@ -37,7 +53,7 @@
                 支付密码
               </div>
               <div class="content">
-                <input type="password" value="" v-model="payPassword" class="password-input js-password">
+                <input type="password" value="" v-model="payPassword" class="password-input js-password"/>
               </div>
               <div class="password-submit" @click="cancelPay">取消</div>
               <div class="password-submit" @click="submitPay">提交</div>
@@ -95,6 +111,13 @@
     background: #007aff;
     margin: 1.3rem auto;
   }
+  .refresh-btn{
+    width: 25%;
+    background-color: #015ebd;
+    color: #FFF !important;
+    text-align: center;
+    margin: 0.2rem;
+  }
 </style>
 <script>
 import Header from '../templates/Header.vue'
@@ -110,15 +133,30 @@ export default {
                     'name':''
                 }
             },
+            amountView:{
+
+            },
             cashAmount:'',
             payPassword:'',
-            showPassword:false
+            showPassword:false,
+            needCharge:false,
+            btnText:'去支付'
+        }
+    },
+    watch:{
+        needCharge:{
+            handler(newVal, oldVal){
+                if(newVal){
+                    this.btnText = '去充值';
+                } else {
+                    this.btnText = '去支付';
+                }
+            }
         }
     },
     created(){
         window.localStorage.setItem("waitPayOrderId",'');
         this.order.id = this.$route.params.id;
-        this.getUserInfo();
         this.getOrderDetail();
     },
     methods: {
@@ -131,7 +169,6 @@ export default {
 
         },
         toCharge(){
-            this.$iosAlert("余额不足");
             window.localStorage.setItem("waitPayOrderId",this.order.id);
             var token = "";
             var cookieArray = window.document.cookie.match('(^|;)?xianhao_token=([^;]*)(;|$)');
@@ -142,10 +179,16 @@ export default {
         },
         getOrderDetail() {
             var self = this;
-            this.Http.get(this.Api.getOrderGoodsDetail(), {
+            $(".alertLoading").css("display","block");
+            self.$store.commit('setLoading', true);
+            this.Http.get(this.Api.toPayOrderDetail(), {
                 orderId: self.order.id
             }, function (result) {
+                $(".alertLoading").css("display","none");
+                self.$store.commit('setLoading', false);
                 self.order = result.data.order;
+                self.amountView = result.data.amountView;
+                self.needCharge = result.data.amountView.needCharge;
             })
         },
         cancelPay(){
@@ -163,21 +206,10 @@ export default {
                     self.showPassword = false;
                     self.$router.push('/buy_success');
                 } else if (result.code === 888) {
+                    this.$iosAlert("余额不足");
                     self.toCharge();
                 }
             })
-        },
-        getUserInfo() {
-            var that = this;
-            var user= this.$store.state.User;
-            if(user && user.cashAmount){
-                that.cashAmount = user.cashAmount;
-            } else {
-                this.Http.get(this.Api.getUserInfo(), null, function (result) {
-                    that.cashAmount = result.data.user.cashAmount;
-                    that.$store.commit('setUser', result.data.user);
-                })
-            }
         }
     },
     components: {
