@@ -140,6 +140,9 @@ export default {
             this.Http.get(this.Api.getUserInfo(), null, function (result) {
                 self.userInfo = result.data;
                 self.$store.commit('setUser', self.userInfo.user);
+                if(result.data.user.freezeStatus === 'FROZEN'){
+                    self.quit();
+                }
             })
         },
         contains(g) {

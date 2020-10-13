@@ -79,6 +79,9 @@ export default {
       var that = this;
       this.Http.get(this.Api.getUserInfo(), null, function (result) {
         that.$store.commit('setUser', result.data.user);
+        if(result.data.user.freezeStatus === 'FROZEN'){
+          that.quit();
+        }
       })
     },
   }

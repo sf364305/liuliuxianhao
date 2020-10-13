@@ -175,6 +175,13 @@ Vue.prototype.Api = {
     },
     getMessageOperate(){
       return base + '/message/detail/'
+    },
+    quit(){
+      var d = new Date;
+      d.setTime(d.getTime() - 1000*60);
+      var t = this.Http.token;
+      window.document.cookie = "xianhao_token=" + t + ";path=/;expires=" + d.toGMTString();
+      window.location.href = this.host +"login";
     }
 };
 

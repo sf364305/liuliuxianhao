@@ -69,6 +69,9 @@ export default {
             var self = this;
             this.Http.get(this.Api.getUserInfo(), null, function (result) {
                 self.user = result.data;
+                if(result.data.user.freezeStatus === 'FROZEN'){
+                    self.quit();
+                }
             })
             console.log(self.user);
         },
