@@ -55,6 +55,9 @@
               <div class="content">
                 <input type="password" value="" v-model="payPassword" class="password-input js-password"/>
               </div>
+              <div class="to-set-pay-password" @click="toSetPayPassword">
+                <p>设置支付密码</p>
+              </div>
               <div class="password-submit" @click="cancelPay">取消</div>
               <div class="password-submit" @click="submitPay">提交</div>
             </div>
@@ -117,6 +120,11 @@
     color: #FFF !important;
     text-align: center;
     margin: 0.2rem;
+  }
+  .to-set-pay-password {
+    margin-top: 1rem;
+    font-size: 1.25rem;
+    color:#666;
   }
 </style>
 <script>
@@ -210,6 +218,15 @@ export default {
                     self.toCharge();
                 }
             })
+        },
+        toSetPayPassword(){
+            window.localStorage.setItem("waitPayOrderId",this.order.id);
+            var token = "";
+            var cookieArray = window.document.cookie.match('(^|;)?xianhao_token=([^;]*)(;|$)');
+            if(cookieArray){
+                token = cookieArray[2];
+            }
+            window.location.href = this.host +"mall/mine/pay/password/reset?token="+token;
         }
     },
     components: {
