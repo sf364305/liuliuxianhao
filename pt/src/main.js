@@ -205,7 +205,7 @@ var routes = [{
     path: '/sell_infomation/:categoryId',
     component: sell_infomation,
     meta: {
-      keepAlive: true
+      keepAlive: false
     }
 }, {
     path: '/lease_information/:categoryId',

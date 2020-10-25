@@ -486,7 +486,7 @@ export default {
             return !(this.isDouyin || this.isKuaishou)
         }
     },
-    activated() {
+    created() {
         this.images=[];
         if (this.$route.params.categoryId == 0) {
             this.goods = this.$store.state.Goods;
