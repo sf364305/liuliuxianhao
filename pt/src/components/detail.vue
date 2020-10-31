@@ -320,6 +320,8 @@
 <style>
   .tips{
     padding-left: 1rem;
+    border-bottom: 2px solid #eee;;
+    height: 2rem;
   }
   .tips p{
     float: left;
