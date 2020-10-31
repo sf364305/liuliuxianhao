@@ -56,7 +56,7 @@
                 <input type="password" value="" v-model="payPassword" class="password-input js-password"/>
               </div>
               <div class="to-set-pay-password" @click="toSetPayPassword">
-                <p>设置支付密码</p>
+                <p>设置支付密码?</p>
               </div>
               <div class="password-submit" @click="cancelPay">取消</div>
               <div class="password-submit" @click="submitPay">提交</div>
@@ -90,9 +90,9 @@
   }
   .g-model .popup .title {
     color: #333;
-    font-size: 17px;
-    margin-top: 15px;
-    margin-bottom: 10px;
+    font-size: 1.7rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
   .g-model .popup .password-input {
     width: 75%;
@@ -124,7 +124,10 @@
   .to-set-pay-password {
     margin-top: 1rem;
     font-size: 1.25rem;
-    color:#666;
+    color:red;
+    text-align: left;
+    padding-left: 3rem;
+    height: 1.8rem;
   }
 </style>
 <script>

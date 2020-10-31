@@ -53,7 +53,7 @@
                     <div class="detail-in-position">
                         <div class="sell-first1 clearfix">
                             <span style="text-overflow: ellipsis;max-width: 7rem;overflow: hidden;white-space: nowrap;">
-                                {{goods.merchant.name}}
+                                {{merchantName}}
                             </span>
                             <em>卖家：</em>
                         </div>
@@ -67,6 +67,13 @@
                             <em>出售成功：</em>
                         </div>
                     </div>
+                </div>
+                <div class="tips">
+                  <p class="tips1">一对一服务</p>
+                  <p class="tips2">担保交易</p>
+                  <p class="tips3">极速退款</p>
+                  <p class="tips4">支持线下</p>
+                  <p class="tips5">确认后放款</p>
                 </div>
                 <div class="detail-information">
                     <div class="detail-nav clearfix">
@@ -286,8 +293,12 @@
                                 <p>待买家确认收货，或者自动确认收货：48小时。</p>
                             </li>
                             <li>
-                                <h2>6.卖家收款</h2>
-                                <p>买家确认收货，交易完成，66闲号通过微信转账给卖家，货款直接到微信钱包。</p>
+                                <h2>6.签署法律合同</h2>
+                                <p>交接完账号后，双方签署法律合同</p>
+                            </li>
+                            <li>
+                              <h2>6.卖家收款</h2>
+                              <p>买家确认收货，交易完成，66闲号通过支付宝转账给卖家，货款直接到支付宝。</p>
                             </li>
                         </ul>
                     </div>
@@ -306,6 +317,34 @@
         </div>
     </div>
 </template>
+<style>
+  .tips{
+    padding-left: 1rem;
+  }
+  .tips p{
+    float: left;
+    font-size: 1rem;
+    color: #939199;
+    padding-left: 1.55rem;
+    background-size: 1.35rem;
+    background-position: 0;
+  }
+  .tips1{
+    background: url(http://qiniu.66xianhao.com/o_1elv353s12n27s313k9d3v11rl9.png) no-repeat;
+  }
+  .tips2{
+    background: url(http://qiniu.66xianhao.com/o_1elv3i1qt9bo10s81mva1km21vc4e.png) no-repeat;
+  }
+  .tips3{
+    background: url(http://qiniu.66xianhao.com/o_1elv3jbvhaendns8c71fun12hhj.png) no-repeat;
+  }
+  .tips4{
+    background: url(http://qiniu.66xianhao.com/o_1elv3jp3apsg1a9u16cq1b7g61uo.png) no-repeat;
+  }
+  .tips5{
+    background: url(http://qiniu.66xianhao.com/o_1elv3k3p012ml11jj59onjkbvt.png) no-repeat;
+  }
+</style>
 <script>
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
@@ -356,6 +395,18 @@ export default {
         },
         isSale: function () {
             return this.goods.type == 0;
+        },
+        merchantName: function(){
+            var fromValue = this.goods.merchant.name;
+
+            if(fromValue.length <= 1){
+                return fromValue + '*';
+            }
+            var result = fromValue.substr(0,1)
+            for(var i=1;i<fromValue.length;i++){
+                result += '*'
+            }
+            return result;
         }
     },
     activated() {

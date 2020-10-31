@@ -1572,10 +1572,11 @@ select {
     display: none;
 }
 .sell-platform label {
-    float: left;
+    /*float: left;*/
     width: 25%;
     margin-bottom: 2rem;
     text-align: center;
+    display: inline-block;
 }
 .sell-platform label img, .papular-plat-choice label img {
     position: relative;
