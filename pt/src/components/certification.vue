@@ -21,18 +21,20 @@ export default {
     },
     methods: {
         go() {
-            //this.$router.push('/certification_else');
-            var self = this;
-            this.Http.get(this.Api.getRealNameDetectUrl(), null, function (result) {
-                $(".alertLoading").css("display","none");
-                self.$store.commit('setLoading', false);
-                window.location.href = result.data.url;
-                if (result.code === 0) {
-                    window.location.href = result.data.url;
-                } else {
-                    console.log(result.msg);
-                }
-            })
+            if(navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1){
+                var self = this;
+                this.Http.get(this.Api.getRealNameDetectUrl(), null, function (result) {
+                    $(".alertLoading").css("display","none");
+                    self.$store.commit('setLoading', false);
+                    if (result.code === 0) {
+                        window.location.href = result.data.url;
+                    } else {
+                        that.$iosAlert(result.msg);
+                    }
+                })
+            } else{
+                this.$router.push('/certification_else');
+            }
         }
     },
     components: {

@@ -167,6 +167,9 @@ Vue.prototype.Api = {
     getRealNameDetectUrl(){
       return base + '/user/real-name/detect';
     },
+    realNameDetect(){
+      return base + '/user/real-name/detect-new';
+    },
     updateUserInfo(){
       return base + '/user/update'
     },
