@@ -21,7 +21,7 @@ export default {
     },
     methods: {
         go() {
-            if(navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1){
+            // if(navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1){
                 var self = this;
                 this.Http.get(this.Api.getRealNameDetectUrl(), null, function (result) {
                     $(".alertLoading").css("display","none");
@@ -32,9 +32,9 @@ export default {
                         that.$iosAlert(result.msg);
                     }
                 })
-            } else{
-                this.$router.push('/certification_else');
-            }
+            // } else{
+            //     this.$router.push('/certification_else');
+            // }
         }
     },
     components: {
