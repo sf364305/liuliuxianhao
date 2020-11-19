@@ -51,7 +51,6 @@ export default {
             }, function (result) {
                 $(".alertLoading").css("display","none");
                 self.$store.commit('setLoading', false);
-                window.location.href = result.data.url;
                 if (result.code === 0) {
                     window.location.href = result.data.url;
                 } else {
